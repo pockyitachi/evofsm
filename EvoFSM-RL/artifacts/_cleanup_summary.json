@@ -1,0 +1,82 @@
+[
+  {
+    "app": "bluecoins",
+    "status": "FAIL",
+    "rounds": 4,
+    "initial_violations": 3,
+    "final_violations": 2,
+    "remaining": [
+      "FAIL: category=\"REMOVE_ENTRY\", field=\"abstract_steps[1]\", found resource hint \"ok\" in \"Invoke the destructive/removal action from the available controls of the opened view (e.g. a tras...\"",
+      "FAIL: category=\"REMOVE_ENTRY\", field=\"failure_modes[0]\", found resource hint \"ok\" in \"Long-pressing invokes a different action (e.g. icon or label selection) rather than the intended ...\""
+    ]
+  },
+  {
+    "app": "calculator",
+    "status": "FAIL",
+    "rounds": 4,
+    "initial_violations": 18,
+    "final_violations": 17,
+    "remaining": [
+      "FAIL: category=\"LAUNCH_APP\", field=\"abstract_steps[0]\", found resource hint \"ok\" in \"Invoke system-level application launch by its registered identifier (confirming any launch prompt...\"",
+      "FAIL: category=\"INPUT_LINEAR_EXPRESSION\", field=\"failure_modes[0]\", found resource hint \"sin\" in \"Missing connector causes adjacent operand elements to merge unintentionally into a single token\"",
+      "FAIL: category=\"INPUT_LINEAR_EXPRESSION\", field=\"failure_modes[0]\", found resource hint \"ok\" in \"Missing connector causes adjacent operand elements to merge unintentionally into a single token\"",
+      "FAIL: category=\"APPLY_UNARY_OPERATION\", field=\"failure_modes[0]\", found resource hint \"sin\" in \"Using incorrect fixity for the chosen operator (e.g., placing operator after operand when prefix ...\"",
+      "FAIL: category=\"APPLY_COMPOUND_FORMULA\", field=\"abstract_steps[1]\", found resource hint \"pi\" in \"Use grouping markers around denominators or nested sub-expressions as needed to preserve intended...\"",
+      "FAIL: category=\"APPLY_COMPOUND_FORMULA\", field=\"abstract_steps[3]\", found resource hint \"pi\" in \"Close any opened grouping markers in matching nesting order to finalize the structure\"",
+      "FAIL: category=\"APPLY_COMPOUND_FORMULA\", field=\"failure_modes[0]\", found resource hint \"pi\" in \"Operator precedence errors caused by omitting appropriate grouping markers around sub-expressions\"",
+      "FAIL: category=\"APPLY_COMPOUND_FORMULA\", field=\"failure_modes[1]\", found resource hint \"pi\" in \"Forgetting to close an opened grouping marker before evaluation of the expression\"",
+      "FAIL: category=\"APPLY_COMPOUND_FORMULA\", field=\"failure_modes[2]\", found resource hint \"sin\" in \"Applying an exponent-like operator without grouping a composite exponent sub-expression, causing ...\"",
+      "FAIL: category=\"APPLY_COMPOUND_FORMULA\", field=\"failure_modes[2]\", found resource hint \"pi\" in \"Applying an exponent-like operator without grouping a composite exponent sub-expression, causing ...\"",
+      "FAIL: category=\"APPLY_COMPOUND_FORMULA\", field=\"verification_checklist[0]\", found resource hint \"pi\" in \"All grouping markers are balanced and correctly scoped to their intended sub-expressions within t...\"",
+      "FAIL: category=\"REVEAL_HIDDEN_CONTROL\", field=\"failure_modes[0]\", found resource hint \"sin\" in \"Confusing an overflow/more-options menu with a feature-expansion toggle that swaps the displayed ...\"",
+      "FAIL: category=\"RESET_INPUT\", field=\"abstract_steps[0]\", found resource hint \"ok\" in \"Invoke the full-reset control that empties the entire input surface\"",
+      "FAIL: category=\"RESET_INPUT\", field=\"failure_modes[0]\", found resource hint \"sin\" in \"Using partial-delete (removing a lone element) when a full reset was intended\"",
+      "FAIL: category=\"RESET_INPUT\", field=\"failure_modes[1]\", found resource hint \"sin\" in \"Repeatedly performing a full reset without addressing the underlying conceptual error\"",
+      "FAIL: category=\"VERIFY_OUTPUT\", field=\"failure_modes[0]\", found resource hint \"sin\" in \"Misinterpreting an auto-preview intermediate value as the final committed result\"",
+      "FAIL: category=\"VERIFY_OUTPUT\", field=\"failure_modes[1]\", found resource hint \"pi\" in \"Stopping at an unexpected partial value and declaring completion prematurely without full evaluation\""
+    ]
+  },
+  {
+    "app": "files",
+    "status": "FAIL",
+    "rounds": 4,
+    "initial_violations": 2,
+    "final_violations": 1,
+    "remaining": [
+      "FAIL: category=\"DELETE_ENTRY\", field=\"name\", found resource hint \"delete\" in \"DELETE_ENTRY\""
+    ]
+  },
+  {
+    "app": "markor",
+    "status": "FAIL",
+    "rounds": 4,
+    "initial_violations": 5,
+    "final_violations": 4,
+    "remaining": [
+      "FAIL: category=\"ADD_ENTRY\", field=\"abstract_steps[0]\", found resource hint \"ok\" in \"Invoke the primary create-new affordance (commonly a prominent action button)\"",
+      "FAIL: category=\"REMOVE_ENTRY\", field=\"name\", found resource hint \"move\" in \"REMOVE_ENTRY\"",
+      "FAIL: category=\"REMOVE_ENTRY\", field=\"abstract_steps[1]\", found resource hint \"ok\" in \"Invoke the removal action from the contextual action bar\"",
+      "FAIL: category=\"BULK_REMOVE\", field=\"name\", found resource hint \"move\" in \"BULK_REMOVE\""
+    ]
+  },
+  {
+    "app": "simple_sms_messenger",
+    "status": "FAIL",
+    "rounds": 4,
+    "initial_violations": 1,
+    "final_violations": 1,
+    "remaining": [
+      "FAIL: category=\"ADD_ENTRY\", field=\"failure_modes[0]\", found resource hint \"no\" in \"A required interface element is unavailable or cannot be located, rendering the action infeasible\""
+    ]
+  },
+  {
+    "app": "snapseed",
+    "status": "FAIL",
+    "rounds": 4,
+    "initial_violations": 1,
+    "final_violations": 1,
+    "remaining": [
+      "FAIL: category=\"LAUNCH_APP\", field=\"abstract_steps[0]\", found resource hint \"ok\" in \"Invoke a direct app-launch mechanism referencing the target application by its user-visible label\""
+    ]
+  }
+]

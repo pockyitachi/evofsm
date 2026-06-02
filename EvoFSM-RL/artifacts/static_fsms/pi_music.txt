@@ -1,0 +1,214 @@
+# ═══════════════════════════════════════════════
+# LAYER 1: APP_SPECIFIC  (non-transferable)
+# ═══════════════════════════════════════════════
+APP: pi_music
+CATEGORY: Music & Audio
+STATES:
+  S0: ANDROID_HOME — Android launcher home screen
+    visual_cues: ['Phone', 'Instagram', 'Chrome', 'Settings icons', 'Google search bar']
+  S1: MY_MUSIC_PLAYLISTS — Pi Music Player main screen showing PLAYLISTS tab
+    visual_cues: ['Open navigation drawer', 'My Music title', 'Upgrade to PRO', 'Search icon', 'TRACKS/PLAYLISTS tabs', 'Custom Playlists section', 'Smart Playlists section', '+ FAB bottom-right']
+    resource_hints: ['My Music', 'PLAYLISTS', 'TRACKS', 'Custom Playlists']
+  S2: TRACKS_TAB — Tracks listing tab showing all songs
+    visual_cues: ['15 Tracks count', 'Track list with titles and artists', 'sort icon', 'three-dot per track']
+    resource_hints: ['TRACKS', 'Track Name', 'album Name']
+  S3: ARTISTS_TAB — Artists listing tab
+    visual_cues: ['15 Artists count', 'artist names like David/Fatima/George/Maya/Theodore', '1 Albums / 1 Track(s) per row', 'ARTISTS tab highlighted']
+    resource_hints: ['ARTISTS', '15 Artists']
+  S4: ALBUMS_TAB — Albums listing tab
+    visual_cues: ['1 Albums count', "album 'Music' by Leon"]
+    resource_hints: ['ALBUMS', '1 Albums']
+  S5: GENRES_TAB — Genres listing, often empty
+    visual_cues: ["'No Music found! Tap here to learn how to import Music into …'"]
+    resource_hints: ['GENRES']
+  S6: FOLDERS_TAB — Folders tab
+    visual_cues: ['FOLDERS tab highlighted']
+    resource_hints: ['FOLDERS']
+  S7: CREATE_PLAYLIST_DIALOG — Dialog for creating a new playlist
+    visual_cues: ["'Create New Playlist' title", 'Enter Name edit field', 'CANCEL / OK buttons']
+    resource_hints: ['Create New Playlist', 'Enter Name']
+  S8: PLAYLIST_DETAIL_EMPTY — Empty playlist view (e.g., Favorite)
+    visual_cues: ["'Sorry..No songs to show!'", 'playlist title', 'Add Songs to Playlist', 'Sort', 'More options']
+    resource_hints: ['Add Songs to Playlist', 'Sorry..No songs to show!']
+  S9: SEARCH_SCREEN — Music library search screen
+    visual_cues: ["'Search Music Library...' edit field", 'Navigate up', 'Clear query', 'keyboard open', "'No results found' when empty"]
+    resource_hints: ['Search Music Library...', 'Clear query']
+  S10: SORT_BY_DIALOG_TRACKS — Sort By dialog for tracks list (Title/Date Added/Duration/Album/Artist + Ascending)
+    visual_cues: ["'Sort By' title", 'options: Title, Date Added, Duration, Album, Artist', 'Ascending toggle']
+    resource_hints: ['Sort By', 'Duration', 'Ascending']
+  S11: SORT_BY_DIALOG_ARTISTS — Sort By dialog for artists list (Artist/No. of Albums/No. of Tracks + Ascending)
+    visual_cues: ["'Sort By' title", 'options: Artist, No. of Albums, No. of Tracks', 'Ascending toggle']
+    resource_hints: ['Sort By', 'No. of Tracks']
+  S12: TRACK_CONTEXT_MENU — Long-press/overflow menu for a track
+    visual_cues: ['Play', 'Add to Playlist', 'Edit Track Info', 'Share', 'Delete', 'Play Next', 'Add to Queue', 'Set As Ringtone']
+    resource_hints: ['Add to Playlist', 'Set As Ringtone']
+TRANSITIONS:
+  S0 --open_app(Pi Music Player)--> S1  [pre: app installed]  [post: app opens on PLAYLISTS tab]
+  S1 --click(+ FAB)--> S7  [pre: on PLAYLISTS tab]  [post: create playlist dialog visible]
+  S7 --input_text(name) then click(OK)--> S1  [post: new playlist added under Custom Playlists]
+  S7 --click(CANCEL)--> S1
+  S1 --click(playlist row)--> S8
+  S1 --click(TRACKS tab)--> S2
+  S1 --click(ARTISTS tab)--> S3
+  S1 --click(ALBUMS tab)--> S4
+  S1 --click(GENRES tab)--> S5
+  S1 --click(Search icon)--> S9
+  S2 --click(sort icon)--> S10  [post: sort options appear]
+  S10 --click(Duration|Title|...)--> S2  [post: list re-sorted and dialog dismissed]
+  S3 --click(sort icon)--> S11
+  S2 --click(three-dot on track)--> S12
+  S9 --input_text(query)--> S9  [post: results or 'No results found']
+  S9 --click(Navigate up/Back)--> S1
+STRATEGIES:
+  CREATE_PLAYLIST:
+    preconditions: android_home
+    steps:
+      1. open_app('Pi Music Player')
+      2. on my_music_playlists (PLAYLISTS tab), click the floating + button (bottom-right)
+      3. in create_playlist_dialog, input playlist name into 'Enter Name'
+      4. click OK
+    success_signal: New playlist appears under 'Custom Playlists' section of PLAYLISTS tab
+    fallback: If dialog does not appear, ensure PLAYLISTS tab is selected; re-click FAB
+  QUERY_TOTAL_TRACKS:
+    preconditions: android_home
+    steps:
+      1. open_app('Pi Music Player')
+      2. click TRACKS tab
+      3. read 'N Tracks' header
+    success_signal: Header displays total tracks count (e.g., '15 Tracks')
+  QUERY_SORTED_TRACKS_BY_TITLE:
+    preconditions: android_home
+    steps:
+      1. open_app('Pi Music Player')
+      2. click TRACKS tab
+      3. optionally click sort icon and select Title with Ascending
+      4. read Nth song rows from list
+    success_signal: Tracks listed in alphabetical order; Nth entry readable
+    fallback: Open Sort By dialog and ensure Title+Ascending selected
+  SORT_TRACKS_BY_ATTRIBUTE:
+    preconditions: tracks_tab
+    steps:
+      1. click sort icon near track count
+      2. in Sort By dialog select attribute (Title/Duration/Date Added/Album/Artist)
+      3. toggle Ascending to desired direction
+    success_signal: Dialog closes and tracks list re-orders accordingly
+    fallback: If direction toggle not tapped, re-open dialog and click Ascending checkbox
+  OPEN_PLAYLIST:
+    preconditions: my_music_playlists
+    steps:
+      1. click the target playlist row under Custom/Smart Playlists
+    success_signal: Playlist detail view opens; shows tracks or 'Sorry..No songs to show!' if empty
+    fallback: If playlist is empty, task to play a song from it is infeasible
+DEAD_ENDS:
+  at playlist_detail_empty: attempting to play first song in 'Favorite' playlist fails  [Playlist contains no songs ('Sorry..No songs to show!'); add songs first or mark infeasible]
+  at search_screen: searching for song/artist titles like 'Shine On You Crazy Diamond', 'Lightship', 'Wish You Were Here', 'Eason Chan', 'Pink Floyd' fails  [Local library is small (15 tracks, 15 artists, 1 album 'Music' by Leon); target not present, returns 'No results found'. Repeated re-queries do not help.]
+  at artists_tab: repeatedly scrolling down to find 'Pink Floyd' or 'Eason Chan' fails  [Artist list is finite (15 Artists, D-T range). Scrolling past the end does nothing; artist is simply absent. Should stop after one full scroll and conclude infeasible.]
+  at sort_by_dialog_artists: looking for 'Duration' sort option in artists sort dialog fails  [Artists sort menu only offers Artist / No. of Albums / No. of Tracks. 'Duration' sort exists only in tracks sort dialog.]
+  at genres_tab: navigating to GENRES to find an artist fails  [Genres tab shows 'No Music found!'; not a valid path to locate artists.]
+  at tracks_tab: selecting Duration in sort dialog and claiming success without verifying direction fails  [Tapping 'Duration' alone may leave Ascending checked; must explicitly toggle Ascending off to achieve Descending order. Agents mis-reported success.]
+
+# ═══════════════════════════════════════════════
+# LAYER 2: GENERIC  (transferable, app-agnostic)
+# ═══════════════════════════════════════════════
+CATEGORY: ADD_ENTRY
+  precondition: App open on the list screen where new items of this type are created
+  abstract_steps:
+    1. Locate the primary add/create control (often a floating action button or + icon)
+    2. Trigger it to open a creation dialog/form
+    3. Fill required fields (e.g., name)
+    4. Confirm via the positive dialog button
+  failure_modes:
+    - 'Clicking the add control on the wrong tab/section'
+    - 'Confirming with empty or invalid name'
+    - 'Dismissing the dialog instead of confirming'
+  verification_checklist:
+    - 'New item is visible in the corresponding list after dialog closes'
+    - 'Item name matches input exactly'
+    - 'No error toast/dialog remained'
+
+CATEGORY: NAVIGATE_TO_SECTION
+  precondition: App open with tabbed or drawer navigation available
+  abstract_steps:
+    1. Identify the section name relevant to the task (distinguishing between the different item-type sections available in the app)
+    2. Click the corresponding tab or drawer entry
+    3. Wait for the list content to load
+  failure_modes:
+    - "Acting on the wrong tab's content"
+    - "Assuming an item exists in a section it doesn't belong to"
+  verification_checklist:
+    - 'Tab indicator reflects chosen section'
+    - "Header/count matches expected section (e.g., 'N <ItemType>')"
+
+CATEGORY: QUERY_INFO
+  precondition: Relevant list or detail view is reachable and not empty
+  abstract_steps:
+    1. Navigate to the section containing the answer
+    2. Optionally apply a sort/filter to expose the required ordering
+    3. Read the requested field(s) directly from the UI
+    4. Return an answer action with the extracted value
+  failure_modes:
+    - "Fabricating data when the target isn't in the library"
+    - 'Reading without ensuring correct sort direction'
+    - 'Confusing counts across different sections (mixing up item-type totals)'
+  verification_checklist:
+    - 'Value is visible on-screen at time of answer'
+    - "Sort/filter state matches the question's requirements"
+    - 'If item cannot be found after a bounded search, declare infeasible'
+
+CATEGORY: SEARCH_FOR_ITEM
+  precondition: A search affordance is visible on a list screen
+  abstract_steps:
+    1. Open the search interface
+    2. Type a concise query (a single attribute, not multiple attributes concatenated)
+    3. Inspect results; if none, try a broader/alternate term once
+    4. If still empty, conclude the item is absent
+  failure_modes:
+    - "Appending new text to existing query (producing garbage like 'QueryQuery')"
+    - 'Retrying the same query repeatedly'
+    - 'Treating empty results as transient and looping'
+  verification_checklist:
+    - 'Query field shows the intended text only'
+    - "Either a result row appears or an explicit 'No results' message is shown"
+    - 'Bounded retry count respected before declaring infeasible'
+
+CATEGORY: SORT_LIST
+  precondition: On a list screen that exposes a sort control
+  abstract_steps:
+    1. Open the ordering configuration dialog via its icon
+    2. Select the desired attribute
+    3. Explicitly toggle the ordering direction to the required state
+    4. Dismiss dialog and verify order
+  failure_modes:
+    - 'Selecting only the attribute without setting direction'
+    - "Using the wrong list's sort dialog (attributes differ across sections)"
+    - 'Declaring success without visually confirming the new order'
+  verification_checklist:
+    - 'Dialog shows target attribute marked'
+    - 'Direction toggle reflects target direction'
+    - 'Top-most items in list match expected ordering'
+
+CATEGORY: OPEN_CONTAINER
+  precondition: A container item is listed
+  abstract_steps:
+    1. Tap the container row
+    2. Verify detail view loads
+    3. Check whether the container is empty before further actions
+  failure_modes:
+    - 'Attempting interaction on an empty container'
+    - 'Treating an empty-container message as a transient error'
+  verification_checklist:
+    - 'Detail view title matches selected container'
+    - 'If empty, an explicit empty-state message is present; declare infeasible for content-dependent goals'
+
+CATEGORY: PLAY_MEDIA
+  precondition: Target media item is visible in a list or detail view
+  abstract_steps:
+    1. Locate the target row
+    2. Tap to start playback or use the row's play control
+    3. Confirm playback UI (now-playing bar / player screen) appears
+  failure_modes:
+    - 'Target not in local library (infeasible)'
+    - 'Tapping a container instead of a playable item'
+  verification_checklist:
+    - 'Now-playing indicator reflects correct item identity'
+    - 'Playback controls (pause/seek) are operable'

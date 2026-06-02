@@ -1,0 +1,82 @@
+## Multi-seed overlay configuration for EvoFSM-RL splits
+## Apply ON TOP of `splits.yaml` (which is K=1, the leaderboard-standard baseline).
+## Version: v1.0  |  Built: 2026-04-15
+
+meta:
+  baseline: "splits.yaml v1.0-K1"
+  rationale: |
+    K=1 (one seed per template) follows the official AndroidWorld leaderboard
+    convention (run.py defaults: n_task_combinations=1, task_random_seed=30).
+    For EvoFSM-RL we additionally need:
+      - more seeds during pretraining and TTA so the FSM/RL loop gets enough
+        samples to learn from (variance reduction during *learning*);
+      - a small but >1 number of seeds at evaluation time so we can report
+        std-error / 95% CI on success-rate.
+    The numbers below were chosen for compute-feasibility (≈ 5x baseline cost
+    for adapt, ≈ 3x for eval) and can be reduced if budget binds.
+
+  cost_envelope:
+    # rough multipliers vs the K=1 baseline
+    pretraining: 5.0    # K_source = 5 across 96 source templates
+    tier_B_adapt: 5.0   # K_adapt = 5 across 32 adapt templates
+    tier_B_eval:  3.0   # K_eval  = 3 across 18 eval templates
+    tier_C_adapt: 5.0   # K_adapt = 5 across 29 adapt templates
+    tier_C_eval:  3.0   # K_eval  = 3 across 17 eval templates
+
+# ─────────────────────────────────────────────────────────────────────────
+# Phase 1 — multi-source pretraining over the 12 source-pool apps
+# ─────────────────────────────────────────────────────────────────────────
+phase1_pretraining:
+  K_source: 5
+  description: |
+    For each of the 96 source-pool templates, instantiate K_source=5 distinct
+    parameterizations (task_random_seed ∈ {30, 31, 32, 33, 34}). These 5×96 = 480
+    episodes are the training pool for both the per-app L1 FSMs and the per-category L_C library.
+  task_random_seeds: [30, 31, 32, 33, 34]
+  episodes_total: 480
+
+# ─────────────────────────────────────────────────────────────────────────
+# Phase 3 — test-time adaptation (TTA) on each held-out app
+# ─────────────────────────────────────────────────────────────────────────
+# Each held-out app has its templates partitioned into T_adapt / T_eval
+# (template-disjoint) by splits.yaml. Within each partition we instantiate
+# K_adapt or K_eval seeds per template.
+
+phase3_TTA:
+  K_adapt: 5
+  K_eval: 3
+  description: |
+    K_adapt = 5: TTA needs a curve (success-rate vs adaptation step), so we want
+                 several rollouts per template to estimate the curve and let the
+                 FSM-mutation/LoRA-update loop see enough failure modes.
+    K_eval  = 3: T_eval is run ONCE per template after adaptation has converged.
+                 K=3 gives a usable std-error (~1/√3 ≈ 0.58× single-run noise)
+                 without doubling compute. Increase to 5 if the paper requires
+                 tighter CI on the headline number.
+  task_random_seeds:
+    T_adapt: [30, 31, 32, 33, 34]   # MUST share seeds with phase1 so distributions align
+    T_eval:  [40, 41, 42]           # disjoint from adapt seeds → independent test draws
+
+# ─────────────────────────────────────────────────────────────────────────
+# Episode budgets (computed from splits.yaml v1.0-K1 + Ks above)
+# ─────────────────────────────────────────────────────────────────────────
+budget:
+  phase1_pretraining: 480       # 96 templates × 5 seeds
+  tier_B:
+    T_adapt_episodes: 160       # 32 templates × 5 seeds
+    T_eval_episodes:   54       # 18 templates × 3 seeds
+  tier_C:
+    T_adapt_episodes: 145       # 29 templates × 5 seeds
+    T_eval_episodes:   51       # 17 templates × 3 seeds
+  grand_total_episodes: 890
+
+# ─────────────────────────────────────────────────────────────────────────
+# Degenerate-template handling (carried over from splits.yaml notes)
+# ─────────────────────────────────────────────────────────────────────────
+degenerate_apps:
+  simple_draw_pro:
+    n_templates: 1
+    behavior: "All 1 template assigned to T_adapt; T_eval is empty → app contributes 0 to Tier-C eval SR. Report TTA convergence trajectory only, exclude from Tier-C aggregate SR."
+  N_equals_2_apps_with_K_adapt_eq_5:
+    apps: [files, audio_recorder, contacts, camera, vlc]
+    note: "These have only 1 adapt template (after the 1-adapt/1-eval split). Running K_adapt=5 seeds on a single template still gives 5 episodes — fine for TTA loop. Same for T_eval (1 template × 3 seeds = 3 eval episodes)."

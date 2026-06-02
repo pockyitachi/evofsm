@@ -1,0 +1,22 @@
+{
+  "args": {
+    "labels": [
+      "EvoFSM-RL/data/step_labels/source_pool_sonnet.jsonl"
+    ],
+    "output": "EvoFSM-RL/artifacts/prm_smoke.pt",
+    "epochs": 1,
+    "batch_size": 1,
+    "lr": 0.0001,
+    "weight_decay": 0.01,
+    "checkpoint_every": 1000,
+    "log_every": 10,
+    "max_examples": 100,
+    "seed": 42,
+    "device": null,
+    "verbose": false
+  },
+  "n_examples": 100,
+  "label_files": [
+    "EvoFSM-RL/data/step_labels/source_pool_sonnet.jsonl"
+  ]
+}

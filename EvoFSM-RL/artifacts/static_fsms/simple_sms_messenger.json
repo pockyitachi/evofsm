@@ -1,0 +1,460 @@
+{
+  "version": "0.1.0",
+  "app": "simple_sms_messenger",
+  "layer1": {
+    "app": "simple_sms_messenger",
+    "category": "Communication",
+    "states": [
+      {
+        "id": "home_screen",
+        "description": "Android home screen / app drawer",
+        "visual_cues": [
+          "Phone, Chrome, Settings icons",
+          "Home label",
+          "clock widget",
+          "notifications shade"
+        ],
+        "resource_hints": [
+          "Home",
+          "Phone",
+          "Search"
+        ]
+      },
+      {
+        "id": "conversation_list",
+        "description": "Main screen showing list of SMS conversations",
+        "visual_cues": [
+          "Search icon top",
+          "Settings/About in overflow",
+          "list of conversations with contact + last message + time",
+          "Start a conversation button when empty"
+        ],
+        "resource_hints": [
+          "Search",
+          "Settings",
+          "About",
+          "More options",
+          "Start a conversation",
+          "No stored conversations have been found"
+        ]
+      },
+      {
+        "id": "conversation_thread",
+        "description": "Open chat thread with a specific contact/number",
+        "visual_cues": [
+          "Back button top-left",
+          "contact name/number header",
+          "Delete/Dial/Add Person icons",
+          "Type a message… input",
+          "SMS send button",
+          "message bubbles"
+        ],
+        "resource_hints": [
+          "Type a message…",
+          "SMS",
+          "Attachment",
+          "Dial number",
+          "Add Person",
+          "Delete"
+        ]
+      },
+      {
+        "id": "new_conversation",
+        "description": "New conversation composer - enter recipient",
+        "visual_cues": [
+          "New conversation title",
+          "Add Contact or Number… field",
+          "No contacts found or SUGGESTIONS list",
+          "checkmark confirm"
+        ],
+        "resource_hints": [
+          "New conversation",
+          "Add Contact or Number…",
+          "SUGGESTIONS",
+          "No contacts found"
+        ]
+      },
+      {
+        "id": "message_selected_mode",
+        "description": "Context action bar after long-press on a message bubble",
+        "visual_cues": [
+          "Done button",
+          "1 / 1 selection count",
+          "Copy to clipboard",
+          "Share",
+          "Delete",
+          "More options"
+        ],
+        "resource_hints": [
+          "Copy to clipboard",
+          "Share",
+          "Delete",
+          "Done"
+        ]
+      },
+      {
+        "id": "conversation_selected_mode",
+        "description": "Context action bar after long-press on a conversation in the list",
+        "visual_cues": [
+          "Done",
+          "Delete",
+          "Add number to contact",
+          "Dial number",
+          "More options (Block/Archive/Copy number/Mark Unread/Pin/Select all)"
+        ],
+        "resource_hints": [
+          "Block number",
+          "Archive",
+          "Copy number to clipboard",
+          "Mark as Unread",
+          "Pin to the top",
+          "Select all"
+        ]
+      },
+      {
+        "id": "thread_overflow_menu",
+        "description": "Overflow menu inside an open thread",
+        "visual_cues": [
+          "Archive",
+          "Conversation details",
+          "Block number",
+          "Mark as Unread"
+        ],
+        "resource_hints": [
+          "Archive",
+          "Conversation details",
+          "Block number",
+          "Mark as Unread"
+        ]
+      },
+      {
+        "id": "delete_confirm_dialog",
+        "description": "Confirmation dialog for deleting a message",
+        "visual_cues": [
+          "Are you sure you want to delete 1 message?",
+          "No / Yes buttons"
+        ],
+        "resource_hints": [
+          "Are you sure you want to delete",
+          "No",
+          "Yes"
+        ]
+      },
+      {
+        "id": "paste_popover",
+        "description": "Text-field context popover with Paste option",
+        "visual_cues": [
+          "Paste button appearing above input field",
+          "More options"
+        ],
+        "resource_hints": [
+          "Paste"
+        ]
+      }
+    ],
+    "transitions": [
+      {
+        "from_state": "home_screen",
+        "to_state": "conversation_list",
+        "action": "open_app(Simple SMS Messenger)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "conversation_list",
+        "to_state": "conversation_thread",
+        "action": "click(conversation_row)",
+        "precondition": "conversation exists",
+        "postcondition": ""
+      },
+      {
+        "from_state": "conversation_list",
+        "to_state": "new_conversation",
+        "action": "click(Start a conversation) or click(new_conversation_fab)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "new_conversation",
+        "to_state": "conversation_thread",
+        "action": "input recipient then click(confirm_check) or select suggestion",
+        "precondition": "valid number/contact entered",
+        "postcondition": ""
+      },
+      {
+        "from_state": "conversation_thread",
+        "to_state": "conversation_thread",
+        "action": "click(Type a message…) -> input_text -> click(SMS)",
+        "precondition": "",
+        "postcondition": "message appears in thread"
+      },
+      {
+        "from_state": "conversation_thread",
+        "to_state": "message_selected_mode",
+        "action": "long_press(message_bubble)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "message_selected_mode",
+        "to_state": "conversation_thread",
+        "action": "click(Copy to clipboard) or click(Done) or navigate_back",
+        "precondition": "",
+        "postcondition": "text copied if Copy used"
+      },
+      {
+        "from_state": "conversation_list",
+        "to_state": "conversation_selected_mode",
+        "action": "long_press(conversation_row)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "conversation_thread",
+        "to_state": "thread_overflow_menu",
+        "action": "click(More options)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "conversation_thread",
+        "to_state": "paste_popover",
+        "action": "long_press(message_input)",
+        "precondition": "clipboard has content",
+        "postcondition": ""
+      },
+      {
+        "from_state": "paste_popover",
+        "to_state": "conversation_thread",
+        "action": "click(Paste)",
+        "precondition": "",
+        "postcondition": "clipboard text inserted into input"
+      },
+      {
+        "from_state": "conversation_thread",
+        "to_state": "delete_confirm_dialog",
+        "action": "click(Delete)",
+        "precondition": "message selected",
+        "postcondition": ""
+      },
+      {
+        "from_state": "delete_confirm_dialog",
+        "to_state": "message_selected_mode",
+        "action": "click(No)",
+        "precondition": "",
+        "postcondition": ""
+      }
+    ],
+    "strategies": [
+      {
+        "name": "REPLY_TO_CONTACT",
+        "preconditions": "home_screen or conversation_list; target conversation exists",
+        "steps": [
+          "open_app('Simple SMS Messenger')",
+          "On conversation_list, locate conversation for target number/contact (scroll if needed)",
+          "click(conversation_row)",
+          "click(Type a message… field)",
+          "input_text(reply message)",
+          "click(SMS send button)",
+          "verify message bubble appears in thread, then mark complete"
+        ],
+        "success_signal": "The typed reply is visible as an outgoing message bubble in the thread",
+        "fallback": "If conversation not visible, use search or scroll; if wrong conversation, navigate_back to list"
+      },
+      {
+        "name": "REPLY_MOST_RECENT",
+        "preconditions": "home_screen; at least one conversation exists",
+        "steps": [
+          "open_app('Simple SMS Messenger')",
+          "On conversation_list, click the top-most (most recent) conversation row",
+          "click(Type a message…) then input_text(message)",
+          "click(SMS send)",
+          "confirm outgoing bubble and mark complete"
+        ],
+        "success_signal": "Reply bubble appears under the most recent thread",
+        "fallback": "If ordering unclear, use the first visible row which is chronologically newest"
+      },
+      {
+        "name": "SEND_NEW_MESSAGE",
+        "preconditions": "home_screen",
+        "steps": [
+          "open_app('Simple SMS Messenger')",
+          "click('Start a conversation') or the new-conversation button",
+          "click('Add Contact or Number…') field",
+          "input_text(recipient phone number)",
+          "click(confirm check mark) to accept the number",
+          "click(Type a message…) then input_text(body)",
+          "click(SMS send)",
+          "confirm outgoing bubble"
+        ],
+        "success_signal": "Thread opens with recipient header and outgoing message bubble visible",
+        "fallback": "If check mark missing, tap a matching suggestion row to open the thread"
+      },
+      {
+        "name": "SEND_CLIPBOARD_CONTENT",
+        "preconditions": "home_screen; clipboard already contains desired text",
+        "steps": [
+          "open_app('Simple SMS Messenger')",
+          "click('Start a conversation')",
+          "click recipient field, input_text(phone number), click confirm check",
+          "In thread, long_press the Type a message… field",
+          "click('Paste') from the popover",
+          "click(SMS send)",
+          "verify pasted text sent"
+        ],
+        "success_signal": "Outgoing bubble with exact clipboard text visible in thread",
+        "fallback": "If paste popover not shown, tap input first then long_press again; avoid pasting into the recipient field"
+      }
+    ],
+    "dead_ends": [
+      {
+        "state": "message_selected_mode",
+        "failed_action": "search for a 'Resend' option",
+        "note": "App has no Resend action; long-press menu only offers Copy/Share/Delete; overflow offers Block/Archive/etc. Must manually re-type or paste text and send again."
+      },
+      {
+        "state": "conversation_selected_mode",
+        "failed_action": "click(More options) expecting Resend",
+        "note": "Options (Block number, Archive, Copy number, Mark Unread, Pin, Select all) do not include Resend."
+      },
+      {
+        "state": "conversation_list",
+        "failed_action": "reply to most recent while wrong conversation targeted",
+        "note": "Agent sometimes picks a non-top row thinking it is most recent; the top row is newest."
+      },
+      {
+        "state": "new_conversation",
+        "failed_action": "long_press input after typing recipient to paste",
+        "note": "Paste appended clipboard text onto the recipient field instead of the message body, resulting in an invalid recipient and failed send."
+      },
+      {
+        "state": "conversation_thread",
+        "failed_action": "reply in the wrong thread (sender's thread) instead of starting new thread to third-party recipient",
+        "note": "For 'forward address to <other contact>', agent pasted address back into the originating sender's thread instead of opening a new conversation with the target contact."
+      },
+      {
+        "state": "delete_confirm_dialog",
+        "failed_action": "repeatedly tap 'Add Person' thinking it starts a new chat",
+        "note": "'Add Person' inside an open thread is interpreted as add-to-existing; combined with a lingering selection it can open a delete dialog loop."
+      }
+    ]
+  },
+  "layer2": {
+    "categories": [
+      {
+        "name": "REPLY_TO_ENTITY",
+        "precondition": "Application open to a list of existing conversations/entities; target entity identifiable by name or identifier",
+        "abstract_steps": [
+          "Launch the application",
+          "Locate the target entity row in the list (scrolling or using a lookup affordance if needed)",
+          "Open the entity detail/thread",
+          "Focus the reply/compose input",
+          "Enter the requested text",
+          "Trigger the send/submit control",
+          "Verify the new entry appears attributed to the user"
+        ],
+        "failure_modes": [
+          "Selecting wrong entity when multiple similar names exist",
+          "Typing into the header/recipient field instead of the body",
+          "Forgetting to press send after entering text"
+        ],
+        "verification_checklist": [
+          "Sent content string matches exactly (including punctuation)",
+          "New outgoing item visible in the correct thread",
+          "Input field is cleared after submission with zero residual draft content"
+        ]
+      },
+      {
+        "name": "ADD_ENTRY",
+        "precondition": "Application allows creating a new item; optionally requires a target identifier (e.g., a recipient or reference value) and content",
+        "abstract_steps": [
+          "Launch the application",
+          "Invoke the create-new action (empty-state CTA or new-item button)",
+          "Provide required identifier in the dedicated field",
+          "Confirm identifier (if a confirm control exists) before entering body",
+          "Enter body content in the dedicated body field",
+          "Submit",
+          "Verify the new item is persisted"
+        ],
+        "failure_modes": [
+          "A required interface element is unavailable or cannot be located, rendering the action infeasible",
+          "Content accidentally placed in identifier field",
+          "Skipping confirm step so body field never activates"
+        ],
+        "verification_checklist": [
+          "Identifier correctly attached to the new item",
+          "Body text matches request verbatim",
+          "Item appears in the main list after creation"
+        ]
+      },
+      {
+        "name": "TRANSFER_CONTENT_BETWEEN_ENTITIES",
+        "precondition": "Source item contains text to forward; target entity might already have an existing thread/record or might require creating one",
+        "abstract_steps": [
+          "Open source item and select the desired text (long-press)",
+          "Copy text to clipboard via the selection action bar",
+          "Navigate back to the list of entities",
+          "Open or create the target entity's thread/record, ensuring it is distinct from the source thread",
+          "Focus the body input and insert the clipboard contents via the standard insertion gesture",
+          "Submit",
+          "Verify the transferred text appears attributed to the user within the target thread"
+        ],
+        "failure_modes": [
+          "Sending the content back into the source thread instead of the target",
+          "Pasting into an identifier field, corrupting the recipient",
+          "Clipboard ends up empty because the copy action was never confirmed"
+        ],
+        "verification_checklist": [
+          "Target entity correctly selected",
+          "Inserted text exactly equals the original",
+          "Outgoing item is visible within the target entity's thread rather than the source's"
+        ]
+      },
+      {
+        "name": "REPEAT_PREVIOUS_ACTION",
+        "precondition": "A prior item/action exists and user wants to repeat it",
+        "abstract_steps": [
+          "Open the item/thread containing the original",
+          "Look for an explicit repeat/resend affordance in context menu or overflow",
+          "If absent, capture original text (read or copy)",
+          "Re-enter the text via the standard create path and submit it once more"
+        ],
+        "failure_modes": [
+          "Assuming a dedicated repeat control exists when the interface lacks one",
+          "Declaring task infeasible without trying the manual re-entry workaround",
+          "Repeating from the wrong item (e.g., a received vs sent one)"
+        ],
+        "verification_checklist": [
+          "A second outgoing copy of the identical text exists",
+          "Timestamp of new copy is after the original",
+          "Original item remains intact and has been preserved without accidental removal"
+        ]
+      },
+      {
+        "name": "NAVIGATE_TO_APP",
+        "precondition": "A different application or the device's primary launcher surface is currently in the foreground",
+        "abstract_steps": [
+          "Attempt direct app launch by name",
+          "If unavailable, open the application list and locate it via scrolling or a lookup affordance",
+          "If truly absent, surface an infeasibility status"
+        ],
+        "failure_modes": [
+          "Confusing a visually-similar app for the target",
+          "Prematurely reporting infeasibility before trying the application list"
+        ],
+        "verification_checklist": [
+          "Foreground window belongs to the intended app",
+          "A recognizable landing screen of that app is visible"
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "built_at": "2025-01-17T00:00:00Z",
+    "n_episodes": 30,
+    "n_successful": 18,
+    "n_episodes_input": 30,
+    "synthesizer_model": "claude-opus-4-7",
+    "synthesizer_temperature": 0.3
+  }
+}

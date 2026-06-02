@@ -1,0 +1,461 @@
+{
+  "version": "0.1.0",
+  "app": "files",
+  "layer1": {
+    "app": "files",
+    "category": "Tools",
+    "states": [
+      {
+        "id": "home_screen",
+        "description": "Android home screen",
+        "visual_cues": [
+          "Phone, Instagram, Chrome, Settings icons",
+          "Google search bar"
+        ],
+        "resource_hints": [
+          "Home"
+        ]
+      },
+      {
+        "id": "app_drawer",
+        "description": "App drawer listing installed apps",
+        "visual_cues": [
+          "Search apps bar",
+          "Alphabetical app list"
+        ],
+        "resource_hints": [
+          "Search apps, web and more"
+        ]
+      },
+      {
+        "id": "settings_main",
+        "description": "Settings app main page",
+        "visual_cues": [
+          "Network & internet",
+          "Apps",
+          "Notifications",
+          "Battery",
+          "Storage entry"
+        ],
+        "resource_hints": [
+          "Settings",
+          "Search settings"
+        ]
+      },
+      {
+        "id": "settings_storage",
+        "description": "Storage settings overview",
+        "visual_cues": [
+          "GB used / GB total",
+          "Free up space card",
+          "Apps, System categories"
+        ],
+        "resource_hints": [
+          "Storage",
+          "Free up space",
+          "Go to Files app to manage and free up space"
+        ]
+      },
+      {
+        "id": "storage_cleanup",
+        "description": "Files cleanup screen (no older files)",
+        "visual_cues": [
+          "Nothing to remove",
+          "REVIEW RECENT ITEMS button"
+        ],
+        "resource_hints": [
+          "Nothing to remove",
+          "REVIEW RECENT ITEMS"
+        ]
+      },
+      {
+        "id": "storage_remove_items",
+        "description": "Remove items (apps list) screen",
+        "visual_cues": [
+          "List of apps with sizes",
+          "Free up 0 B button",
+          "Cancel"
+        ],
+        "resource_hints": [
+          "Remove items",
+          "Free up"
+        ]
+      },
+      {
+        "id": "files_folder_view",
+        "description": "Files by Google folder contents view",
+        "visual_cues": [
+          "Show roots button",
+          "Folder name in header",
+          "Category chips Images/Audio/Videos/Documents",
+          "Search icon"
+        ],
+        "resource_hints": [
+          "Show roots",
+          "List view",
+          "Files in <folder>"
+        ]
+      },
+      {
+        "id": "files_roots",
+        "description": "Files by Google roots/shortcut list",
+        "visual_cues": [
+          "Recent",
+          "Images",
+          "Videos",
+          "Audio",
+          "Documents",
+          "Downloads",
+          "sdk_gphone64_x86_64"
+        ],
+        "resource_hints": [
+          "Files",
+          "sdk_gphone64_x86_64"
+        ]
+      },
+      {
+        "id": "files_selection_mode",
+        "description": "Selection mode active with file(s) selected",
+        "visual_cues": [
+          "X selected count in header",
+          "Share icon",
+          "Delete icon",
+          "More options (three dots)",
+          "Cancel"
+        ],
+        "resource_hints": [
+          "1 selected",
+          "Share",
+          "Delete"
+        ]
+      },
+      {
+        "id": "files_context_menu",
+        "description": "Overflow context menu for selected file",
+        "visual_cues": [
+          "Open with",
+          "Copy to…",
+          "Move to…",
+          "Compress",
+          "Rename",
+          "Get info"
+        ],
+        "resource_hints": [
+          "Move to…",
+          "Copy to…",
+          "Rename"
+        ]
+      },
+      {
+        "id": "delete_confirm_dialog",
+        "description": "Confirm deletion dialog",
+        "visual_cues": [
+          "CANCEL / OK buttons"
+        ],
+        "resource_hints": [
+          "CANCEL",
+          "OK"
+        ]
+      },
+      {
+        "id": "files_move_destination_picker",
+        "description": "Destination picker for Move/Copy",
+        "visual_cues": [
+          "CANCEL and MOVE buttons at bottom",
+          "New folder option",
+          "Folder list"
+        ],
+        "resource_hints": [
+          "MOVE",
+          "CANCEL",
+          "New folder"
+        ]
+      },
+      {
+        "id": "files_folder_info",
+        "description": "Folder info/details page",
+        "visual_cues": [
+          "Type Folder",
+          "Modified date",
+          "Number of items"
+        ],
+        "resource_hints": [
+          "Info",
+          "Number of items"
+        ]
+      }
+    ],
+    "transitions": [
+      {
+        "from_state": "home_screen",
+        "to_state": "files_folder_view",
+        "action": "open_app(Files by Google)",
+        "precondition": "",
+        "postcondition": "Lands in default folder (Downloads)"
+      },
+      {
+        "from_state": "home_screen",
+        "to_state": "settings_main",
+        "action": "open_app(Settings)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "home_screen",
+        "to_state": "app_drawer",
+        "action": "scroll_down",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "app_drawer",
+        "to_state": "files_folder_view",
+        "action": "click(Files icon)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "settings_main",
+        "to_state": "settings_storage",
+        "action": "click(Storage)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "settings_storage",
+        "to_state": "storage_cleanup",
+        "action": "click(Free up space)",
+        "precondition": "",
+        "postcondition": "Does NOT open file browser"
+      },
+      {
+        "from_state": "storage_cleanup",
+        "to_state": "storage_remove_items",
+        "action": "click(REVIEW RECENT ITEMS)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "files_folder_view",
+        "to_state": "files_roots",
+        "action": "click(Show roots)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "files_roots",
+        "to_state": "files_folder_view",
+        "action": "click(<storage or shortcut>)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "files_folder_view",
+        "to_state": "files_folder_view",
+        "action": "click(<subfolder>)",
+        "precondition": "folder contains target subfolder",
+        "postcondition": ""
+      },
+      {
+        "from_state": "files_folder_view",
+        "to_state": "files_selection_mode",
+        "action": "long_press(<file>)",
+        "precondition": "file visible",
+        "postcondition": "1 selected"
+      },
+      {
+        "from_state": "files_selection_mode",
+        "to_state": "delete_confirm_dialog",
+        "action": "click(Delete)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "delete_confirm_dialog",
+        "to_state": "files_folder_view",
+        "action": "click(OK)",
+        "precondition": "",
+        "postcondition": "File removed"
+      },
+      {
+        "from_state": "files_selection_mode",
+        "to_state": "files_context_menu",
+        "action": "click(More options)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "files_context_menu",
+        "to_state": "files_move_destination_picker",
+        "action": "click(Move to…)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "files_move_destination_picker",
+        "to_state": "files_move_destination_picker",
+        "action": "navigate(Show roots / storage / subfolder)",
+        "precondition": "",
+        "postcondition": "picker shows target destination contents"
+      },
+      {
+        "from_state": "files_move_destination_picker",
+        "to_state": "files_folder_view",
+        "action": "click(MOVE)",
+        "precondition": "correct destination open",
+        "postcondition": "File moved"
+      },
+      {
+        "from_state": "files_context_menu",
+        "to_state": "files_folder_info",
+        "action": "click(Get info)",
+        "precondition": "",
+        "postcondition": ""
+      }
+    ],
+    "strategies": [
+      {
+        "name": "DELETE_FILE_IN_FOLDER",
+        "preconditions": "home_screen; know folder path and filename",
+        "steps": [
+          "open_app('Files by Google') -> files_folder_view",
+          "click('Show roots') -> files_roots",
+          "click(storage root, e.g. 'sdk_gphone64_x86_64') -> files_folder_view",
+          "click(target subfolder, e.g. 'Notifications'/'Alarms'/'Downloads')",
+          "scroll_down if file not visible",
+          "long_press(target file) -> files_selection_mode",
+          "click('Delete') -> delete_confirm_dialog",
+          "click('OK') -> file removed"
+        ],
+        "success_signal": "'Deleting 1 item.' toast and file no longer listed in folder",
+        "fallback": "If file not found in assumed folder, use Show roots and try the correct top-level folder; use Search icon by filename"
+      },
+      {
+        "name": "MOVE_FILE_BETWEEN_FOLDERS",
+        "preconditions": "home_screen; know source folder, destination folder, filename",
+        "steps": [
+          "open_app('Files by Google')",
+          "click('Show roots') and navigate into storage root (e.g. 'sdk_gphone64_x86_64')",
+          "click(source subfolder)",
+          "scroll_down until file visible",
+          "long_press(target file) -> files_selection_mode",
+          "click('More options') -> files_context_menu",
+          "click('Move to…') -> files_move_destination_picker",
+          "In destination picker: click('Show roots') if needed, click(storage root), click(destination subfolder) so header shows destination",
+          "click('MOVE') to confirm"
+        ],
+        "success_signal": "'Moving 1 item.' toast, returned to source folder without the file; file appears in destination folder",
+        "fallback": "If picker lands in Downloads, do NOT press MOVE there; navigate via Show roots -> storage root -> correct destination folder before confirming"
+      }
+    ],
+    "dead_ends": [
+      {
+        "state": "settings_storage",
+        "failed_action": "click('Free up space') expecting Files app",
+        "note": "Free up space leads to cleanup screen (Nothing to remove / Remove items for apps), not the file browser. Repeatedly clicking loops between settings_storage <-> storage_cleanup. Use open_app('Files by Google') instead."
+      },
+      {
+        "state": "files_folder_view(Downloads)",
+        "failed_action": "repeatedly click('Images') to reach Pictures folder",
+        "note": "Category chips filter the current folder; they do not navigate to the Pictures directory. Use Show roots -> storage root -> Pictures."
+      },
+      {
+        "state": "files_move_destination_picker(Downloads)",
+        "failed_action": "click('MOVE') while picker still shows default Downloads",
+        "note": "Confirms move to Downloads instead of intended destination. Navigate picker to the correct destination folder before pressing MOVE."
+      },
+      {
+        "state": "files_context_menu",
+        "failed_action": "click('Get info') thinking it is 'Move to…'",
+        "note": "Wrong menu entry selected; need to read labels and pick 'Move to…'."
+      }
+    ]
+  },
+  "layer2": {
+    "categories": [
+      {
+        "name": "NAVIGATE_TO_ITEM",
+        "precondition": "App launched; target item location known or inferable from path",
+        "abstract_steps": [
+          "Open the content browsing app directly rather than via indirect system entry points",
+          "Open the roots/drawer to see top-level locations",
+          "Enter the correct top-level volume",
+          "Drill into subfolders matching the target path",
+          "Scroll within the folder if the item is not immediately visible",
+          "Optionally use Search to locate the item by name"
+        ],
+        "failure_modes": [
+          "Treating category filters (Images/Audio/etc.) as folder navigation",
+          "Staying in a default landing folder instead of switching volumes",
+          "Looping through unrelated system screens that do not expose raw folders"
+        ],
+        "verification_checklist": [
+          "Header shows the intended folder name",
+          "Target item appears in the listing"
+        ]
+      },
+      {
+        "name": "DELETE_ENTRY",
+        "precondition": "Target item visible in its containing view",
+        "abstract_steps": [
+          "Long-press the item to enter selection mode",
+          "Trigger the deletion action from the action bar",
+          "Confirm the deletion in the confirmation dialog"
+        ],
+        "failure_modes": [
+          "Selecting the wrong item with a similar name",
+          "Dismissing the confirmation dialog instead of confirming",
+          "Attempting to perform the deletion from a summary/cleanup screen instead of the primary content browsing view"
+        ],
+        "verification_checklist": [
+          "Transient deletion feedback appears",
+          "Item no longer present in the containing view"
+        ]
+      },
+      {
+        "name": "RELOCATE_ENTRY",
+        "precondition": "Target item visible; destination folder exists and is known",
+        "abstract_steps": [
+          "Long-press the item to enter selection mode",
+          "Open the overflow/more-options menu",
+          "Choose the relocation action",
+          "In the destination picker, navigate to the exact destination folder (switching roots/volumes as needed)",
+          "Confirm the relocation from within the destination folder"
+        ],
+        "failure_modes": [
+          "Confirming the relocation while the picker is still at the default location",
+          "Choosing a duplication action or a metadata-viewing action by mistake",
+          "Not switching to the correct top-level volume in the picker"
+        ],
+        "verification_checklist": [
+          "Transient relocation feedback appears",
+          "Item gone from source folder",
+          "Item present in destination folder"
+        ]
+      },
+      {
+        "name": "QUERY_METADATA",
+        "precondition": "Item or folder visible",
+        "abstract_steps": [
+          "Select the item or open overflow menu",
+          "Choose the details/properties option",
+          "Read the displayed metadata"
+        ],
+        "failure_modes": [
+          "Confusing the details screen with an actionable screen"
+        ],
+        "verification_checklist": [
+          "Details page shows expected attributes (type, modified date, size/count)"
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "built_at": "2025-01-24T00:00:00Z",
+    "n_episodes": 10,
+    "n_successful": 4,
+    "n_episodes_input": 10,
+    "synthesizer_model": "claude-opus-4-7",
+    "synthesizer_temperature": 0.3
+  }
+}

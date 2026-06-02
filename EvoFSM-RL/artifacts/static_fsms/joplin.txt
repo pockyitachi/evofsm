@@ -1,0 +1,131 @@
+# ═══════════════════════════════════════════════
+# LAYER 1: APP_SPECIFIC  (non-transferable)
+# ═══════════════════════════════════════════════
+APP: joplin
+CATEGORY: Productivity
+STATES:
+  S0: ANDROID_HOME — Android launcher home screen
+    visual_cues: ['Home label', 'Phone/Chrome/Instagram icons', 'Google search bar', 'notifications shade']
+    resource_hints: ['Home', 'Phone', 'Chrome', 'Settings']
+  S1: NOTE_LIST — Joplin note list inside a notebook/folder
+    visual_cues: ['Sidebar icon top-left', 'current notebook name (e.g. Personal, Finance, Ideas)', 'Search icon', 'Sort notes by', 'Add new (collapsed) FAB', "list entries some with 'to-do:' prefix and checkbox"]
+    resource_hints: ['Sidebar', 'Search', 'Sort notes by', 'Add new, collapsed', 'to-do:']
+  S2: SIDEBAR_DRAWER — Notebook/tag navigation drawer
+    visual_cues: ['Notebooks section', 'list of notebook names (Ideas, Finance, Projects, etc.)', 'New Notebook', 'Tags', 'Configuration']
+    resource_hints: ['Notebooks', 'New Notebook', 'Tags', 'Configuration']
+  S3: SEARCH_VIEW — Search input screen with keyboard
+    visual_cues: ['Back arrow', 'Search hint', 'editable text field', 'Clear button', 'keyboard visible']
+    resource_hints: ['Search', 'Clear', 'Back']
+  S4: SEARCH_RESULTS — Results for the current search query
+    visual_cues: ['search query echoed', 'matching note titles listed below']
+    resource_hints: ['Search']
+  S5: NOTE_VIEW — Opened single note showing content (e.g. recipe with Ingredients/Instructions)
+    visual_cues: ['Back arrow', 'Edit (collapsed) toggle', 'parent notebook label (e.g. Recipes)', 'Actions menu', 'note body with sections like Ingredients/Instructions']
+    resource_hints: ['Edit, collapsed', 'Actions', 'Ingredients:', 'Instructions:']
+TRANSITIONS:
+  S0 --open_app(Joplin)--> S1  [post: Joplin opens to last-used notebook]
+  S1 --click(Sidebar)--> S2  [post: drawer visible with notebooks]
+  S2 --click(notebook name)--> S1  [pre: target notebook visible]  [post: note list for chosen notebook shown]
+  S1 --click(Search)--> S3  [post: search field focused]
+  S3 --input_text(query)--> S4  [post: results rendered]
+  S4 --click(result title)--> S5  [post: note content opened]
+  S1 --click(note title)--> S5  [pre: note visible in list]  [post: note content opened]
+STRATEGIES:
+  ANSWER_IS_TODO_BY_PREFIX:
+    preconditions: android_home; note title is given
+    steps:
+      1. open_app(Joplin)
+      2. If note visible in current notebook, inspect whether its row has 'to-do:' prefix / checkbox
+      3. If not visible, open sidebar and switch notebooks or use Search to locate the note
+      4. Answer True if the entry has the to-do checkbox/prefix, else False
+    success_signal: answer(True/False) matches presence of 'to-do:' prefix on the row
+    fallback: Use Search to find the note by title when scrolling does not surface it
+  COUNT_TODOS_IN_FOLDER:
+    preconditions: android_home; target notebook name known
+    steps:
+      1. open_app(Joplin)
+      2. click(Sidebar) to open drawer
+      3. click(target notebook name)
+      4. Count list rows whose content description starts with 'to-do:' (have a checkbox)
+      5. answer(count)
+    success_signal: numeric answer equals number of 'to-do:' prefixed rows in the notebook
+    fallback: Scroll the list to ensure all entries are considered
+  LOOKUP_FIELD_IN_NOTE:
+    preconditions: android_home; note title known, field/ingredient known
+    steps:
+      1. open_app(Joplin)
+      2. click(Search)
+      3. input_text(note title)
+      4. click(matching result)
+      5. Read the relevant section (e.g. Ingredients:) and extract the value
+      6. answer(value)
+    success_signal: answer reflects the exact value found in the note body
+    fallback: If search yields nothing, open sidebar and browse candidate notebooks
+DEAD_ENDS:
+  at android_home: status(infeasible) without attempting open_app fails  [Agent incorrectly assumed Joplin was not installed; should always try open_app(Joplin) first]
+  at note_list: scroll(down) in wrong notebook looking for a note fails  [Target note may belong to a different notebook; must switch notebooks via sidebar or use Search instead of scrolling blindly]
+  at note_list: declare infeasible after one scroll fails  [Gave up too early without using Search or switching notebook]
+  at note_list: repeated identical answer actions fails  [Agent looped emitting the same answer many times instead of issuing status(complete)]
+
+# ═══════════════════════════════════════════════
+# LAYER 2: GENERIC  (transferable, app-agnostic)
+# ═══════════════════════════════════════════════
+CATEGORY: QUERY_ITEM_ATTRIBUTE
+  precondition: Target item is identified by name; app may not be in foreground
+  abstract_steps:
+    1. Launch the relevant app from the launcher
+    2. Navigate to the named item by browsing the list or using an in-app lookup affordance
+    3. Inspect the visible marker/attribute (icon, prefix, checkbox) that indicates the attribute in question
+    4. Return a boolean/categorical answer based on the marker
+  failure_modes:
+    - 'Declaring the task infeasible from the launcher without attempting to open the app'
+    - 'Answering based on a screen that does not actually contain the target item'
+    - 'Looping on the same answer action without finalizing with a completion status'
+  verification_checklist:
+    - "The target item's row is actually visible on screen"
+    - 'The attribute marker is unambiguously present or absent'
+    - 'A single completion/status signal is emitted after the answer'
+
+CATEGORY: COUNT_ITEMS_BY_ATTRIBUTE
+  precondition: A container (folder/list/category) and a filtering attribute are specified
+  abstract_steps:
+    1. Open the app and navigate to the specified container via its navigation drawer/menu
+    2. Enumerate all list entries, scrolling as needed to cover the full list
+    3. Count entries whose row carries the filtering attribute marker
+    4. Return the count as a number
+  failure_modes:
+    - 'Counting within the wrong container because the app opened to a different default'
+    - 'Missing entries that require scrolling'
+    - 'Confusing unrelated visual markers with the target attribute'
+  verification_checklist:
+    - 'Current container label matches the requested one'
+    - 'List has been scrolled to end or confirmed fully visible'
+    - 'Only entries with the specific attribute marker are counted'
+
+CATEGORY: LOOKUP_FIELD_IN_ENTRY
+  precondition: Entry title and desired field/sub-item are specified
+  abstract_steps:
+    1. Open the app and invoke its entry-lookup affordance
+    2. Provide the entry title and select the matching result
+    3. Locate the section containing the field and read its value
+    4. Return the value verbatim
+  failure_modes:
+    - 'Skipping app launch and declaring infeasible'
+    - 'Opening a wrong result with a similar title'
+    - 'Reading from the wrong section of the entry'
+  verification_checklist:
+    - 'Opened entry title matches the requested one'
+    - 'Value is read from the correct labeled section'
+    - 'Answer preserves units/qualifiers as shown'
+
+CATEGORY: NAVIGATE_TO_CONTAINER
+  precondition: Multiple containers exist; a specific one is required
+  abstract_steps:
+    1. Open the navigation drawer/menu
+    2. Locate the named container (scroll if necessary)
+    3. Tap it to switch context
+  failure_modes:
+    - 'Assuming the currently opened container is the target'
+    - 'Missing the target entry because it resides in a different container'
+  verification_checklist:
+    - 'Header/title of the list reflects the requested container name'

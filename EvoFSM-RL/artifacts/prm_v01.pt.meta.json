@@ -1,0 +1,21 @@
+{
+  "n_examples_total": 13290,
+  "epochs": 2,
+  "epoch_summaries": [
+    {
+      "epoch": 1,
+      "n": 13290,
+      "skipped": 0,
+      "mean_loss": 0.11531208868201939
+    },
+    {
+      "epoch": 2,
+      "n": 13290,
+      "skipped": 0,
+      "mean_loss": 0.10062805019378479
+    }
+  ],
+  "total_steps": 26580,
+  "wall_min": 128.77275561086523,
+  "final_checkpoint": "EvoFSM-RL/artifacts/prm_v01.pt"
+}

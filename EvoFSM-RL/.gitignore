@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Venvs
+.venv/
+venv/
+
+# Editor / OS
+.DS_Store
+.idea/
+.vscode/
+
+# APKs (proprietary, per-contributor download — see apks/README.md)
+apks/*.apk
+apks/*.apkm
+apks/*.xapk

@@ -1,0 +1,525 @@
+{
+  "version": "0.1.0",
+  "app": "bluecoins",
+  "layer1": {
+    "app": "bluecoins",
+    "category": "Finance",
+    "states": [
+      {
+        "id": "home_screen",
+        "description": "Android device home screen (launcher)",
+        "visual_cues": [
+          "phone/instagram/chrome/settings icons",
+          "clock widget",
+          "search bar"
+        ],
+        "resource_hints": [
+          "Home",
+          "Phone",
+          "Instagram",
+          "Chrome",
+          "Settings",
+          "Search"
+        ]
+      },
+      {
+        "id": "main_dashboard",
+        "description": "Bluecoins main dashboard with calendar and budget summary",
+        "visual_cues": [
+          "Open Drawer Menu",
+          "Main/Transactions/Reminders tabs",
+          "calendar with month grid",
+          "Daily Summary / Budget Summary pie chart",
+          "Actual vs budget amounts"
+        ],
+        "resource_hints": [
+          "Open Drawer Menu",
+          "Help",
+          "Main",
+          "Transactions",
+          "Reminders",
+          "Budget Summary",
+          "Daily Summary"
+        ]
+      },
+      {
+        "id": "transactions_list",
+        "description": "List of transactions across dates",
+        "visual_cues": [
+          "Advanced Filter, Export Data, Search icons in app bar",
+          "grouped transaction entries by date",
+          "red circular + FAB bottom-right",
+          "Main tab at top"
+        ],
+        "resource_hints": [
+          "Advanced Filter",
+          "Export Data",
+          "Search",
+          "Main"
+        ]
+      },
+      {
+        "id": "calendar_transactions_view",
+        "description": "Calendar view with Add buttons and navigate arrows; per-date drilldown",
+        "visual_cues": [
+          "Calendar header with month",
+          "Add buttons",
+          "Go to previous / Go to next",
+          "October 2023 label"
+        ],
+        "resource_hints": [
+          "Calendar",
+          "Add",
+          "Go to previous",
+          "Go to next"
+        ]
+      },
+      {
+        "id": "transaction_editor",
+        "description": "Form screen to add/edit a single transaction",
+        "visual_cues": [
+          "EXPENSE / INCOME tabs",
+          "Category field (Salary/Others/Bonus editable)",
+          "amount field",
+          "date field",
+          "Notes field",
+          "Labels row",
+          "upload photo",
+          "Navigate up, Delete, PDF icons",
+          "green checkmark save button"
+        ],
+        "resource_hints": [
+          "Navigate up",
+          "Delete",
+          "PDF or Send to Printer",
+          "EXPENSE",
+          "INCOME",
+          "Salary",
+          "Others",
+          "Bonus",
+          "upload photo",
+          "Notes",
+          "Labels"
+        ]
+      },
+      {
+        "id": "date_picker_dialog",
+        "description": "Calendar date picker modal",
+        "visual_cues": [
+          "year header",
+          "day-of-week date header (e.g. Sun, Oct 15)",
+          "Previous/Next month arrows",
+          "CANCEL/OK buttons",
+          "grid of day numbers"
+        ],
+        "resource_hints": [
+          "2023",
+          "Previous month",
+          "Next month",
+          "CANCEL",
+          "OK"
+        ]
+      },
+      {
+        "id": "icon_selector_dialog",
+        "description": "Select Icon modal (triggered unexpectedly by tapping a transaction row)",
+        "visual_cues": [
+          "'Select Icon' title",
+          "category name (Others/Salary/Bonus)",
+          "NONE button",
+          "grid of icons"
+        ],
+        "resource_hints": [
+          "Select Icon",
+          "NONE"
+        ]
+      },
+      {
+        "id": "label_select_dialog",
+        "description": "Dialog to select or create a Label",
+        "visual_cues": [
+          "'Select Label' title",
+          "'Add Label...' input",
+          "list of labels (Birthday, Business, ...)",
+          "CANCEL / OK buttons"
+        ],
+        "resource_hints": [
+          "Select Label",
+          "Add Label...",
+          "CANCEL",
+          "OK"
+        ]
+      },
+      {
+        "id": "category_detail_view",
+        "description": "Per-category transaction list (e.g. after save landing page showing Salary/Others with Running Total)",
+        "visual_cues": [
+          "Navigate up",
+          "category name header",
+          "Edit button",
+          "Export Data",
+          "Running Total line",
+          "Table view"
+        ],
+        "resource_hints": [
+          "Navigate up",
+          "Edit",
+          "Export Data",
+          "Running Total",
+          "Table"
+        ]
+      },
+      {
+        "id": "permission_dialog",
+        "description": "System permission request (e.g. Gboard audio)",
+        "visual_cues": [
+          "'Allow ... to record audio?'",
+          "While using the app / Only this time / Don't allow buttons"
+        ],
+        "resource_hints": [
+          "While using the app",
+          "Only this time",
+          "Don’t allow"
+        ]
+      }
+    ],
+    "transitions": [
+      {
+        "from_state": "home_screen",
+        "to_state": "main_dashboard",
+        "action": "open_app(Bluecoins)",
+        "precondition": "",
+        "postcondition": "dashboard visible"
+      },
+      {
+        "from_state": "main_dashboard",
+        "to_state": "transactions_list",
+        "action": "click(Transactions tab)",
+        "precondition": "",
+        "postcondition": "transaction list visible"
+      },
+      {
+        "from_state": "main_dashboard",
+        "to_state": "calendar_transactions_view",
+        "action": "click(day in calendar)",
+        "precondition": "",
+        "postcondition": "per-day drilldown shown"
+      },
+      {
+        "from_state": "transactions_list",
+        "to_state": "transaction_editor",
+        "action": "click(FAB +) then may auto-open editor OR click(transaction row amount area)",
+        "precondition": "",
+        "postcondition": "editor form visible"
+      },
+      {
+        "from_state": "transactions_list",
+        "to_state": "icon_selector_dialog",
+        "action": "click(transaction row icon/label area) or long_press(row)",
+        "precondition": "",
+        "postcondition": "Select Icon dialog shown (unintended entry point for editing)"
+      },
+      {
+        "from_state": "icon_selector_dialog",
+        "to_state": "transactions_list",
+        "action": "click(NONE) or navigate_back",
+        "precondition": "",
+        "postcondition": "returns to list without editing"
+      },
+      {
+        "from_state": "transaction_editor",
+        "to_state": "date_picker_dialog",
+        "action": "click(date field)",
+        "precondition": "",
+        "postcondition": "calendar picker shown"
+      },
+      {
+        "from_state": "date_picker_dialog",
+        "to_state": "transaction_editor",
+        "action": "click(day) then click(OK)",
+        "precondition": "",
+        "postcondition": "new date committed to form"
+      },
+      {
+        "from_state": "transaction_editor",
+        "to_state": "label_select_dialog",
+        "action": "click(Labels field)",
+        "precondition": "",
+        "postcondition": "label selection dialog shown"
+      },
+      {
+        "from_state": "label_select_dialog",
+        "to_state": "transaction_editor",
+        "action": "input_text(Add Label...) + click(OK)",
+        "precondition": "",
+        "postcondition": "label applied"
+      },
+      {
+        "from_state": "transaction_editor",
+        "to_state": "category_detail_view",
+        "action": "click(green checkmark save)",
+        "precondition": "required fields filled",
+        "postcondition": "transaction saved"
+      },
+      {
+        "from_state": "transaction_editor",
+        "to_state": "permission_dialog",
+        "action": "click(voice input icon)",
+        "precondition": "Gboard voice typing triggered",
+        "postcondition": "permission prompt"
+      },
+      {
+        "from_state": "permission_dialog",
+        "to_state": "transaction_editor",
+        "action": "click(Don’t allow / While using the app)",
+        "precondition": "",
+        "postcondition": "dialog dismissed"
+      },
+      {
+        "from_state": "transaction_editor",
+        "to_state": "transactions_list",
+        "action": "click(Navigate up)",
+        "precondition": "",
+        "postcondition": "back to list"
+      },
+      {
+        "from_state": "category_detail_view",
+        "to_state": "transactions_list",
+        "action": "click(Navigate up)",
+        "precondition": "",
+        "postcondition": "back to list"
+      },
+      {
+        "from_state": "calendar_transactions_view",
+        "to_state": "transactions_list",
+        "action": "click(TRANSACTIONS tab)",
+        "precondition": "",
+        "postcondition": "full list view"
+      }
+    ],
+    "strategies": [
+      {
+        "name": "QUERY_DAILY_TOTAL_OR_CATEGORY_SPEND",
+        "preconditions": "starting from home_screen",
+        "steps": [
+          "open_app(Bluecoins) -> main_dashboard",
+          "read the Budget Summary / Daily Summary 'Actual' value for the target date (already visible)",
+          "answer(total_amount) and status(complete)"
+        ],
+        "success_signal": "Daily/Budget Summary shows Actual amount for target date; answer returned",
+        "fallback": "If not visible, click Transactions tab and sum amounts for the date"
+      },
+      {
+        "name": "QUERY_TRANSACTION_CATEGORY_OR_COUNT",
+        "preconditions": "starting from home_screen",
+        "steps": [
+          "open_app(Bluecoins) -> main_dashboard",
+          "click(Transactions tab) -> transactions_list",
+          "locate the date header and read/count the entries (category labels like 'Others', 'Salary', 'Bonus')",
+          "answer(category or count) and status(complete)"
+        ],
+        "success_signal": "Transaction rows for target date are visible and counted/identified",
+        "fallback": "Scroll the list if the date header is off-screen"
+      },
+      {
+        "name": "EDIT_TRANSACTION_VIA_ROW_AMOUNT",
+        "preconditions": "starting from transactions_list",
+        "steps": [
+          "click the amount-text portion of the target transaction row (NOT the icon/label area) -> transaction_editor",
+          "optional: switch EXPENSE/INCOME tab",
+          "click date field -> date_picker_dialog; click target day; click OK",
+          "click amount field; long_press to select all; delete; input new amount",
+          "click Notes field; input new note",
+          "click Labels field if label change needed; input label; OK",
+          "click green checkmark -> category_detail_view (saved)"
+        ],
+        "success_signal": "returns to category detail view / transactions list showing updated values",
+        "fallback": "If clicking opens icon_selector_dialog, press NONE and try clicking a different area of the row (amount text)"
+      },
+      {
+        "name": "CHANGE_TRANSACTION_TYPE_AND_NOTE",
+        "preconditions": "starting from transaction_editor on the target row",
+        "steps": [
+          "click(EXPENSE or INCOME tab) to flip type",
+          "click(Notes field) and input_text the note",
+          "click(green checkmark save)"
+        ],
+        "success_signal": "list view reflects new type (color/sign) and note text visible",
+        "fallback": "If editor not reached, open row via amount click or retry"
+      }
+    ],
+    "dead_ends": [
+      {
+        "state": "transactions_list",
+        "failed_action": "click FAB '+' (index ~53/54) repeatedly",
+        "note": "Often the editor screen did not open from the agent's perspective even though it may have; agent looped clicking the + button. Verify UI state changed before retrying."
+      },
+      {
+        "state": "transactions_list",
+        "failed_action": "click or long_press on transaction row icon/label area",
+        "note": "Opens Select Icon dialog instead of editor. Click on the amount text area instead to open the editor."
+      },
+      {
+        "state": "transaction_editor",
+        "failed_action": "input_text over existing amount without clearing",
+        "note": "Text gets appended (e.g. '5,000.0520.000'). Long-press to select all then delete, or use keyboard backspace before typing the new value."
+      },
+      {
+        "state": "calendar_transactions_view",
+        "failed_action": "click Add (+) header icon then repeatedly navigate back via Calendar Settings",
+        "note": "Agent accidentally entered Calendar settings; needs to use the list-view FAB or click a transaction row directly."
+      },
+      {
+        "state": "main_dashboard",
+        "failed_action": "Prematurely answer status(complete) on Query tasks after navigating to Transactions without verifying match of date/amount",
+        "note": "Led to false positives for add-transaction tasks (confused existing entry with a newly-added one)."
+      }
+    ]
+  },
+  "layer2": {
+    "categories": [
+      {
+        "name": "CREATE_ENTRY",
+        "precondition": "App launched and on a list/dashboard view that exposes a creation affordance (e.g. floating action button or equivalent primary create control)",
+        "abstract_steps": [
+          "Navigate to the list view where new items are created",
+          "Trigger the create affordance (primary create control) and wait for the entry form to appear",
+          "If a type toggle is present, choose the correct type (e.g. one of the mutually exclusive categories offered)",
+          "Set required fields one by one: amount/value, date (via date picker if needed), category/label, note/description",
+          "When modifying a pre-filled field, clear existing text (select-all then remove, or use backspace) before typing",
+          "Confirm/save via the primary save action",
+          "Verify the new item appears in the list with the correct values"
+        ],
+        "failure_modes": [
+          "Repeated taps on create button without detecting whether the entry form actually opened",
+          "Typing into a field without clearing pre-existing text, leading to concatenated values",
+          "Tapping the wrong sub-area of a row and opening a secondary dialog instead of the entry form",
+          "Declaring task complete based on an unrelated pre-existing entry"
+        ],
+        "verification_checklist": [
+          "Entry form was observed (not just list) before entering data",
+          "All target fields show the intended final values before saving",
+          "Post-save list contains a new entry with matching amount/date/type/note"
+        ]
+      },
+      {
+        "name": "MODIFY_ENTRY",
+        "precondition": "Target item is visible in a list and its detail form is accessible via tapping the row",
+        "abstract_steps": [
+          "Locate target item by date/amount/category",
+          "Open its detail form by tapping the text/amount region of the row (avoid icon/label area that may open a picker)",
+          "Clear and replace each target field (amount, date, type, note, label)",
+          "Use the date picker for date changes and confirm with the positive action",
+          "Save with the primary confirm action",
+          "Verify the row now shows the updated values"
+        ],
+        "failure_modes": [
+          "Opening an unrelated modal (icon/label picker) instead of the detail form",
+          "Appending text to a field instead of replacing it",
+          "Saving without toggling type when required",
+          "Claiming success without confirming updated values in the list"
+        ],
+        "verification_checklist": [
+          "Each modified field reflects the new value in the form before save",
+          "After save, list shows updated values and correct sign/type",
+          "Aggregate totals or summaries reflect the change when applicable"
+        ]
+      },
+      {
+        "name": "REMOVE_ENTRY",
+        "precondition": "Target item is visible and its detail form or context menu offers a removal action",
+        "abstract_steps": [
+          "Open the target item's detail form or context menu",
+          "Invoke the destructive/removal action from the available controls of the opened view (e.g. a trash/discard control)",
+          "Confirm removal if prompted via the positive/accept action",
+          "Verify removal from the list"
+        ],
+        "failure_modes": [
+          "Long-pressing invokes a different action (e.g. icon or label selection) rather than the intended removal flow",
+          "Dismissing confirmation prematurely",
+          "Removing the wrong row due to duplicates"
+        ],
+        "verification_checklist": [
+          "Target row no longer appears in list",
+          "Aggregate totals updated accordingly"
+        ]
+      },
+      {
+        "name": "QUERY_INFO",
+        "precondition": "App is launched and the requested summary or list view is reachable",
+        "abstract_steps": [
+          "Open the app and go to the view that surfaces the requested datum (dashboard summary for totals, list view for counts/categories)",
+          "Read the already-displayed value for the target date/category",
+          "Respond with an answer action containing the value",
+          "Mark the task complete"
+        ],
+        "failure_modes": [
+          "Miscounting due to including summary/header rows",
+          "Reporting a pre-existing value when the task was to create a new one",
+          "Answering before scrolling to ensure all relevant rows are seen"
+        ],
+        "verification_checklist": [
+          "Answered value matches what is visible for the specified date/category",
+          "Counted only actual item rows, excluding headers/totals"
+        ]
+      },
+      {
+        "name": "NAVIGATE_TO",
+        "precondition": "App is launched",
+        "abstract_steps": [
+          "Identify the top-level tab or drawer entry matching the target section",
+          "Tap the tab/drawer item",
+          "Confirm the expected section header/content is visible"
+        ],
+        "failure_modes": [
+          "Clicking a header icon that opens an auxiliary configuration view instead of the intended section",
+          "Not waiting for the view to load before interacting"
+        ],
+        "verification_checklist": [
+          "Target section's characteristic UI is visible",
+          "Correct tab/drawer item is highlighted"
+        ]
+      },
+      {
+        "name": "PICK_DATE_FROM_PICKER",
+        "precondition": "A date picker dialog is open",
+        "abstract_steps": [
+          "Use month navigation arrows to reach the target month/year",
+          "Tap the target day in the grid",
+          "Confirm with the positive/accept button"
+        ],
+        "failure_modes": [
+          "Tapping the dismiss/negative button instead of the positive/accept button",
+          "Selecting the wrong day due to misreading the grid"
+        ],
+        "verification_checklist": [
+          "Form's date field shows the selected date"
+        ]
+      },
+      {
+        "name": "CREATE_LABEL_OR_CATEGORY",
+        "precondition": "A label/category selection dialog is open",
+        "abstract_steps": [
+          "If the desired value isn't in the list, tap the new-value input field",
+          "Type the new label text",
+          "Confirm with the positive/accept button to create and apply it"
+        ],
+        "failure_modes": [
+          "Typing in the wrong field and creating duplicates",
+          "Confirming before the text is entered"
+        ],
+        "verification_checklist": [
+          "Form shows the new label applied to the entry"
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "built_at": "2025-01-15T00:00:00Z",
+    "n_episodes": 75,
+    "n_successful": 18,
+    "n_episodes_input": 75,
+    "synthesizer_model": "claude-opus-4-7",
+    "synthesizer_temperature": 0.3
+  }
+}

@@ -1,0 +1,342 @@
+meta:
+  version: v1.1-K1
+  date_built: '2026-04-15'
+  date_revised: '2026-05-14'
+  revision_notes: |
+    v1.1-K1 (2026-05-14): removed `WikipediaDecreaseTextSize50` from
+    tier_C_held_out > wikipedia > T_adapt. This template's class exists
+    in `task_evals/single/wikipedia.py` but is commented out in
+    AndroidWorld upstream's `registry.py`, so harness lookups raise
+    KeyError. Wikipedia template count 6 → 5; tier-C total templates
+    47 → 46; benchmark grand total 192 → 191.
+  protocol: K=1 baseline (one seed per template; matches AndroidWorld leaderboard convention).
+  totals_apps: 25
+  totals_templates: 191
+  note_generic_tasks: OpenApp + SaveCopyOfReceipt (2 generic/composite rows in task_metadata.json) are not assigned to any
+    single app and are excluded from the per-app split. Grand vanilla-AndroidWorld total = 116; Plus = 78; combined app-attributable
+    = 192.
+  counts:
+    source_templates: 96
+    tier_B:
+      apps: 6
+      T_adapt_templates: 32
+      T_eval_templates: 18
+      total_templates: 50
+    tier_C:
+      apps: 7
+      T_adapt_templates: 29
+      T_eval_templates: 17
+      total_templates: 46
+source_pool:
+  markor:
+    category: Productivity
+    n_templates: 14
+    templates:
+    - MarkorAddNoteHeader
+    - MarkorChangeNoteContent
+    - MarkorCreateFolder
+    - MarkorCreateNote
+    - MarkorCreateNoteAndSms
+    - MarkorCreateNoteFromClipboard
+    - MarkorDeleteAllNotes
+    - MarkorDeleteNewestNote
+    - MarkorDeleteNote
+    - MarkorEditNote
+    - MarkorMergeNotes
+    - MarkorMoveNote
+    - MarkorTranscribeReceipt
+    - MarkorTranscribeVideo
+  tasks_org:
+    category: Productivity
+    n_templates: 6
+    templates:
+    - TasksCompletedTasksForDate
+    - TasksDueNextWeek
+    - TasksDueOnDate
+    - TasksHighPriorityTasks
+    - TasksHighPriorityTasksDueOnDate
+    - TasksIncompleteTasksOnDate
+  joplin:
+    category: Productivity
+    n_templates: 4
+    templates:
+    - NotesIsTodo
+    - NotesMeetingAttendeeCount
+    - NotesRecipeIngredientCount
+    - NotesTodoItemCount
+  calculator:
+    category: Tools
+    n_templates: 19
+    templates:
+    - CalculatorConvert45DegreesToRadians
+    - CalculatorGeometricMean
+    - CalculatorHarmonicMean
+    - CalculatorInput1
+    - CalculatorInput10Choose2
+    - CalculatorInput17Times23
+    - CalculatorInput1Plus1
+    - CalculatorInput2Plus24Div3
+    - CalculatorInput3Times5
+    - CalculatorInput5Choose2
+    - CalculatorInputCos180
+    - CalculatorInputCos60
+    - CalculatorInputFactorial6
+    - CalculatorInputLn1234
+    - CalculatorInputPercent50Of28
+    - CalculatorInputSqrt25
+    - CalculatorOpen
+    - CalculatorSumFirst5Fibonacci
+    - CalculatorSumFirst5Primes
+  clock:
+    category: Tools
+    n_templates: 3
+    templates:
+    - ClockStopWatchPausedVerify
+    - ClockStopWatchRunning
+    - ClockTimerEntry
+  files:
+    category: Tools
+    n_templates: 2
+    templates:
+    - FilesDeleteFile
+    - FilesMoveFile
+  bluecoins:
+    category: Finance
+    n_templates: 15
+    templates:
+    - BluecoinsAddExpense
+    - BluecoinsAddExpenseOnDate
+    - BluecoinsAddExpenseOnDateWithLabel
+    - BluecoinsAddIncomeOnDateWithNote
+    - BluecoinsAddIncomeWithLabel
+    - BluecoinsEditExpenseAmount
+    - BluecoinsEditExpenseDateAmountNote
+    - BluecoinsEditIncomeDateAndAmount
+    - BluecoinsEditTransactionType
+    - BluecoinsEditTransactionTypeAmountNote
+    - BluecoinsQueryCategorySpending
+    - BluecoinsQuerySpendingCategory
+    - BluecoinsQuerySpendingOnDate
+    - BluecoinsQueryTotalSpendingOnDate
+    - BluecoinsQueryTransactionCount
+  pi_music:
+    category: Music & Audio
+    n_templates: 12
+    templates:
+    - PiMusicCreatePlaylist
+    - PiMusicPauseAndSeek
+    - PiMusicPlayFromPlaylist
+    - PiMusicPlaySongByTitleArtist
+    - PiMusicQueryArtistSongCount
+    - PiMusicQueryArtistTotalDuration
+    - PiMusicQueryLongestSongDuration
+    - PiMusicQuerySongAlbum
+    - PiMusicQuerySortedSongsByTitle
+    - PiMusicQueryTotalSongs
+    - PiMusicSortByDurationAscending
+    - PiMusicSortByDurationDescending
+  audio_recorder:
+    category: Music & Audio
+    n_templates: 2
+    templates:
+    - AudioRecorderRecordAudio
+    - AudioRecorderRecordAudioWithFileName
+  snapseed:
+    category: Photography
+    n_templates: 11
+    templates:
+    - SnapseedTask1
+    - SnapseedTask10
+    - SnapseedTask11
+    - SnapseedTask2
+    - SnapseedTask3
+    - SnapseedTask4
+    - SnapseedTask5
+    - SnapseedTask6
+    - SnapseedTask7
+    - SnapseedTask8
+    - SnapseedTask9
+  simple_sms_messenger:
+    category: Communication
+    n_templates: 6
+    templates:
+    - SimpleSmsReply
+    - SimpleSmsReplyMostRecent
+    - SimpleSmsResend
+    - SimpleSmsSend
+    - SimpleSmsSendClipboardContent
+    - SimpleSmsSendReceivedAddress
+  contacts:
+    category: Communication
+    n_templates: 2
+    templates:
+    - ContactsAddContact
+    - ContactsNewContactDraft
+tier_B_held_out:
+  simple_calendar_pro:
+    category: Productivity
+    n_templates: 17
+    T_adapt:
+    - SimpleCalendarAddOneEvent
+    - SimpleCalendarAddOneEventInTwoWeeks
+    - SimpleCalendarAddOneEventRelativeDay
+    - SimpleCalendarAddOneEventTomorrow
+    - SimpleCalendarAddRepeatingEvent
+    - SimpleCalendarAnyEventsOnDate
+    - SimpleCalendarDeleteEvents
+    - SimpleCalendarDeleteEventsOnRelativeDay
+    - SimpleCalendarDeleteOneEvent
+    - SimpleCalendarEventOnDateAtTime
+    - SimpleCalendarEventsInNextWeek
+    T_eval:
+    - SimpleCalendarEventsInTimeRange
+    - SimpleCalendarEventsOnDate
+    - SimpleCalendarFirstEventAfterStartTime
+    - SimpleCalendarLocationOfEvent
+    - SimpleCalendarNextEvent
+    - SimpleCalendarNextMeetingWithPerson
+  system_settings:
+    category: Tools
+    n_templates: 15
+    T_adapt:
+    - SystemBluetoothTurnOff
+    - SystemBluetoothTurnOffVerify
+    - SystemBluetoothTurnOn
+    - SystemBluetoothTurnOnVerify
+    - SystemBrightnessMax
+    - SystemBrightnessMaxVerify
+    - SystemBrightnessMin
+    - SystemBrightnessMinVerify
+    - SystemCopyToClipboard
+    T_eval:
+    - SystemWifiTurnOff
+    - SystemWifiTurnOffVerify
+    - SystemWifiTurnOn
+    - SystemWifiTurnOnVerify
+    - TurnOffWifiAndTurnOnBluetooth
+    - TurnOnWifiAndOpenApp
+  pro_expense:
+    category: Finance
+    n_templates: 9
+    T_adapt:
+    - ExpenseAddMultiple
+    - ExpenseAddMultipleFromGallery
+    - ExpenseAddMultipleFromMarkor
+    - ExpenseAddSingle
+    - ExpenseDeleteDuplicates
+    - ExpenseDeleteDuplicates2
+    T_eval:
+    - ExpenseDeleteMultiple
+    - ExpenseDeleteMultiple2
+    - ExpenseDeleteSingle
+  retro_music:
+    category: Music & Audio
+    n_templates: 4
+    T_adapt:
+    - RetroCreatePlaylist
+    - RetroPlayingQueue
+    - RetroPlaylistDuration
+    T_eval:
+    - RetroSavePlaylist
+  camera:
+    category: Photography
+    n_templates: 2
+    T_adapt:
+    - CameraTakePhoto
+    T_eval:
+    - CameraTakeVideo
+  chrome:
+    category: Communication
+    n_templates: 3
+    T_adapt:
+    - BrowserDraw
+    - BrowserMaze
+    T_eval:
+    - BrowserMultiply
+tier_C_held_out:
+  maps_me:
+    category: Maps & Navigation
+    n_templates: 15
+    T_adapt:
+    - MapsMeAddWorkPlace
+    - MapsMeCheckDrivingDistanceTime
+    - MapsMeCheckNearestHotel
+    - MapsMeCheckNearestPlace
+    - MapsMeCheckNearestPlaceDriveTime
+    - MapsMeCheckNearestPlaceWalkTime
+    - MapsMeCheckPublicTransportRoute
+    - MapsMeCheckRidingTime
+    - MapsMeCheckWalkingDistanceTime
+    T_eval:
+    - MapsMeCompareRidingVsPublicTransport
+    - MapsMeNavigateToBerkeley
+    - MapsMeNavigateToLocation
+    - MapsMeNavigateToOpenAI
+    - MapsMeNavigateToStanford
+    - MapsMeNavigateToUniversitySouth
+  osmand:
+    category: Maps & Navigation
+    n_templates: 3
+    T_adapt:
+    - OsmAndFavorite
+    - OsmAndMarker
+    T_eval:
+    - OsmAndTrack
+  broccoli:
+    category: Food & Drink
+    n_templates: 13
+    T_adapt:
+    - RecipeAddMultipleRecipes
+    - RecipeAddMultipleRecipesFromImage
+    - RecipeAddMultipleRecipesFromMarkor
+    - RecipeAddMultipleRecipesFromMarkor2
+    - RecipeAddSingleRecipe
+    - RecipeDeleteDuplicateRecipes
+    - RecipeDeleteDuplicateRecipes2
+    - RecipeDeleteDuplicateRecipes3
+    T_eval:
+    - RecipeDeleteMultipleRecipes
+    - RecipeDeleteMultipleRecipesWithConstraint
+    - RecipeDeleteMultipleRecipesWithNoise
+    - RecipeDeleteSingleRecipe
+    - RecipeDeleteSingleWithRecipeWithNoise
+  opentracks:
+    category: Health & Fitness
+    n_templates: 6
+    T_adapt:
+    - SportsTrackerActivitiesCountForWeek
+    - SportsTrackerActivitiesOnDate
+    - SportsTrackerActivityDuration
+    - SportsTrackerLongestDistanceActivity
+    T_eval:
+    - SportsTrackerTotalDistanceForCategoryOverInterval
+    - SportsTrackerTotalDurationForCategoryThisWeek
+  wikipedia:
+    category: Books & Reference
+    n_templates: 5
+    # Note: WikipediaDecreaseTextSize50 was previously listed in T_adapt
+    # but is commented out in AndroidWorld upstream's registry.py
+    # (along with 7 other Wikipedia Disable* tasks). Removed in
+    # splits.yaml v1.1-K1 (2026-05-14) to keep splits.yaml in sync with
+    # the actual task registry. T_adapt 4 → 3 templates.
+    T_adapt:
+    - WikipediaDisablePreviewAndFeed
+    - WikipediaGoToSavedTab
+    - WikipediaGoToSearchTab
+    T_eval:
+    - WikipediaIncreaseTextSize180
+    - WikipediaOpen
+  vlc:
+    category: Video Players & Editors
+    n_templates: 2
+    T_adapt:
+    - VlcCreatePlaylist
+    T_eval:
+    - VlcCreateTwoPlaylists
+  simple_draw_pro:
+    category: Art & Design
+    n_templates: 1
+    T_adapt:
+    - SimpleDrawProCreateDrawing
+    T_eval: []
+    note: "N=1 \u2014 degenerate: template kept for adapt; no eval signal."

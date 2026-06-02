@@ -1,0 +1,116 @@
+# ═══════════════════════════════════════════════
+# LAYER 1: APP_SPECIFIC  (non-transferable)
+# ═══════════════════════════════════════════════
+APP: clock
+CATEGORY: Tools
+STATES:
+  S0: HOME_SCREEN — Android home screen with stopwatch/timer widget visible
+    visual_cues: ['app icons (Phone, Chrome, Settings)', 'Google search bar', "timer/stopwatch widget showing time like '00:-12' or '00:22'", 'Paused indicator sometimes shown']
+    resource_hints: ['Google app', 'Voice search', 'Search']
+  S1: CLOCK_MAIN — Clock app main Clock tab showing time and date
+    visual_cues: ['Clock title', 'Add city button', 'current time display', 'date display', 'bottom nav: Alarm/Clock/Timer/Stopwatch/Bedtime']
+    resource_hints: ['Clock', 'Add city', 'Alarm', 'Timer', 'Stopwatch', 'Bedtime']
+  S2: STOPWATCH_IDLE — Stopwatch tab with timer at 00 and Start button
+    visual_cues: ['Stopwatch title', 'Start button (large central)', '00 display', 'bottom nav tabs', 'More options']
+    resource_hints: ['Stopwatch', 'Start', 'More options']
+  S3: STOPWATCH_RUNNING — Stopwatch running with Pause/Reset/Lap controls
+    visual_cues: ['elapsed time counting up', 'Pause button (large central)', 'Reset button', 'Lap button']
+    resource_hints: ['Pause', 'Reset', 'Lap']
+  S4: TIMER_ENTRY — Timer setup screen with numeric keypad
+    visual_cues: ['Timer title', "display like '00h 00m 00s'", 'numeric keypad 0-9', '00 key', 'backspace (⌫) key']
+    resource_hints: ['Timer', '00h 00m 00s', '⌫']
+TRANSITIONS:
+  S0 --click(stopwatch_widget)--> S2  [pre: stopwatch running or paused]  [post: opens clock app to stopwatch tab]
+  S0 --open_app(Clock)--> S1  [post: clock app opened to default tab]
+  S1 --click(Timer_tab)--> S4
+  S1 --click(Stopwatch_tab)--> S2
+  S2 --click(Start)--> S3  [post: stopwatch begins counting]
+  S3 --click(Pause) then click(Reset)--> S2
+  S2 --click(Timer_tab)--> S4
+  S4 --click(digit) or click(⌫)--> S4  [post: time display shifts digits (right-to-left fill)]
+STRATEGIES:
+  PAUSE_RUNNING_STOPWATCH_FROM_HOME:
+    preconditions: home screen shows running stopwatch widget
+    steps:
+      1. click the stopwatch widget/timer display on home screen
+      2. verify stopwatch tab opens showing Start button (indicates paused state)
+    success_signal: stopwatch screen shows 'Start' button and '00' display (paused state)
+    fallback: if landed elsewhere, navigate to Stopwatch tab and inspect state
+  START_STOPWATCH:
+    preconditions: stopwatch idle/paused
+    steps:
+      1. click the stopwatch widget on home screen to open clock app on stopwatch tab (or open Clock app and click Stopwatch tab)
+      2. click the Start button
+      3. verify time is counting up and Pause/Reset/Lap buttons appear
+    success_signal: Pause button visible and elapsed time increases
+    fallback: if on wrong tab, tap Stopwatch in bottom nav
+DEAD_ENDS:
+  at home_screen: status=complete without interacting fails  [Agent assumed task was already done by reading widget state; must actually perform the action or verify end-state deterministically]
+  at timer_entry: clicking digits assuming they fill hours first fails  [Timer keypad fills seconds first and digits shift left as new digits are entered (like an odometer). Agent repeatedly misinterpreted order, causing wrong values.]
+  at timer_entry: using backspace to 'reset' then re-entering fails  [Backspace only removes last digit (and shifts right), not a full clear; repeated wrong digit entries compounded the error]
+
+# ═══════════════════════════════════════════════
+# LAYER 2: GENERIC  (transferable, app-agnostic)
+# ═══════════════════════════════════════════════
+CATEGORY: TOGGLE_STATE
+  precondition: An entity exists with a toggleable state (e.g., active/inactive, on/off) and is visible or reachable
+  abstract_steps:
+    1. Identify current state via visual indicators
+    2. Navigate to the control surface if not already there
+    3. Invoke the toggle control
+    4. Verify the state changed to the desired target
+  failure_modes:
+    - 'Declaring success without taking any action based on a misread of current state'
+    - 'Clicking a non-interactive label instead of the actual control'
+    - 'Toggling past the desired state (e.g., invoking the toggle on an already-target-state item flips it back to the opposite state)'
+  verification_checklist:
+    - "Target state's distinctive UI element is present (e.g., opposite action button shown)"
+    - 'Numeric/textual indicator reflects expected state'
+    - 'No transient/loading indicator remains'
+
+CATEGORY: ACTIVATE_ENTITY
+  precondition: Entity is in an inactive/idle state and can be transitioned to an active state
+  abstract_steps:
+    1. Navigate to the entity's control screen
+    2. Locate the primary activation control
+    3. Click the activation control
+    4. Verify active-state controls appear (e.g., controls for suspending or terminating the active state)
+  failure_modes:
+    - 'Attempting activation on the wrong tab/section'
+    - 'Mistaking a display for a button'
+  verification_checklist:
+    - 'Active-state controls visible'
+    - 'Dynamic indicator (counter, progress) advances'
+
+CATEGORY: ENTER_STRUCTURED_VALUE
+  precondition: An input surface exists that accepts a multi-field structured value (e.g., H:M:S, date parts) via a keypad that shifts digits
+  abstract_steps:
+    1. Navigate to the input surface
+    2. Understand the keypad semantics: determine whether digits fill from the right (shift-left) or whether fields are edited independently
+    3. If shift-fill: enter the full digit sequence in order from most-significant to least-significant, including leading zeros to place digits in correct fields
+    4. Avoid partial backspaces unless correcting the last digit only
+    5. Verify the displayed value matches the target exactly before confirming
+  failure_modes:
+    - 'Assuming each field is edited independently when keypad actually shifts digits across fields'
+    - 'Entering only significant digits and skipping leading zeros, causing digits to land in the wrong field'
+    - "Using backspace repeatedly to 'clear' without realizing it only removes one digit at a time"
+    - 'Re-entering after partial clear and compounding misalignment'
+    - 'Declaring completion before verifying display matches target'
+  verification_checklist:
+    - 'Displayed value exactly equals target across all sub-fields'
+    - 'No leading/trailing unintended digits'
+    - 'Did not inadvertently trigger an activation/confirm control'
+
+CATEGORY: NAVIGATE_TO_SECTION
+  precondition: App has multiple tabs/sections and a bottom/top nav is visible
+  abstract_steps:
+    1. Open the app if not already open
+    2. Identify the target tab by label or icon
+    3. Click the tab
+    4. Verify title/contents match the desired section
+  failure_modes:
+    - 'Clicking a home-screen widget that opens a different tab than intended'
+    - 'Mistaking section labels across similar tabs'
+  verification_checklist:
+    - 'Screen title matches target section'
+    - 'Section-specific controls are visible'

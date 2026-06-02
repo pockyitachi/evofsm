@@ -1,0 +1,162 @@
+{
+  "category": "Communication",
+  "layer2": {
+    "categories": [
+      {
+        "name": "ADD_ENTRY",
+        "precondition": "Application opened to a list/overview screen with an affordance to create a new item; optionally requires a target identifier (e.g., a recipient or reference value) and content",
+        "abstract_steps": [
+          "Launch the application and navigate to the target list screen",
+          "Invoke the create-new-item affordance (floating action button, empty-state CTA, or explicit 'Create' entry)",
+          "Provide required identifier in the dedicated field",
+          "Confirm identifier (if a confirm control exists) before entering body",
+          "Focus each required input field in order and enter the corresponding value",
+          "Enter body content in the dedicated body field",
+          "Confirm by activating the primary commit/submit control",
+          "Verify the new item appears in the list and is persisted"
+        ],
+        "failure_modes": [
+          "Committing before all required fields are filled",
+          "Typing into an unfocused field",
+          "Missing the create affordance because it is off-screen or behind a tab",
+          "A required interface element is unavailable or cannot be located, rendering the action infeasible",
+          "Content accidentally placed in identifier field",
+          "Skipping confirm step so body field never activates"
+        ],
+        "verification_checklist": [
+          "New item's identifier is visible in the list view",
+          "No error/validation banner present",
+          "Return to list state (not still in editor)",
+          "Identifier correctly attached to the new item",
+          "Body text matches request verbatim",
+          "Item appears in the main list after creation"
+        ]
+      },
+      {
+        "name": "EDIT_ENTRY_FIELD_WITH_ENUM_LABEL",
+        "precondition": "Editor form open with a field that has an associated enum label selector",
+        "abstract_steps": [
+          "Fill primary value field with input_text",
+          "Activate the adjacent label dropdown/selector",
+          "Choose the desired label from the option list",
+          "Confirm the label field reflects the chosen value"
+        ],
+        "failure_modes": [
+          "Clicking the value field instead of the dropdown trigger",
+          "Selecting wrong option because list indices shift after opening"
+        ],
+        "verification_checklist": [
+          "Label field text matches requested value",
+          "Value field retained its entered text"
+        ]
+      },
+      {
+        "name": "CREATE_DRAFT_WITHOUT_COMMIT",
+        "precondition": "Editor form reachable and task specifies not to persist",
+        "abstract_steps": [
+          "Populate all specified fields",
+          "Adjust any optional attributes (labels/types) as specified",
+          "Stop before invoking the primary commit control",
+          "Declare task complete while editor still shows draft state"
+        ],
+        "failure_modes": [
+          "Accidentally activating the primary commit control",
+          "Navigating away and losing the draft"
+        ],
+        "verification_checklist": [
+          "All requested values are visible in their fields",
+          "Editor screen is still active (not returned to list)",
+          "No success confirmation toast appeared"
+        ]
+      },
+      {
+        "name": "NAVIGATE_TO_APP",
+        "precondition": "Launcher, a different application, or an unrelated screen is currently in the foreground",
+        "abstract_steps": [
+          "Attempt direct app launch by name or identify the target app icon",
+          "If unavailable, open the application list and locate it via scrolling or a lookup affordance",
+          "If app opens to a non-target subsection, switch tabs/drawer to reach target section",
+          "If truly absent, surface an infeasibility status"
+        ],
+        "failure_modes": [
+          "App icon not on current launcher page",
+          "Landing on wrong tab inside a multi-tab app",
+          "Confusing a visually-similar app for the target",
+          "Prematurely reporting infeasibility before trying the application list"
+        ],
+        "verification_checklist": [
+          "Target section header/title visible",
+          "Expected primary affordances (e.g., create button) present",
+          "Foreground window belongs to the intended app",
+          "A recognizable landing screen of that app is visible"
+        ]
+      },
+      {
+        "name": "REPLY_TO_ENTITY",
+        "precondition": "Application open to a list of existing conversations/entities; target entity identifiable by name or identifier",
+        "abstract_steps": [
+          "Launch the application",
+          "Locate the target entity row in the list (scrolling or using a lookup affordance if needed)",
+          "Open the entity detail/thread",
+          "Focus the reply/compose input",
+          "Enter the requested text",
+          "Trigger the send/submit control",
+          "Verify the new entry appears attributed to the user"
+        ],
+        "failure_modes": [
+          "Selecting wrong entity when multiple similar names exist",
+          "Typing into the header/recipient field instead of the body",
+          "Forgetting to press send after entering text"
+        ],
+        "verification_checklist": [
+          "Sent content string matches exactly (including punctuation)",
+          "New outgoing item visible in the correct thread",
+          "Input field is cleared after submission with zero residual draft content"
+        ]
+      },
+      {
+        "name": "TRANSFER_CONTENT_BETWEEN_ENTITIES",
+        "precondition": "Source item contains text to forward; target entity might already have an existing thread/record or might require creating one",
+        "abstract_steps": [
+          "Open source item and select the desired text (long-press)",
+          "Copy text to clipboard via the selection action bar",
+          "Navigate back to the list of entities",
+          "Open or create the target entity's thread/record, ensuring it is distinct from the source thread",
+          "Focus the body input and insert the clipboard contents via the standard insertion gesture",
+          "Submit",
+          "Verify the transferred text appears attributed to the user within the target thread"
+        ],
+        "failure_modes": [
+          "Sending the content back into the source thread instead of the target",
+          "Pasting into an identifier field, corrupting the recipient",
+          "Clipboard ends up empty because the copy action was never confirmed"
+        ],
+        "verification_checklist": [
+          "Target entity correctly selected",
+          "Inserted text exactly equals the original",
+          "Outgoing item is visible within the target entity's thread rather than the source's"
+        ]
+      },
+      {
+        "name": "REPEAT_PREVIOUS_ACTION",
+        "precondition": "A prior item/action exists and user wants to repeat it",
+        "abstract_steps": [
+          "Open the item/thread containing the original",
+          "Look for an explicit repeat/resend affordance in context menu or overflow",
+          "If absent, capture original text (read or copy)",
+          "Re-enter the text via the standard create path and submit it once more"
+        ],
+        "failure_modes": [
+          "Assuming a dedicated repeat control exists when the interface lacks one",
+          "Declaring task infeasible without trying the manual re-entry workaround",
+          "Repeating from the wrong item (e.g., a received vs sent one)"
+        ],
+        "verification_checklist": [
+          "A second outgoing copy of the identical text exists",
+          "Timestamp of new copy is after the original",
+          "Original item remains intact and has been preserved without accidental removal"
+        ]
+      }
+    ]
+  }
+}

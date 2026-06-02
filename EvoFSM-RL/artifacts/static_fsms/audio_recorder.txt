@@ -1,0 +1,158 @@
+# ═══════════════════════════════════════════════
+# LAYER 1: APP_SPECIFIC  (non-transferable)
+# ═══════════════════════════════════════════════
+APP: audio_recorder
+CATEGORY: Music & Audio
+STATES:
+  S0: HOME_SCREEN — Android home screen
+    visual_cues: ['app icons (Phone, Chrome, Settings)', 'time display', 'notification shade hints']
+  S1: WELCOME_SCREEN — Audio Recorder welcome splash
+    visual_cues: ["'Welcome to a simple and fast application' text", "'Get started' button"]
+    resource_hints: ['Get started']
+  S2: SETUP_SCREEN — Recording configuration setup
+    visual_cues: ["'Setup' header", "'Recording format:' label", 'M4a/Wav/3gp options', 'Sample rate options', "'Reset' and 'Apply' buttons", 'Naming field (scrollable below)']
+    resource_hints: ['Setup', 'Apply', 'Reset', 'Recording format', 'Sample rate', 'Naming']
+  S3: NAMING_OPTIONS_DIALOG — List of preset naming templates
+    visual_cues: ["multiple 'Naming: <template>.m4a' rows", 'e.g. Record-1.m4a, date formats, timestamp']
+    resource_hints: ['Naming']
+  S4: WARNING_DIALOG — Warning about deleted/moved records
+    visual_cues: ["'Warning!' title", "'Some of your records was deleted or moved' message", "'Ok' and 'Details' buttons"]
+    resource_hints: ['Warning', 'Ok', 'Details']
+  S5: RECORDER_IDLE — Main recorder ready to record
+    visual_cues: ["'Audio Recorder' title", "'00:00' timer", "file info '0 Mb, M4a, 44.1kHz'", 'large circular record button', 'Settings link']
+    resource_hints: ['Settings', 'Recording: %s']
+  S6: RECORDER_RECORDING — Recording in progress
+    visual_cues: ["'Recording…' status", 'advancing timer', 'file size growing', 'Delete button visible', 'stop/pause controls']
+    resource_hints: ['Recording', 'Delete']
+  S7: RECORDER_PAUSED — Recording stopped/paused
+    visual_cues: ["'Paused' status", 'final timer value', 'file size shown', 'Delete button']
+    resource_hints: ['Paused', 'Delete']
+  S8: SAVE_NAME_DIALOG — Dialog prompting for new name on save
+    visual_cues: ["'New name' label", "editable field with default 'Record-N'", "'Cancel' and 'Save' buttons", "'Don't ask again' checkbox", 'keyboard visible']
+    resource_hints: ['New name', 'Save', 'Cancel', "Don't ask again"]
+  S9: RECORDS_LIST — List of saved recordings
+    visual_cues: ["'Records' header", "'By date (newest)' sort label", 'recording entries with name, size, duration']
+    resource_hints: ['Records', 'By date']
+TRANSITIONS:
+  S0 --open_app(Audio Recorder)--> S1  [post: app launched first time or on splash]
+  S1 --click(Get started)--> S2
+  S2 --click(Naming field)--> S3
+  S3 --click(naming option)--> S2  [post: selected template applied]
+  S2 --click(Apply)--> S4  [pre: stale records exist]
+  S2 --click(Apply)--> S5
+  S4 --click(Ok)--> S5
+  S5 --click(record button)--> S6  [post: timer starts]
+  S6 --click(stop/pause)--> S7  [post: status becomes Paused]
+  S6 --click(stop)--> S8  [pre: save-prompt mode enabled]
+  S8 --click(Save)--> S5  [post: recording saved with chosen name]
+  S7 --click(menu icon)--> S4
+  S4 --click(Ok)--> S9  [pre: came from menu]
+STRATEGIES:
+  RECORD_AND_SAVE_DEFAULT_NAME:
+    preconditions: home_screen
+    steps:
+      1. open_app('Audio Recorder')
+      2. click('Get started') on welcome_screen
+      3. click('Apply') on setup_screen
+      4. dismiss warning_dialog with 'Ok' if shown
+      5. click record button on recorder_idle
+      6. wait a few seconds while recorder_recording
+      7. click stop button to enter recorder_paused or save_name_dialog
+      8. if save_name_dialog appears, click 'Save'
+    success_signal: recorder_idle shows latest record entry (e.g. Record-N with duration and size) and timer back to 00:00
+    fallback: If warning_dialog re-appears at any point, dismiss with 'Ok' then retry.
+  RECORD_WITH_CUSTOM_NAME_VIA_SAVE_DIALOG:
+    preconditions: home_screen; app produces save_name_dialog after stop
+    steps:
+      1. Follow RECORD_AND_SAVE_DEFAULT_NAME up to stop
+      2. In save_name_dialog, clear default text in name field
+      3. input_text(desired filename without or with extension as required)
+      4. click 'Save'
+    success_signal: records_list or recorder_idle shows entry with the chosen name
+    fallback: If save_name_dialog does not appear (stop leads directly to Paused), use Settings/Naming presets before recording instead
+DEAD_ENDS:
+  at setup_screen: click(index) targeting off-screen 'Apply' using invented index numbers fails  [Agent repeatedly clicked non-existent indices (e.g. 34/35/37) believing Apply was visible. Apply is index 3 when visible; agent must use only indices present in the current UI list.]
+  at naming_options_dialog: input_text to set a free-form custom filename fails  [Naming dialog only offers preset templates (Record-N, date formats, timestamp); it does NOT accept arbitrary custom names. Custom filenames must be entered in the post-recording save_name_dialog.]
+  at records_list: click/long_press on a record entry to rename fails  [No rename affordance from the list in this view; neither tap nor long-press opened a rename dialog.]
+  at setup_screen: Attempting to type custom filename into Naming field fails  [Field behaves as a selector, not an editable text box; typing has no effect on actual save name.]
+
+# ═══════════════════════════════════════════════
+# LAYER 2: GENERIC  (transferable, app-agnostic)
+# ═══════════════════════════════════════════════
+CATEGORY: CREATE_ENTRY
+  precondition: App launched and main create/compose surface reachable
+  abstract_steps:
+    1. Navigate from launcher to the app's primary surface
+    2. Pass through onboarding/welcome if present
+    3. Confirm or accept default configuration if an initial configuration screen appears
+    4. Dismiss any transient informational dialogs
+    5. Trigger the primary create action (e.g. record/start)
+    6. Allow the creation process to run for the required duration
+    7. Trigger stop/finalize action
+    8. Confirm in any resulting finalize dialog
+  failure_modes:
+    - 'Clicking indices not present in the current UI listing'
+    - 'Mistaking a selector list for an editable text field'
+    - 'Ignoring or missing a blocking dialog'
+    - 'Terminating before the finalize step'
+  verification_checklist:
+    - 'A new entry with non-zero size/duration appears in the list or main view'
+    - 'Timer/status returns to idle state'
+    - 'No blocking dialog remains on screen'
+
+CATEGORY: CREATE_ENTRY_WITH_CUSTOM_NAME
+  precondition: App provides a means to assign a custom label, either at finalization time or via pre-set options
+  abstract_steps:
+    1. Perform CREATE_ENTRY up to the finalize step
+    2. When a finalize/name dialog appears, clear any pre-filled text
+    3. Type the desired custom name
+    4. Confirm finalization
+  failure_modes:
+    - 'Assuming a pre-creation name selector allows arbitrary text (it may only offer templates)'
+    - 'Trying to rename from a list view that lacks rename affordance'
+    - 'Getting stuck repeating the same invalid click instead of re-examining UI'
+    - 'Missing the finalize dialog because stop leads directly to an intermediate state'
+  verification_checklist:
+    - 'Final entry appears with exactly the requested name'
+    - 'No duplicate entry with default name is left behind'
+    - 'Entry has expected size/duration'
+
+CATEGORY: DISMISS_INTERRUPTION
+  precondition: A modal dialog or notice is blocking interaction
+  abstract_steps:
+    1. Identify the affirmative/dismiss button (e.g. confirm, close)
+    2. Click it
+    3. Re-evaluate resulting screen before next action
+  failure_modes:
+    - 'Ignoring the dialog and clicking through it'
+    - 'Clicking a secondary/expand button when dismissal is intended'
+  verification_checklist:
+    - 'Dialog is no longer visible'
+    - 'Underlying screen is interactive again'
+
+CATEGORY: NAVIGATE_TO_APP
+  precondition: Device on launcher or another app
+  abstract_steps:
+    1. Launch the target app via any available mechanism (launcher icon, app list, or open-by-name)
+    2. Pass any first-run welcome screen
+    3. Arrive at the main functional surface
+  failure_modes:
+    - 'App not installed'
+    - 'Stuck on onboarding if button not clicked'
+  verification_checklist:
+    - "App's primary UI elements visible"
+    - 'App title in header matches expected'
+
+CATEGORY: RENAME_ENTRY
+  precondition: An existing entry is present in a list
+  abstract_steps:
+    1. Open the entry or its context menu (tap / long-press / overflow)
+    2. Locate a rename / edit-name option
+    3. Enter the desired label and confirm
+  failure_modes:
+    - 'App does not support relabeling from list view'
+    - 'Repeated taps produce no effect — agent must recognize and abandon'
+    - 'Confusing selection mode with edit mode'
+  verification_checklist:
+    - 'Entry shows the updated label in list'
+    - 'No duplicate entries created'

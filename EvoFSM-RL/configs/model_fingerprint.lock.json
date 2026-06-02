@@ -1,0 +1,7 @@
+{
+  "architecture": "Qwen3VLForConditionalGeneration",
+  "param_count": 8767123696,
+  "param_count_billions": 8.767,
+  "resolved_sha": "0c351dd01ed87e9c1b53cbc748cba10e6187ff3b",
+  "vocab_size": 151936
+}

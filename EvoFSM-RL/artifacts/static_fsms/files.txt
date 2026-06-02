@@ -1,0 +1,159 @@
+# ═══════════════════════════════════════════════
+# LAYER 1: APP_SPECIFIC  (non-transferable)
+# ═══════════════════════════════════════════════
+APP: files
+CATEGORY: Tools
+STATES:
+  S0: HOME_SCREEN — Android home screen
+    visual_cues: ['Phone, Instagram, Chrome, Settings icons', 'Google search bar']
+    resource_hints: ['Home']
+  S1: APP_DRAWER — App drawer listing installed apps
+    visual_cues: ['Search apps bar', 'Alphabetical app list']
+    resource_hints: ['Search apps, web and more']
+  S2: SETTINGS_MAIN — Settings app main page
+    visual_cues: ['Network & internet', 'Apps', 'Notifications', 'Battery', 'Storage entry']
+    resource_hints: ['Settings', 'Search settings']
+  S3: SETTINGS_STORAGE — Storage settings overview
+    visual_cues: ['GB used / GB total', 'Free up space card', 'Apps, System categories']
+    resource_hints: ['Storage', 'Free up space', 'Go to Files app to manage and free up space']
+  S4: STORAGE_CLEANUP — Files cleanup screen (no older files)
+    visual_cues: ['Nothing to remove', 'REVIEW RECENT ITEMS button']
+    resource_hints: ['Nothing to remove', 'REVIEW RECENT ITEMS']
+  S5: STORAGE_REMOVE_ITEMS — Remove items (apps list) screen
+    visual_cues: ['List of apps with sizes', 'Free up 0 B button', 'Cancel']
+    resource_hints: ['Remove items', 'Free up']
+  S6: FILES_FOLDER_VIEW — Files by Google folder contents view
+    visual_cues: ['Show roots button', 'Folder name in header', 'Category chips Images/Audio/Videos/Documents', 'Search icon']
+    resource_hints: ['Show roots', 'List view', 'Files in <folder>']
+  S7: FILES_ROOTS — Files by Google roots/shortcut list
+    visual_cues: ['Recent', 'Images', 'Videos', 'Audio', 'Documents', 'Downloads', 'sdk_gphone64_x86_64']
+    resource_hints: ['Files', 'sdk_gphone64_x86_64']
+  S8: FILES_SELECTION_MODE — Selection mode active with file(s) selected
+    visual_cues: ['X selected count in header', 'Share icon', 'Delete icon', 'More options (three dots)', 'Cancel']
+    resource_hints: ['1 selected', 'Share', 'Delete']
+  S9: FILES_CONTEXT_MENU — Overflow context menu for selected file
+    visual_cues: ['Open with', 'Copy to…', 'Move to…', 'Compress', 'Rename', 'Get info']
+    resource_hints: ['Move to…', 'Copy to…', 'Rename']
+  S10: DELETE_CONFIRM_DIALOG — Confirm deletion dialog
+    visual_cues: ['CANCEL / OK buttons']
+    resource_hints: ['CANCEL', 'OK']
+  S11: FILES_MOVE_DESTINATION_PICKER — Destination picker for Move/Copy
+    visual_cues: ['CANCEL and MOVE buttons at bottom', 'New folder option', 'Folder list']
+    resource_hints: ['MOVE', 'CANCEL', 'New folder']
+  S12: FILES_FOLDER_INFO — Folder info/details page
+    visual_cues: ['Type Folder', 'Modified date', 'Number of items']
+    resource_hints: ['Info', 'Number of items']
+TRANSITIONS:
+  S0 --open_app(Files by Google)--> S6  [post: Lands in default folder (Downloads)]
+  S0 --open_app(Settings)--> S2
+  S0 --scroll_down--> S1
+  S1 --click(Files icon)--> S6
+  S2 --click(Storage)--> S3
+  S3 --click(Free up space)--> S4  [post: Does NOT open file browser]
+  S4 --click(REVIEW RECENT ITEMS)--> S5
+  S6 --click(Show roots)--> S7
+  S7 --click(<storage or shortcut>)--> S6
+  S6 --click(<subfolder>)--> S6  [pre: folder contains target subfolder]
+  S6 --long_press(<file>)--> S8  [pre: file visible]  [post: 1 selected]
+  S8 --click(Delete)--> S10
+  S10 --click(OK)--> S6  [post: File removed]
+  S8 --click(More options)--> S9
+  S9 --click(Move to…)--> S11
+  S11 --navigate(Show roots / storage / subfolder)--> S11  [post: picker shows target destination contents]
+  S11 --click(MOVE)--> S6  [pre: correct destination open]  [post: File moved]
+  S9 --click(Get info)--> S12
+STRATEGIES:
+  DELETE_FILE_IN_FOLDER:
+    preconditions: home_screen; know folder path and filename
+    steps:
+      1. open_app('Files by Google') -> files_folder_view
+      2. click('Show roots') -> files_roots
+      3. click(storage root, e.g. 'sdk_gphone64_x86_64') -> files_folder_view
+      4. click(target subfolder, e.g. 'Notifications'/'Alarms'/'Downloads')
+      5. scroll_down if file not visible
+      6. long_press(target file) -> files_selection_mode
+      7. click('Delete') -> delete_confirm_dialog
+      8. click('OK') -> file removed
+    success_signal: 'Deleting 1 item.' toast and file no longer listed in folder
+    fallback: If file not found in assumed folder, use Show roots and try the correct top-level folder; use Search icon by filename
+  MOVE_FILE_BETWEEN_FOLDERS:
+    preconditions: home_screen; know source folder, destination folder, filename
+    steps:
+      1. open_app('Files by Google')
+      2. click('Show roots') and navigate into storage root (e.g. 'sdk_gphone64_x86_64')
+      3. click(source subfolder)
+      4. scroll_down until file visible
+      5. long_press(target file) -> files_selection_mode
+      6. click('More options') -> files_context_menu
+      7. click('Move to…') -> files_move_destination_picker
+      8. In destination picker: click('Show roots') if needed, click(storage root), click(destination subfolder) so header shows destination
+      9. click('MOVE') to confirm
+    success_signal: 'Moving 1 item.' toast, returned to source folder without the file; file appears in destination folder
+    fallback: If picker lands in Downloads, do NOT press MOVE there; navigate via Show roots -> storage root -> correct destination folder before confirming
+DEAD_ENDS:
+  at settings_storage: click('Free up space') expecting Files app fails  [Free up space leads to cleanup screen (Nothing to remove / Remove items for apps), not the file browser. Repeatedly clicking loops between settings_storage <-> storage_cleanup. Use open_app('Files by Google') instead.]
+  at files_folder_view(Downloads): repeatedly click('Images') to reach Pictures folder fails  [Category chips filter the current folder; they do not navigate to the Pictures directory. Use Show roots -> storage root -> Pictures.]
+  at files_move_destination_picker(Downloads): click('MOVE') while picker still shows default Downloads fails  [Confirms move to Downloads instead of intended destination. Navigate picker to the correct destination folder before pressing MOVE.]
+  at files_context_menu: click('Get info') thinking it is 'Move to…' fails  [Wrong menu entry selected; need to read labels and pick 'Move to…'.]
+
+# ═══════════════════════════════════════════════
+# LAYER 2: GENERIC  (transferable, app-agnostic)
+# ═══════════════════════════════════════════════
+CATEGORY: NAVIGATE_TO_ITEM
+  precondition: App launched; target item location known or inferable from path
+  abstract_steps:
+    1. Open the content browsing app directly rather than via indirect system entry points
+    2. Open the roots/drawer to see top-level locations
+    3. Enter the correct top-level volume
+    4. Drill into subfolders matching the target path
+    5. Scroll within the folder if the item is not immediately visible
+    6. Optionally use Search to locate the item by name
+  failure_modes:
+    - 'Treating category filters (Images/Audio/etc.) as folder navigation'
+    - 'Staying in a default landing folder instead of switching volumes'
+    - 'Looping through unrelated system screens that do not expose raw folders'
+  verification_checklist:
+    - 'Header shows the intended folder name'
+    - 'Target item appears in the listing'
+
+CATEGORY: DELETE_ENTRY
+  precondition: Target item visible in its containing view
+  abstract_steps:
+    1. Long-press the item to enter selection mode
+    2. Trigger the deletion action from the action bar
+    3. Confirm the deletion in the confirmation dialog
+  failure_modes:
+    - 'Selecting the wrong item with a similar name'
+    - 'Dismissing the confirmation dialog instead of confirming'
+    - 'Attempting to perform the deletion from a summary/cleanup screen instead of the primary content browsing view'
+  verification_checklist:
+    - 'Transient deletion feedback appears'
+    - 'Item no longer present in the containing view'
+
+CATEGORY: RELOCATE_ENTRY
+  precondition: Target item visible; destination folder exists and is known
+  abstract_steps:
+    1. Long-press the item to enter selection mode
+    2. Open the overflow/more-options menu
+    3. Choose the relocation action
+    4. In the destination picker, navigate to the exact destination folder (switching roots/volumes as needed)
+    5. Confirm the relocation from within the destination folder
+  failure_modes:
+    - 'Confirming the relocation while the picker is still at the default location'
+    - 'Choosing a duplication action or a metadata-viewing action by mistake'
+    - 'Not switching to the correct top-level volume in the picker'
+  verification_checklist:
+    - 'Transient relocation feedback appears'
+    - 'Item gone from source folder'
+    - 'Item present in destination folder'
+
+CATEGORY: QUERY_METADATA
+  precondition: Item or folder visible
+  abstract_steps:
+    1. Select the item or open overflow menu
+    2. Choose the details/properties option
+    3. Read the displayed metadata
+  failure_modes:
+    - 'Confusing the details screen with an actionable screen'
+  verification_checklist:
+    - 'Details page shows expected attributes (type, modified date, size/count)'

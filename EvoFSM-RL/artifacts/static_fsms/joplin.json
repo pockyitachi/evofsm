@@ -1,0 +1,308 @@
+{
+  "version": "0.1.0",
+  "app": "joplin",
+  "layer1": {
+    "app": "joplin",
+    "category": "Productivity",
+    "states": [
+      {
+        "id": "android_home",
+        "description": "Android launcher home screen",
+        "visual_cues": [
+          "Home label",
+          "Phone/Chrome/Instagram icons",
+          "Google search bar",
+          "notifications shade"
+        ],
+        "resource_hints": [
+          "Home",
+          "Phone",
+          "Chrome",
+          "Settings"
+        ]
+      },
+      {
+        "id": "note_list",
+        "description": "Joplin note list inside a notebook/folder",
+        "visual_cues": [
+          "Sidebar icon top-left",
+          "current notebook name (e.g. Personal, Finance, Ideas)",
+          "Search icon",
+          "Sort notes by",
+          "Add new (collapsed) FAB",
+          "list entries some with 'to-do:' prefix and checkbox"
+        ],
+        "resource_hints": [
+          "Sidebar",
+          "Search",
+          "Sort notes by",
+          "Add new, collapsed",
+          "to-do:"
+        ]
+      },
+      {
+        "id": "sidebar_drawer",
+        "description": "Notebook/tag navigation drawer",
+        "visual_cues": [
+          "Notebooks section",
+          "list of notebook names (Ideas, Finance, Projects, etc.)",
+          "New Notebook",
+          "Tags",
+          "Configuration"
+        ],
+        "resource_hints": [
+          "Notebooks",
+          "New Notebook",
+          "Tags",
+          "Configuration"
+        ]
+      },
+      {
+        "id": "search_view",
+        "description": "Search input screen with keyboard",
+        "visual_cues": [
+          "Back arrow",
+          "Search hint",
+          "editable text field",
+          "Clear button",
+          "keyboard visible"
+        ],
+        "resource_hints": [
+          "Search",
+          "Clear",
+          "Back"
+        ]
+      },
+      {
+        "id": "search_results",
+        "description": "Results for the current search query",
+        "visual_cues": [
+          "search query echoed",
+          "matching note titles listed below"
+        ],
+        "resource_hints": [
+          "Search"
+        ]
+      },
+      {
+        "id": "note_view",
+        "description": "Opened single note showing content (e.g. recipe with Ingredients/Instructions)",
+        "visual_cues": [
+          "Back arrow",
+          "Edit (collapsed) toggle",
+          "parent notebook label (e.g. Recipes)",
+          "Actions menu",
+          "note body with sections like Ingredients/Instructions"
+        ],
+        "resource_hints": [
+          "Edit, collapsed",
+          "Actions",
+          "Ingredients:",
+          "Instructions:"
+        ]
+      }
+    ],
+    "transitions": [
+      {
+        "from_state": "android_home",
+        "to_state": "note_list",
+        "action": "open_app(Joplin)",
+        "precondition": "",
+        "postcondition": "Joplin opens to last-used notebook"
+      },
+      {
+        "from_state": "note_list",
+        "to_state": "sidebar_drawer",
+        "action": "click(Sidebar)",
+        "precondition": "",
+        "postcondition": "drawer visible with notebooks"
+      },
+      {
+        "from_state": "sidebar_drawer",
+        "to_state": "note_list",
+        "action": "click(notebook name)",
+        "precondition": "target notebook visible",
+        "postcondition": "note list for chosen notebook shown"
+      },
+      {
+        "from_state": "note_list",
+        "to_state": "search_view",
+        "action": "click(Search)",
+        "precondition": "",
+        "postcondition": "search field focused"
+      },
+      {
+        "from_state": "search_view",
+        "to_state": "search_results",
+        "action": "input_text(query)",
+        "precondition": "",
+        "postcondition": "results rendered"
+      },
+      {
+        "from_state": "search_results",
+        "to_state": "note_view",
+        "action": "click(result title)",
+        "precondition": "",
+        "postcondition": "note content opened"
+      },
+      {
+        "from_state": "note_list",
+        "to_state": "note_view",
+        "action": "click(note title)",
+        "precondition": "note visible in list",
+        "postcondition": "note content opened"
+      }
+    ],
+    "strategies": [
+      {
+        "name": "ANSWER_IS_TODO_BY_PREFIX",
+        "preconditions": "android_home; note title is given",
+        "steps": [
+          "open_app(Joplin)",
+          "If note visible in current notebook, inspect whether its row has 'to-do:' prefix / checkbox",
+          "If not visible, open sidebar and switch notebooks or use Search to locate the note",
+          "Answer True if the entry has the to-do checkbox/prefix, else False"
+        ],
+        "success_signal": "answer(True/False) matches presence of 'to-do:' prefix on the row",
+        "fallback": "Use Search to find the note by title when scrolling does not surface it"
+      },
+      {
+        "name": "COUNT_TODOS_IN_FOLDER",
+        "preconditions": "android_home; target notebook name known",
+        "steps": [
+          "open_app(Joplin)",
+          "click(Sidebar) to open drawer",
+          "click(target notebook name)",
+          "Count list rows whose content description starts with 'to-do:' (have a checkbox)",
+          "answer(count)"
+        ],
+        "success_signal": "numeric answer equals number of 'to-do:' prefixed rows in the notebook",
+        "fallback": "Scroll the list to ensure all entries are considered"
+      },
+      {
+        "name": "LOOKUP_FIELD_IN_NOTE",
+        "preconditions": "android_home; note title known, field/ingredient known",
+        "steps": [
+          "open_app(Joplin)",
+          "click(Search)",
+          "input_text(note title)",
+          "click(matching result)",
+          "Read the relevant section (e.g. Ingredients:) and extract the value",
+          "answer(value)"
+        ],
+        "success_signal": "answer reflects the exact value found in the note body",
+        "fallback": "If search yields nothing, open sidebar and browse candidate notebooks"
+      }
+    ],
+    "dead_ends": [
+      {
+        "state": "android_home",
+        "failed_action": "status(infeasible) without attempting open_app",
+        "note": "Agent incorrectly assumed Joplin was not installed; should always try open_app(Joplin) first"
+      },
+      {
+        "state": "note_list",
+        "failed_action": "scroll(down) in wrong notebook looking for a note",
+        "note": "Target note may belong to a different notebook; must switch notebooks via sidebar or use Search instead of scrolling blindly"
+      },
+      {
+        "state": "note_list",
+        "failed_action": "declare infeasible after one scroll",
+        "note": "Gave up too early without using Search or switching notebook"
+      },
+      {
+        "state": "note_list",
+        "failed_action": "repeated identical answer actions",
+        "note": "Agent looped emitting the same answer many times instead of issuing status(complete)"
+      }
+    ]
+  },
+  "layer2": {
+    "categories": [
+      {
+        "name": "QUERY_ITEM_ATTRIBUTE",
+        "precondition": "Target item is identified by name; app may not be in foreground",
+        "abstract_steps": [
+          "Launch the relevant app from the launcher",
+          "Navigate to the named item by browsing the list or using an in-app lookup affordance",
+          "Inspect the visible marker/attribute (icon, prefix, checkbox) that indicates the attribute in question",
+          "Return a boolean/categorical answer based on the marker"
+        ],
+        "failure_modes": [
+          "Declaring the task infeasible from the launcher without attempting to open the app",
+          "Answering based on a screen that does not actually contain the target item",
+          "Looping on the same answer action without finalizing with a completion status"
+        ],
+        "verification_checklist": [
+          "The target item's row is actually visible on screen",
+          "The attribute marker is unambiguously present or absent",
+          "A single completion/status signal is emitted after the answer"
+        ]
+      },
+      {
+        "name": "COUNT_ITEMS_BY_ATTRIBUTE",
+        "precondition": "A container (folder/list/category) and a filtering attribute are specified",
+        "abstract_steps": [
+          "Open the app and navigate to the specified container via its navigation drawer/menu",
+          "Enumerate all list entries, scrolling as needed to cover the full list",
+          "Count entries whose row carries the filtering attribute marker",
+          "Return the count as a number"
+        ],
+        "failure_modes": [
+          "Counting within the wrong container because the app opened to a different default",
+          "Missing entries that require scrolling",
+          "Confusing unrelated visual markers with the target attribute"
+        ],
+        "verification_checklist": [
+          "Current container label matches the requested one",
+          "List has been scrolled to end or confirmed fully visible",
+          "Only entries with the specific attribute marker are counted"
+        ]
+      },
+      {
+        "name": "LOOKUP_FIELD_IN_ENTRY",
+        "precondition": "Entry title and desired field/sub-item are specified",
+        "abstract_steps": [
+          "Open the app and invoke its entry-lookup affordance",
+          "Provide the entry title and select the matching result",
+          "Locate the section containing the field and read its value",
+          "Return the value verbatim"
+        ],
+        "failure_modes": [
+          "Skipping app launch and declaring infeasible",
+          "Opening a wrong result with a similar title",
+          "Reading from the wrong section of the entry"
+        ],
+        "verification_checklist": [
+          "Opened entry title matches the requested one",
+          "Value is read from the correct labeled section",
+          "Answer preserves units/qualifiers as shown"
+        ]
+      },
+      {
+        "name": "NAVIGATE_TO_CONTAINER",
+        "precondition": "Multiple containers exist; a specific one is required",
+        "abstract_steps": [
+          "Open the navigation drawer/menu",
+          "Locate the named container (scroll if necessary)",
+          "Tap it to switch context"
+        ],
+        "failure_modes": [
+          "Assuming the currently opened container is the target",
+          "Missing the target entry because it resides in a different container"
+        ],
+        "verification_checklist": [
+          "Header/title of the list reflects the requested container name"
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "built_at": "2025-01-24T00:00:00Z",
+    "n_episodes": 20,
+    "n_successful": 8,
+    "n_episodes_input": 20,
+    "synthesizer_model": "claude-opus-4-7",
+    "synthesizer_temperature": 0.3
+  }
+}

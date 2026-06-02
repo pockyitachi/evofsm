@@ -1,0 +1,353 @@
+# ═══════════════════════════════════════════════
+# LAYER 1: APP_SPECIFIC  (non-transferable)
+# ═══════════════════════════════════════════════
+APP: markor
+CATEGORY: Productivity
+STATES:
+  S0: HOME_SCREEN — Android home screen
+    visual_cues: ['Phone/Chrome/Settings icons', 'Search bar', 'clock widget']
+    resource_hints: ['Home', 'Phone', 'Search']
+  S1: FILE_LIST — Markor file browser showing files and folders
+    visual_cues: ['red plus FAB bottom-right', "'Markor' title", 'Sort by/Search/More options in top bar', 'list of files/folders']
+    resource_hints: ['Create a new file or folder', 'Markor', 'Go to', 'Sort by', 'Files']
+  S2: SUBFOLDER_VIEW — Inside a subfolder in file browser
+    visual_cues: ["breadcrumb with '> FolderName'", 'file list', 'FAB']
+    resource_hints: ['> DailyNotes', '> StudyGuides', '> Documents']
+  S3: NEW_FILE_DIALOG — Dialog to create new file/folder
+    visual_cues: ["Name text field pre-filled with 'my_note'", 'extension field', 'Type radio group', 'Template', 'OK/CANCEL/FOLDER buttons']
+    resource_hints: ['Name', 'my_note', '.md', 'Type', 'Template', 'FOLDER', 'OK']
+  S4: FILE_SELECTED_MODE — File list with one or more items selected via long-press
+    visual_cues: ['red checkmark next to file', 'action bar shows Favourite/Rename/Details/Delete', 'More options']
+    resource_hints: ['Favourite', 'Rename', 'Details', 'Delete']
+  S5: CONFIRM_DELETE_DIALOG — Confirmation dialog for delete
+    visual_cues: ["'Confirm Delete' title", 'CANCEL/OK buttons']
+    resource_hints: ['Confirm Delete', 'CANCEL', 'OK']
+  S6: FILE_CONTEXT_MORE_MENU — Clipboard/Move/Copy/Share menu after selecting a file and tapping More options
+    visual_cues: ['Clipboard', 'Move', 'Copy', 'Create shortcut', 'Share']
+    resource_hints: ['Clipboard', 'Move', 'Copy', 'Share']
+  S7: MOVE_FOLDER_PICKER — Folder selection dialog for Move/Copy
+    visual_cues: ["'Move → <folder>' title", 'SELECT THIS FOLDER', 'CANCEL', "'Folder ..' up-navigation", 'list of subfolders']
+    resource_hints: ['SELECT THIS FOLDER', 'CANCEL', 'Folder ..']
+  S8: EDITOR_VIEW — Note editor opened for a file
+    visual_cues: ['filename in title bar', 'Undo/Redo/View mode/Save/Search/More options in toolbar', 'text area with cursor', 'keyboard']
+    resource_hints: ['Undo', 'Redo', 'View mode', 'Save', 'Search', 'More options']
+  S9: EDITOR_TEXT_CONTEXT_MENU — Context menu after long-pressing editor text
+    visual_cues: ['Select all/Copy/Paste/Share popup above text']
+    resource_hints: ['Select all', 'Copy', 'Paste', 'Cut']
+  S10: EDITOR_MORE_OPTIONS_MENU — More options menu inside editor
+    visual_cues: ['File settings', 'Share', 'Tools', 'Info', 'Reload']
+    resource_hints: ['File settings', 'Share', 'Tools', 'Info', 'Reload']
+  S11: FILE_SETTINGS_SUBMENU — File settings submenu in editor
+    visual_cues: ['Wrap words', 'Syntax highlighting', 'Auto-format', 'Font Size toggles']
+    resource_hints: ['Wrap words', 'Syntax highlighting', 'Auto-format', 'Font Size']
+  S12: SEARCH_DOCUMENTS_DIALOG — Search/Table of contents dialog opened accidentally or via search
+    visual_cues: ["'Search documents' or 'Table of contents' title", 'Search field', 'FILTER/CANCEL']
+    resource_hints: ['Search documents', 'Table of contents', 'CANCEL', 'FILTER']
+  S13: EXTERNAL_APP — External app launched (Simple SMS Messenger, VLC, Simple Gallery, Phone)
+    visual_cues: ['varies by app']
+    resource_hints: ['Start a conversation', 'Add Contact or Number…', 'Type a message…', 'Video player']
+TRANSITIONS:
+  S0 --open_app(Markor)--> S1  [pre: Markor installed]  [post: file list shown]
+  S1 --click(fab_plus)--> S3  [post: dialog with default 'my_note' appears]
+  S3 --click(OK)--> S8  [pre: name entered]  [post: new file opened in editor]
+  S3 --click(FOLDER)--> S1  [pre: name entered]  [post: folder created, dialog closes]
+  S1 --click(file_row)--> S8  [pre: file exists]  [post: file opened in editor]
+  S1 --click(folder_row)--> S2  [post: inside subfolder]
+  S2 --navigate_back--> S1  [post: back to parent]
+  S1 --long_press(file_row)--> S4  [post: file selected with checkmark]
+  S2 --long_press(file_row)--> S4
+  S4 --click(Delete)--> S5
+  S5 --click(OK)--> S1  [post: file deleted]
+  S4 --click(More_options)--> S6  [post: Clipboard/Move/Copy menu appears]
+  S6 --click(Move)--> S7  [post: folder picker opens]
+  S7 --click(Folder_..)--> S7  [post: navigate up one level]
+  S7 --click(subfolder)--> S7  [post: descend into subfolder]
+  S7 --click(SELECT_THIS_FOLDER)--> S1  [pre: destination folder displayed]  [post: file moved]
+  S8 --long_press(text_area)--> S9  [post: Select all/Copy/Paste popup]
+  S9 --click(Select all/Copy/Paste)--> S8  [post: action performed]
+  S8 --click(More_options)--> S10  [post: menu visible]
+  S10 --click(File_settings)--> S11
+  S11 --navigate_back--> S8
+  S8 --navigate_back--> S1  [post: return to file list (saves implicitly if saved)]
+  S8 --input_text(body,text)--> S8  [pre: cursor positioned]  [post: text inserted]
+  S8 --click(Save)--> S8  [post: file saved]
+  S8 --click(title)--> S12  [post: title click sometimes opens Table of contents rather than rename]
+STRATEGIES:
+  CREATE_NOTE_WITH_CONTENT:
+    preconditions: at home_screen
+    steps:
+      1. open_app(Markor)
+      2. click(fab_plus)
+      3. clear Name field and input_text(desired_filename) (include .ext if non-default)
+      4. click(OK)
+      5. in editor, click text area and input_text(body content)
+      6. click(Save)
+    success_signal: file appears in file_list with given name; editor shows title and content
+    fallback: if extension field garbled, type desired extension explicitly in ext field or include full name in Name field
+  CREATE_FOLDER:
+    preconditions: at file_list
+    steps:
+      1. click(fab_plus)
+      2. input_text(folder_name) in Name field
+      3. click(FOLDER) button
+      4. (if OK dialog still open) click(OK)
+    success_signal: folder visible in file_list
+    fallback: scroll dialog if OK hidden
+  DELETE_FILE:
+    preconditions: at file_list or subfolder_view where file is visible
+    steps:
+      1. long_press(file_row)
+      2. click(Delete icon in action bar)
+      3. click(OK) on Confirm Delete
+    success_signal: file no longer in list
+  DELETE_ALL_FILES:
+    preconditions: at file_list
+    steps:
+      1. repeat for each file: long_press(file),click(Delete),click(OK)
+    success_signal: empty file list
+  MOVE_FILE:
+    preconditions: file visible in current folder
+    steps:
+      1. long_press(file_row)
+      2. click(More_options)
+      3. click(Move)
+      4. use 'Folder ..' to navigate up to parent
+      5. click(target_folder) to descend
+      6. click(SELECT_THIS_FOLDER)
+    success_signal: file no longer present in source folder
+    fallback: use CANCEL and retry if wrong folder
+  APPEND_TEXT_TO_NOTE:
+    preconditions: file exists in list
+    steps:
+      1. open_app(Markor) if needed
+      2. click(file_row)
+      3. click at end of text area
+      4. input_text(new_text)
+      5. click(Save)
+    success_signal: text appears at desired location; file saved
+  PREPEND_TEXT_TO_NOTE:
+    preconditions: file exists
+    steps:
+      1. open file from list
+      2. click at very start of text / long_press+Select all not needed
+      3. input_text(new_text + '\n')
+      4. click(Save)
+    success_signal: new text at top followed by blank line and original content
+  REPLACE_NOTE_CONTENT:
+    preconditions: file exists
+    steps:
+      1. open file
+      2. long_press(text_area)
+      3. click(Select all)
+      4. input_text(new_content) (replaces selection)
+      5. click(Save)
+    success_signal: file content equals new_content
+  CREATE_NOTE_AND_SMS:
+    preconditions: at home_screen
+    steps:
+      1. CREATE_NOTE_WITH_CONTENT for target filename/content
+      2. click(Save)
+      3. open_app(Simple SMS Messenger)
+      4. click(Start a conversation)
+      5. input_text(phone number) in Add Contact field
+      6. click(confirm checkmark)
+      7. click(message field) and input_text(note body)
+      8. click(send)
+    success_signal: message appears in conversation with recipient
+  PASTE_CLIPBOARD_TO_NEW_NOTE:
+    preconditions: clipboard has desired text
+    steps:
+      1. click(fab_plus)
+      2. input_text(filename)
+      3. click(OK)
+      4. long_press(editor text area)
+      5. click(Paste)
+      6. click(Save)
+    success_signal: clipboard content saved in new file
+DEAD_ENDS:
+  at editor_view: click(title) expecting rename fails  [Clicking the filename title in the editor opens Table of contents dialog, not a rename prompt. Renaming must be done from file_list via long_press -> Rename.]
+  at editor_more_options_menu: look for Rename/New note in More options or Tools fails  [Editor More options only contains File settings/Share/Tools/Info/Reload. No rename or new file option here.]
+  at file_settings_submenu: expecting rename/new file toggles fails  [Only contains wrap words/syntax highlighting/etc. Navigate back to file_list to rename/create.]
+  at editor_view: repeatedly click navigation index that is not the back arrow fails  [Mis-indexed back button just re-renders same state. Use navigate_back action instead.]
+  at editor_view: declare success after input_text in title area fails  [Typing into the file title field does not actually rename the file; agents falsely claim completion.]
+  at file_list: trying to Move via editor menus fails  [Move is only available by long-pressing the file in the list and using the item-selection action bar's More options -> Move.]
+  at external_app: navigating via Phone app to send SMS fails  [Phone app cannot send SMS; must open Simple SMS Messenger explicitly.]
+  at editor_view: wait for video frames while transcribing fails  [Agent loops on 'wait' action instead of switching back to VLC; cannot observe frames from within Markor.]
+
+# ═══════════════════════════════════════════════
+# LAYER 2: GENERIC  (transferable, app-agnostic)
+# ═══════════════════════════════════════════════
+CATEGORY: ADD_ENTRY
+  precondition: App is open at a list/index view that exposes an affordance to create a new item
+  abstract_steps:
+    1. Invoke the primary create-new affordance (commonly a prominent action button)
+    2. Provide the required identifier in the creation dialog, clearing any prefilled placeholder first
+    3. Select the correct item kind/format if the dialog offers a choice
+    4. Confirm creation
+    5. If opened in an editor, enter the required body content
+    6. Persist the change (explicit commit if auto-persistence is not guaranteed)
+  failure_modes:
+    - 'Leaving the prefilled placeholder identifier concatenated with the intended identifier'
+    - 'Not switching item kind (leaf vs container) before confirming'
+    - 'Garbled extension/suffix field producing wrong format'
+    - 'Declaring success before persisting'
+    - 'Creating item in wrong parent container'
+  verification_checklist:
+    - 'New item appears in the listing with the exact expected identifier'
+    - 'Opening the item shows the expected body content'
+    - 'No stray/extra items created'
+    - 'Correct parent container'
+
+CATEGORY: REMOVE_ENTRY
+  precondition: Target item is visible in a list view
+  abstract_steps:
+    1. Long-press the target row to enter selection mode
+    2. Invoke the removal action from the contextual action bar
+    3. Confirm removal in the confirmation dialog
+  failure_modes:
+    - 'Selecting wrong row (similar identifiers)'
+    - 'Missing the confirmation step'
+    - 'Removing parent container instead of the target item'
+  verification_checklist:
+    - 'Item no longer appears in the listing'
+    - 'No confirmation dialog left open'
+    - 'Sibling items intact'
+
+CATEGORY: BULK_REMOVE
+  precondition: Multiple items to clear from a list
+  abstract_steps:
+    1. Repeat the single-item removal flow for each item, OR use multi-select if available
+    2. After each removal, verify return to list before selecting the next target
+  failure_modes:
+    - 'Index shifting after removal leading to wrong next item'
+    - 'Stopping before all targets are cleared'
+  verification_checklist:
+    - 'Listing contains only non-target items (often empty)'
+
+CATEGORY: EDIT_ENTRY_CONTENT
+  precondition: Target item exists and can be opened in an editor
+  abstract_steps:
+    1. Open the item from the list
+    2. Position cursor at the required location (start, end, or full-content selection)
+    3. Insert, append, prepend, or replace text as required
+    4. Persist the change
+  failure_modes:
+    - 'Appending instead of prepending (or vice versa)'
+    - 'Not selecting the full existing content before replacing (causing concatenation)'
+    - 'Forgetting trailing newline when prepending'
+    - 'Not persisting before navigating away'
+  verification_checklist:
+    - 'Item body matches expected content exactly'
+    - 'Line breaks and ordering match specification'
+    - 'Changes persisted (indicator dismisses/returns to list cleanly)'
+
+CATEGORY: RELABEL_ENTRY
+  precondition: Item exists in a list view that supports relabeling
+  abstract_steps:
+    1. Long-press the item to enter selection mode
+    2. Choose the relabel action from the contextual action bar
+    3. Enter the new identifier in the dialog and confirm
+  failure_modes:
+    - 'Attempting to relabel from within the editor (title click does not relabel)'
+    - 'Typing into the editor title field and assuming it relabeled the item'
+    - 'Leaving old extension/suffix when a new one is required'
+  verification_checklist:
+    - 'List shows the item with the new identifier'
+    - 'Old identifier no longer present'
+    - 'Content preserved'
+
+CATEGORY: RELOCATE_ENTRY
+  precondition: Source item and destination container both exist
+  abstract_steps:
+    1. Long-press the source item to select it
+    2. Open the contextual overflow and choose the relocate action
+    3. In the destination picker, navigate up and/or into the target container
+    4. Confirm with the 'choose this container' action
+  failure_modes:
+    - "Selecting the source's own container as destination"
+    - 'Stopping at the picker without a final confirmation'
+    - 'Not navigating up to the common ancestor first'
+  verification_checklist:
+    - 'Item no longer present in source container'
+    - 'Item present in destination container'
+    - 'Content unchanged'
+
+CATEGORY: NAVIGATE_TO
+  precondition: Target app/screen may not be on current screen
+  abstract_steps:
+    1. If target app not visible, open the system launcher or app list to switch context
+    2. Traverse the container hierarchy via click-in and back-navigation
+    3. Verify breadcrumb/title matches target
+  failure_modes:
+    - 'Confusing similar container identifiers'
+    - 'Getting stuck in side menus (e.g., configuration panes) that do not lead to target'
+    - 'Repeating the same failing click'
+  verification_checklist:
+    - 'Breadcrumb/title matches expected path'
+    - 'Expected content visible'
+
+CATEGORY: CROSS_APP_TRANSFER
+  precondition: Source content is prepared; destination app is installed
+  abstract_steps:
+    1. Create/finalize source content in the origin app and persist it
+    2. Launch the destination app via the launcher
+    3. Initiate a new message/record in the destination app
+    4. Provide the recipient/target identifier
+    5. Insert the content (enter it directly or transfer via system transfer buffer)
+    6. Send/commit
+  failure_modes:
+    - 'Opening the wrong destination app (a similar but different communication app)'
+    - 'Not persisting source before switching apps'
+    - 'Leaving the draft unsent'
+    - 'Using a pre-existing contact instead of the required recipient identifier'
+  verification_checklist:
+    - 'Destination app shows the sent/committed item with exact content'
+    - 'Recipient identifier matches'
+    - 'No residual draft'
+
+CATEGORY: MERGE_ENTRIES
+  precondition: Multiple source items and a specified destination identifier
+  abstract_steps:
+    1. Create the destination item first (empty)
+    2. For each source in order: open, select full content, capture it, return to destination, insert it, append a separator if required
+    3. Persist destination
+  failure_modes:
+    - 'Getting stuck trying to create destination from editor menus instead of the list view'
+    - 'Losing captured content between app switches'
+    - 'Wrong order'
+    - 'Missing separators between sections'
+  verification_checklist:
+    - "Destination contains each source's content in the required order"
+    - 'Separators (newlines) between sections'
+    - 'Source items unchanged'
+
+CATEGORY: TRANSCRIBE_FROM_MEDIA
+  precondition: Media source and transcription target available
+  abstract_steps:
+    1. Open the media player and start playback
+    2. Observe each piece of text/frame
+    3. Switch to the transcription editor and record the observation with the required formatting
+    4. Repeat until media ends
+    5. Persist the transcription
+  failure_modes:
+    - "Using 'wait' without switching back to the media app"
+    - 'Losing place when switching apps repeatedly'
+    - 'Fabricating content not actually shown'
+    - 'Incorrect delimiter formatting'
+  verification_checklist:
+    - 'Transcription contains the complete ordered sequence'
+    - 'Formatting (delimiter, identifier) matches spec'
+    - 'Transcription persisted'
+
+CATEGORY: QUERY_DATA
+  precondition: Source of the requested data is reachable in the app
+  abstract_steps:
+    1. Navigate to the screen showing the requested data
+    2. Read/extract the required field(s)
+    3. Report back without altering data
+  failure_modes:
+    - 'Modifying data while reading'
+    - 'Reporting stale/cached values'
+  verification_checklist:
+    - 'Reported value matches on-screen value'
+    - 'No side effects on data'

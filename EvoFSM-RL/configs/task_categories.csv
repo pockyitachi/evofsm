@@ -1,0 +1,193 @@
+task_name,app,tier,play_category,task_type
+SimpleDrawProCreateDrawing,simple_draw_pro,tier_C/T_adapt,Art & Design,data_entry
+WikipediaDecreaseTextSize50,wikipedia,tier_C/T_adapt,Books & Reference,data_edit
+WikipediaDisablePreviewAndFeed,wikipedia,tier_C/T_adapt,Books & Reference,data_edit
+WikipediaGoToSavedTab,wikipedia,tier_C/T_adapt,Books & Reference,generic
+WikipediaGoToSearchTab,wikipedia,tier_C/T_adapt,Books & Reference,generic
+WikipediaIncreaseTextSize180,wikipedia,tier_C/T_eval,Books & Reference,data_edit
+WikipediaOpen,wikipedia,tier_C/T_eval,Books & Reference,generic
+BrowserDraw,chrome,tier_B/T_adapt,Communication,game_playing
+BrowserMaze,chrome,tier_B/T_adapt,Communication,memorization
+BrowserMultiply,chrome,tier_B/T_eval,Communication,screen_reading
+ContactsAddContact,contacts,source,Communication,data_entry
+ContactsNewContactDraft,contacts,source,Communication,data_entry
+SimpleSmsReply,simple_sms_messenger,source,Communication,search
+SimpleSmsReplyMostRecent,simple_sms_messenger,source,Communication,parameterized
+SimpleSmsResend,simple_sms_messenger,source,Communication,parameterized
+SimpleSmsSend,simple_sms_messenger,source,Communication,parameterized
+SimpleSmsSendClipboardContent,simple_sms_messenger,source,Communication,data_entry
+SimpleSmsSendReceivedAddress,simple_sms_messenger,source,Communication,information_retrieval
+BluecoinsAddExpense,bluecoins,source,Finance,data_entry
+BluecoinsAddExpenseOnDate,bluecoins,source,Finance,data_entry
+BluecoinsAddExpenseOnDateWithLabel,bluecoins,source,Finance,data_entry
+BluecoinsAddIncomeOnDateWithNote,bluecoins,source,Finance,data_entry
+BluecoinsAddIncomeWithLabel,bluecoins,source,Finance,data_entry
+BluecoinsEditExpenseAmount,bluecoins,source,Finance,data_edit
+BluecoinsEditExpenseDateAmountNote,bluecoins,source,Finance,data_edit
+BluecoinsEditIncomeDateAndAmount,bluecoins,source,Finance,data_edit
+BluecoinsEditTransactionType,bluecoins,source,Finance,data_edit
+BluecoinsEditTransactionTypeAmountNote,bluecoins,source,Finance,data_edit
+BluecoinsQueryCategorySpending,bluecoins,source,Finance,information_retrieval
+BluecoinsQuerySpendingCategory,bluecoins,source,Finance,information_retrieval
+BluecoinsQuerySpendingOnDate,bluecoins,source,Finance,information_retrieval
+BluecoinsQueryTotalSpendingOnDate,bluecoins,source,Finance,information_retrieval
+BluecoinsQueryTransactionCount,bluecoins,source,Finance,information_retrieval
+ExpenseAddMultiple,pro_expense,tier_B/T_adapt,Finance,data_entry
+ExpenseAddMultipleFromGallery,pro_expense,tier_B/T_adapt,Finance,information_retrieval
+ExpenseAddMultipleFromMarkor,pro_expense,tier_B/T_adapt,Finance,data_entry
+ExpenseAddSingle,pro_expense,tier_B/T_adapt,Finance,search
+ExpenseDeleteDuplicates,pro_expense,tier_B/T_adapt,Finance,data_edit
+ExpenseDeleteDuplicates2,pro_expense,tier_B/T_adapt,Finance,data_edit
+ExpenseDeleteMultiple,pro_expense,tier_B/T_eval,Finance,data_edit
+ExpenseDeleteMultiple2,pro_expense,tier_B/T_eval,Finance,screen_reading
+ExpenseDeleteSingle,pro_expense,tier_B/T_eval,Finance,screen_reading
+RecipeAddMultipleRecipes,broccoli,tier_C/T_adapt,Food & Drink,data_entry
+RecipeAddMultipleRecipesFromImage,broccoli,tier_C/T_adapt,Food & Drink,data_entry
+RecipeAddMultipleRecipesFromMarkor,broccoli,tier_C/T_adapt,Food & Drink,data_entry
+RecipeAddMultipleRecipesFromMarkor2,broccoli,tier_C/T_adapt,Food & Drink,information_retrieval
+RecipeAddSingleRecipe,broccoli,tier_C/T_adapt,Food & Drink,data_entry
+RecipeDeleteDuplicateRecipes,broccoli,tier_C/T_adapt,Food & Drink,search
+RecipeDeleteDuplicateRecipes2,broccoli,tier_C/T_adapt,Food & Drink,data_edit
+RecipeDeleteDuplicateRecipes3,broccoli,tier_C/T_adapt,Food & Drink,data_edit
+RecipeDeleteMultipleRecipes,broccoli,tier_C/T_eval,Food & Drink,data_edit
+RecipeDeleteMultipleRecipesWithConstraint,broccoli,tier_C/T_eval,Food & Drink,screen_reading
+RecipeDeleteMultipleRecipesWithNoise,broccoli,tier_C/T_eval,Food & Drink,search
+RecipeDeleteSingleRecipe,broccoli,tier_C/T_eval,Food & Drink,search
+RecipeDeleteSingleWithRecipeWithNoise,broccoli,tier_C/T_eval,Food & Drink,search
+SportsTrackerActivitiesCountForWeek,opentracks,tier_C/T_adapt,Health & Fitness,search
+SportsTrackerActivitiesOnDate,opentracks,tier_C/T_adapt,Health & Fitness,information_retrieval
+SportsTrackerActivityDuration,opentracks,tier_C/T_adapt,Health & Fitness,information_retrieval
+SportsTrackerLongestDistanceActivity,opentracks,tier_C/T_adapt,Health & Fitness,information_retrieval
+SportsTrackerTotalDistanceForCategoryOverInterval,opentracks,tier_C/T_eval,Health & Fitness,search
+SportsTrackerTotalDurationForCategoryThisWeek,opentracks,tier_C/T_eval,Health & Fitness,search
+MapsMeAddWorkPlace,maps_me,tier_C/T_adapt,Maps & Navigation,data_entry
+MapsMeCheckDrivingDistanceTime,maps_me,tier_C/T_adapt,Maps & Navigation,information_retrieval
+MapsMeCheckNearestHotel,maps_me,tier_C/T_adapt,Maps & Navigation,information_retrieval
+MapsMeCheckNearestPlace,maps_me,tier_C/T_adapt,Maps & Navigation,information_retrieval
+MapsMeCheckNearestPlaceDriveTime,maps_me,tier_C/T_adapt,Maps & Navigation,information_retrieval
+MapsMeCheckNearestPlaceWalkTime,maps_me,tier_C/T_adapt,Maps & Navigation,information_retrieval
+MapsMeCheckPublicTransportRoute,maps_me,tier_C/T_adapt,Maps & Navigation,information_retrieval
+MapsMeCheckRidingTime,maps_me,tier_C/T_adapt,Maps & Navigation,information_retrieval
+MapsMeCheckWalkingDistanceTime,maps_me,tier_C/T_adapt,Maps & Navigation,information_retrieval
+MapsMeCompareRidingVsPublicTransport,maps_me,tier_C/T_eval,Maps & Navigation,information_retrieval
+MapsMeNavigateToBerkeley,maps_me,tier_C/T_eval,Maps & Navigation,search
+MapsMeNavigateToLocation,maps_me,tier_C/T_eval,Maps & Navigation,search
+MapsMeNavigateToOpenAI,maps_me,tier_C/T_eval,Maps & Navigation,search
+MapsMeNavigateToStanford,maps_me,tier_C/T_eval,Maps & Navigation,search
+MapsMeNavigateToUniversitySouth,maps_me,tier_C/T_eval,Maps & Navigation,search
+OsmAndFavorite,osmand,tier_C/T_adapt,Maps & Navigation,search
+OsmAndMarker,osmand,tier_C/T_adapt,Maps & Navigation,search
+OsmAndTrack,osmand,tier_C/T_eval,Maps & Navigation,search
+AudioRecorderRecordAudio,audio_recorder,source,Music & Audio,requires_setup
+AudioRecorderRecordAudioWithFileName,audio_recorder,source,Music & Audio,data_entry
+PiMusicCreatePlaylist,pi_music,source,Music & Audio,data_entry
+PiMusicPauseAndSeek,pi_music,source,Music & Audio,data_edit
+PiMusicPlayFromPlaylist,pi_music,source,Music & Audio,search
+PiMusicPlaySongByTitleArtist,pi_music,source,Music & Audio,search
+PiMusicQueryArtistSongCount,pi_music,source,Music & Audio,information_retrieval
+PiMusicQueryArtistTotalDuration,pi_music,source,Music & Audio,information_retrieval
+PiMusicQueryLongestSongDuration,pi_music,source,Music & Audio,information_retrieval
+PiMusicQuerySongAlbum,pi_music,source,Music & Audio,information_retrieval
+PiMusicQuerySortedSongsByTitle,pi_music,source,Music & Audio,information_retrieval
+PiMusicQueryTotalSongs,pi_music,source,Music & Audio,information_retrieval
+PiMusicSortByDurationAscending,pi_music,source,Music & Audio,data_edit
+PiMusicSortByDurationDescending,pi_music,source,Music & Audio,data_edit
+RetroCreatePlaylist,retro_music,tier_B/T_adapt,Music & Audio,data_entry
+RetroPlayingQueue,retro_music,tier_B/T_adapt,Music & Audio,parameterized
+RetroPlaylistDuration,retro_music,tier_B/T_adapt,Music & Audio,math_counting
+RetroSavePlaylist,retro_music,tier_B/T_eval,Music & Audio,search
+CameraTakePhoto,camera,tier_B/T_adapt,Photography,generic
+CameraTakeVideo,camera,tier_B/T_eval,Photography,generic
+SnapseedTask1,snapseed,source,Photography,generic
+SnapseedTask10,snapseed,source,Photography,data_edit
+SnapseedTask11,snapseed,source,Photography,data_edit
+SnapseedTask2,snapseed,source,Photography,data_entry
+SnapseedTask3,snapseed,source,Photography,data_edit
+SnapseedTask4,snapseed,source,Photography,data_edit
+SnapseedTask5,snapseed,source,Photography,data_entry
+SnapseedTask6,snapseed,source,Photography,data_edit
+SnapseedTask7,snapseed,source,Photography,data_edit
+SnapseedTask8,snapseed,source,Photography,data_edit
+SnapseedTask9,snapseed,source,Photography,data_edit
+NotesIsTodo,joplin,source,Productivity,information_retrieval
+NotesMeetingAttendeeCount,joplin,source,Productivity,search
+NotesRecipeIngredientCount,joplin,source,Productivity,search
+NotesTodoItemCount,joplin,source,Productivity,information_retrieval
+MarkorAddNoteHeader,markor,source,Productivity,data_entry
+MarkorChangeNoteContent,markor,source,Productivity,data_entry
+MarkorCreateFolder,markor,source,Productivity,data_entry
+MarkorCreateNote,markor,source,Productivity,data_entry
+MarkorCreateNoteAndSms,markor,source,Productivity,data_entry
+MarkorCreateNoteFromClipboard,markor,source,Productivity,data_entry
+MarkorDeleteAllNotes,markor,source,Productivity,data_edit
+MarkorDeleteNewestNote,markor,source,Productivity,data_edit
+MarkorDeleteNote,markor,source,Productivity,data_edit
+MarkorEditNote,markor,source,Productivity,data_edit
+MarkorMergeNotes,markor,source,Productivity,data_entry
+MarkorMoveNote,markor,source,Productivity,complex_ui_understanding
+MarkorTranscribeReceipt,markor,source,Productivity,data_entry
+MarkorTranscribeVideo,markor,source,Productivity,transcription
+SimpleCalendarAddOneEvent,simple_calendar_pro,tier_B/T_adapt,Productivity,data_entry
+SimpleCalendarAddOneEventInTwoWeeks,simple_calendar_pro,tier_B/T_adapt,Productivity,data_entry
+SimpleCalendarAddOneEventRelativeDay,simple_calendar_pro,tier_B/T_adapt,Productivity,data_entry
+SimpleCalendarAddOneEventTomorrow,simple_calendar_pro,tier_B/T_adapt,Productivity,data_entry
+SimpleCalendarAddRepeatingEvent,simple_calendar_pro,tier_B/T_adapt,Productivity,data_entry
+SimpleCalendarAnyEventsOnDate,simple_calendar_pro,tier_B/T_adapt,Productivity,information_retrieval
+SimpleCalendarDeleteEvents,simple_calendar_pro,tier_B/T_adapt,Productivity,data_edit
+SimpleCalendarDeleteEventsOnRelativeDay,simple_calendar_pro,tier_B/T_adapt,Productivity,data_edit
+SimpleCalendarDeleteOneEvent,simple_calendar_pro,tier_B/T_adapt,Productivity,data_edit
+SimpleCalendarEventOnDateAtTime,simple_calendar_pro,tier_B/T_adapt,Productivity,information_retrieval
+SimpleCalendarEventsInNextWeek,simple_calendar_pro,tier_B/T_adapt,Productivity,data_entry
+SimpleCalendarEventsInTimeRange,simple_calendar_pro,tier_B/T_eval,Productivity,information_retrieval
+SimpleCalendarEventsOnDate,simple_calendar_pro,tier_B/T_eval,Productivity,information_retrieval
+SimpleCalendarFirstEventAfterStartTime,simple_calendar_pro,tier_B/T_eval,Productivity,screen_reading
+SimpleCalendarLocationOfEvent,simple_calendar_pro,tier_B/T_eval,Productivity,search
+SimpleCalendarNextEvent,simple_calendar_pro,tier_B/T_eval,Productivity,information_retrieval
+SimpleCalendarNextMeetingWithPerson,simple_calendar_pro,tier_B/T_eval,Productivity,information_retrieval
+TasksCompletedTasksForDate,tasks_org,source,Productivity,information_retrieval
+TasksDueNextWeek,tasks_org,source,Productivity,information_retrieval
+TasksDueOnDate,tasks_org,source,Productivity,search
+TasksHighPriorityTasks,tasks_org,source,Productivity,information_retrieval
+TasksHighPriorityTasksDueOnDate,tasks_org,source,Productivity,information_retrieval
+TasksIncompleteTasksOnDate,tasks_org,source,Productivity,information_retrieval
+CalculatorConvert45DegreesToRadians,calculator,source,Tools,math_counting
+CalculatorGeometricMean,calculator,source,Tools,math_counting
+CalculatorHarmonicMean,calculator,source,Tools,math_counting
+CalculatorInput1,calculator,source,Tools,math_counting
+CalculatorInput10Choose2,calculator,source,Tools,math_counting
+CalculatorInput17Times23,calculator,source,Tools,math_counting
+CalculatorInput1Plus1,calculator,source,Tools,math_counting
+CalculatorInput2Plus24Div3,calculator,source,Tools,math_counting
+CalculatorInput3Times5,calculator,source,Tools,math_counting
+CalculatorInput5Choose2,calculator,source,Tools,math_counting
+CalculatorInputCos180,calculator,source,Tools,math_counting
+CalculatorInputCos60,calculator,source,Tools,math_counting
+CalculatorInputFactorial6,calculator,source,Tools,math_counting
+CalculatorInputLn1234,calculator,source,Tools,math_counting
+CalculatorInputPercent50Of28,calculator,source,Tools,math_counting
+CalculatorInputSqrt25,calculator,source,Tools,math_counting
+CalculatorOpen,calculator,source,Tools,generic
+CalculatorSumFirst5Fibonacci,calculator,source,Tools,math_counting
+CalculatorSumFirst5Primes,calculator,source,Tools,math_counting
+ClockStopWatchPausedVerify,clock,source,Tools,verification
+ClockStopWatchRunning,clock,source,Tools,generic
+ClockTimerEntry,clock,source,Tools,data_entry
+FilesDeleteFile,files,source,Tools,data_edit
+FilesMoveFile,files,source,Tools,search
+SystemBluetoothTurnOff,system_settings,tier_B/T_adapt,Tools,generic
+SystemBluetoothTurnOffVerify,system_settings,tier_B/T_adapt,Tools,verification
+SystemBluetoothTurnOn,system_settings,tier_B/T_adapt,Tools,screen_reading
+SystemBluetoothTurnOnVerify,system_settings,tier_B/T_adapt,Tools,verification
+SystemBrightnessMax,system_settings,tier_B/T_adapt,Tools,generic
+SystemBrightnessMaxVerify,system_settings,tier_B/T_adapt,Tools,verification
+SystemBrightnessMin,system_settings,tier_B/T_adapt,Tools,generic
+SystemBrightnessMinVerify,system_settings,tier_B/T_adapt,Tools,verification
+SystemCopyToClipboard,system_settings,tier_B/T_adapt,Tools,data_entry
+SystemWifiTurnOff,system_settings,tier_B/T_eval,Tools,screen_reading
+SystemWifiTurnOffVerify,system_settings,tier_B/T_eval,Tools,verification
+SystemWifiTurnOn,system_settings,tier_B/T_eval,Tools,screen_reading
+SystemWifiTurnOnVerify,system_settings,tier_B/T_eval,Tools,verification
+TurnOffWifiAndTurnOnBluetooth,system_settings,tier_B/T_eval,Tools,generic
+TurnOnWifiAndOpenApp,system_settings,tier_B/T_eval,Tools,parameterized
+VlcCreatePlaylist,vlc,tier_C/T_adapt,Video Players & Editors,data_edit
+VlcCreateTwoPlaylists,vlc,tier_C/T_eval,Video Players & Editors,data_entry

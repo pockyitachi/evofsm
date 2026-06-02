@@ -1,0 +1,195 @@
+# ═══════════════════════════════════════════════
+# LAYER 1: APP_SPECIFIC  (non-transferable)
+# ═══════════════════════════════════════════════
+APP: snapseed
+CATEGORY: Photography
+STATES:
+  S0: HOME_SCREEN — Android device home screen
+    visual_cues: ['Home indicator', 'Phone/Instagram/Chrome/Settings icons', 'Search bar']
+    resource_hints: ['Home', 'Phone', 'Search']
+  S1: APP_DRAWER — Android app drawer with list of installed apps
+    visual_cues: ['Search apps field', 'Alphabetical app list', 'Google Lens']
+    resource_hints: ['Search apps, web and more', 'Voice search']
+  S2: SNAPSEED_MAIN — Snapseed main/landing screen before a photo is opened
+    visual_cues: ['OPEN button top-left', 'Edit stack icon', 'Image details icon', 'More options (3-dots)', "'Tap anywhere to open a photo' prompt with + icon"]
+    resource_hints: ['OPEN', 'Edit stack', 'Image details', 'More options', 'Tap anywhere to open a photo']
+  S3: MORE_OPTIONS_MENU — Dropdown menu from More options
+    visual_cues: ['Settings', 'Tutorials', 'Help & feedback']
+    resource_hints: ['Settings', 'Tutorials', 'Help & feedback']
+  S4: SETTINGS_PAGE — Snapseed Settings screen
+    visual_cues: ['Navigate up', 'Appearance section', 'Export & sharing options section', 'Dark theme toggle', 'Image sizing row', 'Format and quality row']
+    resource_hints: ['Settings', 'Appearance', 'Export & sharing options', 'Dark theme', 'Image sizing']
+  S5: IMAGE_SIZING_DIALOG — Dialog to choose export image sizing
+    visual_cues: ['Options: Do not resize, 4000 px, 2000 px, 1920 px, 1366 px, 800 px', 'CANCEL']
+    resource_hints: ['Image sizing', '2000 px', 'CANCEL']
+  S6: FORMAT_QUALITY_DIALOG — Dialog to choose export format and quality
+    visual_cues: ['Options: JPG 100%, JPG 95%, JPG 80%, PNG', 'CANCEL']
+    resource_hints: ['Format and quality', 'JPG 100%', 'CANCEL']
+  S7: PHOTO_PICKER — System document/file picker for selecting photo
+    visual_cues: ['Show roots', 'Recent', 'Search', 'BROWSE FILES IN OTHER APPS', 'Recent images thumbnails']
+    resource_hints: ['Show roots', 'Recent', 'Recent images']
+  S8: GALLERY_NO_MEDIA — Snapseed internal gallery showing no media found
+    visual_cues: ["'No media files have been found' message", 'Add folder button', 'Search folders field']
+    resource_hints: ['No media files have been found', 'Add folder', 'Search folders']
+  S9: FOLDER_PICKER_DIALOG — Select a folder dialog
+    visual_cues: ["'Select a folder' title", 'Internal option', 'Cancel / OK buttons', 'folder and file listings']
+    resource_hints: ['Select a folder', 'Internal', 'Cancel', 'OK']
+  S10: COULD_NOT_LOAD_PHOTO_ERROR — Error dialog: Could not load photo
+    visual_cues: ["Error text 'Could not load photo'", 'OK button']
+    resource_hints: ['Could not load photo', 'OK']
+  S11: EDITOR_VIEW — Snapseed photo editor (after successful photo load) - not observed in data because photo load always failed
+    visual_cues: ['Looks tab', 'Tools tab', 'Export']
+    resource_hints: ['Looks', 'Tools', 'Export']
+TRANSITIONS:
+  S0 --open_app(Snapseed)--> S2  [pre: app installed]  [post: Snapseed main screen visible]
+  S0 --scroll(down)--> S1  [post: app drawer visible]
+  S1 --click(Snapseed icon)--> S2  [pre: icon visible]
+  S2 --click(OPEN) or click(tap-anywhere area)--> S7  [post: system picker shown]
+  S2 --click(More options)--> S3  [post: dropdown shown]
+  S3 --click(Settings)--> S4  [post: settings shown]
+  S4 --click(Dark theme toggle)--> S4  [post: dark theme toggled]
+  S4 --click(Image sizing)--> S5  [post: dialog visible]
+  S5 --click(2000 px)--> S4  [post: sizing set to 2000 px]
+  S4 --click(Format and quality)--> S6  [post: dialog visible]
+  S6 --click(JPG 100%)--> S4  [post: format set]
+  S7 --click(thumbnail)--> S10  [pre: selected file unreadable]  [post: error dialog shown]
+  S10 --click(OK)--> S2  [post: back to main]
+  S7 --click(Gallery icon)--> S8  [post: gallery view with no media]
+  S8 --click(Add folder)--> S9  [post: folder picker open]
+  S9 --click(Cancel) or click(OK)--> S8  [post: dialog closes]
+  S7 --navigate_back--> S2  [post: back to editor main]
+STRATEGIES:
+  OPEN_APP:
+    preconditions: Device on home screen
+    steps:
+      1. Invoke open_app with name 'Snapseed'
+      2. Verify snapseed_main visible
+      3. If not visible, open app drawer via scroll and tap the Snapseed icon
+    success_signal: snapseed_main screen shows 'Tap anywhere to open a photo' and OPEN button
+    fallback: navigate_home then open_app again; if still fails, scroll app drawer and tap icon directly
+  ENABLE_DARK_THEME:
+    preconditions: snapseed_main
+    steps:
+      1. Click More options (3-dot)
+      2. Click Settings
+      3. Click Dark theme toggle
+    success_signal: Dark theme toggle blue/on and UI chrome becomes dark
+    fallback: If dropdown doesn't open, retry click on More options
+  SET_IMAGE_SIZING:
+    preconditions: snapseed_main
+    steps:
+      1. Click More options
+      2. Click Settings
+      3. Click Image sizing row
+      4. Pick desired size (e.g., '2000 px') in dialog
+    success_signal: Settings page shows chosen size under Image sizing
+    fallback: Reopen Settings and click Image sizing again
+  SET_FORMAT_QUALITY:
+    preconditions: snapseed_main
+    steps:
+      1. Click More options
+      2. Click Settings
+      3. Click Format and quality row
+      4. Pick desired option (e.g., 'JPG 100%')
+    success_signal: Settings page shows chosen format under Format and quality
+    fallback: Retry clicking the setting row if dialog doesn't appear
+  OPEN_PHOTO:
+    preconditions: snapseed_main
+    steps:
+      1. Click OPEN or tap anywhere prompt
+      2. In system picker choose a photo
+      3. Wait for editor to load
+    success_signal: editor_view (Looks/Tools/Export tabs) visible
+    fallback: If Could not load photo appears, dismiss (OK) and choose a different file; if no media, use Gallery > Add folder to include a folder with images
+DEAD_ENDS:
+  at could_not_load_photo_error: selecting thumbnails repeatedly fails  [Every available Recent image returned 'Could not load photo'; retrying the same or other thumbnails does not succeed. Photo-dependent tasks become infeasible in this environment.]
+  at gallery_no_media: Add folder then OK fails  [Folders contain only .mp4 files, not images; folder selection does not produce loadable images for Snapseed.]
+  at photo_picker: navigate_back/navigate_home loops fails  [Repeatedly returning to home and reopening Snapseed does not bypass the photo loading error.]
+
+# ═══════════════════════════════════════════════
+# LAYER 2: GENERIC  (transferable, app-agnostic)
+# ═══════════════════════════════════════════════
+CATEGORY: LAUNCH_APP
+  precondition: Device idle on a top-level launcher surface
+  abstract_steps:
+    1. Invoke a direct app-launch mechanism referencing the target application by its user-visible label
+    2. Verify the expected app landing screen is shown
+    3. If not shown, access the full app list and select the target application icon
+  failure_modes:
+    - 'Direct launch no-ops silently when target cannot be resolved'
+    - 'A different application with a similar name is launched instead'
+    - 'Repeated retries without changing strategy'
+  verification_checklist:
+    - 'Landing screen of target application visible'
+    - 'Characteristic UI elements of target application detected'
+
+CATEGORY: TOGGLE_SETTING
+  precondition: Inside the target application
+  abstract_steps:
+    1. Reveal the overflow/options menu from the top-level UI
+    2. Navigate to the configuration area
+    3. Locate the desired toggle
+    4. Tap the toggle to change state
+  failure_modes:
+    - 'Overflow menu missed'
+    - 'Toggle already in desired state and action has no visible effect'
+    - 'Control hidden behind a subsection'
+  verification_checklist:
+    - 'Toggle visually reflects desired state (on/off indicator)'
+    - 'Associated UI updates (e.g., theme changes)'
+
+CATEGORY: SELECT_FROM_OPTION_LIST
+  precondition: A configuration row that presents a single-choice dialog is reachable
+  abstract_steps:
+    1. Enter the configuration area
+    2. Tap the configuration row that presents a choice dialog
+    3. Tap the target option
+    4. Dismiss dialog if needed
+  failure_modes:
+    - 'Wrong option clicked'
+    - 'Dialog closes without selection if tap misses'
+    - 'Row not scrolled into view'
+  verification_checklist:
+    - 'Configuration row shows the new selected value'
+    - 'Dialog closes after selection'
+
+CATEGORY: SELECT_CONTENT_ITEM
+  precondition: Application requires selecting a piece of external content (e.g., a file/photo) to proceed
+  abstract_steps:
+    1. Trigger the content picker from the application
+    2. Browse available items or switch source
+    3. Choose a candidate item
+    4. Wait for the application to load it
+  failure_modes:
+    - 'Item cannot be loaded (corrupted/unsupported)'
+    - 'No items available in current source'
+    - 'Permission not granted to access storage'
+  verification_checklist:
+    - 'Editor/consumer view of the selected item is presented'
+    - 'No error dialog present'
+
+CATEGORY: RECOVER_FROM_BLOCKING_DIALOG
+  precondition: A modal dialog (error or info) is blocking interaction
+  abstract_steps:
+    1. Dismiss the modal via its affirmative/close button
+    2. Reassess state
+    3. Take an alternative path instead of repeating the exact action
+  failure_modes:
+    - 'Looping: dismissing and immediately retrying the same failing action'
+    - 'Mistaking modal buttons for other controls'
+  verification_checklist:
+    - 'Modal no longer present'
+    - 'Underlying screen interactive again'
+
+CATEGORY: ABANDON_TASK_WHEN_BLOCKED
+  precondition: Repeated alternative attempts fail due to environment-level issue
+  abstract_steps:
+    1. Detect a repeating failure signature
+    2. Try at least one alternative source/option
+    3. If still failing, mark task infeasible rather than loop
+  failure_modes:
+    - 'Endless retry loops consuming steps'
+    - 'False positive marking feasible tasks infeasible too early'
+  verification_checklist:
+    - 'At least one distinct alternative tried'
+    - 'Clear evidence the blocker is environmental, not a UI navigation mistake'

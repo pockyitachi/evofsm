@@ -1,0 +1,42 @@
+# T_eval — Story 1.5 M3A baseline against held-out apps
+# Generated 2026-04-17 from configs/splits.yaml (tier_B_held_out + tier_C_held_out)
+# 35 templates total: 18 Tier-B + 17 Tier-C
+
+# ── Tier-B (near-transfer; category in source pool) ─────────────────
+SimpleCalendarEventsInTimeRange:tier_B
+SimpleCalendarEventsOnDate:tier_B
+SimpleCalendarFirstEventAfterStartTime:tier_B
+SimpleCalendarLocationOfEvent:tier_B
+SimpleCalendarNextEvent:tier_B
+SimpleCalendarNextMeetingWithPerson:tier_B
+SystemWifiTurnOff:tier_B
+SystemWifiTurnOffVerify:tier_B
+SystemWifiTurnOn:tier_B
+SystemWifiTurnOnVerify:tier_B
+TurnOffWifiAndTurnOnBluetooth:tier_B
+TurnOnWifiAndOpenApp:tier_B
+ExpenseDeleteMultiple:tier_B
+ExpenseDeleteMultiple2:tier_B
+ExpenseDeleteSingle:tier_B
+RetroSavePlaylist:tier_B
+CameraTakeVideo:tier_B
+BrowserMultiply:tier_B
+
+# ── Tier-C (far-transfer; category NOT in source pool) ──────────────
+MapsMeCompareRidingVsPublicTransport:tier_C
+MapsMeNavigateToBerkeley:tier_C
+MapsMeNavigateToLocation:tier_C
+MapsMeNavigateToOpenAI:tier_C
+MapsMeNavigateToStanford:tier_C
+MapsMeNavigateToUniversitySouth:tier_C
+OsmAndTrack:tier_C
+RecipeDeleteMultipleRecipes:tier_C
+RecipeDeleteMultipleRecipesWithConstraint:tier_C
+RecipeDeleteMultipleRecipesWithNoise:tier_C
+RecipeDeleteSingleRecipe:tier_C
+RecipeDeleteSingleWithRecipeWithNoise:tier_C
+SportsTrackerTotalDistanceForCategoryOverInterval:tier_C
+SportsTrackerTotalDurationForCategoryThisWeek:tier_C
+WikipediaIncreaseTextSize180:tier_C
+WikipediaOpen:tier_C
+VlcCreateTwoPlaylists:tier_C

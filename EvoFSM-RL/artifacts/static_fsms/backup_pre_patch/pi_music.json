@@ -1,0 +1,537 @@
+{
+  "version": "0.1.0",
+  "app": "pi_music",
+  "layer1": {
+    "app": "pi_music",
+    "category": "Music & Audio",
+    "states": [
+      {
+        "id": "android_home",
+        "description": "Android launcher home screen",
+        "visual_cues": [
+          "Phone",
+          "Instagram",
+          "Chrome",
+          "Settings icons",
+          "Google search bar"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "my_music_playlists",
+        "description": "Pi Music Player main screen showing PLAYLISTS tab",
+        "visual_cues": [
+          "Open navigation drawer",
+          "My Music title",
+          "Upgrade to PRO",
+          "Search icon",
+          "TRACKS/PLAYLISTS tabs",
+          "Custom Playlists section",
+          "Smart Playlists section",
+          "+ FAB bottom-right"
+        ],
+        "resource_hints": [
+          "My Music",
+          "PLAYLISTS",
+          "TRACKS",
+          "Custom Playlists"
+        ]
+      },
+      {
+        "id": "tracks_tab",
+        "description": "Tracks listing tab showing all songs",
+        "visual_cues": [
+          "15 Tracks count",
+          "Track list with titles and artists",
+          "sort icon",
+          "three-dot per track"
+        ],
+        "resource_hints": [
+          "TRACKS",
+          "Track Name",
+          "album Name"
+        ]
+      },
+      {
+        "id": "artists_tab",
+        "description": "Artists listing tab",
+        "visual_cues": [
+          "15 Artists count",
+          "artist names like David/Fatima/George/Maya/Theodore",
+          "1 Albums / 1 Track(s) per row",
+          "ARTISTS tab highlighted"
+        ],
+        "resource_hints": [
+          "ARTISTS",
+          "15 Artists"
+        ]
+      },
+      {
+        "id": "albums_tab",
+        "description": "Albums listing tab",
+        "visual_cues": [
+          "1 Albums count",
+          "album 'Music' by Leon"
+        ],
+        "resource_hints": [
+          "ALBUMS",
+          "1 Albums"
+        ]
+      },
+      {
+        "id": "genres_tab",
+        "description": "Genres listing, often empty",
+        "visual_cues": [
+          "'No Music found! Tap here to learn how to import Music into …'"
+        ],
+        "resource_hints": [
+          "GENRES"
+        ]
+      },
+      {
+        "id": "folders_tab",
+        "description": "Folders tab",
+        "visual_cues": [
+          "FOLDERS tab highlighted"
+        ],
+        "resource_hints": [
+          "FOLDERS"
+        ]
+      },
+      {
+        "id": "create_playlist_dialog",
+        "description": "Dialog for creating a new playlist",
+        "visual_cues": [
+          "'Create New Playlist' title",
+          "Enter Name edit field",
+          "CANCEL / OK buttons"
+        ],
+        "resource_hints": [
+          "Create New Playlist",
+          "Enter Name"
+        ]
+      },
+      {
+        "id": "playlist_detail_empty",
+        "description": "Empty playlist view (e.g., Favorite)",
+        "visual_cues": [
+          "'Sorry..No songs to show!'",
+          "playlist title",
+          "Add Songs to Playlist",
+          "Sort",
+          "More options"
+        ],
+        "resource_hints": [
+          "Add Songs to Playlist",
+          "Sorry..No songs to show!"
+        ]
+      },
+      {
+        "id": "search_screen",
+        "description": "Music library search screen",
+        "visual_cues": [
+          "'Search Music Library...' edit field",
+          "Navigate up",
+          "Clear query",
+          "keyboard open",
+          "'No results found' when empty"
+        ],
+        "resource_hints": [
+          "Search Music Library...",
+          "Clear query"
+        ]
+      },
+      {
+        "id": "sort_by_dialog_tracks",
+        "description": "Sort By dialog for tracks list (Title/Date Added/Duration/Album/Artist + Ascending)",
+        "visual_cues": [
+          "'Sort By' title",
+          "options: Title, Date Added, Duration, Album, Artist",
+          "Ascending toggle"
+        ],
+        "resource_hints": [
+          "Sort By",
+          "Duration",
+          "Ascending"
+        ]
+      },
+      {
+        "id": "sort_by_dialog_artists",
+        "description": "Sort By dialog for artists list (Artist/No. of Albums/No. of Tracks + Ascending)",
+        "visual_cues": [
+          "'Sort By' title",
+          "options: Artist, No. of Albums, No. of Tracks",
+          "Ascending toggle"
+        ],
+        "resource_hints": [
+          "Sort By",
+          "No. of Tracks"
+        ]
+      },
+      {
+        "id": "track_context_menu",
+        "description": "Long-press/overflow menu for a track",
+        "visual_cues": [
+          "Play",
+          "Add to Playlist",
+          "Edit Track Info",
+          "Share",
+          "Delete",
+          "Play Next",
+          "Add to Queue",
+          "Set As Ringtone"
+        ],
+        "resource_hints": [
+          "Add to Playlist",
+          "Set As Ringtone"
+        ]
+      }
+    ],
+    "transitions": [
+      {
+        "from_state": "android_home",
+        "to_state": "my_music_playlists",
+        "action": "open_app(Pi Music Player)",
+        "precondition": "app installed",
+        "postcondition": "app opens on PLAYLISTS tab"
+      },
+      {
+        "from_state": "my_music_playlists",
+        "to_state": "create_playlist_dialog",
+        "action": "click(+ FAB)",
+        "precondition": "on PLAYLISTS tab",
+        "postcondition": "create playlist dialog visible"
+      },
+      {
+        "from_state": "create_playlist_dialog",
+        "to_state": "my_music_playlists",
+        "action": "input_text(name) then click(OK)",
+        "precondition": "",
+        "postcondition": "new playlist added under Custom Playlists"
+      },
+      {
+        "from_state": "create_playlist_dialog",
+        "to_state": "my_music_playlists",
+        "action": "click(CANCEL)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "my_music_playlists",
+        "to_state": "playlist_detail_empty",
+        "action": "click(playlist row)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "my_music_playlists",
+        "to_state": "tracks_tab",
+        "action": "click(TRACKS tab)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "my_music_playlists",
+        "to_state": "artists_tab",
+        "action": "click(ARTISTS tab)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "my_music_playlists",
+        "to_state": "albums_tab",
+        "action": "click(ALBUMS tab)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "my_music_playlists",
+        "to_state": "genres_tab",
+        "action": "click(GENRES tab)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "my_music_playlists",
+        "to_state": "search_screen",
+        "action": "click(Search icon)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "tracks_tab",
+        "to_state": "sort_by_dialog_tracks",
+        "action": "click(sort icon)",
+        "precondition": "",
+        "postcondition": "sort options appear"
+      },
+      {
+        "from_state": "sort_by_dialog_tracks",
+        "to_state": "tracks_tab",
+        "action": "click(Duration|Title|...)",
+        "precondition": "",
+        "postcondition": "list re-sorted and dialog dismissed"
+      },
+      {
+        "from_state": "artists_tab",
+        "to_state": "sort_by_dialog_artists",
+        "action": "click(sort icon)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "tracks_tab",
+        "to_state": "track_context_menu",
+        "action": "click(three-dot on track)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "search_screen",
+        "to_state": "search_screen",
+        "action": "input_text(query)",
+        "precondition": "",
+        "postcondition": "results or 'No results found'"
+      },
+      {
+        "from_state": "search_screen",
+        "to_state": "my_music_playlists",
+        "action": "click(Navigate up/Back)",
+        "precondition": "",
+        "postcondition": ""
+      }
+    ],
+    "strategies": [
+      {
+        "name": "CREATE_PLAYLIST",
+        "preconditions": "android_home",
+        "steps": [
+          "open_app('Pi Music Player')",
+          "on my_music_playlists (PLAYLISTS tab), click the floating + button (bottom-right)",
+          "in create_playlist_dialog, input playlist name into 'Enter Name'",
+          "click OK"
+        ],
+        "success_signal": "New playlist appears under 'Custom Playlists' section of PLAYLISTS tab",
+        "fallback": "If dialog does not appear, ensure PLAYLISTS tab is selected; re-click FAB"
+      },
+      {
+        "name": "QUERY_TOTAL_TRACKS",
+        "preconditions": "android_home",
+        "steps": [
+          "open_app('Pi Music Player')",
+          "click TRACKS tab",
+          "read 'N Tracks' header"
+        ],
+        "success_signal": "Header displays total tracks count (e.g., '15 Tracks')",
+        "fallback": ""
+      },
+      {
+        "name": "QUERY_SORTED_TRACKS_BY_TITLE",
+        "preconditions": "android_home",
+        "steps": [
+          "open_app('Pi Music Player')",
+          "click TRACKS tab",
+          "optionally click sort icon and select Title with Ascending",
+          "read Nth song rows from list"
+        ],
+        "success_signal": "Tracks listed in alphabetical order; Nth entry readable",
+        "fallback": "Open Sort By dialog and ensure Title+Ascending selected"
+      },
+      {
+        "name": "SORT_TRACKS_BY_ATTRIBUTE",
+        "preconditions": "tracks_tab",
+        "steps": [
+          "click sort icon near track count",
+          "in Sort By dialog select attribute (Title/Duration/Date Added/Album/Artist)",
+          "toggle Ascending to desired direction"
+        ],
+        "success_signal": "Dialog closes and tracks list re-orders accordingly",
+        "fallback": "If direction toggle not tapped, re-open dialog and click Ascending checkbox"
+      },
+      {
+        "name": "OPEN_PLAYLIST",
+        "preconditions": "my_music_playlists",
+        "steps": [
+          "click the target playlist row under Custom/Smart Playlists"
+        ],
+        "success_signal": "Playlist detail view opens; shows tracks or 'Sorry..No songs to show!' if empty",
+        "fallback": "If playlist is empty, task to play a song from it is infeasible"
+      }
+    ],
+    "dead_ends": [
+      {
+        "state": "playlist_detail_empty",
+        "failed_action": "attempting to play first song in 'Favorite' playlist",
+        "note": "Playlist contains no songs ('Sorry..No songs to show!'); add songs first or mark infeasible"
+      },
+      {
+        "state": "search_screen",
+        "failed_action": "searching for song/artist titles like 'Shine On You Crazy Diamond', 'Lightship', 'Wish You Were Here', 'Eason Chan', 'Pink Floyd'",
+        "note": "Local library is small (15 tracks, 15 artists, 1 album 'Music' by Leon); target not present, returns 'No results found'. Repeated re-queries do not help."
+      },
+      {
+        "state": "artists_tab",
+        "failed_action": "repeatedly scrolling down to find 'Pink Floyd' or 'Eason Chan'",
+        "note": "Artist list is finite (15 Artists, D-T range). Scrolling past the end does nothing; artist is simply absent. Should stop after one full scroll and conclude infeasible."
+      },
+      {
+        "state": "sort_by_dialog_artists",
+        "failed_action": "looking for 'Duration' sort option in artists sort dialog",
+        "note": "Artists sort menu only offers Artist / No. of Albums / No. of Tracks. 'Duration' sort exists only in tracks sort dialog."
+      },
+      {
+        "state": "genres_tab",
+        "failed_action": "navigating to GENRES to find an artist",
+        "note": "Genres tab shows 'No Music found!'; not a valid path to locate artists."
+      },
+      {
+        "state": "tracks_tab",
+        "failed_action": "selecting Duration in sort dialog and claiming success without verifying direction",
+        "note": "Tapping 'Duration' alone may leave Ascending checked; must explicitly toggle Ascending off to achieve Descending order. Agents mis-reported success."
+      }
+    ]
+  },
+  "layer2": {
+    "categories": [
+      {
+        "name": "ADD_ENTRY",
+        "precondition": "App open on the list screen where new items of this type are created",
+        "abstract_steps": [
+          "Locate the primary add/create control (often a floating action button or + icon)",
+          "Trigger it to open a creation dialog/form",
+          "Fill required fields (e.g., name)",
+          "Confirm via the positive dialog button"
+        ],
+        "failure_modes": [
+          "Clicking the add control on the wrong tab/section",
+          "Confirming with empty or invalid name",
+          "Dismissing the dialog instead of confirming"
+        ],
+        "verification_checklist": [
+          "New item is visible in the corresponding list after dialog closes",
+          "Item name matches input exactly",
+          "No error toast/dialog remained"
+        ]
+      },
+      {
+        "name": "NAVIGATE_TO_SECTION",
+        "precondition": "App open with tabbed or drawer navigation available",
+        "abstract_steps": [
+          "Identify the section name relevant to the task (distinguishing between the different item-type sections available in the app)",
+          "Click the corresponding tab or drawer entry",
+          "Wait for the list content to load"
+        ],
+        "failure_modes": [
+          "Acting on the wrong tab's content",
+          "Assuming an item exists in a section it doesn't belong to"
+        ],
+        "verification_checklist": [
+          "Tab indicator reflects chosen section",
+          "Header/count matches expected section (e.g., 'N <ItemType>')"
+        ]
+      },
+      {
+        "name": "QUERY_INFO",
+        "precondition": "Relevant list or detail view is reachable and not empty",
+        "abstract_steps": [
+          "Navigate to the section containing the answer",
+          "Optionally apply a sort/filter to expose the required ordering",
+          "Read the requested field(s) directly from the UI",
+          "Return an answer action with the extracted value"
+        ],
+        "failure_modes": [
+          "Fabricating data when the target isn't in the library",
+          "Reading without ensuring correct sort direction",
+          "Confusing counts across different sections (mixing up item-type totals)"
+        ],
+        "verification_checklist": [
+          "Value is visible on-screen at time of answer",
+          "Sort/filter state matches the question's requirements",
+          "If item cannot be found after a bounded search, declare infeasible"
+        ]
+      },
+      {
+        "name": "SEARCH_FOR_ITEM",
+        "precondition": "A search affordance is visible on a list screen",
+        "abstract_steps": [
+          "Open the search interface",
+          "Type a concise query (a single attribute, not multiple attributes concatenated)",
+          "Inspect results; if none, try a broader/alternate term once",
+          "If still empty, conclude the item is absent"
+        ],
+        "failure_modes": [
+          "Appending new text to existing query (producing garbage like 'QueryQuery')",
+          "Retrying the same query repeatedly",
+          "Treating empty results as transient and looping"
+        ],
+        "verification_checklist": [
+          "Query field shows the intended text only",
+          "Either a result row appears or an explicit 'No results' message is shown",
+          "Bounded retry count respected before declaring infeasible"
+        ]
+      },
+      {
+        "name": "SORT_LIST",
+        "precondition": "On a list screen that exposes a sort control",
+        "abstract_steps": [
+          "Open the ordering configuration dialog via its icon",
+          "Select the desired attribute",
+          "Explicitly toggle the ordering direction to the required state",
+          "Dismiss dialog and verify order"
+        ],
+        "failure_modes": [
+          "Selecting only the attribute without setting direction",
+          "Using the wrong list's sort dialog (attributes differ across sections)",
+          "Declaring success without visually confirming the new order"
+        ],
+        "verification_checklist": [
+          "Dialog shows target attribute marked",
+          "Direction toggle reflects target direction",
+          "Top-most items in list match expected ordering"
+        ]
+      },
+      {
+        "name": "OPEN_CONTAINER",
+        "precondition": "A container item is listed",
+        "abstract_steps": [
+          "Tap the container row",
+          "Verify detail view loads",
+          "Check whether the container is empty before further actions"
+        ],
+        "failure_modes": [
+          "Attempting interaction on an empty container",
+          "Treating an empty-container message as a transient error"
+        ],
+        "verification_checklist": [
+          "Detail view title matches selected container",
+          "If empty, an explicit empty-state message is present; declare infeasible for content-dependent goals"
+        ]
+      },
+      {
+        "name": "PLAY_MEDIA",
+        "precondition": "Target media item is visible in a list or detail view",
+        "abstract_steps": [
+          "Locate the target row",
+          "Tap to start playback or use the row's play control",
+          "Confirm playback UI (now-playing bar / player screen) appears"
+        ],
+        "failure_modes": [
+          "Target not in local library (infeasible)",
+          "Tapping a container instead of a playable item"
+        ],
+        "verification_checklist": [
+          "Now-playing indicator reflects correct item identity",
+          "Playback controls (pause/seek) are operable"
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "built_at": "2025-01-23T00:00:00Z",
+    "n_episodes": 60,
+    "n_successful": 22,
+    "n_episodes_input": 60,
+    "synthesizer_model": "claude-opus-4-7",
+    "synthesizer_temperature": 0.3
+  }
+}

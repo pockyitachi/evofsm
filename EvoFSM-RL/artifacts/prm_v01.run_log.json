@@ -1,0 +1,24 @@
+{
+  "args": {
+    "labels": [
+      "EvoFSM-RL/data/step_labels/source_pool_sonnet.jsonl",
+      "EvoFSM-RL/data/step_labels/b4_k4_unified_sonnet.jsonl"
+    ],
+    "output": "EvoFSM-RL/artifacts/prm_v01.pt",
+    "epochs": 2,
+    "batch_size": 1,
+    "lr": 5e-05,
+    "weight_decay": 0.01,
+    "checkpoint_every": 2000,
+    "log_every": 100,
+    "max_examples": null,
+    "seed": 42,
+    "device": null,
+    "verbose": false
+  },
+  "n_examples": 13290,
+  "label_files": [
+    "EvoFSM-RL/data/step_labels/source_pool_sonnet.jsonl",
+    "EvoFSM-RL/data/step_labels/b4_k4_unified_sonnet.jsonl"
+  ]
+}

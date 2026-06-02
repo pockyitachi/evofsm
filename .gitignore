@@ -1,0 +1,34 @@
+# ── Umbrella repo "evofsm" — whitelist: only our 3 code dirs are tracked ──
+# Ignore everything at repo root...
+/*
+# ...then re-include only what we want:
+!/.gitignore
+!/README.md
+!/EvoFSM-RL/
+!/EvoFSM-MW/
+!/build_evofsm_tasks/
+
+# Within EvoFSM-RL, drop large / regenerable / binary artifacts:
+/EvoFSM-RL/traces/
+/EvoFSM-RL/apks/
+/EvoFSM-RL/data/
+/EvoFSM-RL/.venv/
+
+# Excluded (separate repos / variants / regenerable), for the record:
+#   SkyRL-AndroidWorld/, MobileWorld/  → third-party forks, already on GitHub
+#   android_world_plus/                → EvoFSM-RL imports it at runtime; add later if you
+#                                         want the repo self-runnable (check android_world license)
+#   android-sdk/, tmp/, logs/, *.zip   → regenerable / large
+
+# ── Global junk ──
+__pycache__/
+*.pyc
+*.pyo
+*.pt
+*.safetensors
+*.zip
+*.apk
+*_log.txt
+*.bak_*
+.DS_Store
+.ipynb_checkpoints/

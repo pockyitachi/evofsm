@@ -1,0 +1,405 @@
+{
+  "version": "0.1.0",
+  "app": "audio_recorder",
+  "layer1": {
+    "app": "audio_recorder",
+    "category": "Music & Audio",
+    "states": [
+      {
+        "id": "home_screen",
+        "description": "Android home screen",
+        "visual_cues": [
+          "app icons (Phone, Chrome, Settings)",
+          "time display",
+          "notification shade hints"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "welcome_screen",
+        "description": "Audio Recorder welcome splash",
+        "visual_cues": [
+          "'Welcome to a simple and fast application' text",
+          "'Get started' button"
+        ],
+        "resource_hints": [
+          "Get started"
+        ]
+      },
+      {
+        "id": "setup_screen",
+        "description": "Recording configuration setup",
+        "visual_cues": [
+          "'Setup' header",
+          "'Recording format:' label",
+          "M4a/Wav/3gp options",
+          "Sample rate options",
+          "'Reset' and 'Apply' buttons",
+          "Naming field (scrollable below)"
+        ],
+        "resource_hints": [
+          "Setup",
+          "Apply",
+          "Reset",
+          "Recording format",
+          "Sample rate",
+          "Naming"
+        ]
+      },
+      {
+        "id": "naming_options_dialog",
+        "description": "List of preset naming templates",
+        "visual_cues": [
+          "multiple 'Naming: <template>.m4a' rows",
+          "e.g. Record-1.m4a, date formats, timestamp"
+        ],
+        "resource_hints": [
+          "Naming"
+        ]
+      },
+      {
+        "id": "warning_dialog",
+        "description": "Warning about deleted/moved records",
+        "visual_cues": [
+          "'Warning!' title",
+          "'Some of your records was deleted or moved' message",
+          "'Ok' and 'Details' buttons"
+        ],
+        "resource_hints": [
+          "Warning",
+          "Ok",
+          "Details"
+        ]
+      },
+      {
+        "id": "recorder_idle",
+        "description": "Main recorder ready to record",
+        "visual_cues": [
+          "'Audio Recorder' title",
+          "'00:00' timer",
+          "file info '0 Mb, M4a, 44.1kHz'",
+          "large circular record button",
+          "Settings link"
+        ],
+        "resource_hints": [
+          "Settings",
+          "Recording: %s"
+        ]
+      },
+      {
+        "id": "recorder_recording",
+        "description": "Recording in progress",
+        "visual_cues": [
+          "'Recording…' status",
+          "advancing timer",
+          "file size growing",
+          "Delete button visible",
+          "stop/pause controls"
+        ],
+        "resource_hints": [
+          "Recording",
+          "Delete"
+        ]
+      },
+      {
+        "id": "recorder_paused",
+        "description": "Recording stopped/paused",
+        "visual_cues": [
+          "'Paused' status",
+          "final timer value",
+          "file size shown",
+          "Delete button"
+        ],
+        "resource_hints": [
+          "Paused",
+          "Delete"
+        ]
+      },
+      {
+        "id": "save_name_dialog",
+        "description": "Dialog prompting for new name on save",
+        "visual_cues": [
+          "'New name' label",
+          "editable field with default 'Record-N'",
+          "'Cancel' and 'Save' buttons",
+          "'Don't ask again' checkbox",
+          "keyboard visible"
+        ],
+        "resource_hints": [
+          "New name",
+          "Save",
+          "Cancel",
+          "Don't ask again"
+        ]
+      },
+      {
+        "id": "records_list",
+        "description": "List of saved recordings",
+        "visual_cues": [
+          "'Records' header",
+          "'By date (newest)' sort label",
+          "recording entries with name, size, duration"
+        ],
+        "resource_hints": [
+          "Records",
+          "By date"
+        ]
+      }
+    ],
+    "transitions": [
+      {
+        "from_state": "home_screen",
+        "to_state": "welcome_screen",
+        "action": "open_app(Audio Recorder)",
+        "precondition": "",
+        "postcondition": "app launched first time or on splash"
+      },
+      {
+        "from_state": "welcome_screen",
+        "to_state": "setup_screen",
+        "action": "click(Get started)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "setup_screen",
+        "to_state": "naming_options_dialog",
+        "action": "click(Naming field)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "naming_options_dialog",
+        "to_state": "setup_screen",
+        "action": "click(naming option)",
+        "precondition": "",
+        "postcondition": "selected template applied"
+      },
+      {
+        "from_state": "setup_screen",
+        "to_state": "warning_dialog",
+        "action": "click(Apply)",
+        "precondition": "stale records exist",
+        "postcondition": ""
+      },
+      {
+        "from_state": "setup_screen",
+        "to_state": "recorder_idle",
+        "action": "click(Apply)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "warning_dialog",
+        "to_state": "recorder_idle",
+        "action": "click(Ok)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "recorder_idle",
+        "to_state": "recorder_recording",
+        "action": "click(record button)",
+        "precondition": "",
+        "postcondition": "timer starts"
+      },
+      {
+        "from_state": "recorder_recording",
+        "to_state": "recorder_paused",
+        "action": "click(stop/pause)",
+        "precondition": "",
+        "postcondition": "status becomes Paused"
+      },
+      {
+        "from_state": "recorder_recording",
+        "to_state": "save_name_dialog",
+        "action": "click(stop)",
+        "precondition": "save-prompt mode enabled",
+        "postcondition": ""
+      },
+      {
+        "from_state": "save_name_dialog",
+        "to_state": "recorder_idle",
+        "action": "click(Save)",
+        "precondition": "",
+        "postcondition": "recording saved with chosen name"
+      },
+      {
+        "from_state": "recorder_paused",
+        "to_state": "warning_dialog",
+        "action": "click(menu icon)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "warning_dialog",
+        "to_state": "records_list",
+        "action": "click(Ok)",
+        "precondition": "came from menu",
+        "postcondition": ""
+      }
+    ],
+    "strategies": [
+      {
+        "name": "RECORD_AND_SAVE_DEFAULT_NAME",
+        "preconditions": "home_screen",
+        "steps": [
+          "open_app('Audio Recorder')",
+          "click('Get started') on welcome_screen",
+          "click('Apply') on setup_screen",
+          "dismiss warning_dialog with 'Ok' if shown",
+          "click record button on recorder_idle",
+          "wait a few seconds while recorder_recording",
+          "click stop button to enter recorder_paused or save_name_dialog",
+          "if save_name_dialog appears, click 'Save'"
+        ],
+        "success_signal": "recorder_idle shows latest record entry (e.g. Record-N with duration and size) and timer back to 00:00",
+        "fallback": "If warning_dialog re-appears at any point, dismiss with 'Ok' then retry."
+      },
+      {
+        "name": "RECORD_WITH_CUSTOM_NAME_VIA_SAVE_DIALOG",
+        "preconditions": "home_screen; app produces save_name_dialog after stop",
+        "steps": [
+          "Follow RECORD_AND_SAVE_DEFAULT_NAME up to stop",
+          "In save_name_dialog, clear default text in name field",
+          "input_text(desired filename without or with extension as required)",
+          "click 'Save'"
+        ],
+        "success_signal": "records_list or recorder_idle shows entry with the chosen name",
+        "fallback": "If save_name_dialog does not appear (stop leads directly to Paused), use Settings/Naming presets before recording instead"
+      }
+    ],
+    "dead_ends": [
+      {
+        "state": "setup_screen",
+        "failed_action": "click(index) targeting off-screen 'Apply' using invented index numbers",
+        "note": "Agent repeatedly clicked non-existent indices (e.g. 34/35/37) believing Apply was visible. Apply is index 3 when visible; agent must use only indices present in the current UI list."
+      },
+      {
+        "state": "naming_options_dialog",
+        "failed_action": "input_text to set a free-form custom filename",
+        "note": "Naming dialog only offers preset templates (Record-N, date formats, timestamp); it does NOT accept arbitrary custom names. Custom filenames must be entered in the post-recording save_name_dialog."
+      },
+      {
+        "state": "records_list",
+        "failed_action": "click/long_press on a record entry to rename",
+        "note": "No rename affordance from the list in this view; neither tap nor long-press opened a rename dialog."
+      },
+      {
+        "state": "setup_screen",
+        "failed_action": "Attempting to type custom filename into Naming field",
+        "note": "Field behaves as a selector, not an editable text box; typing has no effect on actual save name."
+      }
+    ]
+  },
+  "layer2": {
+    "categories": [
+      {
+        "name": "CREATE_ENTRY",
+        "precondition": "App launched and main create/compose surface reachable",
+        "abstract_steps": [
+          "Navigate from launcher to the app's primary surface",
+          "Pass through onboarding/welcome if present",
+          "Confirm or accept default configuration if an initial configuration screen appears",
+          "Dismiss any transient informational dialogs",
+          "Trigger the primary create action (e.g. record/start)",
+          "Allow the creation process to run for the required duration",
+          "Trigger stop/finalize action",
+          "Confirm in any resulting finalize dialog"
+        ],
+        "failure_modes": [
+          "Clicking indices not present in the current UI listing",
+          "Mistaking a selector list for an editable text field",
+          "Ignoring or missing a blocking dialog",
+          "Terminating before the finalize step"
+        ],
+        "verification_checklist": [
+          "A new entry with non-zero size/duration appears in the list or main view",
+          "Timer/status returns to idle state",
+          "No blocking dialog remains on screen"
+        ]
+      },
+      {
+        "name": "CREATE_ENTRY_WITH_CUSTOM_NAME",
+        "precondition": "App provides a means to assign a custom label, either at finalization time or via pre-set options",
+        "abstract_steps": [
+          "Perform CREATE_ENTRY up to the finalize step",
+          "When a finalize/name dialog appears, clear any pre-filled text",
+          "Type the desired custom name",
+          "Confirm finalization"
+        ],
+        "failure_modes": [
+          "Assuming a pre-creation name selector allows arbitrary text (it may only offer templates)",
+          "Trying to rename from a list view that lacks rename affordance",
+          "Getting stuck repeating the same invalid click instead of re-examining UI",
+          "Missing the finalize dialog because stop leads directly to an intermediate state"
+        ],
+        "verification_checklist": [
+          "Final entry appears with exactly the requested name",
+          "No duplicate entry with default name is left behind",
+          "Entry has expected size/duration"
+        ]
+      },
+      {
+        "name": "DISMISS_INTERRUPTION",
+        "precondition": "A modal dialog or notice is blocking interaction",
+        "abstract_steps": [
+          "Identify the affirmative/dismiss button (e.g. confirm, close)",
+          "Click it",
+          "Re-evaluate resulting screen before next action"
+        ],
+        "failure_modes": [
+          "Ignoring the dialog and clicking through it",
+          "Clicking a secondary/expand button when dismissal is intended"
+        ],
+        "verification_checklist": [
+          "Dialog is no longer visible",
+          "Underlying screen is interactive again"
+        ]
+      },
+      {
+        "name": "NAVIGATE_TO_APP",
+        "precondition": "Device on launcher or another app",
+        "abstract_steps": [
+          "Launch the target app via any available mechanism (launcher icon, app list, or open-by-name)",
+          "Pass any first-run welcome screen",
+          "Arrive at the main functional surface"
+        ],
+        "failure_modes": [
+          "App not installed",
+          "Stuck on onboarding if button not clicked"
+        ],
+        "verification_checklist": [
+          "App's primary UI elements visible",
+          "App title in header matches expected"
+        ]
+      },
+      {
+        "name": "RENAME_ENTRY",
+        "precondition": "An existing entry is present in a list",
+        "abstract_steps": [
+          "Open the entry or its context menu (tap / long-press / overflow)",
+          "Locate a rename / edit-name option",
+          "Enter the desired label and confirm"
+        ],
+        "failure_modes": [
+          "App does not support relabeling from list view",
+          "Repeated taps produce no effect — agent must recognize and abandon",
+          "Confusing selection mode with edit mode"
+        ],
+        "verification_checklist": [
+          "Entry shows the updated label in list",
+          "No duplicate entries created"
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "built_at": "2025-01-20T00:00:00Z",
+    "n_episodes": 10,
+    "n_successful": 5,
+    "n_episodes_input": 10,
+    "synthesizer_model": "claude-opus-4-7",
+    "synthesizer_temperature": 0.3
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "n_examples_total": 50,
+  "epochs": 1,
+  "epoch_summaries": [
+    {
+      "epoch": 1,
+      "n": 50,
+      "skipped": 0,
+      "mean_loss": 4.619808938903734
+    }
+  ],
+  "total_steps": 50,
+  "wall_min": 0.6175453265663237,
+  "final_checkpoint": "EvoFSM-RL/artifacts/prm_smoke.pt"
+}

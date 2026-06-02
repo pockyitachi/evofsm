@@ -1,0 +1,294 @@
+{
+  "version": "0.1.0",
+  "app": "clock",
+  "layer1": {
+    "app": "clock",
+    "category": "Tools",
+    "states": [
+      {
+        "id": "home_screen",
+        "description": "Android home screen with stopwatch/timer widget visible",
+        "visual_cues": [
+          "app icons (Phone, Chrome, Settings)",
+          "Google search bar",
+          "timer/stopwatch widget showing time like '00:-12' or '00:22'",
+          "Paused indicator sometimes shown"
+        ],
+        "resource_hints": [
+          "Google app",
+          "Voice search",
+          "Search"
+        ]
+      },
+      {
+        "id": "clock_main",
+        "description": "Clock app main Clock tab showing time and date",
+        "visual_cues": [
+          "Clock title",
+          "Add city button",
+          "current time display",
+          "date display",
+          "bottom nav: Alarm/Clock/Timer/Stopwatch/Bedtime"
+        ],
+        "resource_hints": [
+          "Clock",
+          "Add city",
+          "Alarm",
+          "Timer",
+          "Stopwatch",
+          "Bedtime"
+        ]
+      },
+      {
+        "id": "stopwatch_idle",
+        "description": "Stopwatch tab with timer at 00 and Start button",
+        "visual_cues": [
+          "Stopwatch title",
+          "Start button (large central)",
+          "00 display",
+          "bottom nav tabs",
+          "More options"
+        ],
+        "resource_hints": [
+          "Stopwatch",
+          "Start",
+          "More options"
+        ]
+      },
+      {
+        "id": "stopwatch_running",
+        "description": "Stopwatch running with Pause/Reset/Lap controls",
+        "visual_cues": [
+          "elapsed time counting up",
+          "Pause button (large central)",
+          "Reset button",
+          "Lap button"
+        ],
+        "resource_hints": [
+          "Pause",
+          "Reset",
+          "Lap"
+        ]
+      },
+      {
+        "id": "timer_entry",
+        "description": "Timer setup screen with numeric keypad",
+        "visual_cues": [
+          "Timer title",
+          "display like '00h 00m 00s'",
+          "numeric keypad 0-9",
+          "00 key",
+          "backspace (⌫) key"
+        ],
+        "resource_hints": [
+          "Timer",
+          "00h 00m 00s",
+          "⌫"
+        ]
+      }
+    ],
+    "transitions": [
+      {
+        "from_state": "home_screen",
+        "to_state": "stopwatch_idle",
+        "action": "click(stopwatch_widget)",
+        "precondition": "stopwatch running or paused",
+        "postcondition": "opens clock app to stopwatch tab"
+      },
+      {
+        "from_state": "home_screen",
+        "to_state": "clock_main",
+        "action": "open_app(Clock)",
+        "precondition": "",
+        "postcondition": "clock app opened to default tab"
+      },
+      {
+        "from_state": "clock_main",
+        "to_state": "timer_entry",
+        "action": "click(Timer_tab)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "clock_main",
+        "to_state": "stopwatch_idle",
+        "action": "click(Stopwatch_tab)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "stopwatch_idle",
+        "to_state": "stopwatch_running",
+        "action": "click(Start)",
+        "precondition": "",
+        "postcondition": "stopwatch begins counting"
+      },
+      {
+        "from_state": "stopwatch_running",
+        "to_state": "stopwatch_idle",
+        "action": "click(Pause) then click(Reset)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "stopwatch_idle",
+        "to_state": "timer_entry",
+        "action": "click(Timer_tab)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "timer_entry",
+        "to_state": "timer_entry",
+        "action": "click(digit) or click(⌫)",
+        "precondition": "",
+        "postcondition": "time display shifts digits (right-to-left fill)"
+      }
+    ],
+    "strategies": [
+      {
+        "name": "PAUSE_RUNNING_STOPWATCH_FROM_HOME",
+        "preconditions": "home screen shows running stopwatch widget",
+        "steps": [
+          "click the stopwatch widget/timer display on home screen",
+          "verify stopwatch tab opens showing Start button (indicates paused state)"
+        ],
+        "success_signal": "stopwatch screen shows 'Start' button and '00' display (paused state)",
+        "fallback": "if landed elsewhere, navigate to Stopwatch tab and inspect state"
+      },
+      {
+        "name": "START_STOPWATCH",
+        "preconditions": "stopwatch idle/paused",
+        "steps": [
+          "click the stopwatch widget on home screen to open clock app on stopwatch tab (or open Clock app and click Stopwatch tab)",
+          "click the Start button",
+          "verify time is counting up and Pause/Reset/Lap buttons appear"
+        ],
+        "success_signal": "Pause button visible and elapsed time increases",
+        "fallback": "if on wrong tab, tap Stopwatch in bottom nav"
+      },
+      {
+        "name": "ENTER_TIMER_DIGITS",
+        "preconditions": "clock_main visible; target duration known as H:MM:SS",
+        "steps": [
+          "from clock_main, click the Timer tab to enter timer_entry",
+          "expand the target duration into a left-padded 6-digit string HHMMSS (e.g. 1h 23m 40s -> '012340')",
+          "tap each digit in order left-to-right; the keypad uses odometer shift-fill semantics — the first tap lands in the least-significant position and shifts left as more digits arrive",
+          "after all 6 digits, verify the display reads the target HH:MM:SS exactly (not a shifted variant like 00:12:34 when the goal was 01:23:40)",
+          "if the display does not match, tap ⌫ to remove the trailing digit and re-align, or clear fully and re-enter from scratch",
+          "click Start to begin the countdown"
+        ],
+        "success_signal": "the timer begins counting down from a value within 1 second of the target; the Start button is replaced by Pause/Cancel affordances",
+        "fallback": "If the digit display never aligns to the target after two full re-entries, emit status:infeasible — do NOT invent indices or try to type directly into HH/MM/SS fields (they are not editable text, only via the shift-fill keypad)."
+      }
+    ],
+    "dead_ends": [
+      {
+        "state": "home_screen",
+        "failed_action": "status=complete without interacting",
+        "note": "Agent assumed task was already done by reading widget state; must actually perform the action or verify end-state deterministically"
+      },
+      {
+        "state": "timer_entry",
+        "failed_action": "clicking digits assuming they fill hours first",
+        "note": "Timer keypad fills seconds first and digits shift left as new digits are entered (like an odometer). Agent repeatedly misinterpreted order, causing wrong values."
+      },
+      {
+        "state": "timer_entry",
+        "failed_action": "using backspace to 'reset' then re-entering",
+        "note": "Backspace only removes last digit (and shifts right), not a full clear; repeated wrong digit entries compounded the error"
+      }
+    ]
+  },
+  "layer2": {
+    "categories": [
+      {
+        "name": "TOGGLE_STATE",
+        "precondition": "An entity exists with a toggleable state (e.g., active/inactive, on/off) and is visible or reachable",
+        "abstract_steps": [
+          "Identify current state via visual indicators",
+          "Navigate to the control surface if not already there",
+          "Invoke the toggle control",
+          "Verify the state changed to the desired target"
+        ],
+        "failure_modes": [
+          "Declaring success without taking any action based on a misread of current state",
+          "Clicking a non-interactive label instead of the actual control",
+          "Toggling past the desired state (e.g., invoking the toggle on an already-target-state item flips it back to the opposite state)"
+        ],
+        "verification_checklist": [
+          "Target state's distinctive UI element is present (e.g., opposite action button shown)",
+          "Numeric/textual indicator reflects expected state",
+          "No transient/loading indicator remains"
+        ]
+      },
+      {
+        "name": "ACTIVATE_ENTITY",
+        "precondition": "Entity is in an inactive/idle state and can be transitioned to an active state",
+        "abstract_steps": [
+          "Navigate to the entity's control screen",
+          "Locate the primary activation control",
+          "Click the activation control",
+          "Verify active-state controls appear (e.g., controls for suspending or terminating the active state)"
+        ],
+        "failure_modes": [
+          "Attempting activation on the wrong tab/section",
+          "Mistaking a display for a button"
+        ],
+        "verification_checklist": [
+          "Active-state controls visible",
+          "Dynamic indicator (counter, progress) advances"
+        ]
+      },
+      {
+        "name": "ENTER_STRUCTURED_VALUE",
+        "precondition": "An input surface exists that accepts a multi-field structured value (e.g., H:M:S, date parts) via a keypad that shifts digits",
+        "abstract_steps": [
+          "Navigate to the input surface",
+          "Understand the keypad semantics: determine whether digits fill from the right (shift-left) or whether fields are edited independently",
+          "If shift-fill: enter the full digit sequence in order from most-significant to least-significant, including leading zeros to place digits in correct fields",
+          "Avoid partial backspaces unless correcting the last digit only",
+          "Verify the displayed value matches the target exactly before confirming"
+        ],
+        "failure_modes": [
+          "Assuming each field is edited independently when keypad actually shifts digits across fields",
+          "Entering only significant digits and skipping leading zeros, causing digits to land in the wrong field",
+          "Using backspace repeatedly to 'clear' without realizing it only removes one digit at a time",
+          "Re-entering after partial clear and compounding misalignment",
+          "Declaring completion before verifying display matches target"
+        ],
+        "verification_checklist": [
+          "Displayed value exactly equals target across all sub-fields",
+          "No leading/trailing unintended digits",
+          "Did not inadvertently trigger an activation/confirm control"
+        ]
+      },
+      {
+        "name": "NAVIGATE_TO_SECTION",
+        "precondition": "App has multiple tabs/sections and a bottom/top nav is visible",
+        "abstract_steps": [
+          "Open the app if not already open",
+          "Identify the target tab by label or icon",
+          "Click the tab",
+          "Verify title/contents match the desired section"
+        ],
+        "failure_modes": [
+          "Clicking a home-screen widget that opens a different tab than intended",
+          "Mistaking section labels across similar tabs"
+        ],
+        "verification_checklist": [
+          "Screen title matches target section",
+          "Section-specific controls are visible"
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "built_at": "2025-01-20T00:00:00Z",
+    "n_episodes": 15,
+    "n_successful": 6,
+    "n_episodes_input": 15,
+    "synthesizer_model": "claude-opus-4-7",
+    "synthesizer_temperature": 0.3
+  }
+}

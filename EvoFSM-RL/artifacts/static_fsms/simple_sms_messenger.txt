@@ -1,0 +1,191 @@
+# ═══════════════════════════════════════════════
+# LAYER 1: APP_SPECIFIC  (non-transferable)
+# ═══════════════════════════════════════════════
+APP: simple_sms_messenger
+CATEGORY: Communication
+STATES:
+  S0: HOME_SCREEN — Android home screen / app drawer
+    visual_cues: ['Phone, Chrome, Settings icons', 'Home label', 'clock widget', 'notifications shade']
+    resource_hints: ['Home', 'Phone', 'Search']
+  S1: CONVERSATION_LIST — Main screen showing list of SMS conversations
+    visual_cues: ['Search icon top', 'Settings/About in overflow', 'list of conversations with contact + last message + time', 'Start a conversation button when empty']
+    resource_hints: ['Search', 'Settings', 'About', 'More options', 'Start a conversation', 'No stored conversations have been found']
+  S2: CONVERSATION_THREAD — Open chat thread with a specific contact/number
+    visual_cues: ['Back button top-left', 'contact name/number header', 'Delete/Dial/Add Person icons', 'Type a message… input', 'SMS send button', 'message bubbles']
+    resource_hints: ['Type a message…', 'SMS', 'Attachment', 'Dial number', 'Add Person', 'Delete']
+  S3: NEW_CONVERSATION — New conversation composer - enter recipient
+    visual_cues: ['New conversation title', 'Add Contact or Number… field', 'No contacts found or SUGGESTIONS list', 'checkmark confirm']
+    resource_hints: ['New conversation', 'Add Contact or Number…', 'SUGGESTIONS', 'No contacts found']
+  S4: MESSAGE_SELECTED_MODE — Context action bar after long-press on a message bubble
+    visual_cues: ['Done button', '1 / 1 selection count', 'Copy to clipboard', 'Share', 'Delete', 'More options']
+    resource_hints: ['Copy to clipboard', 'Share', 'Delete', 'Done']
+  S5: CONVERSATION_SELECTED_MODE — Context action bar after long-press on a conversation in the list
+    visual_cues: ['Done', 'Delete', 'Add number to contact', 'Dial number', 'More options (Block/Archive/Copy number/Mark Unread/Pin/Select all)']
+    resource_hints: ['Block number', 'Archive', 'Copy number to clipboard', 'Mark as Unread', 'Pin to the top', 'Select all']
+  S6: THREAD_OVERFLOW_MENU — Overflow menu inside an open thread
+    visual_cues: ['Archive', 'Conversation details', 'Block number', 'Mark as Unread']
+    resource_hints: ['Archive', 'Conversation details', 'Block number', 'Mark as Unread']
+  S7: DELETE_CONFIRM_DIALOG — Confirmation dialog for deleting a message
+    visual_cues: ['Are you sure you want to delete 1 message?', 'No / Yes buttons']
+    resource_hints: ['Are you sure you want to delete', 'No', 'Yes']
+  S8: PASTE_POPOVER — Text-field context popover with Paste option
+    visual_cues: ['Paste button appearing above input field', 'More options']
+    resource_hints: ['Paste']
+TRANSITIONS:
+  S0 --open_app(Simple SMS Messenger)--> S1
+  S1 --click(conversation_row)--> S2  [pre: conversation exists]
+  S1 --click(Start a conversation) or click(new_conversation_fab)--> S3
+  S3 --input recipient then click(confirm_check) or select suggestion--> S2  [pre: valid number/contact entered]
+  S2 --click(Type a message…) -> input_text -> click(SMS)--> S2  [post: message appears in thread]
+  S2 --long_press(message_bubble)--> S4
+  S4 --click(Copy to clipboard) or click(Done) or navigate_back--> S2  [post: text copied if Copy used]
+  S1 --long_press(conversation_row)--> S5
+  S2 --click(More options)--> S6
+  S2 --long_press(message_input)--> S8  [pre: clipboard has content]
+  S8 --click(Paste)--> S2  [post: clipboard text inserted into input]
+  S2 --click(Delete)--> S7  [pre: message selected]
+  S7 --click(No)--> S4
+STRATEGIES:
+  REPLY_TO_CONTACT:
+    preconditions: home_screen or conversation_list; target conversation exists
+    steps:
+      1. open_app('Simple SMS Messenger')
+      2. On conversation_list, locate conversation for target number/contact (scroll if needed)
+      3. click(conversation_row)
+      4. click(Type a message… field)
+      5. input_text(reply message)
+      6. click(SMS send button)
+      7. verify message bubble appears in thread, then mark complete
+    success_signal: The typed reply is visible as an outgoing message bubble in the thread
+    fallback: If conversation not visible, use search or scroll; if wrong conversation, navigate_back to list
+  REPLY_MOST_RECENT:
+    preconditions: home_screen; at least one conversation exists
+    steps:
+      1. open_app('Simple SMS Messenger')
+      2. On conversation_list, click the top-most (most recent) conversation row
+      3. click(Type a message…) then input_text(message)
+      4. click(SMS send)
+      5. confirm outgoing bubble and mark complete
+    success_signal: Reply bubble appears under the most recent thread
+    fallback: If ordering unclear, use the first visible row which is chronologically newest
+  SEND_NEW_MESSAGE:
+    preconditions: home_screen
+    steps:
+      1. open_app('Simple SMS Messenger')
+      2. click('Start a conversation') or the new-conversation button
+      3. click('Add Contact or Number…') field
+      4. input_text(recipient phone number)
+      5. click(confirm check mark) to accept the number
+      6. click(Type a message…) then input_text(body)
+      7. click(SMS send)
+      8. confirm outgoing bubble
+    success_signal: Thread opens with recipient header and outgoing message bubble visible
+    fallback: If check mark missing, tap a matching suggestion row to open the thread
+  SEND_CLIPBOARD_CONTENT:
+    preconditions: home_screen; clipboard already contains desired text
+    steps:
+      1. open_app('Simple SMS Messenger')
+      2. click('Start a conversation')
+      3. click recipient field, input_text(phone number), click confirm check
+      4. In thread, long_press the Type a message… field
+      5. click('Paste') from the popover
+      6. click(SMS send)
+      7. verify pasted text sent
+    success_signal: Outgoing bubble with exact clipboard text visible in thread
+    fallback: If paste popover not shown, tap input first then long_press again; avoid pasting into the recipient field
+DEAD_ENDS:
+  at message_selected_mode: search for a 'Resend' option fails  [App has no Resend action; long-press menu only offers Copy/Share/Delete; overflow offers Block/Archive/etc. Must manually re-type or paste text and send again.]
+  at conversation_selected_mode: click(More options) expecting Resend fails  [Options (Block number, Archive, Copy number, Mark Unread, Pin, Select all) do not include Resend.]
+  at conversation_list: reply to most recent while wrong conversation targeted fails  [Agent sometimes picks a non-top row thinking it is most recent; the top row is newest.]
+  at new_conversation: long_press input after typing recipient to paste fails  [Paste appended clipboard text onto the recipient field instead of the message body, resulting in an invalid recipient and failed send.]
+  at conversation_thread: reply in the wrong thread (sender's thread) instead of starting new thread to third-party recipient fails  [For 'forward address to <other contact>', agent pasted address back into the originating sender's thread instead of opening a new conversation with the target contact.]
+  at delete_confirm_dialog: repeatedly tap 'Add Person' thinking it starts a new chat fails  ['Add Person' inside an open thread is interpreted as add-to-existing; combined with a lingering selection it can open a delete dialog loop.]
+
+# ═══════════════════════════════════════════════
+# LAYER 2: GENERIC  (transferable, app-agnostic)
+# ═══════════════════════════════════════════════
+CATEGORY: REPLY_TO_ENTITY
+  precondition: Application open to a list of existing conversations/entities; target entity identifiable by name or identifier
+  abstract_steps:
+    1. Launch the application
+    2. Locate the target entity row in the list (scrolling or using a lookup affordance if needed)
+    3. Open the entity detail/thread
+    4. Focus the reply/compose input
+    5. Enter the requested text
+    6. Trigger the send/submit control
+    7. Verify the new entry appears attributed to the user
+  failure_modes:
+    - 'Selecting wrong entity when multiple similar names exist'
+    - 'Typing into the header/recipient field instead of the body'
+    - 'Forgetting to press send after entering text'
+  verification_checklist:
+    - 'Sent content string matches exactly (including punctuation)'
+    - 'New outgoing item visible in the correct thread'
+    - 'Input field is cleared after submission with zero residual draft content'
+
+CATEGORY: ADD_ENTRY
+  precondition: Application allows creating a new item; optionally requires a target identifier (e.g., a recipient or reference value) and content
+  abstract_steps:
+    1. Launch the application
+    2. Invoke the create-new action (empty-state CTA or new-item button)
+    3. Provide required identifier in the dedicated field
+    4. Confirm identifier (if a confirm control exists) before entering body
+    5. Enter body content in the dedicated body field
+    6. Submit
+    7. Verify the new item is persisted
+  failure_modes:
+    - 'A required interface element is unavailable or cannot be located, rendering the action infeasible'
+    - 'Content accidentally placed in identifier field'
+    - 'Skipping confirm step so body field never activates'
+  verification_checklist:
+    - 'Identifier correctly attached to the new item'
+    - 'Body text matches request verbatim'
+    - 'Item appears in the main list after creation'
+
+CATEGORY: TRANSFER_CONTENT_BETWEEN_ENTITIES
+  precondition: Source item contains text to forward; target entity might already have an existing thread/record or might require creating one
+  abstract_steps:
+    1. Open source item and select the desired text (long-press)
+    2. Copy text to clipboard via the selection action bar
+    3. Navigate back to the list of entities
+    4. Open or create the target entity's thread/record, ensuring it is distinct from the source thread
+    5. Focus the body input and insert the clipboard contents via the standard insertion gesture
+    6. Submit
+    7. Verify the transferred text appears attributed to the user within the target thread
+  failure_modes:
+    - 'Sending the content back into the source thread instead of the target'
+    - 'Pasting into an identifier field, corrupting the recipient'
+    - 'Clipboard ends up empty because the copy action was never confirmed'
+  verification_checklist:
+    - 'Target entity correctly selected'
+    - 'Inserted text exactly equals the original'
+    - "Outgoing item is visible within the target entity's thread rather than the source's"
+
+CATEGORY: REPEAT_PREVIOUS_ACTION
+  precondition: A prior item/action exists and user wants to repeat it
+  abstract_steps:
+    1. Open the item/thread containing the original
+    2. Look for an explicit repeat/resend affordance in context menu or overflow
+    3. If absent, capture original text (read or copy)
+    4. Re-enter the text via the standard create path and submit it once more
+  failure_modes:
+    - 'Assuming a dedicated repeat control exists when the interface lacks one'
+    - 'Declaring task infeasible without trying the manual re-entry workaround'
+    - 'Repeating from the wrong item (e.g., a received vs sent one)'
+  verification_checklist:
+    - 'A second outgoing copy of the identical text exists'
+    - 'Timestamp of new copy is after the original'
+    - 'Original item remains intact and has been preserved without accidental removal'
+
+CATEGORY: NAVIGATE_TO_APP
+  precondition: A different application or the device's primary launcher surface is currently in the foreground
+  abstract_steps:
+    1. Attempt direct app launch by name
+    2. If unavailable, open the application list and locate it via scrolling or a lookup affordance
+    3. If truly absent, surface an infeasibility status
+  failure_modes:
+    - 'Confusing a visually-similar app for the target'
+    - 'Prematurely reporting infeasibility before trying the application list'
+  verification_checklist:
+    - 'Foreground window belongs to the intended app'
+    - 'A recognizable landing screen of that app is visible'

@@ -1,0 +1,132 @@
+# ═══════════════════════════════════════════════
+# LAYER 1: APP_SPECIFIC  (non-transferable)
+# ═══════════════════════════════════════════════
+APP: contacts
+CATEGORY: Communication
+STATES:
+  S0: HOME_SCREEN — Android home screen with app icons
+    visual_cues: ['Phone icon', 'Instagram icon', 'Chrome icon', 'Settings icon', 'clock/time', 'notification shade items']
+    resource_hints: ['Home', 'Phone']
+  S1: PHONE_APP_CONTACTS_TAB — Phone app showing Contacts tab with list or empty state
+    visual_cues: ['bottom navigation with Favorites/Recents/Contacts/Voicemail', "'Create new contact' option", "contact list items like 'Quick contact for X'"]
+    resource_hints: ['Contacts', 'Create new contact', 'key pad', 'Favorites', 'Recents', 'Voicemail']
+  S2: CONTACTS_APP_HOME — Standalone Contacts app main screen
+    visual_cues: ["'Contacts' title", 'Highlights/Fix & manage tabs', "floating '+' Create contact button", 'navigation drawer', 'device contact list entries']
+    resource_hints: ['Create contact', 'Highlights', 'Fix & manage', 'Open navigation drawer', 'Phone contacts', 'Email contacts', 'Device • N contact']
+  S3: CREATE_CONTACT_FORM — New contact creation form
+    visual_cues: ['Cancel/Save header', "'Create contact' title", 'First name field', 'Last name field', 'Company field', 'Phone field with Mobile label dropdown', 'Email field', 'Add contact photo']
+    resource_hints: ['Cancel', 'Create contact', 'Save', 'First name', 'Last name', 'Company', 'Phone', 'Mobile', 'Email', 'Show dropdown menu', 'Show more name fields']
+  S4: PHONE_LABEL_DROPDOWN — Dropdown menu showing phone label options (Home, Work, Mobile, etc.)
+    visual_cues: ['list of label options overlaying form', 'options like Home, Work, Mobile, Main, Other']
+    resource_hints: ['Home', 'Work', 'Mobile', 'Main', 'Other', 'Custom']
+  S5: CONTACT_SAVED_LIST — Contacts list showing newly created contact
+    visual_cues: ['contact name visible in list', 'Quick contact avatar', 'bottom nav Contacts selected']
+    resource_hints: ['Quick contact for <name>', 'Contacts']
+TRANSITIONS:
+  S0 --click(Phone icon) then click(Contacts tab)--> S1  [post: Contacts tab shown]
+  S0 --open_app('Contacts')--> S2  [post: Contacts app opened]
+  S1 --click('Create new contact')--> S3  [post: Form loaded]
+  S2 --click(floating + Create contact)--> S3  [post: Form loaded]
+  S3 --click(First name) + input_text--> S3  [post: First name filled]
+  S3 --click(Last name) + input_text--> S3  [post: Last name filled]
+  S3 --click(Phone) + input_text--> S3  [post: Phone filled]
+  S3 --click('Show dropdown menu')--> S4  [pre: phone field present]  [post: Label options visible]
+  S4 --click(label option e.g. Work/Home)--> S3  [post: Label updated]
+  S3 --click('Save')--> S5  [pre: required fields filled]  [post: Contact persisted and visible in list]
+STRATEGIES:
+  CREATE_NEW_CONTACT_VIA_PHONE_APP:
+    preconditions: home_screen
+    steps:
+      1. click Phone app icon
+      2. click Contacts tab (bottom nav)
+      3. click 'Create new contact'
+      4. click First name field, input_text first name
+      5. click/Tab to Last name field, input_text last name
+      6. click Phone field, input_text phone number
+      7. click Save
+    success_signal: Contacts list displays the new contact name ('Quick contact for <name>')
+    fallback: If Save not visible, scroll up in form; if Contacts tab not shown, re-click Contacts in bottom nav
+  CREATE_NEW_CONTACT_VIA_CONTACTS_APP:
+    preconditions: home_screen
+    steps:
+      1. open_app('Contacts')
+      2. click floating '+' Create contact button
+      3. fill First name, Last name, Phone
+      4. click Save
+    success_signal: Return to contacts app home with new entry in Device list
+    fallback: If + not found, use Phone app path
+  FILL_CONTACT_DRAFT_WITH_CUSTOM_LABEL:
+    preconditions: create_contact_form reached
+    steps:
+      1. input First name
+      2. input Last name
+      3. click Phone field and input phone number
+      4. click 'Show dropdown menu' next to Mobile label
+      5. click desired label option (e.g. Work/Home)
+      6. do NOT click Save (draft only)
+      7. report complete
+    success_signal: Phone label field shows the selected label and all fields populated
+    fallback: If dropdown option index uncertain, read the list items and match by text
+DEAD_ENDS:
+  (none)
+
+# ═══════════════════════════════════════════════
+# LAYER 2: GENERIC  (transferable, app-agnostic)
+# ═══════════════════════════════════════════════
+CATEGORY: ADD_ENTRY
+  precondition: Application opened to a list/overview screen with an affordance to create a new item
+  abstract_steps:
+    1. Navigate from launcher to the target application's list screen
+    2. Invoke the create-new-item affordance (floating action button or explicit 'Create' entry)
+    3. Focus each required input field in order and enter the corresponding value
+    4. Confirm by activating the primary commit control
+    5. Verify the new item appears in the list
+  failure_modes:
+    - 'Committing before all required fields are filled'
+    - 'Typing into an unfocused field'
+    - 'Missing the create affordance because it is off-screen or behind a tab'
+  verification_checklist:
+    - "New item's identifier is visible in the list view"
+    - 'No error/validation banner present'
+    - 'Return to list state (not still in editor)'
+
+CATEGORY: EDIT_ENTRY_FIELD_WITH_ENUM_LABEL
+  precondition: Editor form open with a field that has an associated enum label selector
+  abstract_steps:
+    1. Fill primary value field with input_text
+    2. Activate the adjacent label dropdown/selector
+    3. Choose the desired label from the option list
+    4. Confirm the label field reflects the chosen value
+  failure_modes:
+    - 'Clicking the value field instead of the dropdown trigger'
+    - 'Selecting wrong option because list indices shift after opening'
+  verification_checklist:
+    - 'Label field text matches requested value'
+    - 'Value field retained its entered text'
+
+CATEGORY: CREATE_DRAFT_WITHOUT_COMMIT
+  precondition: Editor form reachable and task specifies not to persist
+  abstract_steps:
+    1. Populate all specified fields
+    2. Adjust any optional attributes (labels/types) as specified
+    3. Stop before invoking the primary commit control
+    4. Declare task complete while editor still shows draft state
+  failure_modes:
+    - 'Accidentally activating the primary commit control'
+    - 'Navigating away and losing the draft'
+  verification_checklist:
+    - 'All requested values are visible in their fields'
+    - 'Editor screen is still active (not returned to list)'
+    - 'No success confirmation toast appeared'
+
+CATEGORY: NAVIGATE_TO
+  precondition: Launcher or unrelated screen visible
+  abstract_steps:
+    1. Identify the target app icon or use open_app by name
+    2. If app opens to a non-target subsection, switch tabs/drawer to reach target section
+  failure_modes:
+    - 'App icon not on current launcher page'
+    - 'Landing on wrong tab inside a multi-tab app'
+  verification_checklist:
+    - 'Target section header/title visible'
+    - 'Expected primary affordances (e.g., create button) present'

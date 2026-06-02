@@ -1,0 +1,123 @@
+# Source pool — 96 templates × 5 seeds (K_source=5 per multi_seed_config.yaml)
+# Generated 2026-04-17 from configs/splits.yaml > source_pool
+# Format: Template:tier  (tier='source' since this is the pretraining pool)
+
+# ── audio_recorder (Music & Audio) — 2 templates ──
+AudioRecorderRecordAudio:source
+AudioRecorderRecordAudioWithFileName:source
+
+# ── bluecoins (Finance) — 15 templates ──
+BluecoinsAddExpense:source
+BluecoinsAddExpenseOnDate:source
+BluecoinsAddExpenseOnDateWithLabel:source
+BluecoinsAddIncomeOnDateWithNote:source
+BluecoinsAddIncomeWithLabel:source
+BluecoinsEditExpenseAmount:source
+BluecoinsEditExpenseDateAmountNote:source
+BluecoinsEditIncomeDateAndAmount:source
+BluecoinsEditTransactionType:source
+BluecoinsEditTransactionTypeAmountNote:source
+BluecoinsQueryCategorySpending:source
+BluecoinsQuerySpendingCategory:source
+BluecoinsQuerySpendingOnDate:source
+BluecoinsQueryTotalSpendingOnDate:source
+BluecoinsQueryTransactionCount:source
+
+# ── calculator (Tools) — 19 templates ──
+CalculatorConvert45DegreesToRadians:source
+CalculatorGeometricMean:source
+CalculatorHarmonicMean:source
+CalculatorInput1:source
+CalculatorInput10Choose2:source
+CalculatorInput17Times23:source
+CalculatorInput1Plus1:source
+CalculatorInput2Plus24Div3:source
+CalculatorInput3Times5:source
+CalculatorInput5Choose2:source
+CalculatorInputCos180:source
+CalculatorInputCos60:source
+CalculatorInputFactorial6:source
+CalculatorInputLn1234:source
+CalculatorInputPercent50Of28:source
+CalculatorInputSqrt25:source
+CalculatorOpen:source
+CalculatorSumFirst5Fibonacci:source
+CalculatorSumFirst5Primes:source
+
+# ── clock (Tools) — 3 templates ──
+ClockStopWatchPausedVerify:source
+ClockStopWatchRunning:source
+ClockTimerEntry:source
+
+# ── contacts (Communication) — 2 templates ──
+ContactsAddContact:source
+ContactsNewContactDraft:source
+
+# ── files (Tools) — 2 templates ──
+FilesDeleteFile:source
+FilesMoveFile:source
+
+# ── joplin (Productivity) — 4 templates ──
+NotesIsTodo:source
+NotesMeetingAttendeeCount:source
+NotesRecipeIngredientCount:source
+NotesTodoItemCount:source
+
+# ── markor (Productivity) — 14 templates ──
+MarkorAddNoteHeader:source
+MarkorChangeNoteContent:source
+MarkorCreateFolder:source
+MarkorCreateNote:source
+MarkorCreateNoteAndSms:source
+MarkorCreateNoteFromClipboard:source
+MarkorDeleteAllNotes:source
+MarkorDeleteNewestNote:source
+MarkorDeleteNote:source
+MarkorEditNote:source
+MarkorMergeNotes:source
+MarkorMoveNote:source
+MarkorTranscribeReceipt:source
+MarkorTranscribeVideo:source
+
+# ── pi_music (Music & Audio) — 12 templates ──
+PiMusicCreatePlaylist:source
+PiMusicPauseAndSeek:source
+PiMusicPlayFromPlaylist:source
+PiMusicPlaySongByTitleArtist:source
+PiMusicQueryArtistSongCount:source
+PiMusicQueryArtistTotalDuration:source
+PiMusicQueryLongestSongDuration:source
+PiMusicQuerySongAlbum:source
+PiMusicQuerySortedSongsByTitle:source
+PiMusicQueryTotalSongs:source
+PiMusicSortByDurationAscending:source
+PiMusicSortByDurationDescending:source
+
+# ── simple_sms_messenger (Communication) — 6 templates ──
+SimpleSmsReply:source
+SimpleSmsReplyMostRecent:source
+SimpleSmsResend:source
+SimpleSmsSend:source
+SimpleSmsSendClipboardContent:source
+SimpleSmsSendReceivedAddress:source
+
+# ── snapseed (Photography) — 11 templates ──
+SnapseedTask1:source
+SnapseedTask10:source
+SnapseedTask11:source
+SnapseedTask2:source
+SnapseedTask3:source
+SnapseedTask4:source
+SnapseedTask5:source
+SnapseedTask6:source
+SnapseedTask7:source
+SnapseedTask8:source
+SnapseedTask9:source
+
+# ── tasks_org (Productivity) — 6 templates ──
+TasksCompletedTasksForDate:source
+TasksDueNextWeek:source
+TasksDueOnDate:source
+TasksHighPriorityTasks:source
+TasksHighPriorityTasksDueOnDate:source
+TasksIncompleteTasksOnDate:source

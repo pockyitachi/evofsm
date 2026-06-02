@@ -1,0 +1,809 @@
+{
+  "version": "0.1.0",
+  "app": "markor",
+  "layer1": {
+    "app": "markor",
+    "category": "Productivity",
+    "states": [
+      {
+        "id": "home_screen",
+        "description": "Android home screen",
+        "visual_cues": [
+          "Phone/Chrome/Settings icons",
+          "Search bar",
+          "clock widget"
+        ],
+        "resource_hints": [
+          "Home",
+          "Phone",
+          "Search"
+        ]
+      },
+      {
+        "id": "file_list",
+        "description": "Markor file browser showing files and folders",
+        "visual_cues": [
+          "red plus FAB bottom-right",
+          "'Markor' title",
+          "Sort by/Search/More options in top bar",
+          "list of files/folders"
+        ],
+        "resource_hints": [
+          "Create a new file or folder",
+          "Markor",
+          "Go to",
+          "Sort by",
+          "Files"
+        ]
+      },
+      {
+        "id": "subfolder_view",
+        "description": "Inside a subfolder in file browser",
+        "visual_cues": [
+          "breadcrumb with '> FolderName'",
+          "file list",
+          "FAB"
+        ],
+        "resource_hints": [
+          "> DailyNotes",
+          "> StudyGuides",
+          "> Documents"
+        ]
+      },
+      {
+        "id": "new_file_dialog",
+        "description": "Dialog to create new file/folder",
+        "visual_cues": [
+          "Name text field pre-filled with 'my_note'",
+          "extension field",
+          "Type radio group",
+          "Template",
+          "OK/CANCEL/FOLDER buttons"
+        ],
+        "resource_hints": [
+          "Name",
+          "my_note",
+          ".md",
+          "Type",
+          "Template",
+          "FOLDER",
+          "OK"
+        ]
+      },
+      {
+        "id": "file_selected_mode",
+        "description": "File list with one or more items selected via long-press",
+        "visual_cues": [
+          "red checkmark next to file",
+          "action bar shows Favourite/Rename/Details/Delete",
+          "More options"
+        ],
+        "resource_hints": [
+          "Favourite",
+          "Rename",
+          "Details",
+          "Delete"
+        ]
+      },
+      {
+        "id": "confirm_delete_dialog",
+        "description": "Confirmation dialog for delete",
+        "visual_cues": [
+          "'Confirm Delete' title",
+          "CANCEL/OK buttons"
+        ],
+        "resource_hints": [
+          "Confirm Delete",
+          "CANCEL",
+          "OK"
+        ]
+      },
+      {
+        "id": "file_context_more_menu",
+        "description": "Clipboard/Move/Copy/Share menu after selecting a file and tapping More options",
+        "visual_cues": [
+          "Clipboard",
+          "Move",
+          "Copy",
+          "Create shortcut",
+          "Share"
+        ],
+        "resource_hints": [
+          "Clipboard",
+          "Move",
+          "Copy",
+          "Share"
+        ]
+      },
+      {
+        "id": "move_folder_picker",
+        "description": "Folder selection dialog for Move/Copy",
+        "visual_cues": [
+          "'Move → <folder>' title",
+          "SELECT THIS FOLDER",
+          "CANCEL",
+          "'Folder ..' up-navigation",
+          "list of subfolders"
+        ],
+        "resource_hints": [
+          "SELECT THIS FOLDER",
+          "CANCEL",
+          "Folder .."
+        ]
+      },
+      {
+        "id": "editor_view",
+        "description": "Note editor opened for a file",
+        "visual_cues": [
+          "filename in title bar",
+          "Undo/Redo/View mode/Save/Search/More options in toolbar",
+          "text area with cursor",
+          "keyboard"
+        ],
+        "resource_hints": [
+          "Undo",
+          "Redo",
+          "View mode",
+          "Save",
+          "Search",
+          "More options"
+        ]
+      },
+      {
+        "id": "editor_text_context_menu",
+        "description": "Context menu after long-pressing editor text",
+        "visual_cues": [
+          "Select all/Copy/Paste/Share popup above text"
+        ],
+        "resource_hints": [
+          "Select all",
+          "Copy",
+          "Paste",
+          "Cut"
+        ]
+      },
+      {
+        "id": "editor_more_options_menu",
+        "description": "More options menu inside editor",
+        "visual_cues": [
+          "File settings",
+          "Share",
+          "Tools",
+          "Info",
+          "Reload"
+        ],
+        "resource_hints": [
+          "File settings",
+          "Share",
+          "Tools",
+          "Info",
+          "Reload"
+        ]
+      },
+      {
+        "id": "file_settings_submenu",
+        "description": "File settings submenu in editor",
+        "visual_cues": [
+          "Wrap words",
+          "Syntax highlighting",
+          "Auto-format",
+          "Font Size toggles"
+        ],
+        "resource_hints": [
+          "Wrap words",
+          "Syntax highlighting",
+          "Auto-format",
+          "Font Size"
+        ]
+      },
+      {
+        "id": "search_documents_dialog",
+        "description": "Search/Table of contents dialog opened accidentally or via search",
+        "visual_cues": [
+          "'Search documents' or 'Table of contents' title",
+          "Search field",
+          "FILTER/CANCEL"
+        ],
+        "resource_hints": [
+          "Search documents",
+          "Table of contents",
+          "CANCEL",
+          "FILTER"
+        ]
+      },
+      {
+        "id": "external_app",
+        "description": "External app launched (Simple SMS Messenger, VLC, Simple Gallery, Phone)",
+        "visual_cues": [
+          "varies by app"
+        ],
+        "resource_hints": [
+          "Start a conversation",
+          "Add Contact or Number…",
+          "Type a message…",
+          "Video player"
+        ]
+      }
+    ],
+    "transitions": [
+      {
+        "from_state": "home_screen",
+        "to_state": "file_list",
+        "action": "open_app(Markor)",
+        "precondition": "Markor installed",
+        "postcondition": "file list shown"
+      },
+      {
+        "from_state": "file_list",
+        "to_state": "new_file_dialog",
+        "action": "click(fab_plus)",
+        "precondition": "",
+        "postcondition": "dialog with default 'my_note' appears"
+      },
+      {
+        "from_state": "new_file_dialog",
+        "to_state": "editor_view",
+        "action": "click(OK)",
+        "precondition": "name entered",
+        "postcondition": "new file opened in editor"
+      },
+      {
+        "from_state": "new_file_dialog",
+        "to_state": "file_list",
+        "action": "click(FOLDER)",
+        "precondition": "name entered",
+        "postcondition": "folder created, dialog closes"
+      },
+      {
+        "from_state": "file_list",
+        "to_state": "editor_view",
+        "action": "click(file_row)",
+        "precondition": "file exists",
+        "postcondition": "file opened in editor"
+      },
+      {
+        "from_state": "file_list",
+        "to_state": "subfolder_view",
+        "action": "click(folder_row)",
+        "precondition": "",
+        "postcondition": "inside subfolder"
+      },
+      {
+        "from_state": "subfolder_view",
+        "to_state": "file_list",
+        "action": "navigate_back",
+        "precondition": "",
+        "postcondition": "back to parent"
+      },
+      {
+        "from_state": "file_list",
+        "to_state": "file_selected_mode",
+        "action": "long_press(file_row)",
+        "precondition": "",
+        "postcondition": "file selected with checkmark"
+      },
+      {
+        "from_state": "subfolder_view",
+        "to_state": "file_selected_mode",
+        "action": "long_press(file_row)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "file_selected_mode",
+        "to_state": "confirm_delete_dialog",
+        "action": "click(Delete)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "confirm_delete_dialog",
+        "to_state": "file_list",
+        "action": "click(OK)",
+        "precondition": "",
+        "postcondition": "file deleted"
+      },
+      {
+        "from_state": "file_selected_mode",
+        "to_state": "file_context_more_menu",
+        "action": "click(More_options)",
+        "precondition": "",
+        "postcondition": "Clipboard/Move/Copy menu appears"
+      },
+      {
+        "from_state": "file_context_more_menu",
+        "to_state": "move_folder_picker",
+        "action": "click(Move)",
+        "precondition": "",
+        "postcondition": "folder picker opens"
+      },
+      {
+        "from_state": "move_folder_picker",
+        "to_state": "move_folder_picker",
+        "action": "click(Folder_..)",
+        "precondition": "",
+        "postcondition": "navigate up one level"
+      },
+      {
+        "from_state": "move_folder_picker",
+        "to_state": "move_folder_picker",
+        "action": "click(subfolder)",
+        "precondition": "",
+        "postcondition": "descend into subfolder"
+      },
+      {
+        "from_state": "move_folder_picker",
+        "to_state": "file_list",
+        "action": "click(SELECT_THIS_FOLDER)",
+        "precondition": "destination folder displayed",
+        "postcondition": "file moved"
+      },
+      {
+        "from_state": "editor_view",
+        "to_state": "editor_text_context_menu",
+        "action": "long_press(text_area)",
+        "precondition": "",
+        "postcondition": "Select all/Copy/Paste popup"
+      },
+      {
+        "from_state": "editor_text_context_menu",
+        "to_state": "editor_view",
+        "action": "click(Select all/Copy/Paste)",
+        "precondition": "",
+        "postcondition": "action performed"
+      },
+      {
+        "from_state": "editor_view",
+        "to_state": "editor_more_options_menu",
+        "action": "click(More_options)",
+        "precondition": "",
+        "postcondition": "menu visible"
+      },
+      {
+        "from_state": "editor_more_options_menu",
+        "to_state": "file_settings_submenu",
+        "action": "click(File_settings)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "file_settings_submenu",
+        "to_state": "editor_view",
+        "action": "navigate_back",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "editor_view",
+        "to_state": "file_list",
+        "action": "navigate_back",
+        "precondition": "",
+        "postcondition": "return to file list (saves implicitly if saved)"
+      },
+      {
+        "from_state": "editor_view",
+        "to_state": "editor_view",
+        "action": "input_text(body,text)",
+        "precondition": "cursor positioned",
+        "postcondition": "text inserted"
+      },
+      {
+        "from_state": "editor_view",
+        "to_state": "editor_view",
+        "action": "click(Save)",
+        "precondition": "",
+        "postcondition": "file saved"
+      },
+      {
+        "from_state": "editor_view",
+        "to_state": "search_documents_dialog",
+        "action": "click(title)",
+        "precondition": "",
+        "postcondition": "title click sometimes opens Table of contents rather than rename"
+      }
+    ],
+    "strategies": [
+      {
+        "name": "CREATE_NOTE_WITH_CONTENT",
+        "preconditions": "at home_screen",
+        "steps": [
+          "open_app(Markor)",
+          "click(fab_plus)",
+          "clear Name field and input_text(desired_filename) (include .ext if non-default)",
+          "click(OK)",
+          "in editor, click text area and input_text(body content)",
+          "click(Save)"
+        ],
+        "success_signal": "file appears in file_list with given name; editor shows title and content",
+        "fallback": "if extension field garbled, type desired extension explicitly in ext field or include full name in Name field"
+      },
+      {
+        "name": "CREATE_FOLDER",
+        "preconditions": "at file_list",
+        "steps": [
+          "click(fab_plus)",
+          "input_text(folder_name) in Name field",
+          "click(FOLDER) button",
+          "(if OK dialog still open) click(OK)"
+        ],
+        "success_signal": "folder visible in file_list",
+        "fallback": "scroll dialog if OK hidden"
+      },
+      {
+        "name": "DELETE_FILE",
+        "preconditions": "at file_list or subfolder_view where file is visible",
+        "steps": [
+          "long_press(file_row)",
+          "click(Delete icon in action bar)",
+          "click(OK) on Confirm Delete"
+        ],
+        "success_signal": "file no longer in list",
+        "fallback": ""
+      },
+      {
+        "name": "DELETE_ALL_FILES",
+        "preconditions": "at file_list",
+        "steps": [
+          "repeat for each file: long_press(file),click(Delete),click(OK)"
+        ],
+        "success_signal": "empty file list",
+        "fallback": ""
+      },
+      {
+        "name": "MOVE_FILE",
+        "preconditions": "file visible in current folder",
+        "steps": [
+          "long_press(file_row)",
+          "click(More_options)",
+          "click(Move)",
+          "use 'Folder ..' to navigate up to parent",
+          "click(target_folder) to descend",
+          "click(SELECT_THIS_FOLDER)"
+        ],
+        "success_signal": "file no longer present in source folder",
+        "fallback": "use CANCEL and retry if wrong folder"
+      },
+      {
+        "name": "APPEND_TEXT_TO_NOTE",
+        "preconditions": "file exists in list",
+        "steps": [
+          "open_app(Markor) if needed",
+          "click(file_row)",
+          "click at end of text area",
+          "input_text(new_text)",
+          "click(Save)"
+        ],
+        "success_signal": "text appears at desired location; file saved",
+        "fallback": ""
+      },
+      {
+        "name": "PREPEND_TEXT_TO_NOTE",
+        "preconditions": "file exists",
+        "steps": [
+          "open file from list",
+          "click at very start of text / long_press+Select all not needed",
+          "input_text(new_text + '\\n')",
+          "click(Save)"
+        ],
+        "success_signal": "new text at top followed by blank line and original content",
+        "fallback": ""
+      },
+      {
+        "name": "REPLACE_NOTE_CONTENT",
+        "preconditions": "file exists",
+        "steps": [
+          "open file",
+          "long_press(text_area)",
+          "click(Select all)",
+          "input_text(new_content) (replaces selection)",
+          "click(Save)"
+        ],
+        "success_signal": "file content equals new_content",
+        "fallback": ""
+      },
+      {
+        "name": "CREATE_NOTE_AND_SMS",
+        "preconditions": "at home_screen",
+        "steps": [
+          "CREATE_NOTE_WITH_CONTENT for target filename/content",
+          "click(Save)",
+          "open_app(Simple SMS Messenger)",
+          "click(Start a conversation)",
+          "input_text(phone number) in Add Contact field",
+          "click(confirm checkmark)",
+          "click(message field) and input_text(note body)",
+          "click(send)"
+        ],
+        "success_signal": "message appears in conversation with recipient",
+        "fallback": ""
+      },
+      {
+        "name": "PASTE_CLIPBOARD_TO_NEW_NOTE",
+        "preconditions": "clipboard has desired text",
+        "steps": [
+          "click(fab_plus)",
+          "input_text(filename)",
+          "click(OK)",
+          "long_press(editor text area)",
+          "click(Paste)",
+          "click(Save)"
+        ],
+        "success_signal": "clipboard content saved in new file",
+        "fallback": ""
+      }
+    ],
+    "dead_ends": [
+      {
+        "state": "editor_view",
+        "failed_action": "click(title) expecting rename",
+        "note": "Clicking the filename title in the editor opens Table of contents dialog, not a rename prompt. Renaming must be done from file_list via long_press -> Rename."
+      },
+      {
+        "state": "editor_more_options_menu",
+        "failed_action": "look for Rename/New note in More options or Tools",
+        "note": "Editor More options only contains File settings/Share/Tools/Info/Reload. No rename or new file option here."
+      },
+      {
+        "state": "file_settings_submenu",
+        "failed_action": "expecting rename/new file toggles",
+        "note": "Only contains wrap words/syntax highlighting/etc. Navigate back to file_list to rename/create."
+      },
+      {
+        "state": "editor_view",
+        "failed_action": "repeatedly click navigation index that is not the back arrow",
+        "note": "Mis-indexed back button just re-renders same state. Use navigate_back action instead."
+      },
+      {
+        "state": "editor_view",
+        "failed_action": "declare success after input_text in title area",
+        "note": "Typing into the file title field does not actually rename the file; agents falsely claim completion."
+      },
+      {
+        "state": "file_list",
+        "failed_action": "trying to Move via editor menus",
+        "note": "Move is only available by long-pressing the file in the list and using the item-selection action bar's More options -> Move."
+      },
+      {
+        "state": "external_app",
+        "failed_action": "navigating via Phone app to send SMS",
+        "note": "Phone app cannot send SMS; must open Simple SMS Messenger explicitly."
+      },
+      {
+        "state": "editor_view",
+        "failed_action": "wait for video frames while transcribing",
+        "note": "Agent loops on 'wait' action instead of switching back to VLC; cannot observe frames from within Markor."
+      }
+    ]
+  },
+  "layer2": {
+    "categories": [
+      {
+        "name": "ADD_ENTRY",
+        "precondition": "App is open at a list/index view that exposes an affordance to create a new item",
+        "abstract_steps": [
+          "Invoke the primary create-new affordance (commonly a prominent action button)",
+          "Provide the required identifier in the creation dialog, clearing any prefilled placeholder first",
+          "Select the correct item kind/format if the dialog offers a choice",
+          "Confirm creation",
+          "If opened in an editor, enter the required body content",
+          "Persist the change (explicit commit if auto-persistence is not guaranteed)"
+        ],
+        "failure_modes": [
+          "Leaving the prefilled placeholder identifier concatenated with the intended identifier",
+          "Not switching item kind (leaf vs container) before confirming",
+          "Garbled extension/suffix field producing wrong format",
+          "Declaring success before persisting",
+          "Creating item in wrong parent container"
+        ],
+        "verification_checklist": [
+          "New item appears in the listing with the exact expected identifier",
+          "Opening the item shows the expected body content",
+          "No stray/extra items created",
+          "Correct parent container"
+        ]
+      },
+      {
+        "name": "REMOVE_ENTRY",
+        "precondition": "Target item is visible in a list view",
+        "abstract_steps": [
+          "Long-press the target row to enter selection mode",
+          "Invoke the removal action from the contextual action bar",
+          "Confirm removal in the confirmation dialog"
+        ],
+        "failure_modes": [
+          "Selecting wrong row (similar identifiers)",
+          "Missing the confirmation step",
+          "Removing parent container instead of the target item"
+        ],
+        "verification_checklist": [
+          "Item no longer appears in the listing",
+          "No confirmation dialog left open",
+          "Sibling items intact"
+        ]
+      },
+      {
+        "name": "BULK_REMOVE",
+        "precondition": "Multiple items to clear from a list",
+        "abstract_steps": [
+          "Repeat the single-item removal flow for each item, OR use multi-select if available",
+          "After each removal, verify return to list before selecting the next target"
+        ],
+        "failure_modes": [
+          "Index shifting after removal leading to wrong next item",
+          "Stopping before all targets are cleared"
+        ],
+        "verification_checklist": [
+          "Listing contains only non-target items (often empty)"
+        ]
+      },
+      {
+        "name": "EDIT_ENTRY_CONTENT",
+        "precondition": "Target item exists and can be opened in an editor",
+        "abstract_steps": [
+          "Open the item from the list",
+          "Position cursor at the required location (start, end, or full-content selection)",
+          "Insert, append, prepend, or replace text as required",
+          "Persist the change"
+        ],
+        "failure_modes": [
+          "Appending instead of prepending (or vice versa)",
+          "Not selecting the full existing content before replacing (causing concatenation)",
+          "Forgetting trailing newline when prepending",
+          "Not persisting before navigating away"
+        ],
+        "verification_checklist": [
+          "Item body matches expected content exactly",
+          "Line breaks and ordering match specification",
+          "Changes persisted (indicator dismisses/returns to list cleanly)"
+        ]
+      },
+      {
+        "name": "RELABEL_ENTRY",
+        "precondition": "Item exists in a list view that supports relabeling",
+        "abstract_steps": [
+          "Long-press the item to enter selection mode",
+          "Choose the relabel action from the contextual action bar",
+          "Enter the new identifier in the dialog and confirm"
+        ],
+        "failure_modes": [
+          "Attempting to relabel from within the editor (title click does not relabel)",
+          "Typing into the editor title field and assuming it relabeled the item",
+          "Leaving old extension/suffix when a new one is required"
+        ],
+        "verification_checklist": [
+          "List shows the item with the new identifier",
+          "Old identifier no longer present",
+          "Content preserved"
+        ]
+      },
+      {
+        "name": "RELOCATE_ENTRY",
+        "precondition": "Source item and destination container both exist",
+        "abstract_steps": [
+          "Long-press the source item to select it",
+          "Open the contextual overflow and choose the relocate action",
+          "In the destination picker, navigate up and/or into the target container",
+          "Confirm with the 'choose this container' action"
+        ],
+        "failure_modes": [
+          "Selecting the source's own container as destination",
+          "Stopping at the picker without a final confirmation",
+          "Not navigating up to the common ancestor first"
+        ],
+        "verification_checklist": [
+          "Item no longer present in source container",
+          "Item present in destination container",
+          "Content unchanged"
+        ]
+      },
+      {
+        "name": "NAVIGATE_TO",
+        "precondition": "Target app/screen may not be on current screen",
+        "abstract_steps": [
+          "If target app not visible, open the system launcher or app list to switch context",
+          "Traverse the container hierarchy via click-in and back-navigation",
+          "Verify breadcrumb/title matches target"
+        ],
+        "failure_modes": [
+          "Confusing similar container identifiers",
+          "Getting stuck in side menus (e.g., configuration panes) that do not lead to target",
+          "Repeating the same failing click"
+        ],
+        "verification_checklist": [
+          "Breadcrumb/title matches expected path",
+          "Expected content visible"
+        ]
+      },
+      {
+        "name": "CROSS_APP_TRANSFER",
+        "precondition": "Source content is prepared; destination app is installed",
+        "abstract_steps": [
+          "Create/finalize source content in the origin app and persist it",
+          "Launch the destination app via the launcher",
+          "Initiate a new message/record in the destination app",
+          "Provide the recipient/target identifier",
+          "Insert the content (enter it directly or transfer via system transfer buffer)",
+          "Send/commit"
+        ],
+        "failure_modes": [
+          "Opening the wrong destination app (a similar but different communication app)",
+          "Not persisting source before switching apps",
+          "Leaving the draft unsent",
+          "Using a pre-existing contact instead of the required recipient identifier"
+        ],
+        "verification_checklist": [
+          "Destination app shows the sent/committed item with exact content",
+          "Recipient identifier matches",
+          "No residual draft"
+        ]
+      },
+      {
+        "name": "MERGE_ENTRIES",
+        "precondition": "Multiple source items and a specified destination identifier",
+        "abstract_steps": [
+          "Create the destination item first (empty)",
+          "For each source in order: open, select full content, capture it, return to destination, insert it, append a separator if required",
+          "Persist destination"
+        ],
+        "failure_modes": [
+          "Getting stuck trying to create destination from editor menus instead of the list view",
+          "Losing captured content between app switches",
+          "Wrong order",
+          "Missing separators between sections"
+        ],
+        "verification_checklist": [
+          "Destination contains each source's content in the required order",
+          "Separators (newlines) between sections",
+          "Source items unchanged"
+        ]
+      },
+      {
+        "name": "TRANSCRIBE_FROM_MEDIA",
+        "precondition": "Media source and transcription target available",
+        "abstract_steps": [
+          "Open the media player and start playback",
+          "Observe each piece of text/frame",
+          "Switch to the transcription editor and record the observation with the required formatting",
+          "Repeat until media ends",
+          "Persist the transcription"
+        ],
+        "failure_modes": [
+          "Using 'wait' without switching back to the media app",
+          "Losing place when switching apps repeatedly",
+          "Fabricating content not actually shown",
+          "Incorrect delimiter formatting"
+        ],
+        "verification_checklist": [
+          "Transcription contains the complete ordered sequence",
+          "Formatting (delimiter, identifier) matches spec",
+          "Transcription persisted"
+        ]
+      },
+      {
+        "name": "QUERY_DATA",
+        "precondition": "Source of the requested data is reachable in the app",
+        "abstract_steps": [
+          "Navigate to the screen showing the requested data",
+          "Read/extract the required field(s)",
+          "Report back without altering data"
+        ],
+        "failure_modes": [
+          "Modifying data while reading",
+          "Reporting stale/cached values"
+        ],
+        "verification_checklist": [
+          "Reported value matches on-screen value",
+          "No side effects on data"
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "built_at": "2025-01-26T00:00:00Z",
+    "n_episodes": 70,
+    "n_successful": 19,
+    "n_episodes_input": 70,
+    "synthesizer_model": "claude-opus-4-7",
+    "synthesizer_temperature": 0.3
+  }
+}

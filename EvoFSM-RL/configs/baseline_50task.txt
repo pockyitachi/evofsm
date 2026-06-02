@@ -1,0 +1,78 @@
+# 50-task Qwen3-VL-8B baseline sweep
+# Template:tier — tiers: easy (single toggle), medium (single-app flow),
+#                        hard (multi-step / cross-app / info-retrieval)
+# Coverage: all apps currently installed on Pixel_6_API_33 AVD.
+
+# ── System / Settings (12 easy) ──────────────────────────────────────
+SystemBrightnessMin:easy
+SystemBrightnessMax:easy
+SystemBrightnessMinVerify:easy
+SystemBrightnessMaxVerify:easy
+SystemWifiTurnOn:easy
+SystemWifiTurnOff:easy
+SystemWifiTurnOnVerify:easy
+SystemBluetoothTurnOn:easy
+SystemBluetoothTurnOff:easy
+SystemBluetoothTurnOnVerify:easy
+SystemBluetoothTurnOffVerify:easy
+SystemCopyToClipboard:easy
+
+# ── Clock (3 medium) ─────────────────────────────────────────────────
+ClockTimerEntry:medium
+ClockStopWatchRunning:medium
+ClockStopWatchPausedVerify:medium
+
+# ── Contacts (2 medium) ──────────────────────────────────────────────
+ContactsAddContact:medium
+ContactsNewContactDraft:medium
+
+# ── Audio Recorder (2 medium) ────────────────────────────────────────
+AudioRecorderRecordAudio:medium
+AudioRecorderRecordAudioWithFileName:medium
+
+# ── Camera (2 medium) ────────────────────────────────────────────────
+CameraTakePhoto:medium
+CameraTakeVideo:medium
+
+# ── Files (2 medium) ─────────────────────────────────────────────────
+FilesDeleteFile:medium
+FilesMoveFile:medium
+
+# ── Simple Calendar Pro — add/delete (8 medium) ──────────────────────
+SimpleCalendarAddOneEvent:medium
+SimpleCalendarAddOneEventTomorrow:medium
+SimpleCalendarAddOneEventInTwoWeeks:medium
+SimpleCalendarAddOneEventRelativeDay:medium
+SimpleCalendarAddRepeatingEvent:medium
+SimpleCalendarDeleteOneEvent:medium
+SimpleCalendarDeleteEvents:medium
+SimpleCalendarDeleteEventsOnRelativeDay:medium
+
+# ── Markor — single-app (10 medium) ──────────────────────────────────
+MarkorCreateNote:medium
+MarkorCreateFolder:medium
+MarkorAddNoteHeader:medium
+MarkorChangeNoteContent:medium
+MarkorEditNote:medium
+MarkorDeleteNote:medium
+MarkorDeleteNewestNote:medium
+MarkorDeleteAllNotes:medium
+MarkorMergeNotes:hard
+MarkorMoveNote:medium
+
+# ── Cross-app Markor (2 hard) ────────────────────────────────────────
+MarkorCreateNoteFromClipboard:hard
+MarkorCreateNoteAndSms:hard
+
+# ── Simple SMS Messenger (4 medium) ──────────────────────────────────
+SimpleSmsSend:medium
+SimpleSmsSendReceivedAddress:medium
+SimpleSmsReply:medium
+SimpleSmsResend:medium
+
+# ── Simple Draw Pro (1 medium) ───────────────────────────────────────
+SimpleDrawProCreateDrawing:medium
+
+# ── Calendar info retrieval (2 hard) ─────────────────────────────────
+SimpleCalendarAnyEventsOnDate:hard
+SimpleCalendarLocationOfEvent:hard

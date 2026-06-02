@@ -1,0 +1,135 @@
+\section{Source pool composition}
+\label{app:source-pool}
+
+Table~\ref{tab:source-apps} lists the 12 source-pool apps grouped by Play Store category. Six categories anchor the pool; the per-category $L_C$ files are produced by aggregating LAYER~2 across the same-category source apps. Episodes per app at $K{=}5$ seeds are also given.
+
+\begin{table}[t]
+\small
+\centering
+\begin{tabular}{lll r}
+\hline
+\textbf{App} & \textbf{Category} & \textbf{Templates} & \textbf{Episodes} \\
+\hline
+markor               & Productivity     & 14 & 70 \\
+tasks\_org           & Productivity     &  6 & 30 \\
+joplin               & Productivity     &  4 & 20 \\
+calculator           & Tools            & 19 & 95 \\
+clock                & Tools            &  3 & 15 \\
+files                & Tools            &  2 & 10 \\
+bluecoins            & Finance          & 15 & 75 \\
+pi\_music            & Music \& Audio   & 12 & 60 \\
+audio\_recorder      & Music \& Audio   &  2 & 10 \\
+snapseed             & Photography      & 11 & 55 \\
+simple\_sms\_messenger & Communication  &  6 & 30 \\
+contacts             & Communication    &  2 & 10 \\
+\hline
+\textbf{Total -- 6 categories} & & \textbf{96} & \textbf{480} \\
+\hline
+\end{tabular}
+\caption{Source-pool composition. Productivity, Tools, and Communication each have three to two apps; Finance and Photography have a single source app, so the corresponding $L_C$ is the lone app's LAYER~2 with no aggregation.}
+\label{tab:source-apps}
+\end{table}
+
+\section{Hyperparameters}
+\label{app:hyper}
+
+Table~\ref{tab:hyper} consolidates the configuration shared across baselines and reports the EvoFSM-RL-specific knobs.
+
+\begin{table}[t]
+\small
+\centering
+\begin{tabular}{lll}
+\hline
+\textbf{Parameter} & \textbf{Symbol} & \textbf{Value} \\
+\hline
+Backbone & --- & Qwen3-VL-8B-Instruct \\
+Action loop & --- & M3A (action + summary) \\
+Max steps per template & --- & 10 $\times$ default budget \\
+Generation precision & --- & bf16, temperature $0$ \\
+Image max-pixels & --- & $1{,}605{,}632$ \\
+\hline
+$L_C$ injection point & --- & after prefix, before goal/UI \\
+\hline
+M (variants per iter) & $M$ & 2 \\
+N (rollouts per variant) & $N$ & 1 (B3) / 2 (B4) \\
+TrueSkill prior mean & $\mu_0$ & 25.0 \\
+TrueSkill prior $\sigma$ & $\sigma_0$ & 8.33 \\
+Child $\sigma$ inflation & $\Delta\sigma$ & 1.5 \\
+Softmax optimism & $\lambda$ & 1.5 \\
+Softmax temperature & $T$ & 1.0 \\
+Sliding window & $K_{\text{win}}$ & 15 \\
+Mutation cadence & --- & every iter if $r{>}0$, else every 3 iters \\
+Mutation model & $\pi_{\text{ref}}$ & Claude Opus 4.7 (frozen) \\
+\hline
+LoRA rank & $r$ & 16 \\
+LoRA alpha & $\alpha$ & 32 \\
+LoRA dropout & --- & 0.05 \\
+LoRA target modules & --- & $q_{\text{proj}}, v_{\text{proj}}$ \\
+Optimizer & --- & AdamW \\
+LoRA learning rate & --- & $3\!\times\!10^{-4}$ \\
+KL coefficient & $\beta$ & 0 \\
+GRPO buffer threshold & $K_{\text{buf}}$ & 10 \\
+Max gradient norm & --- & 1.0 \\
+\hline
+Reward bonus weight & $w_e$ & 0.2 \\
+\hline
+Iterations / target (B3, B4) & --- & 20 \\
+Iterations -- Phase~1 pretrain & --- & up to 600 (12 apps) \\
+$K_{\text{adapt}}$ seeds & --- & $\{30,31,32,33,34\}$ \\
+$K_{\text{eval}}$ seeds & --- & $\{40,41,42\}$ \\
+\hline
+\end{tabular}
+\caption{Configuration. The first block is shared across B1--B4; the middle block is the FSM-evolution machinery (B3, B4); the lower block is the LoRA / GRPO machinery (B4 only).}
+\label{tab:hyper}
+\end{table}
+
+\section{Example two-layer FSM}
+\label{app:fsm-example}
+
+To illustrate the structural separation the linter enforces, Figure~\ref{fig:layer1} sketches an excerpt of the LAYER~1 (app-specific) block of the static FSM for \texttt{markor}, and Figure~\ref{fig:layer2} sketches the corresponding LAYER~2 (category-generic) entry for \texttt{QUERY\_INFO} from the Productivity $L_C$.
+
+\begin{table}[t]
+\small
+\begin{tabular}{p{0.92\columnwidth}}
+\hline
+\textbf{LAYER 1 (markor, excerpt)} \\
+\hline
+\texttt{S0: HOME\_SCREEN} -- Android home screen \\
+\hspace{1em} visual\_cues: Phone/Chrome icons, Search bar \\
+\texttt{S1: FILE\_LIST} -- Markor file browser \\
+\hspace{1em} visual\_cues: red plus FAB bottom-right, `Markor' title \\
+\hspace{1em} resource\_hints: Create a new file or folder, Markor \\
+\texttt{S3: NEW\_FILE\_DIALOG} \\
+\hspace{1em} visual\_cues: name field pre-filled `my\_note', OK/CANCEL/FOLDER \\
+\\
+TRANSITIONS: \\
+\texttt{S0 -open\_app(Markor)-> S1} \\
+\texttt{S1 -click(fab\_plus)-> S3} \\
+\texttt{S3 -click(OK)-> S8} (editor opens) \\
+\hline
+\end{tabular}
+\caption{LAYER~1 binds to Markor-specific strings (the FAB color and position, the dialog's default filename, etc.) and is therefore non-transferable across apps.}
+\label{fig:layer1}
+\end{table}
+
+\begin{table}[t]
+\small
+\begin{tabular}{p{0.92\columnwidth}}
+\hline
+\textbf{LAYER 2 (Productivity, \texttt{QUERY\_INFO})} \\
+\hline
+\textbf{precondition:} Target list/overview screen reachable from launcher; query specifies a filter (date / status / priority / attribute). \\
+\textbf{abstract\_steps:} (i) launch the relevant app; (ii) navigate to the primary list or to the named item; (iii) resolve relative terms in the query (today, next week) to absolute values; (iv) scroll to enumerate all candidates; (v) apply the predicate using visible markers; (vi) aggregate matches into the requested output format; (vii) emit a single answer and immediately terminate. \\
+\textbf{failure\_modes:} declaring the query infeasible without opening the app; answering from a partial view without scrolling; confusing relative date labels with the queried absolute date; miscounting after partial scroll; looping on the same answer without terminating. \\
+\textbf{verification\_checklist:} reached the data-bearing screen; mapped all relative dates; scrolled until no new content appears; each returned item satisfies every conjunct of the filter; answer format matches the question; a single terminal completion signal is emitted. \\
+\hline
+\end{tabular}
+\caption{LAYER~2 contains no app name and no resource identifier. The Productivity $L_C$ was aggregated from \texttt{markor}, \texttt{joplin}, and \texttt{tasks\_org}; the resulting block is the cross-source intersection plus an explicit enumeration of cross-source failure modes.}
+\label{fig:layer2}
+\end{table}
+
+\section{LAYER-2 mutation operator}
+\label{app:mutation}
+
+The mutation step in Algorithm~1 (Table~\ref{alg:evofsmrl}) is implemented as a two-step LLM prompt to the frozen reference $\pi_{\text{ref}}$ (Claude Opus 4.7). Step~1 builds a structured reflection: the FSM in JSON form, the recent rollout trajectories under the best variant (action sequence, screen tags, reward), and a directive to identify (a)~which abstract step or verification check appears to have been violated in failing rollouts and (b)~which step appears to have been load-bearing in successful rollouts. Step~2 takes that reflection and the FSM and asks for a JSON-typed diff over LAYER~2 only (operations: \texttt{add\_failure\_mode}, \texttt{add\_verification\_check}, \texttt{rewrite\_abstract\_step}, \texttt{add\_category}, and a small set of removals). The diff is then validated against the FSM schema and lint-checked for app-specific tokens before being applied. Rejected diffs do not enter the population; the iteration logs them but proceeds with the existing best variant.
+

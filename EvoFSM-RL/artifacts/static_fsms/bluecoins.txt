@@ -1,0 +1,206 @@
+# ═══════════════════════════════════════════════
+# LAYER 1: APP_SPECIFIC  (non-transferable)
+# ═══════════════════════════════════════════════
+APP: bluecoins
+CATEGORY: Finance
+STATES:
+  S0: HOME_SCREEN — Android device home screen (launcher)
+    visual_cues: ['phone/instagram/chrome/settings icons', 'clock widget', 'search bar']
+    resource_hints: ['Home', 'Phone', 'Instagram', 'Chrome', 'Settings', 'Search']
+  S1: MAIN_DASHBOARD — Bluecoins main dashboard with calendar and budget summary
+    visual_cues: ['Open Drawer Menu', 'Main/Transactions/Reminders tabs', 'calendar with month grid', 'Daily Summary / Budget Summary pie chart', 'Actual vs budget amounts']
+    resource_hints: ['Open Drawer Menu', 'Help', 'Main', 'Transactions', 'Reminders', 'Budget Summary', 'Daily Summary']
+  S2: TRANSACTIONS_LIST — List of transactions across dates
+    visual_cues: ['Advanced Filter, Export Data, Search icons in app bar', 'grouped transaction entries by date', 'red circular + FAB bottom-right', 'Main tab at top']
+    resource_hints: ['Advanced Filter', 'Export Data', 'Search', 'Main']
+  S3: CALENDAR_TRANSACTIONS_VIEW — Calendar view with Add buttons and navigate arrows; per-date drilldown
+    visual_cues: ['Calendar header with month', 'Add buttons', 'Go to previous / Go to next', 'October 2023 label']
+    resource_hints: ['Calendar', 'Add', 'Go to previous', 'Go to next']
+  S4: TRANSACTION_EDITOR — Form screen to add/edit a single transaction
+    visual_cues: ['EXPENSE / INCOME tabs', 'Category field (Salary/Others/Bonus editable)', 'amount field', 'date field', 'Notes field', 'Labels row', 'upload photo', 'Navigate up, Delete, PDF icons', 'green checkmark save button']
+    resource_hints: ['Navigate up', 'Delete', 'PDF or Send to Printer', 'EXPENSE', 'INCOME', 'Salary', 'Others', 'Bonus', 'upload photo', 'Notes', 'Labels']
+  S5: DATE_PICKER_DIALOG — Calendar date picker modal
+    visual_cues: ['year header', 'day-of-week date header (e.g. Sun, Oct 15)', 'Previous/Next month arrows', 'CANCEL/OK buttons', 'grid of day numbers']
+    resource_hints: ['2023', 'Previous month', 'Next month', 'CANCEL', 'OK']
+  S6: ICON_SELECTOR_DIALOG — Select Icon modal (triggered unexpectedly by tapping a transaction row)
+    visual_cues: ["'Select Icon' title", 'category name (Others/Salary/Bonus)', 'NONE button', 'grid of icons']
+    resource_hints: ['Select Icon', 'NONE']
+  S7: LABEL_SELECT_DIALOG — Dialog to select or create a Label
+    visual_cues: ["'Select Label' title", "'Add Label...' input", 'list of labels (Birthday, Business, ...)', 'CANCEL / OK buttons']
+    resource_hints: ['Select Label', 'Add Label...', 'CANCEL', 'OK']
+  S8: CATEGORY_DETAIL_VIEW — Per-category transaction list (e.g. after save landing page showing Salary/Others with Running Total)
+    visual_cues: ['Navigate up', 'category name header', 'Edit button', 'Export Data', 'Running Total line', 'Table view']
+    resource_hints: ['Navigate up', 'Edit', 'Export Data', 'Running Total', 'Table']
+  S9: PERMISSION_DIALOG — System permission request (e.g. Gboard audio)
+    visual_cues: ["'Allow ... to record audio?'", "While using the app / Only this time / Don't allow buttons"]
+    resource_hints: ['While using the app', 'Only this time', 'Don’t allow']
+TRANSITIONS:
+  S0 --open_app(Bluecoins)--> S1  [post: dashboard visible]
+  S1 --click(Transactions tab)--> S2  [post: transaction list visible]
+  S1 --click(day in calendar)--> S3  [post: per-day drilldown shown]
+  S2 --click(FAB +) then may auto-open editor OR click(transaction row amount area)--> S4  [post: editor form visible]
+  S2 --click(transaction row icon/label area) or long_press(row)--> S6  [post: Select Icon dialog shown (unintended entry point for editing)]
+  S6 --click(NONE) or navigate_back--> S2  [post: returns to list without editing]
+  S4 --click(date field)--> S5  [post: calendar picker shown]
+  S5 --click(day) then click(OK)--> S4  [post: new date committed to form]
+  S4 --click(Labels field)--> S7  [post: label selection dialog shown]
+  S7 --input_text(Add Label...) + click(OK)--> S4  [post: label applied]
+  S4 --click(green checkmark save)--> S8  [pre: required fields filled]  [post: transaction saved]
+  S4 --click(voice input icon)--> S9  [pre: Gboard voice typing triggered]  [post: permission prompt]
+  S9 --click(Don’t allow / While using the app)--> S4  [post: dialog dismissed]
+  S4 --click(Navigate up)--> S2  [post: back to list]
+  S8 --click(Navigate up)--> S2  [post: back to list]
+  S3 --click(TRANSACTIONS tab)--> S2  [post: full list view]
+STRATEGIES:
+  QUERY_DAILY_TOTAL_OR_CATEGORY_SPEND:
+    preconditions: starting from home_screen
+    steps:
+      1. open_app(Bluecoins) -> main_dashboard
+      2. read the Budget Summary / Daily Summary 'Actual' value for the target date (already visible)
+      3. answer(total_amount) and status(complete)
+    success_signal: Daily/Budget Summary shows Actual amount for target date; answer returned
+    fallback: If not visible, click Transactions tab and sum amounts for the date
+  QUERY_TRANSACTION_CATEGORY_OR_COUNT:
+    preconditions: starting from home_screen
+    steps:
+      1. open_app(Bluecoins) -> main_dashboard
+      2. click(Transactions tab) -> transactions_list
+      3. locate the date header and read/count the entries (category labels like 'Others', 'Salary', 'Bonus')
+      4. answer(category or count) and status(complete)
+    success_signal: Transaction rows for target date are visible and counted/identified
+    fallback: Scroll the list if the date header is off-screen
+  EDIT_TRANSACTION_VIA_ROW_AMOUNT:
+    preconditions: starting from transactions_list
+    steps:
+      1. click the amount-text portion of the target transaction row (NOT the icon/label area) -> transaction_editor
+      2. optional: switch EXPENSE/INCOME tab
+      3. click date field -> date_picker_dialog; click target day; click OK
+      4. click amount field; long_press to select all; delete; input new amount
+      5. click Notes field; input new note
+      6. click Labels field if label change needed; input label; OK
+      7. click green checkmark -> category_detail_view (saved)
+    success_signal: returns to category detail view / transactions list showing updated values
+    fallback: If clicking opens icon_selector_dialog, press NONE and try clicking a different area of the row (amount text)
+  CHANGE_TRANSACTION_TYPE_AND_NOTE:
+    preconditions: starting from transaction_editor on the target row
+    steps:
+      1. click(EXPENSE or INCOME tab) to flip type
+      2. click(Notes field) and input_text the note
+      3. click(green checkmark save)
+    success_signal: list view reflects new type (color/sign) and note text visible
+    fallback: If editor not reached, open row via amount click or retry
+DEAD_ENDS:
+  at transactions_list: click FAB '+' (index ~53/54) repeatedly fails  [Often the editor screen did not open from the agent's perspective even though it may have; agent looped clicking the + button. Verify UI state changed before retrying.]
+  at transactions_list: click or long_press on transaction row icon/label area fails  [Opens Select Icon dialog instead of editor. Click on the amount text area instead to open the editor.]
+  at transaction_editor: input_text over existing amount without clearing fails  [Text gets appended (e.g. '5,000.0520.000'). Long-press to select all then delete, or use keyboard backspace before typing the new value.]
+  at calendar_transactions_view: click Add (+) header icon then repeatedly navigate back via Calendar Settings fails  [Agent accidentally entered Calendar settings; needs to use the list-view FAB or click a transaction row directly.]
+  at main_dashboard: Prematurely answer status(complete) on Query tasks after navigating to Transactions without verifying match of date/amount fails  [Led to false positives for add-transaction tasks (confused existing entry with a newly-added one).]
+
+# ═══════════════════════════════════════════════
+# LAYER 2: GENERIC  (transferable, app-agnostic)
+# ═══════════════════════════════════════════════
+CATEGORY: CREATE_ENTRY
+  precondition: App launched and on a list/dashboard view that exposes a creation affordance (e.g. floating action button or equivalent primary create control)
+  abstract_steps:
+    1. Navigate to the list view where new items are created
+    2. Trigger the create affordance (primary create control) and wait for the entry form to appear
+    3. If a type toggle is present, choose the correct type (e.g. one of the mutually exclusive categories offered)
+    4. Set required fields one by one: amount/value, date (via date picker if needed), category/label, note/description
+    5. When modifying a pre-filled field, clear existing text (select-all then remove, or use backspace) before typing
+    6. Confirm/save via the primary save action
+    7. Verify the new item appears in the list with the correct values
+  failure_modes:
+    - 'Repeated taps on create button without detecting whether the entry form actually opened'
+    - 'Typing into a field without clearing pre-existing text, leading to concatenated values'
+    - 'Tapping the wrong sub-area of a row and opening a secondary dialog instead of the entry form'
+    - 'Declaring task complete based on an unrelated pre-existing entry'
+  verification_checklist:
+    - 'Entry form was observed (not just list) before entering data'
+    - 'All target fields show the intended final values before saving'
+    - 'Post-save list contains a new entry with matching amount/date/type/note'
+
+CATEGORY: MODIFY_ENTRY
+  precondition: Target item is visible in a list and its detail form is accessible via tapping the row
+  abstract_steps:
+    1. Locate target item by date/amount/category
+    2. Open its detail form by tapping the text/amount region of the row (avoid icon/label area that may open a picker)
+    3. Clear and replace each target field (amount, date, type, note, label)
+    4. Use the date picker for date changes and confirm with the positive action
+    5. Save with the primary confirm action
+    6. Verify the row now shows the updated values
+  failure_modes:
+    - 'Opening an unrelated modal (icon/label picker) instead of the detail form'
+    - 'Appending text to a field instead of replacing it'
+    - 'Saving without toggling type when required'
+    - 'Claiming success without confirming updated values in the list'
+  verification_checklist:
+    - 'Each modified field reflects the new value in the form before save'
+    - 'After save, list shows updated values and correct sign/type'
+    - 'Aggregate totals or summaries reflect the change when applicable'
+
+CATEGORY: REMOVE_ENTRY
+  precondition: Target item is visible and its detail form or context menu offers a removal action
+  abstract_steps:
+    1. Open the target item's detail form or context menu
+    2. Invoke the destructive/removal action from the available controls of the opened view (e.g. a trash/discard control)
+    3. Confirm removal if prompted via the positive/accept action
+    4. Verify removal from the list
+  failure_modes:
+    - 'Long-pressing invokes a different action (e.g. icon or label selection) rather than the intended removal flow'
+    - 'Dismissing confirmation prematurely'
+    - 'Removing the wrong row due to duplicates'
+  verification_checklist:
+    - 'Target row no longer appears in list'
+    - 'Aggregate totals updated accordingly'
+
+CATEGORY: QUERY_INFO
+  precondition: App is launched and the requested summary or list view is reachable
+  abstract_steps:
+    1. Open the app and go to the view that surfaces the requested datum (dashboard summary for totals, list view for counts/categories)
+    2. Read the already-displayed value for the target date/category
+    3. Respond with an answer action containing the value
+    4. Mark the task complete
+  failure_modes:
+    - 'Miscounting due to including summary/header rows'
+    - 'Reporting a pre-existing value when the task was to create a new one'
+    - 'Answering before scrolling to ensure all relevant rows are seen'
+  verification_checklist:
+    - 'Answered value matches what is visible for the specified date/category'
+    - 'Counted only actual item rows, excluding headers/totals'
+
+CATEGORY: NAVIGATE_TO
+  precondition: App is launched
+  abstract_steps:
+    1. Identify the top-level tab or drawer entry matching the target section
+    2. Tap the tab/drawer item
+    3. Confirm the expected section header/content is visible
+  failure_modes:
+    - 'Clicking a header icon that opens an auxiliary configuration view instead of the intended section'
+    - 'Not waiting for the view to load before interacting'
+  verification_checklist:
+    - "Target section's characteristic UI is visible"
+    - 'Correct tab/drawer item is highlighted'
+
+CATEGORY: PICK_DATE_FROM_PICKER
+  precondition: A date picker dialog is open
+  abstract_steps:
+    1. Use month navigation arrows to reach the target month/year
+    2. Tap the target day in the grid
+    3. Confirm with the positive/accept button
+  failure_modes:
+    - 'Tapping the dismiss/negative button instead of the positive/accept button'
+    - 'Selecting the wrong day due to misreading the grid'
+  verification_checklist:
+    - "Form's date field shows the selected date"
+
+CATEGORY: CREATE_LABEL_OR_CATEGORY
+  precondition: A label/category selection dialog is open
+  abstract_steps:
+    1. If the desired value isn't in the list, tap the new-value input field
+    2. Type the new label text
+    3. Confirm with the positive/accept button to create and apply it
+  failure_modes:
+    - 'Typing in the wrong field and creating duplicates'
+    - 'Confirming before the text is entered'
+  verification_checklist:
+    - 'Form shows the new label applied to the entry'

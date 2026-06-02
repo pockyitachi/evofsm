@@ -1,0 +1,58 @@
+# EvoFSM-RL — Python deps layered ON TOP of android_world_plus/requirements.txt
+#
+# The parent android_world_plus repo only needs AndroidWorld's benchmark runtime
+# (android_env, gRPC, numpy, etc.). The model + training stack lives here.
+#
+# Install:
+#     cd /path/to/android_world_plus
+#     source .venv/bin/activate
+#     pip install -r android_world_plus/requirements.txt
+#     pip install -r EvoFSM-RL/requirements.txt
+#
+# Last validated: 2026-04-26 (B4 v2 sweep, 6 apps × 20 iters × 0 OOM).
+# B4's GRPO + LoRA stack (evofsm_rl/rl/grpo.py + evofsm_rl/model/lora.py) adds
+# NO new top-level deps beyond what's already declared here — it's all torch
+# + peft. No vllm / trl / deepspeed / datasets needed.
+#
+# On Mac (Apple Silicon) bitsandbytes is intentionally omitted — it doesn't
+# support MPS. See configs/model.yaml `deviations_from_adr`.
+
+# ── PyTorch + HF stack ───────────────────────────────────────────────
+# Floor bumped 2026-04-26: B4 sweep validated on torch 2.11 / transformers 5.5
+# (cu128). Older torch 2.3 likely still works but is no longer the validated path.
+torch>=2.8
+torchvision>=0.20
+transformers>=4.55
+huggingface_hub>=0.24
+accelerate>=1.0
+safetensors>=0.4
+
+# ── Config / tokenization ────────────────────────────────────────────
+pyyaml>=6.0
+Pillow>=10.0          # image processor needs this
+sentencepiece>=0.2    # Qwen tokenizer dep
+
+# ── LoRA / PEFT (B4 GRPO trainer — evofsm_rl/model/lora.py + rl/grpo.py) ─
+peft>=0.19
+
+# ── LLM API client (Story 2.2.2 — FSM synthesis via Claude;
+#    Story 3 — B3/B4 evolution mutations via Claude) ────────────────
+# Used by evofsm_rl/fsm/builder.py + scripts/run_b{3,4}_evolution.py.
+# Requires ANTHROPIC_API_KEY in env.
+anthropic>=0.50
+
+# ── Quantization: CUDA-only, pinned behind a marker ─────────────────
+# bitsandbytes only installs cleanly on Linux-x86_64 with CUDA. On Mac pip
+# will silently skip this line thanks to the marker.
+bitsandbytes>=0.43 ; platform_system == "Linux" and platform_machine == "x86_64"
+
+# ── SQLite with FTS4 (needed by AndroidWorld joplin/broccoli/vlc tasks) ─
+# Some systems' stdlib sqlite3 is compiled without ENABLE_FTS4=1, causing
+# `sqlite3.OperationalError: no such module: fts4` in
+# `task_evals/utils/sqlite_utils.py::delete_all_rows_from_table` during
+# `initialize_task` / `tear_down` of any task with an FTS4 virtual table
+# (joplin notes, broccoli recipes, vlc playlists). pysqlite3-binary
+# ships a SQLite build with FTS4 + FTS5 enabled; the patched import in
+# `android_world_plus/.../sqlite_utils.py` (`try: import pysqlite3 as sqlite3`)
+# requires this to be installed.
+pysqlite3-binary>=0.5

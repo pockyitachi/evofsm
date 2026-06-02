@@ -1,0 +1,12 @@
+{
+  "total_episodes": 30,
+  "total_steps": 486,
+  "epoch_losses": [
+    {
+      "epoch": 1,
+      "mean_loss": 1.124078215477188,
+      "n_steps": 486,
+      "wall_seconds": 410.73161526187323
+    }
+  ]
+}

@@ -1,0 +1,303 @@
+{
+  "category": "Tools",
+  "layer2": {
+    "categories": [
+      {
+        "name": "LAUNCH_APP",
+        "precondition": "Device launcher surface or application list visible; target application available",
+        "abstract_steps": [
+          "Invoke system-level application launch by its registered identifier (confirming any launch prompt if presented)",
+          "Wait for main view to render",
+          "Verify landing screen matches expected main state"
+        ],
+        "failure_modes": [
+          "Application not installed",
+          "Launcher blocks external intent",
+          "Landing on a different startup view (tutorial, permission prompt)"
+        ],
+        "verification_checklist": [
+          "Main workspace visible",
+          "Expected primary input/output areas present",
+          "No modal overlay blocking interaction"
+        ]
+      },
+      {
+        "name": "NAVIGATE_TO_SECTION",
+        "precondition": "App has multiple tabs/sections/locations and a navigation surface is visible; target item location known or inferable from path",
+        "abstract_steps": [
+          "Open the app directly rather than via indirect system entry points",
+          "Identify the target tab/section by label or icon",
+          "Click the tab",
+          "Open the roots/drawer to see top-level locations if needed",
+          "Enter the correct top-level volume",
+          "Drill into subfolders matching the target path",
+          "Scroll within the folder if the item is not immediately visible",
+          "Optionally use Search to locate the item by name",
+          "Verify title/contents match the desired section"
+        ],
+        "failure_modes": [
+          "Clicking a home-screen widget that opens a different tab than intended",
+          "Mistaking section labels across similar tabs",
+          "Treating category filters (Images/Audio/etc.) as folder navigation",
+          "Staying in a default landing folder instead of switching volumes",
+          "Looping through unrelated system screens that do not expose raw folders"
+        ],
+        "verification_checklist": [
+          "Screen title matches target section",
+          "Section-specific controls are visible",
+          "Header shows the intended folder name",
+          "Target item appears in the listing"
+        ]
+      },
+      {
+        "name": "INPUT_LINEAR_EXPRESSION",
+        "precondition": "Main input surface active and empty or reset",
+        "abstract_steps": [
+          "Input first operand elements sequentially",
+          "Insert connector between operands",
+          "Input subsequent operand elements",
+          "Repeat until full expression entered",
+          "Optionally trigger evaluation/confirmation"
+        ],
+        "failure_modes": [
+          "Missing connector causes adjacent operand elements to merge unintentionally into a single token",
+          "Premature resetting of partial entry",
+          "Misreading auto-evaluated intermediate output as final state"
+        ],
+        "verification_checklist": [
+          "Expression matches intended sequence",
+          "No additional or omitted elements in the entered sequence",
+          "Result (if evaluated) matches expected value within tolerance"
+        ]
+      },
+      {
+        "name": "APPLY_UNARY_OPERATION",
+        "precondition": "Main input surface active; target operation available (possibly after revealing hidden controls)",
+        "abstract_steps": [
+          "If operation control not visible, toggle advanced/secondary panel",
+          "Apply operation before or after operand depending on its fixity (prefix vs postfix)",
+          "Enter operand if prefix style required",
+          "Confirm/evaluate if needed"
+        ],
+        "failure_modes": [
+          "Using incorrect fixity for the chosen operator (e.g., placing operator after operand when prefix position is required, or vice versa)",
+          "Substituting a different operation than the one intended (selecting a related but distinct function)",
+          "Not revealing hidden control panel before attempting to locate the control"
+        ],
+        "verification_checklist": [
+          "Expression displays the correct operator element",
+          "Result consistent with the intended operation semantics"
+        ]
+      },
+      {
+        "name": "APPLY_COMPOUND_FORMULA",
+        "precondition": "Main input surface active; all required operators/operands known",
+        "abstract_steps": [
+          "Plan full element sequence in advance",
+          "Use grouping markers around denominators or nested sub-expressions as needed to preserve intended structure of the formula",
+          "Enter elements strictly in left-to-right order",
+          "Close any opened grouping markers in matching nesting order to finalize the structure",
+          "Evaluate"
+        ],
+        "failure_modes": [
+          "Operator precedence errors caused by omitting appropriate grouping markers around sub-expressions",
+          "Forgetting to close an opened grouping marker before evaluation of the expression",
+          "Applying an exponent-like operator without grouping a composite exponent sub-expression, causing only part of it to be raised"
+        ],
+        "verification_checklist": [
+          "All grouping markers are balanced and correctly scoped to their intended sub-expressions within the formula",
+          "Result matches the expected correct answer",
+          "Expression visible in display matches planned sequence exactly"
+        ]
+      },
+      {
+        "name": "REVEAL_HIDDEN_CONTROL",
+        "precondition": "A required control is not visible in default layout",
+        "abstract_steps": [
+          "Identify a toggle that exposes additional controls",
+          "Activate the toggle",
+          "Locate and use the previously hidden control",
+          "Optionally return the panel to its compact state"
+        ],
+        "failure_modes": [
+          "Confusing an overflow/more-options menu with a feature-expansion toggle that swaps the displayed control set",
+          "Assuming control does not exist and declaring task infeasible",
+          "Getting stuck in sub-menu without ability to return"
+        ],
+        "verification_checklist": [
+          "Target control becomes visible and interactive",
+          "Primary workspace still reachable afterward"
+        ]
+      },
+      {
+        "name": "RESET_INPUT",
+        "precondition": "Input surface contains unwanted or incorrect content",
+        "abstract_steps": [
+          "Invoke the full-reset control that empties the entire input surface",
+          "Verify input surface is empty or at initial value",
+          "Begin fresh entry"
+        ],
+        "failure_modes": [
+          "Using partial-delete (removing a lone element) when a full reset was intended",
+          "Repeatedly performing a full reset without addressing the underlying conceptual error",
+          "Resetting after each element, preventing multi-element entry"
+        ],
+        "verification_checklist": [
+          "Input surface shows empty/initial state",
+          "Subsequent actions build expression from scratch"
+        ]
+      },
+      {
+        "name": "VERIFY_OUTPUT",
+        "precondition": "An operation has been evaluated",
+        "abstract_steps": [
+          "Read result field",
+          "Compare against expected value or symbolic form",
+          "Decide success or retry"
+        ],
+        "failure_modes": [
+          "Misinterpreting an auto-preview intermediate value as the final committed result",
+          "Stopping at an unexpected partial value and declaring completion prematurely without full evaluation",
+          "Not noticing mode or unit differences affecting interpretation"
+        ],
+        "verification_checklist": [
+          "Result is well-formed and finite",
+          "Value matches expected within appropriate precision",
+          "Mode/units appropriate for the problem"
+        ]
+      },
+      {
+        "name": "NAVIGATE_MENU",
+        "precondition": "Secondary menu or overlay opened",
+        "abstract_steps": [
+          "Scan menu for relevant item",
+          "Select it or dismiss if irrelevant",
+          "Return to main workspace via back/dismiss action"
+        ],
+        "failure_modes": [
+          "Treating the menu as a source of unrelated features",
+          "Leaving a modal overlay open and blocking further input"
+        ],
+        "verification_checklist": [
+          "Returned to main workspace",
+          "No lingering overlay or modal surface"
+        ]
+      },
+      {
+        "name": "TOGGLE_STATE",
+        "precondition": "An entity exists with a toggleable state (e.g., active/inactive, on/off) and is visible or reachable",
+        "abstract_steps": [
+          "Identify current state via visual indicators",
+          "Navigate to the control surface if not already there",
+          "Invoke the toggle control",
+          "Verify the state changed to the desired target"
+        ],
+        "failure_modes": [
+          "Declaring success without taking any action based on a misread of current state",
+          "Clicking a non-interactive label instead of the actual control",
+          "Toggling past the desired state (e.g., invoking the toggle on an already-target-state item flips it back to the opposite state)"
+        ],
+        "verification_checklist": [
+          "Target state's distinctive UI element is present (e.g., opposite action button shown)",
+          "Numeric/textual indicator reflects expected state",
+          "No transient/loading indicator remains"
+        ]
+      },
+      {
+        "name": "ACTIVATE_ENTITY",
+        "precondition": "Entity is in an inactive/idle state and can be transitioned to an active state",
+        "abstract_steps": [
+          "Navigate to the entity's control screen",
+          "Locate the primary activation control",
+          "Click the activation control",
+          "Verify active-state controls appear (e.g., controls for suspending or terminating the active state)"
+        ],
+        "failure_modes": [
+          "Attempting activation on the wrong tab/section",
+          "Mistaking a display for a button"
+        ],
+        "verification_checklist": [
+          "Active-state controls visible",
+          "Dynamic indicator (counter, progress) advances"
+        ]
+      },
+      {
+        "name": "ENTER_STRUCTURED_VALUE",
+        "precondition": "An input surface exists that accepts a multi-field structured value (e.g., H:M:S, date parts) via a keypad that shifts digits",
+        "abstract_steps": [
+          "Navigate to the input surface",
+          "Understand the keypad semantics: determine whether digits fill from the right (shift-left) or whether fields are edited independently",
+          "If shift-fill: enter the full digit sequence in order from most-significant to least-significant, including leading zeros to place digits in correct fields",
+          "Avoid partial backspaces unless correcting the last digit only",
+          "Verify the displayed value matches the target exactly before confirming"
+        ],
+        "failure_modes": [
+          "Assuming each field is edited independently when keypad actually shifts digits across fields",
+          "Entering only significant digits and skipping leading zeros, causing digits to land in the wrong field",
+          "Using backspace repeatedly to 'clear' without realizing it only removes one digit at a time",
+          "Re-entering after partial clear and compounding misalignment",
+          "Declaring completion before verifying display matches target"
+        ],
+        "verification_checklist": [
+          "Displayed value exactly equals target across all sub-fields",
+          "No leading/trailing unintended digits",
+          "Did not inadvertently trigger an activation/confirm control"
+        ]
+      },
+      {
+        "name": "DELETE_ENTRY",
+        "precondition": "Target item visible in its containing view",
+        "abstract_steps": [
+          "Long-press the item to enter selection mode",
+          "Trigger the deletion action from the action bar",
+          "Confirm the deletion in the confirmation dialog"
+        ],
+        "failure_modes": [
+          "Selecting the wrong item with a similar name",
+          "Dismissing the confirmation dialog instead of confirming",
+          "Attempting to perform the deletion from a summary/cleanup screen instead of the primary content browsing view"
+        ],
+        "verification_checklist": [
+          "Transient deletion feedback appears",
+          "Item no longer present in the containing view"
+        ]
+      },
+      {
+        "name": "RELOCATE_ENTRY",
+        "precondition": "Target item visible; destination folder exists and is known",
+        "abstract_steps": [
+          "Long-press the item to enter selection mode",
+          "Open the overflow/more-options menu",
+          "Choose the relocation action",
+          "In the destination picker, navigate to the exact destination folder (switching roots/volumes as needed)",
+          "Confirm the relocation from within the destination folder"
+        ],
+        "failure_modes": [
+          "Confirming the relocation while the picker is still at the default location",
+          "Choosing a duplication action or a metadata-viewing action by mistake",
+          "Not switching to the correct top-level volume in the picker"
+        ],
+        "verification_checklist": [
+          "Transient relocation feedback appears",
+          "Item gone from source folder",
+          "Item present in destination folder"
+        ]
+      },
+      {
+        "name": "QUERY_METADATA",
+        "precondition": "Item or folder visible",
+        "abstract_steps": [
+          "Select the item or open overflow menu",
+          "Choose the details/properties option",
+          "Read the displayed metadata"
+        ],
+        "failure_modes": [
+          "Confusing the details screen with an actionable screen"
+        ],
+        "verification_checklist": [
+          "Details page shows expected attributes (type, modified date, size/count)"
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,107 @@
+# ═══════════════════════════════════════════════
+# LAYER 1: APP_SPECIFIC  (non-transferable)
+# ═══════════════════════════════════════════════
+APP: tasks_org
+CATEGORY: Productivity
+STATES:
+  S0: HOME_SCREEN — Android launcher / home screen
+    visual_cues: ['Phone icon', 'Chrome icon', 'Settings icon', 'Search bar', 'Google app']
+    resource_hints: ['Home']
+  S1: TASK_LIST — My Tasks main list view showing tasks with due date chips and priority-colored checkboxes
+    visual_cues: ["'My Tasks' title", 'Search icon', 'Sort icon', 'More options', 'Create new task (FAB)', 'task rows with colored checkboxes', 'day labels (Mon/Tue/Today/Tmrw/Yest/Oct N)']
+    resource_hints: ['My Tasks', 'Search', 'Voice input', 'Sort', 'More options', 'Create new task']
+  S2: SORT_MENU — Sort / grouping bottom sheet
+    visual_cues: ['Drag handle', 'Grouping section', 'Sorting section', 'Smart sort', 'My order', 'Move completed tasks to bottom', 'Completed section']
+    resource_hints: ['Grouping', 'Sorting', 'Smart sort', 'Subtasks', 'Completed']
+  S3: TASK_DETAIL — Detailed editor view of a single task (not clearly entered in these episodes)
+    visual_cues: ['task title', 'description', 'due date chip']
+TRANSITIONS:
+  S0 --open_app(Tasks)--> S1  [post: My Tasks list visible]
+  S1 --scroll(down)--> S1  [pre: more tasks below viewport]  [post: further tasks revealed]
+  S1 --click(Sort)--> S2  [post: sort/group options visible]
+  S2 --back / dismiss--> S1  [post: return to list]
+STRATEGIES:
+  QUERY_TASKS_BY_DATE:
+    preconditions: home_screen
+    steps:
+      1. open_app('Tasks')
+      2. On task_list, scroll through the entire list to enumerate date chips (Today/Tmrw/Yest/Mon..Sun/Oct N)
+      3. Map natural-language date ('today is Oct 15') to chip labels
+      4. Collect task titles whose chip matches the target date
+      5. Return titles as a comma-separated list, or 'None' if empty
+      6. Call status(complete)
+    success_signal: Answer action returns the exact set of task titles for the date
+    fallback: If date cannot be resolved to a visible chip, open the task to inspect its full date
+  QUERY_INCOMPLETE_BY_DEADLINE:
+    preconditions: task_list visible
+    steps:
+      1. Scroll through the list
+      2. Identify tasks whose checkbox is UNCHECKED and whose date chip is on or before the target day
+      3. Compose comma-separated titles as answer
+    success_signal: Answer contains all and only incomplete tasks with dates <= target
+    fallback: Re-scroll to verify nothing missed
+  QUERY_HIGH_PRIORITY:
+    preconditions: task_list visible
+    steps:
+      1. Identify tasks whose checkbox is colored RED (high priority indicator in this app)
+      2. List their titles
+    success_signal: Only red-checkbox tasks listed
+    fallback: Do not infer priority from due date proximity or other colors
+DEAD_ENDS:
+  at task_list: repeatedly answer and re-answer without calling status(complete) fails  [Agent loops emitting 'answer' actions; must emit status(complete) once answer is given]
+  at task_list: interpret 'Yest' chip as the queried future/specific date fails  [Relative date chips (Yest/Today/Tmrw/Mon..Sun) must be mapped to absolute dates using the current date; mis-mapping produces wrong answers]
+  at task_list: guess high priority from due-date urgency or blue checkbox fails  [Only RED checkbox indicates high priority; blue/yellow are not high priority]
+  at task_list: scroll repeatedly looking for an absolute date that is not present fails  [List does not expose arbitrary future dates if no task exists; infinite scroll loops waste steps]
+  at sort_menu: emit unparsable/null action fails  [Sort menu has no priority filter; opening it does not help priority/date queries]
+  at task_list: mark infeasible prematurely fails  [Agent declared infeasible without scrolling entire list to confirm no matching tasks]
+
+# ═══════════════════════════════════════════════
+# LAYER 2: GENERIC  (transferable, app-agnostic)
+# ═══════════════════════════════════════════════
+CATEGORY: QUERY_INFO
+  precondition: Target data-bearing screen reachable from launcher; query specifies a filter (date, status, priority, etc.)
+  abstract_steps:
+    1. Launch the target app from the launcher
+    2. Navigate to the primary list/overview screen
+    3. Resolve any relative terms in the query (today, next week, after next) to absolute values using the device/task context
+    4. Scroll through the full list to enumerate all candidate items
+    5. Apply the query's filter predicate to each item using observable visual attributes
+    6. Aggregate matching items into the requested output format (list, count, yes/no)
+    7. Emit a single answer action, then immediately emit a terminal completion signal
+  failure_modes:
+    - 'Confusing relative date labels with the queried absolute date'
+    - 'Answering from a partial view without scrolling the full list'
+    - 'Repeating the same answer action without terminating, causing step exhaustion'
+    - 'Guessing semantic attributes (priority, category) from unrelated visual cues'
+    - 'Declaring the query infeasible before exhausting available navigation (scroll, open detail)'
+    - 'Miscounting due to duplicated or partially visible rows after scrolling'
+  verification_checklist:
+    - 'Did I reach the list screen that actually contains the data?'
+    - 'Did I map all relative terms to concrete values consistent with the current date?'
+    - 'Did I scroll until the end of the list (no new content appears)?'
+    - 'Does each returned item satisfy every part of the filter (date AND status AND priority)?'
+    - 'Is the answer format exactly what the user requested (comma-separated / count / None)?'
+    - 'Did I emit a terminal completion action exactly once after answering?'
+
+CATEGORY: FILTER_BY_ATTRIBUTE
+  precondition: List view exposes per-item visual attributes (color, icon, label) that encode the attribute of interest
+  abstract_steps:
+    1. Identify the concrete visual encoding of the target attribute on this app (e.g., checkbox color = priority)
+    2. Iterate items and apply the encoding rule
+    3. Return matching titles/identifiers
+  failure_modes:
+    - "Assuming a default encoding from other apps rather than observing this app's cues"
+    - 'Treating urgency/date as priority when priority is encoded separately'
+  verification_checklist:
+    - 'Is the attribute encoding confirmed by at least one unambiguous example?'
+    - 'Are negative examples (items that should NOT match) excluded?'
+
+CATEGORY: NAVIGATE_TO
+  precondition: Target app installed; currently elsewhere
+  abstract_steps:
+    1. Invoke the app-launch primitive with the app name
+    2. Verify the landing screen matches expectations before acting
+  failure_modes:
+    - 'Acting before the landing screen is fully loaded'
+  verification_checklist:
+    - 'Title bar/landmark of destination screen is visible'

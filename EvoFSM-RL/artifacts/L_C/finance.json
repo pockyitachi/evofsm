@@ -1,0 +1,141 @@
+{
+  "category": "Finance",
+  "layer2": {
+    "categories": [
+      {
+        "name": "CREATE_ENTRY",
+        "precondition": "App launched and on a list/dashboard view that exposes a creation affordance (e.g. floating action button or equivalent primary create control)",
+        "abstract_steps": [
+          "Navigate to the list view where new items are created",
+          "Trigger the create affordance (primary create control) and wait for the entry form to appear",
+          "If a type toggle is present, choose the correct type (e.g. one of the mutually exclusive categories offered)",
+          "Set required fields one by one: amount/value, date (via date picker if needed), category/label, note/description",
+          "When modifying a pre-filled field, clear existing text (select-all then remove, or use backspace) before typing",
+          "Confirm/save via the primary save action",
+          "Verify the new item appears in the list with the correct values"
+        ],
+        "failure_modes": [
+          "Repeated taps on create button without detecting whether the entry form actually opened",
+          "Typing into a field without clearing pre-existing text, leading to concatenated values",
+          "Tapping the wrong sub-area of a row and opening a secondary dialog instead of the entry form",
+          "Declaring task complete based on an unrelated pre-existing entry"
+        ],
+        "verification_checklist": [
+          "Entry form was observed (not just list) before entering data",
+          "All target fields show the intended final values before saving",
+          "Post-save list contains a new entry with matching amount/date/type/note"
+        ]
+      },
+      {
+        "name": "MODIFY_ENTRY",
+        "precondition": "Target item is visible in a list and its detail form is accessible via tapping the row",
+        "abstract_steps": [
+          "Locate target item by date/amount/category",
+          "Open its detail form by tapping the text/amount region of the row (avoid icon/label area that may open a picker)",
+          "Clear and replace each target field (amount, date, type, note, label)",
+          "Use the date picker for date changes and confirm with the positive action",
+          "Save with the primary confirm action",
+          "Verify the row now shows the updated values"
+        ],
+        "failure_modes": [
+          "Opening an unrelated modal (icon/label picker) instead of the detail form",
+          "Appending text to a field instead of replacing it",
+          "Saving without toggling type when required",
+          "Claiming success without confirming updated values in the list"
+        ],
+        "verification_checklist": [
+          "Each modified field reflects the new value in the form before save",
+          "After save, list shows updated values and correct sign/type",
+          "Aggregate totals or summaries reflect the change when applicable"
+        ]
+      },
+      {
+        "name": "REMOVE_ENTRY",
+        "precondition": "Target item is visible and its detail form or context menu offers a removal action",
+        "abstract_steps": [
+          "Open the target item's detail form or context menu",
+          "Invoke the destructive/removal action from the available controls of the opened view (e.g. a trash/discard control)",
+          "Confirm removal if prompted via the positive/accept action",
+          "Verify removal from the list"
+        ],
+        "failure_modes": [
+          "Long-pressing invokes a different action (e.g. icon or label selection) rather than the intended removal flow",
+          "Dismissing confirmation prematurely",
+          "Removing the wrong row due to duplicates"
+        ],
+        "verification_checklist": [
+          "Target row no longer appears in list",
+          "Aggregate totals updated accordingly"
+        ]
+      },
+      {
+        "name": "QUERY_INFO",
+        "precondition": "App is launched and the requested summary or list view is reachable",
+        "abstract_steps": [
+          "Open the app and go to the view that surfaces the requested datum (dashboard summary for totals, list view for counts/categories)",
+          "Read the already-displayed value for the target date/category",
+          "Respond with an answer action containing the value",
+          "Mark the task complete"
+        ],
+        "failure_modes": [
+          "Miscounting due to including summary/header rows",
+          "Reporting a pre-existing value when the task was to create a new one",
+          "Answering before scrolling to ensure all relevant rows are seen"
+        ],
+        "verification_checklist": [
+          "Answered value matches what is visible for the specified date/category",
+          "Counted only actual item rows, excluding headers/totals"
+        ]
+      },
+      {
+        "name": "NAVIGATE_TO",
+        "precondition": "App is launched",
+        "abstract_steps": [
+          "Identify the top-level tab or drawer entry matching the target section",
+          "Tap the tab/drawer item",
+          "Confirm the expected section header/content is visible"
+        ],
+        "failure_modes": [
+          "Clicking a header icon that opens an auxiliary configuration view instead of the intended section",
+          "Not waiting for the view to load before interacting"
+        ],
+        "verification_checklist": [
+          "Target section's characteristic UI is visible",
+          "Correct tab/drawer item is highlighted"
+        ]
+      },
+      {
+        "name": "PICK_DATE_FROM_PICKER",
+        "precondition": "A date picker dialog is open",
+        "abstract_steps": [
+          "Use month navigation arrows to reach the target month/year",
+          "Tap the target day in the grid",
+          "Confirm with the positive/accept button"
+        ],
+        "failure_modes": [
+          "Tapping the dismiss/negative button instead of the positive/accept button",
+          "Selecting the wrong day due to misreading the grid"
+        ],
+        "verification_checklist": [
+          "Form's date field shows the selected date"
+        ]
+      },
+      {
+        "name": "CREATE_LABEL_OR_CATEGORY",
+        "precondition": "A label/category selection dialog is open",
+        "abstract_steps": [
+          "If the desired value isn't in the list, tap the new-value input field",
+          "Type the new label text",
+          "Confirm with the positive/accept button to create and apply it"
+        ],
+        "failure_modes": [
+          "Typing in the wrong field and creating duplicates",
+          "Confirming before the text is entered"
+        ],
+        "verification_checklist": [
+          "Form shows the new label applied to the entry"
+        ]
+      }
+    ]
+  }
+}

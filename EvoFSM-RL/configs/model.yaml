@@ -1,0 +1,165 @@
+## Base-model configuration for EvoFSM-RL
+## Ref: ADR-002 — Base model: Qwen3-VL-8B
+## Version: v0.1  |  Built: 2026-04-16  |  Ticket: Story 1.2 — Base model loader
+##
+## This file is the SINGLE source of truth for which weights the policy π loads.
+## Everything that touches the base model — inference on Mac, LoRA training on
+## A100, scripts/model_smoke.py, zero-shot baseline eval (Story 1.4), and every
+## later experiment — reads this yaml.
+##
+## DO NOT hardcode model name / revision / dtype anywhere else.
+
+meta:
+  version: "v0.1"
+  adr_ref: "docs/adr/002-base-model.md"
+  built: "2026-04-16"
+  rationale: |
+    ADR-002 settled on Qwen/Qwen3-VL-8B-Instruct as the base policy because:
+      (1) fits Mac 24 GB + emulator concurrent (dev-loop-friendly);
+      (2) fits single-A100 LoRA training without 2-GPU rental;
+      (3) open-weights SOTA on GUI grounding at 8B scale per AndroidLab 2025.
+    The 30B-A3B MoE variant was rejected: all 30B params must be resident even
+    when only 3B are active per token, so Mac OOMs with the emulator loaded.
+  role_split: |
+    ⚠ Mac vs A100 are NOT interchangeable:
+      - Mac (MPS, fp16, max_pixels=802816): development only. Smoke tests,
+        prompt iteration, agent-loop debugging. Numbers produced here are
+        NOT suitable for paper / benchmark reporting (downscaled screenshots
+        + fp16 introduce drift vs. canonical eval conditions).
+      - A100 (CUDA, bf16, max_pixels=1605632 via cuda_override): canonical
+        eval + LoRA training. All reportable numbers come from this path.
+    Any "interesting" Mac result must be re-run on A100 before it goes in a
+    paper figure or Linear ticket titled "result".
+
+# ─────────────────────────────────────────────────────────────────────────
+# Model identity
+# ─────────────────────────────────────────────────────────────────────────
+model:
+  # HuggingFace Hub repo id. Resolves via `transformers.AutoModel.from_pretrained`.
+  name: "Qwen/Qwen3-VL-8B-Instruct"
+
+  # Commit SHA to pin a reproducible checkpoint.
+  #
+  # HOW TO RESOLVE (run once on any box with HF Hub access, e.g. Mac):
+  #   python -c "from huggingface_hub import HfApi; \
+  #              print(HfApi().model_info('Qwen/Qwen3-VL-8B-Instruct').sha)"
+  # then paste the 40-char SHA below and commit.
+  #
+  # Until this is pinned, the loader MUST warn loudly and print the resolved SHA
+  # so we can capture it. When the value below is a real SHA, the loader MUST
+  # fail loud if the resolved SHA doesn't match (tampered cache, stale pin, etc.).
+  # Pinned 2026-04-16 from HF main after first successful Mac load (Task 1.2.4).
+  # To bump: resolve a new SHA (see HOW TO RESOLVE above), replace here, delete
+  # configs/model_fingerprint.lock.json, re-run scripts/model_smoke.py.
+  revision: "0c351dd01ed87e9c1b53cbc748cba10e6187ff3b"
+
+  # Auxiliary artifacts shipped in the same HF repo. These are revision-locked
+  # with `revision` above; listed here only as a reminder of what gets pulled.
+  expected_artifacts:
+    - "config.json"
+    - "model.safetensors.index.json"   # sharded weights
+    - "preprocessor_config.json"        # image processor (pixel size, patches)
+    - "tokenizer.json"
+    - "tokenizer_config.json"
+    - "chat_template.jinja"             # or embedded in tokenizer_config
+
+# ─────────────────────────────────────────────────────────────────────────
+# Device-aware dtype / quantization
+# ─────────────────────────────────────────────────────────────────────────
+#
+# ADR-002 wrote "8-bit on Mac, bf16 on A100" — but bitsandbytes (the standard
+# 8-bit path) does NOT run on Apple Silicon (MPS). Options we considered:
+#   (a) float16 on Mac            — simple, ~16 GB weights + 4 GB emu = 20 GB
+#                                   (fits 24 GB w/ narrow headroom)
+#   (b) MLX 4-bit quantization    — best memory (~5 GB) but different code path
+#                                   (mlx_lm + converted weights)
+#   (c) GGUF via llama.cpp        — even smaller but another different code path
+#
+# v0.1 picks (a) float16 because it keeps ONE code path (HF transformers +
+# torch MPS) for Mac↔A100 parity. If Task 1.2.4 memory report shows we're
+# hitting ceiling, bump to (b) MLX and document as ADR-002 amendment.
+devices:
+  mac:
+    torch_device: "mps"
+    dtype: "float16"              # see note above; MPS doesn't do 8-bit natively
+    quantization: null             # no bitsandbytes on Apple Silicon
+    load_in_n_bit: null            # placeholder for future MLX/int8 switch
+    max_memory_gb_hint: 18         # leave ≥ 4 GB for emulator on 24 GB Mac
+    notes: |
+      If peak RSS exceeds 18 GB with the emulator running, switch to MLX 4-bit
+      and amend ADR-002. Track in Task 1.2.4.
+
+  cuda:
+    torch_device: "cuda"
+    dtype: "bfloat16"              # A100 native, numerically stable for LoRA training
+    quantization: null             # full-precision inference during Phase 1 collection
+    load_in_n_bit: null            # inference is bf16; LoRA training uses bf16 + grad-ckpt
+    max_memory_gb_hint: 70         # leave 10 GB for optimizer states / activations
+    notes: |
+      bf16 weights ≈ 16 GB, plus 12 GB activations/KV cache under typical agent
+      rollout → ~28 GB peak inference. Training adds LoRA optimizer states
+      (~few hundred MB for rank-16 adapters) + grad activations → ~55 GB peak.
+      Fits 80 GB A100 with room for batch > 1.
+
+# ─────────────────────────────────────────────────────────────────────────
+# Image processing — Qwen3-VL uses min/max pixel budgets per image
+# ─────────────────────────────────────────────────────────────────────────
+# These values trade accuracy (more pixels = better UI element detection) against
+# memory + latency (more pixels = more vision tokens = longer sequence).
+# AndroidWorld screenshots are 1080×2400 Pixel 6 = ~2.6 M pixels at native res.
+# We downscale aggressively because agent throughput > pixel fidelity for our loop.
+image:
+  # MPS reality-check (Task 1.2.4, 2026-04-16):
+  #   max_pixels=1605632 on a real 1080×2400 screenshot → 2046 vision patches
+  #   → vision tower SDPA (MPS has no flash-attn fallback) allocates ~12 GiB
+  #   of activations, OOMs combined with 17 GiB weights on 24 GB Mac.
+  #   Halving max_pixels drops O(N²) attention by ~4x. Recoverable on
+  #   A100 (flash-attn available) — see cuda override hint below.
+  min_pixels: 262144        # 512×512 floor — below this UI text gets unreadable
+  max_pixels: 802816        # ~896×896 ceiling — ~1024 vision tokens post-merge
+  patch_size: 14            # Qwen3-VL vision tower patch size
+  merge_size: 2             # vision-language merge factor
+  resize_strategy: "smart"  # preserve aspect ratio, fit within min/max budget
+  # On CUDA we can afford 2x more pixels because flash-attn makes SDPA O(N).
+  # Kept as a suggestion for Story 1.4 baseline eval, not auto-applied by loader.
+  cuda_override_max_pixels: 1605632
+
+# ─────────────────────────────────────────────────────────────────────────
+# Generation / sampling — pinned so baseline eval and TTA rollouts are consistent
+# ─────────────────────────────────────────────────────────────────────────
+generation:
+  max_new_tokens: 512       # enough for agent thought + action JSON; bump if truncating
+  do_sample: false          # greedy for reproducibility in baseline eval (Story 1.4)
+  temperature: null         # ignored when do_sample=false
+  top_p: null               # ignored when do_sample=false
+  repetition_penalty: 1.0
+  # When we do RL rollouts we'll override do_sample=true with explicit temperature;
+  # that override happens in the rollout config (not here) to keep this yaml
+  # representing "the base policy in its canonical evaluation form".
+
+# ─────────────────────────────────────────────────────────────────────────
+# Sanity / acceptance-gate (checked by loader)
+# ─────────────────────────────────────────────────────────────────────────
+# If any of these fail, loader raises loudly. Prevents silent footguns like
+# "someone swapped the checkpoint out from under us".
+sanity:
+  # Observed 8.767B on Mac load 2026-04-16 (Task 1.2.4). Qwen3-VL-8B is
+  # nominally "8B" in marketing but real param count = 8.77B including the
+  # vision tower + merger. Loader tolerates ±1% drift.
+  expected_param_count_billions: 8.767
+  expected_vocab_size: 151936           # Qwen tokenizer size; verified against config.text_config.vocab_size
+  expected_architecture: "Qwen3VLForConditionalGeneration"   # config.json architectures[0]
+  # On first successful load, loader writes the EXACT observed values into
+  # `configs/model_fingerprint.lock.json`. Subsequent loads compare against the
+  # lock file and fail loud on mismatch. This makes "did the model change?"
+  # answerable with `git diff configs/model_fingerprint.lock.json`.
+  fingerprint_lock_path: "configs/model_fingerprint.lock.json"
+
+# ─────────────────────────────────────────────────────────────────────────
+# Known deviations from ADR-002 (keep in sync with ADR file)
+# ─────────────────────────────────────────────────────────────────────────
+deviations_from_adr:
+  - issue: "ADR-002 specified 8-bit on Mac; bitsandbytes doesn't support Apple Silicon."
+    resolution: "Use float16 on MPS for v0.1. Revisit in Task 1.2.4 with measured memory; if over budget, switch to MLX 4-bit and amend ADR-002."
+    owner: "J"
+    due: "End of Story 1.2"

@@ -1,0 +1,250 @@
+# ═══════════════════════════════════════════════
+# LAYER 1: APP_SPECIFIC  (non-transferable)
+# ═══════════════════════════════════════════════
+APP: calculator
+CATEGORY: Tools
+STATES:
+  S0: HOME_SCREEN — Android home screen before calculator is launched
+    visual_cues: ['app icons (Phone, Chrome, Settings)', 'Search bar', 'clock widget']
+    resource_hints: ['Home', 'Phone', 'Chrome', 'Settings', 'Search']
+  S1: CALC_BASIC — Calculator default (basic) keypad view
+    visual_cues: ["result field 'No result' or numeric result", 'top row with square root, pi, power (^), factorial (!)', 'Expand button (chevron) on right', 'AC/clear button', 'digits 0-9, +, -, ×, ÷, (, ), %, =']
+    resource_hints: ['No result', 'square root', 'pi', 'power', 'factorial', 'Expand', 'clear']
+  S2: CALC_EXPANDED — Calculator with advanced/scientific functions expanded (cos, sin, tan, ln, log, etc.)
+    visual_cues: ['Collapse button replaces Expand', 'DEG/RAD toggle visible at top', 'trig and log buttons visible (cos, sin, tan, ln, log, e)', 'switch to radians option']
+    resource_hints: ['DEG', 'Collapse', 'switch to radians', 'cos', 'sin', 'tan', 'ln', 'log']
+  S3: CALC_RESULT — Calculator after pressing equals showing formatted result
+    visual_cues: ['expression and final result both displayed', "alternate form may be visible (e.g., 'π / 4')"]
+    resource_hints: ['No result']
+  S4: OPTIONS_MENU — Overflow menu opened via More options
+    visual_cues: ['menu items: History, Choose theme, Privacy policy, Send feedback, Help']
+    resource_hints: ['History', 'Choose theme', 'Privacy policy', 'Send feedback', 'Help']
+  S5: HISTORY_VIEW — History page showing past calculations
+    visual_cues: ['Navigate up arrow', "'No History' empty state", 'Current expression area']
+    resource_hints: ['History', 'No History', 'Current expression', 'Navigate up']
+  S6: THEME_DIALOG — Theme selection dialog
+    visual_cues: ['Light/Dark/System default radio options', 'Cancel and OK buttons']
+    resource_hints: ['Choose theme', 'Light', 'Dark', 'System default', 'Cancel', 'OK']
+TRANSITIONS:
+  S0 --open_app(Calculator)--> S1  [pre: Calculator app installed]  [post: Calculator basic keypad displayed]
+  S1 --click(digit|operator|paren|%|!|√|π|^|AC|=)--> S1  [post: Expression updated on display]
+  S1 --click(Expand)--> S2  [post: Scientific functions (cos/sin/tan/ln/log) visible]
+  S2 --click(Collapse)--> S1  [post: Returns to basic keypad]
+  S2 --click(cos|sin|tan|ln|log|digit|operator|=)--> S2  [post: Function or digit appended to expression]
+  S1 --click(=)--> S3  [pre: Complete expression entered]  [post: Result displayed; may show symbolic form]
+  S1 --click(More options)--> S4  [post: Overflow menu visible]
+  S4 --click(History)--> S5  [post: History page opened]
+  S4 --click(Choose theme)--> S6  [post: Theme dialog opened]
+  S6 --click(Cancel|OK)--> S1  [post: Dialog dismissed]
+  S5 --click(Navigate up)--> S1  [post: Return to calculator]
+  S4 --click(outside menu)--> S1  [post: Menu dismissed]
+STRATEGIES:
+  LAUNCH_CALCULATOR:
+    preconditions: home_screen
+    steps:
+      1. open_app with app_name 'Calculator'
+    success_signal: calc_basic shown with 'No result' and keypad
+    fallback: Open app drawer and search for Calculator
+  INPUT_SIMPLE_EXPRESSION:
+    preconditions: calc_basic
+    steps:
+      1. Click first operand digits
+      2. Click operator (+, -, ×, ÷)
+      3. Click next operand digits
+      4. Optionally click = to finalize
+    success_signal: Display shows expression and/or final numeric result
+    fallback: Click AC to clear and re-enter
+  INPUT_MULTI_DIGIT:
+    preconditions: calc_basic, expression partially entered
+    steps:
+      1. Click each digit sequentially (e.g. 1, 8, 0 for 180)
+      2. Do NOT re-press operator between digits of same number
+    success_signal: Multi-digit number appears contiguous in display
+    fallback: Click AC and restart; avoid clearing mid-number
+  USE_UNARY_FUNCTION_PREFIX:
+    preconditions: calc_basic or calc_expanded
+    steps:
+      1. Click the unary function button (√, cos, sin, ln) first
+      2. Input the argument digits
+      3. Optionally close paren or press =
+    success_signal: Expression shows function(argument) and result
+    fallback: Clear with AC and retry
+  USE_FACTORIAL_POSTFIX:
+    preconditions: calc_basic, a number already entered
+    steps:
+      1. Enter the number digits
+      2. Click factorial (!) button
+    success_signal: Display shows n! and computed value
+    fallback: AC and retry
+  COMPUTE_COMBINATION_FORMULA:
+    preconditions: calc_basic
+    steps:
+      1. Enter n then click !
+      2. Click ÷
+      3. Click (
+      4. Enter k then !
+      5. Click ×
+      6. Enter (n-k) then !
+      7. Click ) then =
+    success_signal: Display shows n!÷(k!×(n-k)!) and numeric result
+    fallback: AC and retry with explicit parentheses
+  ACCESS_SCIENTIFIC_FUNCTION:
+    preconditions: calc_basic
+    steps:
+      1. Click Expand button (chevron)
+      2. Click desired function (cos, sin, ln, log, tan)
+      3. Enter argument digits
+    success_signal: Function name shown prefixed in expression and result computed
+    fallback: If Expand not used, scientific functions will be unavailable
+  CONVERT_DEGREES_TO_RADIANS_FORMULA:
+    preconditions: calc_basic
+    steps:
+      1. Enter degree value
+      2. Click ×
+      3. Click π
+      4. Click ÷
+      5. Enter 180
+      6. Press =
+    success_signal: Numeric radian value and possibly symbolic form displayed
+    fallback: AC and restart if operator sequence wrong
+  CLEAR_AND_RESTART:
+    preconditions: any calc state with wrong expression
+    steps:
+      1. Click AC (clear)
+      2. Re-enter correct expression
+    success_signal: Display returns to 'No result' then builds new expression
+    fallback: Close and reopen app
+DEAD_ENDS:
+  at calc_basic: Using square root (√) repeatedly to approximate cube root fails  [√ applied twice computes fourth root, not cube root; use power (^) with exponent (1/3) and parentheses, or explicit 60^(1/3)]
+  at calc_basic: Entering '^' followed by digits '1' and '3' without parentheses fails  [Produces x^13 instead of x^(1/3); must wrap exponent in parentheses and use division]
+  at calc_basic: Typing 50% then 28 expecting 50% of 28 fails  [Calculator interprets 50%28 differently; correct form is 50%×28 or 28×50%]
+  at calc_basic: Omitting + between consecutive numbers in a sum (e.g. 2,3,5 typed as 235) fails  [Calculator concatenates digits into one number unless an operator separates them]
+  at calc_basic: Looking for 'cos'/'ln' on the default keypad fails  [Scientific functions are hidden until Expand button is pressed]
+  at options_menu: Trying to find trig/log functions inside overflow menu fails  [Overflow menu only contains History/Theme/Help; functions live behind Expand]
+  at calc_basic: Typing harmonic mean as 2*4*5÷4+5 without parentheses fails  [Division and addition precedence yields wrong result; must group denominator with parentheses: 2×4×5÷(4+5)]
+  at calc_basic: Not using parentheses for (n-k) in combination denominator (typed 2!×8!) fails  [Computes different expression; correct C(10,2) denominator is 2!×(10-2)! = 2!×8!, but the task-required literal form may differ from mathematical C(n,k)]
+  at calc_basic: Agent repeatedly clearing partial multi-digit entry thinking it's wrong fails  [Seeing intermediate auto-evaluated result confuses agent into pressing AC; should continue typing digits]
+
+# ═══════════════════════════════════════════════
+# LAYER 2: GENERIC  (transferable, app-agnostic)
+# ═══════════════════════════════════════════════
+CATEGORY: LAUNCH_APP
+  precondition: Device launcher surface or application list visible; target application available
+  abstract_steps:
+    1. Invoke system-level application launch by its registered identifier (confirming any launch prompt if presented)
+    2. Wait for main view to render
+    3. Verify landing screen matches expected main state
+  failure_modes:
+    - 'Application not installed'
+    - 'Launcher blocks external intent'
+    - 'Landing on a different startup view (tutorial, permission prompt)'
+  verification_checklist:
+    - 'Main workspace visible'
+    - 'Expected primary input/output areas present'
+    - 'No modal overlay blocking interaction'
+
+CATEGORY: INPUT_LINEAR_EXPRESSION
+  precondition: Main input surface active and empty or reset
+  abstract_steps:
+    1. Input first operand elements sequentially
+    2. Insert connector between operands
+    3. Input subsequent operand elements
+    4. Repeat until full expression entered
+    5. Optionally trigger evaluation/confirmation
+  failure_modes:
+    - 'Missing connector causes adjacent operand elements to merge unintentionally into a single token'
+    - 'Premature resetting of partial entry'
+    - 'Misreading auto-evaluated intermediate output as final state'
+  verification_checklist:
+    - 'Expression matches intended sequence'
+    - 'No additional or omitted elements in the entered sequence'
+    - 'Result (if evaluated) matches expected value within tolerance'
+
+CATEGORY: APPLY_UNARY_OPERATION
+  precondition: Main input surface active; target operation available (possibly after revealing hidden controls)
+  abstract_steps:
+    1. If operation control not visible, toggle advanced/secondary panel
+    2. Apply operation before or after operand depending on its fixity (prefix vs postfix)
+    3. Enter operand if prefix style required
+    4. Confirm/evaluate if needed
+  failure_modes:
+    - 'Using incorrect fixity for the chosen operator (e.g., placing operator after operand when prefix position is required, or vice versa)'
+    - 'Substituting a different operation than the one intended (selecting a related but distinct function)'
+    - 'Not revealing hidden control panel before attempting to locate the control'
+  verification_checklist:
+    - 'Expression displays the correct operator element'
+    - 'Result consistent with the intended operation semantics'
+
+CATEGORY: APPLY_COMPOUND_FORMULA
+  precondition: Main input surface active; all required operators/operands known
+  abstract_steps:
+    1. Plan full element sequence in advance
+    2. Use grouping markers around denominators or nested sub-expressions as needed to preserve intended structure of the formula
+    3. Enter elements strictly in left-to-right order
+    4. Close any opened grouping markers in matching nesting order to finalize the structure
+    5. Evaluate
+  failure_modes:
+    - 'Operator precedence errors caused by omitting appropriate grouping markers around sub-expressions'
+    - 'Forgetting to close an opened grouping marker before evaluation of the expression'
+    - 'Applying an exponent-like operator without grouping a composite exponent sub-expression, causing only part of it to be raised'
+  verification_checklist:
+    - 'All grouping markers are balanced and correctly scoped to their intended sub-expressions within the formula'
+    - 'Result matches the expected correct answer'
+    - 'Expression visible in display matches planned sequence exactly'
+
+CATEGORY: REVEAL_HIDDEN_CONTROL
+  precondition: A required control is not visible in default layout
+  abstract_steps:
+    1. Identify a toggle that exposes additional controls
+    2. Activate the toggle
+    3. Locate and use the previously hidden control
+    4. Optionally return the panel to its compact state
+  failure_modes:
+    - 'Confusing an overflow/more-options menu with a feature-expansion toggle that swaps the displayed control set'
+    - 'Assuming control does not exist and declaring task infeasible'
+    - 'Getting stuck in sub-menu without ability to return'
+  verification_checklist:
+    - 'Target control becomes visible and interactive'
+    - 'Primary workspace still reachable afterward'
+
+CATEGORY: RESET_INPUT
+  precondition: Input surface contains unwanted or incorrect content
+  abstract_steps:
+    1. Invoke the full-reset control that empties the entire input surface
+    2. Verify input surface is empty or at initial value
+    3. Begin fresh entry
+  failure_modes:
+    - 'Using partial-delete (removing a lone element) when a full reset was intended'
+    - 'Repeatedly performing a full reset without addressing the underlying conceptual error'
+    - 'Resetting after each element, preventing multi-element entry'
+  verification_checklist:
+    - 'Input surface shows empty/initial state'
+    - 'Subsequent actions build expression from scratch'
+
+CATEGORY: VERIFY_OUTPUT
+  precondition: An operation has been evaluated
+  abstract_steps:
+    1. Read result field
+    2. Compare against expected value or symbolic form
+    3. Decide success or retry
+  failure_modes:
+    - 'Misinterpreting an auto-preview intermediate value as the final committed result'
+    - 'Stopping at an unexpected partial value and declaring completion prematurely without full evaluation'
+    - 'Not noticing mode or unit differences affecting interpretation'
+  verification_checklist:
+    - 'Result is well-formed and finite'
+    - 'Value matches expected within appropriate precision'
+    - 'Mode/units appropriate for the problem'
+
+CATEGORY: NAVIGATE_MENU
+  precondition: Secondary menu or overlay opened
+  abstract_steps:
+    1. Scan menu for relevant item
+    2. Select it or dismiss if irrelevant
+    3. Return to main workspace via back/dismiss action
+  failure_modes:
+    - 'Treating the menu as a source of unrelated features'
+    - 'Leaving a modal overlay open and blocking further input'
+  verification_checklist:
+    - 'Returned to main workspace'
+    - 'No lingering overlay or modal surface'

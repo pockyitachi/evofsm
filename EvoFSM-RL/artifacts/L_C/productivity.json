@@ -1,0 +1,314 @@
+{
+  "category": "Productivity",
+  "layer2": {
+    "categories": [
+      {
+        "name": "QUERY_INFO",
+        "precondition": "Target data-bearing screen reachable from launcher; target item/query specifies a filter (date, status, priority, attribute, etc.); app may not be in foreground",
+        "abstract_steps": [
+          "Launch the relevant app from the launcher",
+          "Navigate to the primary list/overview screen or to the named item by browsing the list or using an in-app lookup affordance",
+          "Resolve any relative terms in the query (today, next week, after next) to absolute values using the device/task context",
+          "Scroll through the full list to enumerate all candidate items",
+          "Inspect the visible marker/attribute (icon, prefix, checkbox, color) that indicates the attribute in question",
+          "Apply the query's filter predicate to each item using observable visual attributes",
+          "Aggregate matching items into the requested output format (list, count, yes/no, categorical value)",
+          "Emit a single answer action, then immediately emit a terminal completion signal"
+        ],
+        "failure_modes": [
+          "Declaring the task infeasible from the launcher without attempting to open the app",
+          "Declaring the query infeasible before exhausting available navigation (scroll, open detail)",
+          "Answering based on a screen that does not actually contain the target item",
+          "Answering from a partial view without scrolling the full list",
+          "Looping on the same answer action without finalizing with a completion status",
+          "Repeating the same answer action without terminating, causing step exhaustion",
+          "Confusing relative date labels with the queried absolute date",
+          "Guessing semantic attributes (priority, category) from unrelated visual cues",
+          "Miscounting due to duplicated or partially visible rows after scrolling",
+          "Modifying data while reading",
+          "Reporting stale/cached values"
+        ],
+        "verification_checklist": [
+          "The target item's row is actually visible on screen",
+          "The attribute marker is unambiguously present or absent",
+          "Did I reach the list screen that actually contains the data?",
+          "Did I map all relative terms to concrete values consistent with the current date?",
+          "Did I scroll until the end of the list (no new content appears)?",
+          "Does each returned item satisfy every part of the filter (date AND status AND priority)?",
+          "Is the answer format exactly what the user requested (comma-separated / count / None)?",
+          "A single completion/status signal is emitted after the answer",
+          "Did I emit a terminal completion action exactly once after answering?",
+          "Reported value matches on-screen value",
+          "No side effects on data"
+        ]
+      },
+      {
+        "name": "COUNT_ITEMS_BY_ATTRIBUTE",
+        "precondition": "A container (folder/list/category) and a filtering attribute are specified",
+        "abstract_steps": [
+          "Open the app and navigate to the specified container via its navigation drawer/menu",
+          "Enumerate all list entries, scrolling as needed to cover the full list",
+          "Count entries whose row carries the filtering attribute marker",
+          "Return the count as a number"
+        ],
+        "failure_modes": [
+          "Counting within the wrong container because the app opened to a different default",
+          "Missing entries that require scrolling",
+          "Confusing unrelated visual markers with the target attribute"
+        ],
+        "verification_checklist": [
+          "Current container label matches the requested one",
+          "List has been scrolled to end or confirmed fully visible",
+          "Only entries with the specific attribute marker are counted"
+        ]
+      },
+      {
+        "name": "FILTER_BY_ATTRIBUTE",
+        "precondition": "List view exposes per-item visual attributes (color, icon, label) that encode the attribute of interest",
+        "abstract_steps": [
+          "Identify the concrete visual encoding of the target attribute on this app (e.g., checkbox color = priority)",
+          "Iterate items and apply the encoding rule",
+          "Return matching titles/identifiers"
+        ],
+        "failure_modes": [
+          "Assuming a default encoding from other apps rather than observing this app's cues",
+          "Treating urgency/date as priority when priority is encoded separately"
+        ],
+        "verification_checklist": [
+          "Is the attribute encoding confirmed by at least one unambiguous example?",
+          "Are negative examples (items that should NOT match) excluded?"
+        ]
+      },
+      {
+        "name": "LOOKUP_FIELD_IN_ENTRY",
+        "precondition": "Entry title and desired field/sub-item are specified",
+        "abstract_steps": [
+          "Open the app and invoke its entry-lookup affordance",
+          "Provide the entry title and select the matching result",
+          "Locate the section containing the field and read its value",
+          "Return the value verbatim"
+        ],
+        "failure_modes": [
+          "Skipping app launch and declaring infeasible",
+          "Opening a wrong result with a similar title",
+          "Reading from the wrong section of the entry"
+        ],
+        "verification_checklist": [
+          "Opened entry title matches the requested one",
+          "Value is read from the correct labeled section",
+          "Answer preserves units/qualifiers as shown"
+        ]
+      },
+      {
+        "name": "NAVIGATE_TO",
+        "precondition": "Multiple containers exist or target app/screen may not be on current screen; a specific one is required",
+        "abstract_steps": [
+          "If target app not visible, invoke the app-launch primitive or open the system launcher/app list to switch context",
+          "Open the navigation drawer/menu",
+          "Locate the named container (scroll if necessary)",
+          "Traverse the container hierarchy via click-in and back-navigation",
+          "Tap to switch context",
+          "Verify the landing screen/breadcrumb/title matches expectations before acting"
+        ],
+        "failure_modes": [
+          "Assuming the currently opened container is the target",
+          "Missing the target entry because it resides in a different container",
+          "Confusing similar container identifiers",
+          "Getting stuck in side menus (e.g., configuration panes) that do not lead to target",
+          "Repeating the same failing click",
+          "Acting before the landing screen is fully loaded"
+        ],
+        "verification_checklist": [
+          "Header/title of the list reflects the requested container name",
+          "Breadcrumb/title matches expected path",
+          "Expected content visible",
+          "Title bar/landmark of destination screen is visible"
+        ]
+      },
+      {
+        "name": "ADD_ENTRY",
+        "precondition": "App is open at a list/index view that exposes an affordance to create a new item",
+        "abstract_steps": [
+          "Invoke the primary create-new affordance (commonly a prominent action button)",
+          "Provide the required identifier in the creation dialog, clearing any prefilled placeholder first",
+          "Select the correct item kind/format if the dialog offers a choice",
+          "Confirm creation",
+          "If opened in an editor, enter the required body content",
+          "Persist the change (explicit commit if auto-persistence is not guaranteed)"
+        ],
+        "failure_modes": [
+          "Leaving the prefilled placeholder identifier concatenated with the intended identifier",
+          "Not switching item kind (leaf vs container) before confirming",
+          "Garbled extension/suffix field producing wrong format",
+          "Declaring success before persisting",
+          "Creating item in wrong parent container"
+        ],
+        "verification_checklist": [
+          "New item appears in the listing with the exact expected identifier",
+          "Opening the item shows the expected body content",
+          "No stray/extra items created",
+          "Correct parent container"
+        ]
+      },
+      {
+        "name": "REMOVE_ENTRY",
+        "precondition": "Target item is visible in a list view",
+        "abstract_steps": [
+          "Long-press the target row to enter selection mode",
+          "Invoke the removal action from the contextual action bar",
+          "Confirm removal in the confirmation dialog"
+        ],
+        "failure_modes": [
+          "Selecting wrong row (similar identifiers)",
+          "Missing the confirmation step",
+          "Removing parent container instead of the target item"
+        ],
+        "verification_checklist": [
+          "Item no longer appears in the listing",
+          "No confirmation dialog left open",
+          "Sibling items intact"
+        ]
+      },
+      {
+        "name": "BULK_REMOVE",
+        "precondition": "Multiple items to clear from a list",
+        "abstract_steps": [
+          "Repeat the single-item removal flow for each item, OR use multi-select if available",
+          "After each removal, verify return to list before selecting the next target"
+        ],
+        "failure_modes": [
+          "Index shifting after removal leading to wrong next item",
+          "Stopping before all targets are cleared"
+        ],
+        "verification_checklist": [
+          "Listing contains only non-target items (often empty)"
+        ]
+      },
+      {
+        "name": "EDIT_ENTRY_CONTENT",
+        "precondition": "Target item exists and can be opened in an editor",
+        "abstract_steps": [
+          "Open the item from the list",
+          "Position cursor at the required location (start, end, or full-content selection)",
+          "Insert, append, prepend, or replace text as required",
+          "Persist the change"
+        ],
+        "failure_modes": [
+          "Appending instead of prepending (or vice versa)",
+          "Not selecting the full existing content before replacing (causing concatenation)",
+          "Forgetting trailing newline when prepending",
+          "Not persisting before navigating away"
+        ],
+        "verification_checklist": [
+          "Item body matches expected content exactly",
+          "Line breaks and ordering match specification",
+          "Changes persisted (indicator dismisses/returns to list cleanly)"
+        ]
+      },
+      {
+        "name": "RELABEL_ENTRY",
+        "precondition": "Item exists in a list view that supports relabeling",
+        "abstract_steps": [
+          "Long-press the item to enter selection mode",
+          "Choose the relabel action from the contextual action bar",
+          "Enter the new identifier in the dialog and confirm"
+        ],
+        "failure_modes": [
+          "Attempting to relabel from within the editor (title click does not relabel)",
+          "Typing into the editor title field and assuming it relabeled the item",
+          "Leaving old extension/suffix when a new one is required"
+        ],
+        "verification_checklist": [
+          "List shows the item with the new identifier",
+          "Old identifier no longer present",
+          "Content preserved"
+        ]
+      },
+      {
+        "name": "RELOCATE_ENTRY",
+        "precondition": "Source item and destination container both exist",
+        "abstract_steps": [
+          "Long-press the source item to select it",
+          "Open the contextual overflow and choose the relocate action",
+          "In the destination picker, navigate up and/or into the target container",
+          "Confirm with the 'choose this container' action"
+        ],
+        "failure_modes": [
+          "Selecting the source's own container as destination",
+          "Stopping at the picker without a final confirmation",
+          "Not navigating up to the common ancestor first"
+        ],
+        "verification_checklist": [
+          "Item no longer present in source container",
+          "Item present in destination container",
+          "Content unchanged"
+        ]
+      },
+      {
+        "name": "CROSS_APP_TRANSFER",
+        "precondition": "Source content is prepared; destination app is installed",
+        "abstract_steps": [
+          "Create/finalize source content in the origin app and persist it",
+          "Launch the destination app via the launcher",
+          "Initiate a new message/record in the destination app",
+          "Provide the recipient/target identifier",
+          "Insert the content (enter it directly or transfer via system transfer buffer)",
+          "Send/commit"
+        ],
+        "failure_modes": [
+          "Opening the wrong destination app (a similar but different communication app)",
+          "Not persisting source before switching apps",
+          "Leaving the draft unsent",
+          "Using a pre-existing contact instead of the required recipient identifier"
+        ],
+        "verification_checklist": [
+          "Destination app shows the sent/committed item with exact content",
+          "Recipient identifier matches",
+          "No residual draft"
+        ]
+      },
+      {
+        "name": "MERGE_ENTRIES",
+        "precondition": "Multiple source items and a specified destination identifier",
+        "abstract_steps": [
+          "Create the destination item first (empty)",
+          "For each source in order: open, select full content, capture it, return to destination, insert it, append a separator if required",
+          "Persist destination"
+        ],
+        "failure_modes": [
+          "Getting stuck trying to create destination from editor menus instead of the list view",
+          "Losing captured content between app switches",
+          "Wrong order",
+          "Missing separators between sections"
+        ],
+        "verification_checklist": [
+          "Destination contains each source's content in the required order",
+          "Separators (newlines) between sections",
+          "Source items unchanged"
+        ]
+      },
+      {
+        "name": "TRANSCRIBE_FROM_MEDIA",
+        "precondition": "Media source and transcription target available",
+        "abstract_steps": [
+          "Open the media player and start playback",
+          "Observe each piece of text/frame",
+          "Switch to the transcription editor and record the observation with the required formatting",
+          "Repeat until media ends",
+          "Persist the transcription"
+        ],
+        "failure_modes": [
+          "Using 'wait' without switching back to the media app",
+          "Losing place when switching apps repeatedly",
+          "Fabricating content not actually shown",
+          "Incorrect delimiter formatting"
+        ],
+        "verification_checklist": [
+          "Transcription contains the complete ordered sequence",
+          "Formatting (delimiter, identifier) matches spec",
+          "Transcription persisted"
+        ]
+      }
+    ]
+  }
+}
