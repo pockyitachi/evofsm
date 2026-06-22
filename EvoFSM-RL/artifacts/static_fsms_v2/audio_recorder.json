@@ -1,0 +1,601 @@
+{
+  "version": "0.1.0",
+  "app": "audio_recorder",
+  "layer1": {
+    "app": "audio_recorder",
+    "category": "Music & Audio",
+    "states": [
+      {
+        "id": "home_screen",
+        "description": "Android device home screen",
+        "visual_cues": [
+          "app icons grid",
+          "bottom dock with Phone/Messages/Chrome"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "app_drawer",
+        "description": "Full app list",
+        "visual_cues": [
+          "alphabetical app grid",
+          "search bar at top"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "welcome_screen",
+        "description": "First-launch onboarding screen",
+        "visual_cues": [
+          "Audio Recorder logo",
+          "Welcome to a simple and fast application text",
+          "yellow 'Get started' button bottom"
+        ],
+        "resource_hints": [
+          "Get started"
+        ]
+      },
+      {
+        "id": "setup_screen",
+        "description": "Initial setup/configuration wizard",
+        "visual_cues": [
+          "Theme dropdown",
+          "Naming dropdown",
+          "Recording format buttons (M4a/Wav/3gp)",
+          "Sample rate buttons",
+          "Bitrate buttons",
+          "Channel count buttons (Stereo/Mono)",
+          "info (i) icons",
+          "expected size info panel",
+          "yellow Reset + Apply buttons at bottom"
+        ],
+        "resource_hints": [
+          "Theme",
+          "Naming",
+          "Recording format",
+          "Sample rate",
+          "Bitrate",
+          "Channel count",
+          "Apply",
+          "Reset",
+          "expected size"
+        ]
+      },
+      {
+        "id": "main_recorder",
+        "description": "Main recording interface",
+        "visual_cues": [
+          "large central record button",
+          "timer 00:00",
+          "size/format/sample-rate text below timer",
+          "settings gear bottom-left",
+          "list icon bottom-right"
+        ],
+        "resource_hints": [
+          "Mb",
+          "M4a",
+          "Wav",
+          "3gp",
+          "kHz"
+        ]
+      },
+      {
+        "id": "recording_active",
+        "description": "Recording in progress",
+        "visual_cues": [
+          "running timer",
+          "Recording... status text",
+          "stop and pause buttons"
+        ],
+        "resource_hints": [
+          "Recording..."
+        ]
+      },
+      {
+        "id": "rename_dialog",
+        "description": "New name dialog after stop",
+        "visual_cues": [
+          "text field with default 'Record-N'",
+          "Cancel and Save buttons"
+        ],
+        "resource_hints": [
+          "New name",
+          "Save"
+        ]
+      },
+      {
+        "id": "settings_menu",
+        "description": "App settings (gear icon)",
+        "visual_cues": [
+          "Trash",
+          "File browser",
+          "Theme",
+          "Naming",
+          "Keep screen ON while recording toggle",
+          "Show rename dialog after recording toggle",
+          "Recording format/Sample rate/Bitrate/Channel count sections"
+        ],
+        "resource_hints": [
+          "Keep screen ON while recording",
+          "Show rename dialog after recording is completed",
+          "Trash",
+          "File browser"
+        ]
+      },
+      {
+        "id": "info_dialog",
+        "description": "Information popup for a setting",
+        "visual_cues": [
+          "Information title",
+          "explanatory text about sample rates/formats/bitrate/channel",
+          "Ok button"
+        ],
+        "resource_hints": [
+          "Information",
+          "Ok",
+          "recommended"
+        ]
+      },
+      {
+        "id": "records_list",
+        "description": "Saved recordings list",
+        "visual_cues": [
+          "Records title",
+          "list of files or 'Records is empty'",
+          "sort/filter icon top-right",
+          "bookmark icon top-right",
+          "back arrow top-left"
+        ],
+        "resource_hints": [
+          "Records",
+          "Records is empty"
+        ]
+      },
+      {
+        "id": "bookmarks",
+        "description": "Bookmarks list",
+        "visual_cues": [
+          "Bookmarks title",
+          "'Bookmarks is empty' message"
+        ],
+        "resource_hints": [
+          "Bookmarks is empty"
+        ]
+      },
+      {
+        "id": "sort_menu",
+        "description": "Sort dropdown over records",
+        "visual_cues": [
+          "By date",
+          "By name",
+          "By duration options"
+        ],
+        "resource_hints": [
+          "By date",
+          "By name",
+          "By duration"
+        ]
+      },
+      {
+        "id": "recent_filter_view",
+        "description": "System Recent picker with filter chips",
+        "visual_cues": [
+          "Large files chip",
+          "This week chip",
+          "No matches in Recent message"
+        ],
+        "resource_hints": [
+          "Large files",
+          "No matches in Recent"
+        ]
+      },
+      {
+        "id": "file_overflow_menu",
+        "description": "Overflow menu for loaded record",
+        "visual_cues": [
+          "Share",
+          "Information",
+          "Rename",
+          "Open with",
+          "Save as",
+          "Delete"
+        ],
+        "resource_hints": [
+          "Share",
+          "Rename",
+          "Delete"
+        ]
+      }
+    ],
+    "transitions": [
+      {
+        "from_state": "home_screen",
+        "to_state": "app_drawer",
+        "action": "swipe_up_from_bottom",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "app_drawer",
+        "to_state": "welcome_screen",
+        "action": "click(Audio Recorder icon)",
+        "precondition": "first launch",
+        "postcondition": ""
+      },
+      {
+        "from_state": "app_drawer",
+        "to_state": "main_recorder",
+        "action": "click(Audio Recorder icon)",
+        "precondition": "already configured",
+        "postcondition": ""
+      },
+      {
+        "from_state": "welcome_screen",
+        "to_state": "setup_screen",
+        "action": "click(Get started)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "setup_screen",
+        "to_state": "main_recorder",
+        "action": "click(Apply)",
+        "precondition": "",
+        "postcondition": "settings saved"
+      },
+      {
+        "from_state": "setup_screen",
+        "to_state": "setup_screen",
+        "action": "click(Reset)",
+        "precondition": "",
+        "postcondition": "settings reverted to defaults"
+      },
+      {
+        "from_state": "setup_screen",
+        "to_state": "info_dialog",
+        "action": "click(info icon next to setting)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "info_dialog",
+        "to_state": "setup_screen",
+        "action": "click(Ok)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "main_recorder",
+        "to_state": "settings_menu",
+        "action": "click(gear icon bottom-left)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "settings_menu",
+        "to_state": "main_recorder",
+        "action": "click(back arrow)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "settings_menu",
+        "to_state": "info_dialog",
+        "action": "click(info icon)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "main_recorder",
+        "to_state": "records_list",
+        "action": "click(list icon bottom-right)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "records_list",
+        "to_state": "main_recorder",
+        "action": "click(back arrow)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "records_list",
+        "to_state": "bookmarks",
+        "action": "click(bookmark icon top-right)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "records_list",
+        "to_state": "sort_menu",
+        "action": "click(sort/filter icon top-right)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "sort_menu",
+        "to_state": "records_list",
+        "action": "click(outside menu)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "main_recorder",
+        "to_state": "recording_active",
+        "action": "click(record button)",
+        "precondition": "",
+        "postcondition": "recording started"
+      },
+      {
+        "from_state": "recording_active",
+        "to_state": "rename_dialog",
+        "action": "click(stop)",
+        "precondition": "rename-dialog setting enabled",
+        "postcondition": ""
+      },
+      {
+        "from_state": "rename_dialog",
+        "to_state": "main_recorder",
+        "action": "click(Save)",
+        "precondition": "",
+        "postcondition": "file saved"
+      },
+      {
+        "from_state": "main_recorder",
+        "to_state": "file_overflow_menu",
+        "action": "click(three-dot menu top-right)",
+        "precondition": "a record is loaded",
+        "postcondition": ""
+      }
+    ],
+    "strategies": [
+      {
+        "name": "INITIAL_LAUNCH_AND_SETUP",
+        "preconditions": "first time opening the app from home_screen",
+        "steps": [
+          "swipe up to open app_drawer",
+          "click Audio Recorder icon",
+          "click 'Get started' on welcome_screen",
+          "modify desired options on setup_screen (Theme, Naming, Recording format, Sample rate, Bitrate, Channel count)",
+          "click 'Apply' to land on main_recorder"
+        ],
+        "success_signal": "main_recorder visible with format/sample-rate text reflecting choices",
+        "fallback": "if you exit Apply too early, tap gear icon to re-open settings_menu"
+      },
+      {
+        "name": "CONFIGURE_RECORDING_PARAMETERS",
+        "preconditions": "on setup_screen or settings_menu",
+        "steps": [
+          "tap target format button (M4a / Wav / 3gp)",
+          "tap target sample rate button (8/16/22/32/44.1/48kHz)",
+          "tap target bitrate button (only available for compressed formats like M4a)",
+          "tap Stereo or Mono",
+          "tap Apply (setup) or back arrow (settings)"
+        ],
+        "success_signal": "checkmarks appear on selected buttons; summary text matches request",
+        "fallback": "if Bitrate disappears under 3gp/Wav, set bitrate first with M4a then switch format"
+      },
+      {
+        "name": "CHANGE_THEME_OR_NAMING",
+        "preconditions": "on setup_screen",
+        "steps": [
+          "tap current Theme dropdown",
+          "select desired theme from list",
+          "tap current Naming dropdown",
+          "select desired naming pattern (sequential, date formats, or Unix timestamp)",
+          "tap Apply"
+        ],
+        "success_signal": "main_recorder background color matches theme; summary text reflects new naming",
+        "fallback": "re-open dropdown if selection didn't register"
+      },
+      {
+        "name": "LOOKUP_INFO_VIA_HELP_ICON",
+        "preconditions": "on setup_screen or settings_menu, need recommendation/explanation",
+        "steps": [
+          "tap info (i) icon next to the relevant section",
+          "read info_dialog text for 'recommended' marker or specific value",
+          "tap Ok to dismiss",
+          "select the recommended value on the underlying screen",
+          "tap Apply"
+        ],
+        "success_signal": "answer text present in dialog; selection persists after Ok",
+        "fallback": ""
+      },
+      {
+        "name": "READ_EXPECTED_SIZE",
+        "preconditions": "on setup_screen",
+        "steps": [
+          "ensure desired format/sample rate/bitrate/channel are selected",
+          "read the 'X Mb/min expected size' line at the bottom info panel"
+        ],
+        "success_signal": "expected size text visible above Reset/Apply",
+        "fallback": ""
+      },
+      {
+        "name": "RECORD_AND_SAVE_WITH_NAME",
+        "preconditions": "on main_recorder, rename dialog enabled",
+        "steps": [
+          "tap record button",
+          "wait a few seconds",
+          "tap stop button",
+          "in rename_dialog, clear field and type desired filename",
+          "tap Save"
+        ],
+        "success_signal": "main_recorder shows saved file name in title area",
+        "fallback": "if rename dialog doesn't appear, enable 'Show rename dialog after recording is completed' in settings_menu"
+      },
+      {
+        "name": "BROWSE_RECORDS",
+        "preconditions": "on main_recorder",
+        "steps": [
+          "tap list icon bottom-right to open records_list",
+          "optionally tap sort/filter icon for sort options",
+          "optionally tap bookmark icon for bookmarks"
+        ],
+        "success_signal": "Records list or 'Records is empty' visible",
+        "fallback": ""
+      },
+      {
+        "name": "ENABLE_KEEP_SCREEN_ON",
+        "preconditions": "main_recorder",
+        "steps": [
+          "tap gear icon to open settings_menu",
+          "toggle 'Keep screen ON while recording'",
+          "tap back arrow"
+        ],
+        "success_signal": "toggle appears yellow/on",
+        "fallback": ""
+      }
+    ],
+    "dead_ends": [
+      {
+        "state": "records_list",
+        "failed_action": "looking for built-in search bar / 'Large files' filter inside the app",
+        "note": "App lacks an explicit search; only sort options exist. 'Large files'/Recent filtering is in the system Recent picker, not the app itself."
+      },
+      {
+        "state": "setup_screen",
+        "failed_action": "trying to set bitrate after selecting 3gp or Wav format",
+        "note": "Bitrate section disappears for non-M4a formats; set bitrate first while M4a is selected, then switch format."
+      },
+      {
+        "state": "main_recorder",
+        "failed_action": "tapping Apply before configuring all required parameters",
+        "note": "Apply exits setup_screen; missing settings must be redone via gear settings_menu."
+      },
+      {
+        "state": "setup_screen",
+        "failed_action": "opening Theme dropdown then tapping Apply without selecting",
+        "note": "Dropdown closes without applying change; theme remains as before. Must reopen and explicitly tap a theme entry."
+      }
+    ]
+  },
+  "layer2": {
+    "categories": [
+      {
+        "name": "CONFIGURE_SETTINGS",
+        "precondition": "Target app is installed and reachable; configuration screen or settings menu accessible",
+        "abstract_steps": [
+          "Launch app from launcher or app drawer",
+          "Dismiss any first-run/onboarding screens",
+          "Navigate to the settings/preferences area",
+          "For each requested parameter: locate its section and select the desired option",
+          "Confirm/apply the changes via the explicit apply/save control",
+          "Verify on the resulting screen that selections are reflected"
+        ],
+        "failure_modes": [
+          "Applying before all parameters are set, exiting the settings page prematurely",
+          "Selecting a value that hides dependent options (mutually exclusive choices)",
+          "Mis-tapping a dropdown that auto-dismisses without recording a selection",
+          "Confusing similar-looking app icons during launch"
+        ],
+        "verification_checklist": [
+          "Each requested parameter shows the selected state (checkmark/highlight)",
+          "Any summary/status line on main UI reflects the new values",
+          "Returning to the settings screen still shows the chosen values"
+        ]
+      },
+      {
+        "name": "QUERY_INFO",
+        "precondition": "Information is exposed somewhere in the app's UI (info icons, help dialogs, summary lines)",
+        "abstract_steps": [
+          "Navigate to the screen that contains the desired information",
+          "If hidden, tap the contextual help/info affordance next to the relevant field",
+          "Read the dialog or status text",
+          "Return the exact phrasing/value as the answer"
+        ],
+        "failure_modes": [
+          "Reading default values instead of values for the requested configuration",
+          "Closing the info dialog before extracting the value",
+          "Confusing 'recommended' marker with currently selected value"
+        ],
+        "verification_checklist": [
+          "Value is read while the relevant configuration is active",
+          "Answer matches text on screen verbatim where requested"
+        ]
+      },
+      {
+        "name": "ADD_ENTRY",
+        "precondition": "App is on its main creation surface; storage permission granted",
+        "abstract_steps": [
+          "Reach the main creation screen",
+          "Trigger the primary create/record action",
+          "Provide any required input (duration, content)",
+          "Stop/finish the creation",
+          "If prompted, supply a name and confirm save"
+        ],
+        "failure_modes": [
+          "Save dialog absent because an option to prompt-for-name is disabled",
+          "Default name used instead of requested name because dialog dismissed",
+          "Creation aborted before save"
+        ],
+        "verification_checklist": [
+          "New entry appears in the entry list with the desired name",
+          "Entry metadata reflects the configured parameters"
+        ]
+      },
+      {
+        "name": "DELETE_ENTRY",
+        "precondition": "Entry list is non-empty and visible",
+        "abstract_steps": [
+          "Open the list of entries",
+          "Select/expand the target entry",
+          "Tap the delete control",
+          "Confirm deletion if prompted"
+        ],
+        "failure_modes": [
+          "Deleting wrong entry due to mis-tap",
+          "Toast confirmation missed; assumes failure"
+        ],
+        "verification_checklist": [
+          "Target entry no longer in list",
+          "Confirmation toast/snackbar observed"
+        ]
+      },
+      {
+        "name": "NAVIGATE_TO",
+        "precondition": "Target screen exists and is reachable from current screen",
+        "abstract_steps": [
+          "Identify entry point control (icon/tab/menu item)",
+          "Tap to navigate; if blocked by onboarding, dismiss first",
+          "Confirm arrival via expected visual cue"
+        ],
+        "failure_modes": [
+          "Icon confusable with another app or function",
+          "Search/filter expected but not present in current app",
+          "Back button leaves the app instead of going up one level"
+        ],
+        "verification_checklist": [
+          "Expected title/labels visible on destination",
+          "Expected primary action available"
+        ]
+      },
+      {
+        "name": "RESET_TO_DEFAULTS",
+        "precondition": "On settings screen exposing a reset/restore control",
+        "abstract_steps": [
+          "Locate the reset control",
+          "Tap reset",
+          "Verify defaults are restored"
+        ],
+        "failure_modes": [
+          "Reset tapped before reading required current values",
+          "Reset doesn't affect cross-screen settings"
+        ],
+        "verification_checklist": [
+          "All visible options show default selections",
+          "Summary text matches default configuration"
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "built_at": "2025-01-17T00:00:00Z",
+    "n_episodes": 56,
+    "n_successful": 56,
+    "n_episodes_input": 56,
+    "synthesizer_model": "claude-opus-4-7",
+    "synthesizer_temperature": 0.3
+  }
+}

@@ -1,0 +1,1076 @@
+{
+  "version": "0.1.0",
+  "app": "contacts",
+  "layer1": {
+    "app": "contacts",
+    "category": "Communication",
+    "states": [
+      {
+        "id": "home_screen",
+        "description": "Android device home screen",
+        "visual_cues": [
+          "app icons grid",
+          "bottom dock with apps",
+          "Google search bar"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "app_drawer",
+        "description": "App drawer showing all installed apps",
+        "visual_cues": [
+          "alphabetical grid of apps",
+          "search bar at top"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "contacts_main",
+        "description": "Main Contacts screen",
+        "visual_cues": [
+          "Search contacts bar",
+          "filter chips below search",
+          "FAB '+' button bottom-right",
+          "bottom nav with Contacts/Highlights/Fix & manage",
+          "'No contacts yet' empty state"
+        ],
+        "resource_hints": [
+          "Search contacts",
+          "Phone contacts",
+          "Email contacts",
+          "Company"
+        ]
+      },
+      {
+        "id": "permission_dialog",
+        "description": "Allow notifications dialog when first opening app",
+        "visual_cues": [
+          "Allow / Don't allow buttons",
+          "'Allow Contacts to send you notifications?'"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "tooltip_overlay",
+        "description": "Tooltip pointing to profile icon for Settings",
+        "visual_cues": [
+          "blue tooltip 'Now you can find Settings and Help & feedback here'"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "create_contact",
+        "description": "New contact creation form",
+        "visual_cues": [
+          "First name field",
+          "Last name field",
+          "Company field",
+          "Phone field",
+          "Email field",
+          "Add picture circle at top",
+          "Save button top-right"
+        ],
+        "resource_hints": [
+          "First name",
+          "Last name",
+          "Company",
+          "Phone",
+          "Email",
+          "Save"
+        ]
+      },
+      {
+        "id": "add_photo_dialog",
+        "description": "Photo source picker dialog",
+        "visual_cues": [
+          "Take photo option",
+          "Choose photo option",
+          "Cancel button"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "camera_view",
+        "description": "Device camera capture screen",
+        "visual_cues": [
+          "viewfinder",
+          "circular shutter button"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "photo_crop",
+        "description": "Captured photo crop/confirm screen",
+        "visual_cues": [
+          "crop frame",
+          "Done button"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "label_dropdown",
+        "description": "Phone/Email label selection dropdown",
+        "visual_cues": [
+          "list: Mobile/Home/Work/Work Fax/Home Fax/Pager/Other/Custom"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "contact_details",
+        "description": "Saved contact view",
+        "visual_cues": [
+          "large avatar at top",
+          "name heading",
+          "pencil edit icon",
+          "star favorite icon",
+          "overflow menu",
+          "Contact info section"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "edit_contact",
+        "description": "Editing existing contact",
+        "visual_cues": [
+          "editable name fields",
+          "Save button"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "search_view",
+        "description": "Active search within Contacts",
+        "visual_cues": [
+          "search input focused",
+          "back arrow",
+          "'No results' or filtered list"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "nav_drawer",
+        "description": "Hamburger navigation drawer",
+        "visual_cues": [
+          "account/Device entry",
+          "Labels section",
+          "Create label option"
+        ],
+        "resource_hints": [
+          "Create label"
+        ]
+      },
+      {
+        "id": "create_label_dialog",
+        "description": "Dialog to create a new label",
+        "visual_cues": [
+          "Label name input",
+          "OK / Cancel buttons"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "highlights_tab",
+        "description": "Highlights tab showing Favorites and Recents",
+        "visual_cues": [
+          "Favorites section",
+          "Recents section with 'Viewed recently' / 'Added recently' toggle"
+        ],
+        "resource_hints": [
+          "Favorites",
+          "Recents",
+          "Added recently",
+          "Viewed recently"
+        ]
+      },
+      {
+        "id": "fix_and_manage",
+        "description": "Fix & manage tab",
+        "visual_cues": [
+          "Import from SIM",
+          "Import from file",
+          "Export to file",
+          "Settings",
+          "Blocked numbers under Other tools"
+        ],
+        "resource_hints": [
+          "Import from SIM",
+          "Import from file",
+          "Export to file",
+          "Settings",
+          "Blocked numbers"
+        ]
+      },
+      {
+        "id": "settings",
+        "description": "Contacts app settings",
+        "visual_cues": [
+          "Your info",
+          "Accounts",
+          "Display section (Sort by, Name format, Theme)",
+          "Edit contacts section (Phonetic name, Default account for new contacts)"
+        ],
+        "resource_hints": [
+          "Sort by",
+          "Name format",
+          "Theme",
+          "Phonetic name",
+          "Default account for new contacts"
+        ]
+      },
+      {
+        "id": "settings_choice_dialog",
+        "description": "Radio/list dialog for a setting (Theme/Sort by/Name format/Phonetic/Default account)",
+        "visual_cues": [
+          "radio options",
+          "selected option"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "blocked_numbers",
+        "description": "Blocked numbers management screen",
+        "visual_cues": [
+          "Unknown toggle for unidentified callers",
+          "Add a number row",
+          "list of blocked numbers"
+        ],
+        "resource_hints": [
+          "Unknown",
+          "Add a number"
+        ]
+      },
+      {
+        "id": "add_blocked_dialog",
+        "description": "Dialog to add a number to block list",
+        "visual_cues": [
+          "'Block calls and texts from' title",
+          "Phone number input",
+          "Cancel / Block buttons"
+        ],
+        "resource_hints": [
+          "Phone number",
+          "Block"
+        ]
+      },
+      {
+        "id": "profile_menu",
+        "description": "Account/profile popup from top-right icon",
+        "visual_cues": [
+          "Add another account",
+          "Manage accounts on this device",
+          "Contacts app settings",
+          "Help & feedback"
+        ],
+        "resource_hints": [
+          "Contacts app settings",
+          "Help & feedback",
+          "Manage accounts on this device"
+        ]
+      },
+      {
+        "id": "help_feedback",
+        "description": "Help & feedback page",
+        "visual_cues": [
+          "Popular help resources",
+          "Send feedback",
+          "three-dot menu top-right"
+        ],
+        "resource_hints": [
+          "Send feedback"
+        ]
+      },
+      {
+        "id": "help_overflow_menu",
+        "description": "Overflow menu in Help with Version info / Licenses",
+        "visual_cues": [
+          "View in Play Store",
+          "Version info",
+          "Open source licenses",
+          "Privacy Policy",
+          "Terms of Service"
+        ],
+        "resource_hints": [
+          "Version info",
+          "Open source licenses"
+        ]
+      },
+      {
+        "id": "version_info_dialog",
+        "description": "Dialog showing app version",
+        "visual_cues": [
+          "app icon",
+          "Version number text"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "file_picker",
+        "description": "System file picker (for Import from file)",
+        "visual_cues": [
+          "hamburger menu",
+          "Recent header",
+          "filter chips like 'Large files', 'This week'"
+        ],
+        "resource_hints": [
+          "Downloads",
+          "Recent"
+        ]
+      },
+      {
+        "id": "import_sim",
+        "description": "Import from SIM selection screen",
+        "visual_cues": [
+          "'Select contacts' header",
+          "'No contacts on your SIM card' if empty"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "passwords_accounts",
+        "description": "System Passwords & accounts settings",
+        "visual_cues": [
+          "Account list",
+          "Automatically sync app data toggle"
+        ],
+        "resource_hints": [
+          "Automatically sync app data"
+        ]
+      },
+      {
+        "id": "autosync_confirm_dialog",
+        "description": "Confirmation to turn off auto-sync",
+        "visual_cues": [
+          "'Turn auto-sync data off?' dialog",
+          "Cancel / OK"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "phone_app",
+        "description": "Phone (dialer) app - alternative path for blocked numbers",
+        "visual_cues": [
+          "Favorites/Recents/Contacts tabs",
+          "dialer",
+          "three-dot menu"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "phone_settings",
+        "description": "Phone app settings",
+        "visual_cues": [
+          "Caller ID & spam",
+          "Blocked numbers entry"
+        ],
+        "resource_hints": [
+          "Blocked numbers"
+        ]
+      },
+      {
+        "id": "discard_changes_dialog",
+        "description": "Unsaved changes confirmation",
+        "visual_cues": [
+          "'Your changes have not been saved' Discard / Save"
+        ],
+        "resource_hints": []
+      }
+    ],
+    "transitions": [
+      {
+        "from_state": "home_screen",
+        "to_state": "app_drawer",
+        "action": "swipe_up_from_bottom",
+        "precondition": "",
+        "postcondition": "app drawer visible"
+      },
+      {
+        "from_state": "app_drawer",
+        "to_state": "contacts_main",
+        "action": "click(Contacts icon)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "contacts_main",
+        "to_state": "permission_dialog",
+        "action": "auto on first launch",
+        "precondition": "first run",
+        "postcondition": ""
+      },
+      {
+        "from_state": "permission_dialog",
+        "to_state": "contacts_main",
+        "action": "click(Allow|Don't allow)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "contacts_main",
+        "to_state": "create_contact",
+        "action": "click(fab_plus)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "create_contact",
+        "to_state": "add_photo_dialog",
+        "action": "click(add_picture)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "add_photo_dialog",
+        "to_state": "camera_view",
+        "action": "click(Take photo)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "add_photo_dialog",
+        "to_state": "create_contact",
+        "action": "click(Cancel)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "camera_view",
+        "to_state": "photo_crop",
+        "action": "click(shutter) then confirm",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "photo_crop",
+        "to_state": "create_contact",
+        "action": "click(Done)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "create_contact",
+        "to_state": "label_dropdown",
+        "action": "click(label dropdown)",
+        "precondition": "phone/email entered",
+        "postcondition": ""
+      },
+      {
+        "from_state": "label_dropdown",
+        "to_state": "create_contact",
+        "action": "click(label option)",
+        "precondition": "",
+        "postcondition": "label updated"
+      },
+      {
+        "from_state": "create_contact",
+        "to_state": "contact_details",
+        "action": "click(Save)",
+        "precondition": "at least one field filled",
+        "postcondition": "toast '<name> saved'"
+      },
+      {
+        "from_state": "create_contact",
+        "to_state": "discard_changes_dialog",
+        "action": "system_back with unsaved data",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "contact_details",
+        "to_state": "edit_contact",
+        "action": "click(pencil)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "edit_contact",
+        "to_state": "contact_details",
+        "action": "click(Save)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "contact_details",
+        "to_state": "contact_details",
+        "action": "click(star)",
+        "precondition": "",
+        "postcondition": "favorited toggle"
+      },
+      {
+        "from_state": "contacts_main",
+        "to_state": "search_view",
+        "action": "click(Search contacts)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "search_view",
+        "to_state": "contacts_main",
+        "action": "click(back_arrow)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "contacts_main",
+        "to_state": "nav_drawer",
+        "action": "click(hamburger)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "nav_drawer",
+        "to_state": "create_label_dialog",
+        "action": "click(Create label)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "create_label_dialog",
+        "to_state": "contacts_main",
+        "action": "type(name) + click(OK)",
+        "precondition": "",
+        "postcondition": "label created"
+      },
+      {
+        "from_state": "contacts_main",
+        "to_state": "highlights_tab",
+        "action": "click(Highlights tab)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "contacts_main",
+        "to_state": "fix_and_manage",
+        "action": "click(Fix & manage tab)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "fix_and_manage",
+        "to_state": "settings",
+        "action": "click(Settings)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "fix_and_manage",
+        "to_state": "blocked_numbers",
+        "action": "click(Blocked numbers)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "fix_and_manage",
+        "to_state": "import_sim",
+        "action": "click(Import from SIM)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "fix_and_manage",
+        "to_state": "file_picker",
+        "action": "click(Import from file)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "fix_and_manage",
+        "to_state": "file_picker",
+        "action": "click(Export to file)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "settings",
+        "to_state": "settings_choice_dialog",
+        "action": "click(Theme|Sort by|Name format|Phonetic name|Default account)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "settings_choice_dialog",
+        "to_state": "settings",
+        "action": "click(option)",
+        "precondition": "",
+        "postcondition": "setting updated"
+      },
+      {
+        "from_state": "blocked_numbers",
+        "to_state": "add_blocked_dialog",
+        "action": "click(Add a number)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "add_blocked_dialog",
+        "to_state": "blocked_numbers",
+        "action": "click(Phone number)+type+click(Block)",
+        "precondition": "",
+        "postcondition": "number added"
+      },
+      {
+        "from_state": "contacts_main",
+        "to_state": "profile_menu",
+        "action": "click(profile_icon)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "profile_menu",
+        "to_state": "help_feedback",
+        "action": "click(Help & feedback)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "profile_menu",
+        "to_state": "settings",
+        "action": "click(Contacts app settings)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "profile_menu",
+        "to_state": "passwords_accounts",
+        "action": "click(Manage accounts on this device)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "help_feedback",
+        "to_state": "help_overflow_menu",
+        "action": "click(three_dot_menu)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "help_overflow_menu",
+        "to_state": "version_info_dialog",
+        "action": "click(Version info)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "passwords_accounts",
+        "to_state": "autosync_confirm_dialog",
+        "action": "click(Automatically sync app data toggle when ON)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "autosync_confirm_dialog",
+        "to_state": "passwords_accounts",
+        "action": "click(OK)",
+        "precondition": "",
+        "postcondition": "auto-sync disabled"
+      }
+    ],
+    "strategies": [
+      {
+        "name": "CREATE_CONTACT_BASIC",
+        "preconditions": "home_screen",
+        "steps": [
+          "Open app drawer via swipe up",
+          "click(Contacts) to launch contacts_main",
+          "Dismiss notification permission dialog if shown",
+          "click(fab_plus) to open create_contact",
+          "click(First name) and type first name",
+          "click(Last name) and type last name",
+          "Optional: click(Company) and type company",
+          "If phone/email field hidden: system_back to dismiss keyboard or swipe up to scroll",
+          "click(Phone) and type phone number",
+          "If needed, click(label) and select desired label from label_dropdown",
+          "Optional: click(Email) and type email",
+          "click(Save) at top-right"
+        ],
+        "success_signal": "Navigates to contact_details with name, fields visible, toast '<name> saved'",
+        "fallback": "If Save shows 'Add info to save as a contact' error, dismiss and ensure at least name field is non-empty"
+      },
+      {
+        "name": "ADD_CONTACT_WITH_PHOTO",
+        "preconditions": "create_contact open",
+        "steps": [
+          "click(Add picture) at top of form",
+          "click(Take photo) in add_photo_dialog",
+          "click(shutter) in camera_view",
+          "click(checkmark) to confirm capture",
+          "click(Done) on crop screen",
+          "Continue filling fields and click(Save)"
+        ],
+        "success_signal": "Captured image appears as avatar on contact_details",
+        "fallback": "If photo not attached, re-tap Add picture and retry"
+      },
+      {
+        "name": "FAVORITE_CONTACT",
+        "preconditions": "contact_details open",
+        "steps": [
+          "click(star icon top-right)"
+        ],
+        "success_signal": "Star icon becomes filled",
+        "fallback": "Re-tap if star remains outlined"
+      },
+      {
+        "name": "APPLY_FILTER_CHIP",
+        "preconditions": "contacts_main",
+        "steps": [
+          "Locate filter chip row under search bar",
+          "click(desired chip e.g. Phone contacts/Email contacts/Company)"
+        ],
+        "success_signal": "Chip becomes highlighted blue with 'x', list filters or shows 'No results'",
+        "fallback": "If chip is cut off, swipe horizontally or tap the partially visible chip"
+      },
+      {
+        "name": "SEARCH_CONTACT",
+        "preconditions": "contacts_main",
+        "steps": [
+          "click(Search contacts) bar",
+          "type(query)",
+          "click(keyboard search) to execute"
+        ],
+        "success_signal": "Filtered list or 'No results' shown",
+        "fallback": "If not found, optionally create new entry via fab_plus"
+      },
+      {
+        "name": "CHANGE_APP_SETTING",
+        "preconditions": "contacts_main",
+        "steps": [
+          "click(Fix & manage) tab OR click(profile_icon) then click(Contacts app settings)",
+          "If via Fix & manage: click(Settings)",
+          "click(target setting e.g. Theme/Sort by/Name format/Phonetic name/Default account)",
+          "click(desired option) in settings_choice_dialog"
+        ],
+        "success_signal": "Sub-label under setting updates to chosen value",
+        "fallback": "Return to settings list and re-tap if not changed"
+      },
+      {
+        "name": "BLOCK_NUMBER",
+        "preconditions": "contacts_main",
+        "steps": [
+          "click(Fix & manage) tab",
+          "click(Blocked numbers) under Other tools",
+          "Optionally toggle Unknown for unidentified callers",
+          "click(Add a number)",
+          "click(Phone number) input to focus",
+          "type(number)",
+          "click(Block)"
+        ],
+        "success_signal": "Number appears in blocked list with 'x' for removal",
+        "fallback": "If Block button greyed, the field was not focused; tap the input and retype"
+      },
+      {
+        "name": "IMPORT_FROM_FILE",
+        "preconditions": "contacts_main",
+        "steps": [
+          "click(Fix & manage)",
+          "click(Import from file)",
+          "Use hamburger to switch to Downloads",
+          "select file"
+        ],
+        "success_signal": "File picker shows target folder contents",
+        "fallback": ""
+      },
+      {
+        "name": "EXPORT_TO_VCF",
+        "preconditions": "contacts_main",
+        "steps": [
+          "click(Fix & manage)",
+          "click(Export to file)",
+          "Confirm with SAVE in file picker"
+        ],
+        "success_signal": "Toast 'Contacts will be exported shortly.'",
+        "fallback": ""
+      },
+      {
+        "name": "CREATE_LABEL",
+        "preconditions": "contacts_main",
+        "steps": [
+          "click(hamburger menu)",
+          "click(Create label)",
+          "type(label name)",
+          "click(OK)"
+        ],
+        "success_signal": "New label appears as header with 'No contacts with this label'",
+        "fallback": ""
+      },
+      {
+        "name": "VIEW_VERSION_INFO",
+        "preconditions": "contacts_main",
+        "steps": [
+          "click(profile_icon)",
+          "click(Help & feedback)",
+          "click(three-dot menu top-right)",
+          "click(Version info)"
+        ],
+        "success_signal": "Dialog displays app name and version number",
+        "fallback": ""
+      },
+      {
+        "name": "TOGGLE_AUTOSYNC",
+        "preconditions": "contacts_main",
+        "steps": [
+          "click(profile_icon)",
+          "click(Manage accounts on this device)",
+          "Scroll to 'Automatically sync app data'",
+          "click(toggle)",
+          "Confirm with click(OK) on dialog"
+        ],
+        "success_signal": "Toggle changes state; sub-text reflects new state",
+        "fallback": ""
+      },
+      {
+        "name": "COUNT_VIA_FILTER_OR_TAB",
+        "preconditions": "contacts_main",
+        "steps": [
+          "Navigate to relevant view (filter chip, Highlights tab Favorites or Added recently, Blocked numbers)",
+          "Inspect list or empty state",
+          "Provide count as answer"
+        ],
+        "success_signal": "List items can be counted or 'No results'/'No contacts' = 0",
+        "fallback": ""
+      }
+    ],
+    "dead_ends": [
+      {
+        "state": "home_screen",
+        "failed_action": "swipe_up imprecise -> long-press triggers Wallpaper & Widgets menu",
+        "note": "Press Home/Back to dismiss, then retry swipe up from clearly empty area"
+      },
+      {
+        "state": "create_contact",
+        "failed_action": "Tapping near top of form hits 'Add picture' button instead of First name field",
+        "note": "Aim lower on First name text box; cancel Add photo dialog if it opens"
+      },
+      {
+        "state": "create_contact",
+        "failed_action": "type() executed without explicit field focus -> text not entered into intended field (e.g. duplicate 'JamesJames' or empty input)",
+        "note": "Always click input field first; verify focus (blue border) before type; use long_press to select existing text for replacement"
+      },
+      {
+        "state": "add_blocked_dialog",
+        "failed_action": "type() before focusing the Phone number field leaves it empty and Block button disabled",
+        "note": "Click the Phone number input first to give focus, then type"
+      },
+      {
+        "state": "contacts_main (Phone app confusion)",
+        "failed_action": "Looking for 'Highlights' or call-blocking settings in the Phone app",
+        "note": "Highlights tab is in Google Contacts app; system-level call blocking may live in Phone app settings"
+      },
+      {
+        "state": "settings",
+        "failed_action": "Searching for 'Blocked numbers' inside Contacts Settings menu",
+        "note": "Blocked numbers is in Fix & manage > Other tools, not inside Settings"
+      },
+      {
+        "state": "search_view",
+        "failed_action": "Searching for a contact that doesn't exist returns 'No results' and cannot add from this view",
+        "note": "Back out and use fab_plus on contacts_main to create"
+      },
+      {
+        "state": "create_contact",
+        "failed_action": "Saving with no fields filled triggers 'Add info to save as a contact' error",
+        "note": "Ensure at least one identifying field is populated before Save"
+      }
+    ]
+  },
+  "layer2": {
+    "categories": [
+      {
+        "name": "ADD_ENTRY",
+        "precondition": "App launched and on its main list/empty state with an add affordance available",
+        "abstract_steps": [
+          "Trigger the add-new-entry control (typically a floating action button)",
+          "Focus each required input field explicitly before typing",
+          "Type each piece of data into the corresponding field",
+          "If a field's label/category is configurable, open its selector and choose the requested option",
+          "Optionally attach media (capture or pick) via the dedicated picker dialog",
+          "Dismiss the on-screen keyboard if it hides remaining fields (system back) or scroll the form",
+          "Submit/save using the primary action (often top-right)"
+        ],
+        "failure_modes": [
+          "Tapping near the avatar/header accidentally opens the photo picker",
+          "Typing without focusing a field causes data loss or duplication",
+          "Premature save with empty required fields triggers validation error",
+          "Auto-suggested text or pre-existing text concatenates with typed text"
+        ],
+        "verification_checklist": [
+          "Post-save detail view shows all entered values",
+          "Confirmation toast/snackbar appears with entity name",
+          "Configurable labels reflect chosen option",
+          "Attached media renders as expected"
+        ]
+      },
+      {
+        "name": "EDIT_ENTRY",
+        "precondition": "Entry detail view is open",
+        "abstract_steps": [
+          "Activate edit mode (e.g., pencil icon)",
+          "Focus field needing change",
+          "Clear existing content via long-press select or backspace",
+          "Type corrected value",
+          "Save changes"
+        ],
+        "failure_modes": [
+          "Replacing text without selecting first causes append instead of overwrite",
+          "Dismissing without saving loses edits"
+        ],
+        "verification_checklist": [
+          "Detail view reflects updated values",
+          "No leftover duplicate characters"
+        ]
+      },
+      {
+        "name": "DELETE_ENTRY",
+        "precondition": "Target entry is locatable via list or search",
+        "abstract_steps": [
+          "Search/scroll to the entry",
+          "Open overflow or long-press for delete option",
+          "Confirm deletion in dialog"
+        ],
+        "failure_modes": [
+          "Entry not found -> nothing to delete (may already be absent)",
+          "Confirmation dialog dismissed accidentally"
+        ],
+        "verification_checklist": [
+          "Entry no longer appears in list or search",
+          "Toast/snackbar confirms removal"
+        ]
+      },
+      {
+        "name": "QUERY_INFO",
+        "precondition": "App opened to a state where the requested datum is reachable",
+        "abstract_steps": [
+          "Navigate to the section containing the information (tab, settings, help, detail view)",
+          "Apply any required filter or selector to narrow the view",
+          "Read the value, count, or status from the rendered UI",
+          "Return the answer in the requested format"
+        ],
+        "failure_modes": [
+          "Misreading empty-state as a value other than zero",
+          "Filter not applied, leading to wrong count",
+          "Information located in a different app than expected"
+        ],
+        "verification_checklist": [
+          "Source screen clearly shows the answered value",
+          "Empty-state messages map to 0/None",
+          "Format matches what was requested"
+        ]
+      },
+      {
+        "name": "NAVIGATE_TO",
+        "precondition": "Starting at home or app's root",
+        "abstract_steps": [
+          "Open the app drawer if app shortcut not on home",
+          "Launch target app",
+          "Dismiss permission prompts and onboarding tooltips",
+          "Traverse tabs/menus toward the target screen",
+          "Confirm target screen is visible"
+        ],
+        "failure_modes": [
+          "Swipe gesture interpreted as long-press, opening home customization menu",
+          "Launching a similarly-named but wrong app (e.g. dialer vs. contacts manager)",
+          "Tooltip overlays obscuring desired control"
+        ],
+        "verification_checklist": [
+          "Page title/header matches target",
+          "Expected controls are interactive"
+        ]
+      },
+      {
+        "name": "CHANGE_SETTING",
+        "precondition": "On the app's settings or system settings screen reachable from the app",
+        "abstract_steps": [
+          "Locate the setting row (scroll if necessary)",
+          "Tap the row to open chooser dialog or toggle directly",
+          "Select desired option / flip toggle",
+          "Confirm any follow-up dialog"
+        ],
+        "failure_modes": [
+          "Setting not present where expected (looking in wrong submenu)",
+          "Dialog dismissed without selecting, leaving setting unchanged",
+          "Confusing 'system' vs 'app' setting locations"
+        ],
+        "verification_checklist": [
+          "Sub-label or toggle state reflects new value",
+          "Returning to setting later still shows the value"
+        ]
+      },
+      {
+        "name": "FILTER_OR_SEARCH",
+        "precondition": "Listing view with search bar and/or filter chips",
+        "abstract_steps": [
+          "Tap filter chip or open search input",
+          "Provide query or selection",
+          "Submit if needed (keyboard enter)",
+          "Read filtered results"
+        ],
+        "failure_modes": [
+          "Chip is off-screen; needs horizontal swipe",
+          "Search not executed because submit not pressed",
+          "No results misinterpreted"
+        ],
+        "verification_checklist": [
+          "Chip is highlighted/active or query shown in search bar",
+          "Result list or empty-state visible"
+        ]
+      },
+      {
+        "name": "BLOCK_OR_RESTRICT_ITEM",
+        "precondition": "On a management screen exposing a block/restriction list",
+        "abstract_steps": [
+          "Open the add-restriction control",
+          "Focus the identifier input field explicitly",
+          "Type the identifier",
+          "Confirm via primary action button (only enabled when input populated)"
+        ],
+        "failure_modes": [
+          "Typing without focus leaves field empty and confirm disabled",
+          "Toggling unrelated switches by mistake"
+        ],
+        "verification_checklist": [
+          "Item appears in restriction list",
+          "Toggle states match intent"
+        ]
+      },
+      {
+        "name": "IMPORT_OR_EXPORT_DATA",
+        "precondition": "On management/tools screen offering import/export actions",
+        "abstract_steps": [
+          "Select the desired import/export action",
+          "Use the file picker drawer to choose source/destination folder",
+          "Confirm save or select file"
+        ],
+        "failure_modes": [
+          "Source has no data to import (empty SIM/file)",
+          "File picker defaults to wrong location"
+        ],
+        "verification_checklist": [
+          "Confirmation toast or new file presence",
+          "Or clear message indicating empty source"
+        ]
+      },
+      {
+        "name": "MARK_FAVORITE_OR_FLAG",
+        "precondition": "Entry detail view open with star/flag affordance",
+        "abstract_steps": [
+          "Tap the star/flag icon",
+          "Verify icon state changed"
+        ],
+        "failure_modes": [
+          "Tapping wrong icon (overflow vs star)",
+          "Icon state ambiguous; repeated taps may un-favorite"
+        ],
+        "verification_checklist": [
+          "Icon filled/highlighted",
+          "Entry appears under favorites list"
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "built_at": "2025-01-30T00:00:00Z",
+    "n_episodes": 60,
+    "n_successful": 60,
+    "n_episodes_input": 60,
+    "synthesizer_model": "claude-opus-4-7",
+    "synthesizer_temperature": 0.3
+  }
+}

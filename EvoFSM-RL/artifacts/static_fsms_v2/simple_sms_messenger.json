@@ -1,0 +1,1054 @@
+{
+  "version": "0.1.0",
+  "app": "simple_sms_messenger",
+  "layer1": {
+    "app": "simple_sms_messenger",
+    "category": "Communication",
+    "states": [
+      {
+        "id": "home_screen",
+        "description": "Android device home screen",
+        "visual_cues": [
+          "bottom dock with app icons",
+          "app shortcuts grid",
+          "notification area at top"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "app_drawer",
+        "description": "Android app drawer showing installed apps",
+        "visual_cues": [
+          "grid of app icons",
+          "alphabetical vertical scrolling list"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "default_sms_prompt",
+        "description": "System dialog asking to set app as default SMS handler",
+        "visual_cues": [
+          "radio buttons for SMS app choice",
+          "'Set as default' / 'Cancel' buttons",
+          "'Set X as your default SMS app?' title"
+        ],
+        "resource_hints": [
+          "Set as default",
+          "Cancel"
+        ]
+      },
+      {
+        "id": "setup_default_sms_screen",
+        "description": "In-app screen prompting to set as default SMS app",
+        "visual_cues": [
+          "'To use Messages, make it your default SMS app' text",
+          "'Set default SMS app' button"
+        ],
+        "resource_hints": [
+          "Set default SMS app"
+        ]
+      },
+      {
+        "id": "conversation_list",
+        "description": "Main inbox showing list of SMS conversations",
+        "visual_cues": [
+          "search bar at top",
+          "gear icon",
+          "info (i) icon",
+          "three-dot menu",
+          "floating '+' button bottom-right",
+          "conversation rows with name/number, preview, timestamp"
+        ],
+        "resource_hints": [
+          "Search",
+          "floating action button"
+        ]
+      },
+      {
+        "id": "conversation_list_search",
+        "description": "Search mode within conversation list",
+        "visual_cues": [
+          "active search field",
+          "keyboard shown",
+          "filtered results or 'No items found'"
+        ],
+        "resource_hints": [
+          "No items found"
+        ]
+      },
+      {
+        "id": "conversation_list_selected",
+        "description": "Conversation list with one or more threads selected via long-press",
+        "visual_cues": [
+          "contextual action bar with '1 / N' counter",
+          "trash icon",
+          "add contact icon",
+          "call icon",
+          "three-dot overflow"
+        ],
+        "resource_hints": [
+          "trash icon",
+          "add contact icon"
+        ]
+      },
+      {
+        "id": "conversation_view",
+        "description": "Individual SMS chat thread view",
+        "visual_cues": [
+          "recipient name/number at top",
+          "message bubbles",
+          "'Type a message...' input field",
+          "send button (paper plane / SMS) on right",
+          "back arrow",
+          "trash icon",
+          "call icon",
+          "add contact icon",
+          "overflow menu"
+        ],
+        "resource_hints": [
+          "Type a message",
+          "SMS send button"
+        ]
+      },
+      {
+        "id": "conversation_overflow_menu",
+        "description": "Dropdown menu inside conversation view",
+        "visual_cues": [
+          "Archive",
+          "Conversation details",
+          "Add number to contact",
+          "Block number",
+          "Mark as Unread/Read"
+        ],
+        "resource_hints": [
+          "Add number to contact",
+          "Block number",
+          "Archive"
+        ]
+      },
+      {
+        "id": "new_conversation_screen",
+        "description": "Compose new conversation screen",
+        "visual_cues": [
+          "'Add Contact or Number...' input",
+          "checkmark to confirm recipient",
+          "contact suggestions list",
+          "'No contacts found' text"
+        ],
+        "resource_hints": [
+          "Add Contact or Number"
+        ]
+      },
+      {
+        "id": "add_to_contacts_sheet",
+        "description": "Bottom sheet to add number to contact",
+        "visual_cues": [
+          "'Add to existing contact' search",
+          "'Create a new contact' option"
+        ],
+        "resource_hints": [
+          "Create a new contact",
+          "Add to existing contact"
+        ]
+      },
+      {
+        "id": "add_contact_form",
+        "description": "Form to create new contact",
+        "visual_cues": [
+          "First name field",
+          "Last name field",
+          "pre-filled Phone field",
+          "Save button top-right"
+        ],
+        "resource_hints": [
+          "First name",
+          "Last name",
+          "Phone",
+          "Save"
+        ]
+      },
+      {
+        "id": "contact_profile",
+        "description": "View of a saved contact's profile",
+        "visual_cues": [
+          "contact name",
+          "Call/Text buttons",
+          "Contact info section",
+          "edit (pencil) icon",
+          "overflow menu"
+        ],
+        "resource_hints": [
+          "Edit",
+          "Delete"
+        ]
+      },
+      {
+        "id": "edit_contact",
+        "description": "Edit contact details screen",
+        "visual_cues": [
+          "editable First name, Last name, Company, Phone, Email fields",
+          "Save button top-right"
+        ],
+        "resource_hints": [
+          "Company",
+          "Email",
+          "Save"
+        ]
+      },
+      {
+        "id": "settings_screen",
+        "description": "App settings menu",
+        "visual_cues": [
+          "COLOR CUSTOMIZATION",
+          "GENERAL",
+          "NOTIFICATIONS",
+          "OUTGOING MESSAGES",
+          "RECYCLE BIN",
+          "SECURITY",
+          "MIGRATING"
+        ],
+        "resource_hints": [
+          "Customize colors",
+          "Language",
+          "Manage blocked numbers",
+          "Manage blocked keywords",
+          "Show a character counter"
+        ]
+      },
+      {
+        "id": "customize_colors_screen",
+        "description": "Color customization menu",
+        "visual_cues": [
+          "Theme row",
+          "App icon color row",
+          "Primary color row",
+          "checkmark save in top-right"
+        ],
+        "resource_hints": [
+          "Theme",
+          "Primary color"
+        ]
+      },
+      {
+        "id": "theme_picker_dialog",
+        "description": "Theme selection dialog",
+        "visual_cues": [
+          "radio list: System default, Light, Dark, Dark red, White, Black & White, Custom"
+        ],
+        "resource_hints": [
+          "Custom",
+          "Dark red"
+        ]
+      },
+      {
+        "id": "language_picker",
+        "description": "App language selection screen",
+        "visual_cues": [
+          "Suggested section",
+          "System default",
+          "language options list"
+        ],
+        "resource_hints": [
+          "English (United States)",
+          "Español (Estados Unidos)"
+        ]
+      },
+      {
+        "id": "blocked_keywords_screen",
+        "description": "Manage blocked keywords list",
+        "visual_cues": [
+          "empty state or list of keywords",
+          "'Add a blocked keyword' button",
+          "'+' top-right"
+        ],
+        "resource_hints": [
+          "Add a blocked keyword"
+        ]
+      },
+      {
+        "id": "add_keyword_dialog",
+        "description": "Dialog to enter a blocked keyword",
+        "visual_cues": [
+          "Keyword input",
+          "OK / Cancel buttons"
+        ],
+        "resource_hints": [
+          "Keyword",
+          "OK"
+        ]
+      },
+      {
+        "id": "about_screen",
+        "description": "About page with app metadata",
+        "visual_cues": [
+          "SUPPORT section (FAQ, email)",
+          "HELP US section (Contributors)",
+          "SOCIAL section",
+          "OTHER section (Privacy policy, Third party licences)"
+        ],
+        "resource_hints": [
+          "Frequently asked questions",
+          "Contributors",
+          "Third party licences"
+        ]
+      },
+      {
+        "id": "faq_screen",
+        "description": "Frequently asked questions page",
+        "visual_cues": [
+          "list of question / answer pairs"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "third_party_licenses_screen",
+        "description": "List of third-party library licenses",
+        "visual_cues": [
+          "library names with copyright text"
+        ],
+        "resource_hints": [
+          "Copyright"
+        ]
+      },
+      {
+        "id": "contributors_screen",
+        "description": "List of contributors and translators",
+        "visual_cues": [
+          "contributor names grouped by role/language"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "confirmation_dialog",
+        "description": "Generic Yes/No or Delete confirmation",
+        "visual_cues": [
+          "question text",
+          "Yes/No or Delete/Cancel buttons"
+        ],
+        "resource_hints": [
+          "Yes",
+          "No",
+          "Delete"
+        ]
+      }
+    ],
+    "transitions": [
+      {
+        "from_state": "home_screen",
+        "to_state": "app_drawer",
+        "action": "swipe_up_from_bottom",
+        "precondition": "app not on home dock",
+        "postcondition": ""
+      },
+      {
+        "from_state": "home_screen",
+        "to_state": "conversation_list",
+        "action": "click(app_icon)",
+        "precondition": "app launches and is already default SMS",
+        "postcondition": ""
+      },
+      {
+        "from_state": "app_drawer",
+        "to_state": "app_drawer",
+        "action": "swipe_up_to_scroll",
+        "precondition": "target app not visible",
+        "postcondition": ""
+      },
+      {
+        "from_state": "app_drawer",
+        "to_state": "conversation_list",
+        "action": "click(SMS_Messenger_icon)",
+        "precondition": "app already configured as default",
+        "postcondition": ""
+      },
+      {
+        "from_state": "app_drawer",
+        "to_state": "default_sms_prompt",
+        "action": "click(SMS_Messenger_icon)",
+        "precondition": "app not yet default SMS handler",
+        "postcondition": ""
+      },
+      {
+        "from_state": "default_sms_prompt",
+        "to_state": "conversation_list",
+        "action": "select(SMS_Messenger) + click('Set as default')",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "default_sms_prompt",
+        "to_state": "app_drawer",
+        "action": "click('Cancel')",
+        "precondition": "",
+        "postcondition": "app exits"
+      },
+      {
+        "from_state": "setup_default_sms_screen",
+        "to_state": "default_sms_prompt",
+        "action": "click('Set default SMS app')",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "conversation_list",
+        "to_state": "conversation_view",
+        "action": "click(conversation_row)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "conversation_list",
+        "to_state": "conversation_list_search",
+        "action": "click(search_bar)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "conversation_list_search",
+        "to_state": "conversation_list_search",
+        "action": "type(query)",
+        "precondition": "",
+        "postcondition": "filters list or shows 'No items found'"
+      },
+      {
+        "from_state": "conversation_list_search",
+        "to_state": "conversation_list",
+        "action": "click(back_arrow)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "conversation_list",
+        "to_state": "conversation_list_selected",
+        "action": "long_press(conversation_row)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "conversation_list_selected",
+        "to_state": "confirmation_dialog",
+        "action": "click(trash_icon)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "confirmation_dialog",
+        "to_state": "conversation_list",
+        "action": "click('Yes'/'Delete')",
+        "precondition": "",
+        "postcondition": "selected threads removed"
+      },
+      {
+        "from_state": "conversation_list_selected",
+        "to_state": "conversation_list",
+        "action": "click(overflow) -> click('Archive') -> confirm",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "conversation_list",
+        "to_state": "new_conversation_screen",
+        "action": "click(floating_plus)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "new_conversation_screen",
+        "to_state": "conversation_view",
+        "action": "type(number) + click(checkmark)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "conversation_view",
+        "to_state": "conversation_view",
+        "action": "click(input) + type(text) + click(send)",
+        "precondition": "",
+        "postcondition": "message sent bubble appears"
+      },
+      {
+        "from_state": "conversation_view",
+        "to_state": "conversation_list",
+        "action": "click(back_arrow)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "conversation_view",
+        "to_state": "conversation_overflow_menu",
+        "action": "click(three_dots)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "conversation_overflow_menu",
+        "to_state": "add_to_contacts_sheet",
+        "action": "click('Add number to contact')",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "conversation_overflow_menu",
+        "to_state": "confirmation_dialog",
+        "action": "click('Block number')",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "add_to_contacts_sheet",
+        "to_state": "add_contact_form",
+        "action": "click('Create a new contact')",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "add_contact_form",
+        "to_state": "conversation_view",
+        "action": "fill(name) + click(Save)",
+        "precondition": "",
+        "postcondition": "contact created"
+      },
+      {
+        "from_state": "conversation_view",
+        "to_state": "contact_profile",
+        "action": "navigate via details (contact name)",
+        "precondition": "contact saved",
+        "postcondition": ""
+      },
+      {
+        "from_state": "contact_profile",
+        "to_state": "edit_contact",
+        "action": "click(pencil_icon)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "edit_contact",
+        "to_state": "contact_profile",
+        "action": "fill(fields) + click(Save)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "contact_profile",
+        "to_state": "confirmation_dialog",
+        "action": "click(overflow) + click('Delete')",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "conversation_list",
+        "to_state": "settings_screen",
+        "action": "click(gear_icon)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "settings_screen",
+        "to_state": "customize_colors_screen",
+        "action": "click('Customize colors')",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "customize_colors_screen",
+        "to_state": "theme_picker_dialog",
+        "action": "click('Theme')",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "theme_picker_dialog",
+        "to_state": "customize_colors_screen",
+        "action": "click(option)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "customize_colors_screen",
+        "to_state": "settings_screen",
+        "action": "click(checkmark_save)",
+        "precondition": "",
+        "postcondition": "theme applied"
+      },
+      {
+        "from_state": "settings_screen",
+        "to_state": "language_picker",
+        "action": "click('Language')",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "language_picker",
+        "to_state": "settings_screen",
+        "action": "click(language_option)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "settings_screen",
+        "to_state": "blocked_keywords_screen",
+        "action": "click('Manage blocked keywords')",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "blocked_keywords_screen",
+        "to_state": "add_keyword_dialog",
+        "action": "click('Add a blocked keyword') or click('+')",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "add_keyword_dialog",
+        "to_state": "blocked_keywords_screen",
+        "action": "type(keyword) + click(OK)",
+        "precondition": "",
+        "postcondition": "keyword added"
+      },
+      {
+        "from_state": "conversation_list",
+        "to_state": "about_screen",
+        "action": "click(info_icon)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "about_screen",
+        "to_state": "faq_screen",
+        "action": "click('Frequently asked questions')",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "about_screen",
+        "to_state": "third_party_licenses_screen",
+        "action": "scroll + click('Third party licences')",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "about_screen",
+        "to_state": "contributors_screen",
+        "action": "click('Contributors')",
+        "precondition": "",
+        "postcondition": ""
+      }
+    ],
+    "strategies": [
+      {
+        "name": "SEND_NEW_SMS",
+        "preconditions": "app open at conversation_list, app is default SMS",
+        "steps": [
+          "click(floating_plus)",
+          "type(phone_number) in 'Add Contact or Number...'",
+          "click(checkmark) to confirm recipient",
+          "click 'Type a message...' input",
+          "type(message_body)",
+          "click(send button)"
+        ],
+        "success_signal": "sent message appears as outgoing bubble with checkmark below",
+        "fallback": "if recipient not confirmed, re-tap the checkmark next to the entered number"
+      },
+      {
+        "name": "REPLY_IN_EXISTING_THREAD",
+        "preconditions": "conversation visible in list or via search",
+        "steps": [
+          "click(conversation_row) to open thread",
+          "click 'Type a message...' to focus",
+          "type(reply_text)",
+          "click(send button)"
+        ],
+        "success_signal": "new outgoing bubble with the typed text shown in thread",
+        "fallback": "if type doesn't register, explicitly tap input field then retype"
+      },
+      {
+        "name": "FIND_CONVERSATION_BY_KEYWORD_OR_NUMBER",
+        "preconditions": "on conversation_list",
+        "steps": [
+          "click(search_bar)",
+          "type(query: phone number or keyword)",
+          "scan filtered results",
+          "click target row"
+        ],
+        "success_signal": "conversation opens with matching content",
+        "fallback": "if 'No items found', go back and scroll list manually, or start new conversation by number"
+      },
+      {
+        "name": "DELETE_THREAD",
+        "preconditions": "on conversation_list",
+        "steps": [
+          "long_press(target thread)",
+          "click(trash_icon) in contextual bar",
+          "click('Yes'/'Delete') in confirmation dialog"
+        ],
+        "success_signal": "thread no longer appears in list",
+        "fallback": "alternative: open thread, click trash icon in top bar, confirm"
+      },
+      {
+        "name": "ARCHIVE_THREAD",
+        "preconditions": "on conversation_list",
+        "steps": [
+          "long_press(target thread)",
+          "click(overflow)",
+          "click('Archive')",
+          "confirm if prompted"
+        ],
+        "success_signal": "thread removed from active list",
+        "fallback": ""
+      },
+      {
+        "name": "BLOCK_SENDER",
+        "preconditions": "target conversation open",
+        "steps": [
+          "click(three_dots overflow)",
+          "click('Block number')",
+          "click('Yes') in confirmation"
+        ],
+        "success_signal": "thread removed from inbox; confirmation toast",
+        "fallback": ""
+      },
+      {
+        "name": "SAVE_NUMBER_AS_CONTACT",
+        "preconditions": "in conversation_view for unsaved number",
+        "steps": [
+          "click(three_dots overflow)",
+          "click('Add number to contact')",
+          "click('Create a new contact')",
+          "tap 'First name' field",
+          "type(contact_name)",
+          "click(Save) top-right"
+        ],
+        "success_signal": "toast 'X saved'; header may show name; verify via new conversation contact list",
+        "fallback": "do NOT use the 'person+' icon at top — it opens add-recipient mode, not save contact"
+      },
+      {
+        "name": "EDIT_CONTACT_FIELDS",
+        "preconditions": "on conversation_view of saved contact",
+        "steps": [
+          "click(three_dots) -> 'Details' or open contact via details screen",
+          "click(contact_name) to open profile",
+          "click(pencil) to edit",
+          "tap target field (Company/Email/etc.)",
+          "type(value)",
+          "scroll if keyboard hides target field",
+          "click(Save) top-right"
+        ],
+        "success_signal": "updated values visible on contact profile and toast confirmation",
+        "fallback": "swipe up to reveal hidden fields when keyboard is open"
+      },
+      {
+        "name": "DELETE_CONTACT",
+        "preconditions": "on contact_profile",
+        "steps": [
+          "click(overflow three-dots)",
+          "click('Delete')",
+          "click('Delete') in confirmation"
+        ],
+        "success_signal": "contact disappears from details screen; toast 'contact doesn't exist'",
+        "fallback": ""
+      },
+      {
+        "name": "CHANGE_THEME",
+        "preconditions": "on conversation_list",
+        "steps": [
+          "click(gear settings)",
+          "click('Customize colors')",
+          "click('Theme')",
+          "select desired theme (e.g. 'Custom' or 'Dark red')",
+          "if Custom: tap 'Primary color' and pick color, OK",
+          "click(checkmark) top-right to save"
+        ],
+        "success_signal": "section headers and accents adopt selected color",
+        "fallback": "dismiss 'app icon customization' warning with OK if tapped by mistake"
+      },
+      {
+        "name": "CHANGE_LANGUAGE",
+        "preconditions": "on conversation_list",
+        "steps": [
+          "click(gear settings)",
+          "click('Language')",
+          "click target language under Suggested list"
+        ],
+        "success_signal": "settings labels switch to selected language",
+        "fallback": ""
+      },
+      {
+        "name": "TOGGLE_SETTING_CHECKBOX",
+        "preconditions": "on settings_screen",
+        "steps": [
+          "scroll to relevant section (e.g. OUTGOING MESSAGES, NOTIFICATIONS)",
+          "click target row's checkbox or label"
+        ],
+        "success_signal": "checkbox state visually toggled",
+        "fallback": ""
+      },
+      {
+        "name": "ADD_BLOCKED_KEYWORD",
+        "preconditions": "on settings_screen",
+        "steps": [
+          "click('Manage blocked keywords')",
+          "click('Add a blocked keyword') or '+'",
+          "type(keyword)",
+          "click(OK)"
+        ],
+        "success_signal": "keyword appears in blocked list",
+        "fallback": ""
+      },
+      {
+        "name": "OPEN_ABOUT_AND_READ",
+        "preconditions": "on conversation_list",
+        "steps": [
+          "click(info 'i' icon) in top bar",
+          "scroll to find target section",
+          "optionally click subsection (FAQ / Third party licences / Contributors)",
+          "read displayed text"
+        ],
+        "success_signal": "requested information visible on screen",
+        "fallback": "the three-dots menu does NOT contain About — use the i icon"
+      },
+      {
+        "name": "QUERY_MESSAGE_TIMESTAMP_OR_CONTENT",
+        "preconditions": "on conversation_list",
+        "steps": [
+          "locate target conversation (scroll or search by number)",
+          "click row to open thread",
+          "read timestamp shown above target message bubble or text inside bubble"
+        ],
+        "success_signal": "extracted value matches expected format",
+        "fallback": "the preview in the list often already contains text; verify by opening thread"
+      },
+      {
+        "name": "MARK_AS_UNREAD",
+        "preconditions": "on conversation_list",
+        "steps": [
+          "long_press(thread)",
+          "click(overflow three-dots)",
+          "click('Mark as Unread')"
+        ],
+        "success_signal": "option toggles to 'Mark as Read' indicating thread is now unread",
+        "fallback": ""
+      }
+    ],
+    "dead_ends": [
+      {
+        "state": "setup_default_sms_screen",
+        "failed_action": "click('Cancel') on default SMS prompt",
+        "note": "Cancelling causes the app to close and return to app drawer; must accept default-SMS prompt to access app features"
+      },
+      {
+        "state": "conversation_view",
+        "failed_action": "click(person+ icon) expecting 'add to contacts'",
+        "note": "That icon opens 'Add recipients' (group chat) mode; use overflow menu -> 'Add number to contact' instead"
+      },
+      {
+        "state": "conversation_list",
+        "failed_action": "click(three_dots) expecting Settings/About",
+        "note": "The three-dot menu only contains 'Show archived conversations'; Settings is the gear icon and About is the i icon"
+      },
+      {
+        "state": "conversation_list_search",
+        "failed_action": "search by full phone number with '+' prefix",
+        "note": "Search may fail to match phone numbers due to formatting; try without '+' or use number-entry via new-conversation flow"
+      },
+      {
+        "state": "app_drawer",
+        "failed_action": "swipe left/right to paginate",
+        "note": "App drawer scrolls vertically only; horizontal swipes do nothing"
+      },
+      {
+        "state": "home_screen",
+        "failed_action": "tap default Google Messages icon thinking it's Simple SMS Messenger",
+        "note": "Wrong app — Simple SMS Messenger has an orange chat-bubble icon, often only in app drawer under 'S'"
+      },
+      {
+        "state": "conversation_list",
+        "failed_action": "long-press elements without app being default SMS",
+        "note": "Many actions are gated by being default SMS app; complete default-SMS dialog first"
+      },
+      {
+        "state": "customize_colors_screen",
+        "failed_action": "tap 'App icon color' instead of 'Theme'",
+        "note": "Triggers a warning dialog about launcher compatibility; dismiss with OK and tap 'Theme' instead"
+      }
+    ]
+  },
+  "layer2": {
+    "categories": [
+      {
+        "name": "ADD_ENTRY",
+        "precondition": "User is in a list-style screen of the relevant data domain (e.g., conversations, contacts, keywords) and has permission/default-app prerequisites satisfied",
+        "abstract_steps": [
+          "From the list screen, invoke the primary 'create' affordance (floating action button or '+' icon)",
+          "Provide the required identifying input (recipient, name, keyword) via input field",
+          "Confirm/commit the input (checkmark or OK)",
+          "If a follow-up form appears, fill remaining required fields",
+          "Press the explicit Save/confirm control"
+        ],
+        "failure_modes": [
+          "Tapping a similar icon that opens a different mode (e.g., add-participant vs add-contact)",
+          "Typing while the input field is not focused, so text is dropped",
+          "Forgetting to press the final Save/checkmark, leaving changes unpersisted",
+          "Dismissing required permission/default-handler prompts and being kicked out of the app"
+        ],
+        "verification_checklist": [
+          "New entry visibly appears in the list or relevant screen",
+          "Confirmation toast or visual cue is shown",
+          "Returning to the list and re-opening shows the entry persisted"
+        ]
+      },
+      {
+        "name": "DELETE_ENTRY",
+        "precondition": "Target item exists and is visible (or reachable via search/scroll) in a list or detail view",
+        "abstract_steps": [
+          "Locate the target item (scroll or search)",
+          "Enter selection or detail mode (long-press for list items, open detail for single items)",
+          "Invoke the delete affordance (trash icon or overflow -> Delete)",
+          "Confirm the destructive action in the confirmation dialog"
+        ],
+        "failure_modes": [
+          "Confirmation dialog dismissed accidentally, no actual deletion",
+          "Selecting the wrong item due to similar names/numbers",
+          "Confusing delete-thread with delete-message-content",
+          "Repeating confirm taps because UI state did not refresh"
+        ],
+        "verification_checklist": [
+          "Item no longer appears in the list",
+          "Empty-state text or updated count is shown",
+          "No success toast indicates pending action; re-check to ensure removal"
+        ]
+      },
+      {
+        "name": "EDIT_ENTRY",
+        "precondition": "User can navigate to detail/edit screen of the target entity",
+        "abstract_steps": [
+          "Open the entity detail view",
+          "Enter edit mode via a pencil/edit affordance",
+          "Tap each field to focus, then type the new value",
+          "Scroll to reveal fields hidden by the keyboard",
+          "Tap the Save control"
+        ],
+        "failure_modes": [
+          "Editing a similarly-named entity by mistake",
+          "Keyboard obscuring fields, leading to no input",
+          "Leaving without saving",
+          "Field unfocused at moment of typing, so input is lost"
+        ],
+        "verification_checklist": [
+          "Detail view shows updated values",
+          "Confirmation toast appears",
+          "Re-entering edit mode shows persisted values"
+        ]
+      },
+      {
+        "name": "QUERY_INFO",
+        "precondition": "Target information exists somewhere in the app's screens",
+        "abstract_steps": [
+          "Navigate to the most likely container screen (list / detail / about / settings)",
+          "Use search or scroll to locate the data",
+          "Read the value verbatim from the UI",
+          "Return the value in the required format"
+        ],
+        "failure_modes": [
+          "Reading truncated preview text instead of the full content",
+          "Assuming a value from the list when the detail differs",
+          "Searching with overly strict formatting (e.g., punctuation) and getting no results",
+          "Looking in the wrong menu (overflow vs info icon vs gear)"
+        ],
+        "verification_checklist": [
+          "Value matches the literal text shown on screen",
+          "Format matches what was requested (e.g., HH:MM, full string, comma-separated list)",
+          "If multiple matches exist, the correct contextual one was chosen"
+        ]
+      },
+      {
+        "name": "NAVIGATE_TO",
+        "precondition": "User knows the destination screen exists within the app",
+        "abstract_steps": [
+          "From the current screen, identify the likely entry point (top-bar icon, menu item, settings row)",
+          "Tap it; if the resulting screen is wrong, back out and try the next candidate",
+          "Iterate through known entry points (info icon, gear, overflow) systematically"
+        ],
+        "failure_modes": [
+          "Confusing icons with similar appearance",
+          "Getting trapped in modal dialogs (permissions, defaults) that close the app on cancel",
+          "Mis-tapping on adjacent UI elements"
+        ],
+        "verification_checklist": [
+          "Target screen's distinguishing visual cues are present",
+          "Back navigation returns to a known prior screen"
+        ]
+      },
+      {
+        "name": "COMPOSE_AND_SEND_MESSAGE",
+        "precondition": "Messaging surface available and recipient identifiable",
+        "abstract_steps": [
+          "Open or create the target conversation by recipient identifier",
+          "Focus the message input field",
+          "Enter the message text",
+          "Trigger the send control",
+          "Verify the sent indicator (bubble + delivery mark) appears"
+        ],
+        "failure_modes": [
+          "Sending in the wrong thread because of a similar number",
+          "Hitting send before text is committed",
+          "Permissions/default-handler prompt blocking the send",
+          "Typing into a different focused field (e.g., recipient instead of body)"
+        ],
+        "verification_checklist": [
+          "Outgoing bubble with exact text appears in the thread",
+          "Delivery/sent indicator shown",
+          "Recipient header matches target"
+        ]
+      },
+      {
+        "name": "CONFIGURE_PREFERENCE",
+        "precondition": "User can reach the settings/preferences area of the app",
+        "abstract_steps": [
+          "Open the settings screen",
+          "Locate the section containing the preference",
+          "Open the picker or toggle for the preference",
+          "Select or input the desired value",
+          "Confirm/save if required by the screen"
+        ],
+        "failure_modes": [
+          "Mistaking an adjacent option (e.g., icon color vs theme)",
+          "Forgetting to press the final save control",
+          "Triggering a warning dialog and not understanding it"
+        ],
+        "verification_checklist": [
+          "Preference row reflects the new value",
+          "Visual effect (color, language) is applied across the UI",
+          "Re-entering settings confirms persistence"
+        ]
+      },
+      {
+        "name": "HANDLE_PERMISSION_OR_DEFAULT_HANDLER_PROMPT",
+        "precondition": "App requires a system role or permission that has not yet been granted",
+        "abstract_steps": [
+          "Read the dialog and identify the required role/permission",
+          "Select the correct option (often the target app's own entry)",
+          "Press the affirmative confirm button",
+          "Wait for app's main UI to load"
+        ],
+        "failure_modes": [
+          "Pressing cancel/back and getting bounced out of the app",
+          "Selecting the wrong app in a chooser",
+          "Repeatedly toggling the role and creating loops"
+        ],
+        "verification_checklist": [
+          "Dialog dismisses and app's main UI is visible",
+          "Subsequent actions that depend on the role succeed"
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "built_at": "2025-01-15T00:00:00Z",
+    "n_episodes": 68,
+    "n_successful": 68,
+    "n_episodes_input": 68,
+    "synthesizer_model": "claude-opus-4-7",
+    "synthesizer_temperature": 0.3
+  }
+}

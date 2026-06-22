@@ -19,3 +19,8 @@ venv/
 apks/*.apk
 apks/*.apkm
 apks/*.xapk
+
+# Archived abandoned-route backups (large; see archive/*/README.md) — code/meta stay tracked
+archive/**/*.zip
+archive/**/*.jsonl
+archive/**/*.pt

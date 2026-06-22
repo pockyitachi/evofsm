@@ -1,0 +1,758 @@
+{
+  "version": "0.1.0",
+  "app": "joplin",
+  "layer1": {
+    "app": "joplin",
+    "category": "Productivity",
+    "states": [
+      {
+        "id": "home_screen",
+        "description": "Android device home screen",
+        "visual_cues": [
+          "app icons grid",
+          "Google search bar",
+          "bottom dock"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "app_drawer",
+        "description": "Android app drawer with installed apps",
+        "visual_cues": [
+          "alphabetical grid of apps",
+          "search bar at top"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "all_notes",
+        "description": "Joplin main 'All notes' list view",
+        "visual_cues": [
+          "list of notes with checkboxes for to-dos",
+          "hamburger menu top-left",
+          "search icon top-right",
+          "sort icon top-right",
+          "red FAB bottom-right with plus"
+        ],
+        "resource_hints": [
+          "All notes",
+          "search",
+          "sort"
+        ]
+      },
+      {
+        "id": "navigation_drawer",
+        "description": "Joplin side navigation drawer with notebooks",
+        "visual_cues": [
+          "Notebooks section list",
+          "New Notebook option",
+          "Tags",
+          "Configuration",
+          "Trash"
+        ],
+        "resource_hints": [
+          "Notebooks",
+          "New Notebook",
+          "Configuration"
+        ]
+      },
+      {
+        "id": "notebook_view",
+        "description": "Joplin notebook contents view",
+        "visual_cues": [
+          "notebook title at top",
+          "list of notes/to-dos",
+          "red FAB bottom-right",
+          "back arrow top-left"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "create_menu",
+        "description": "Expanded FAB showing New to-do/New note",
+        "visual_cues": [
+          "'New to-do' option with checkbox icon",
+          "'New note' option with document icon",
+          "red X to close"
+        ],
+        "resource_hints": [
+          "New to-do",
+          "New note"
+        ]
+      },
+      {
+        "id": "note_editor",
+        "description": "Joplin note/to-do editor (edit mode)",
+        "visual_cues": [
+          "title field with 'Add title' placeholder",
+          "body area",
+          "formatting toolbar at bottom",
+          "keyboard",
+          "back arrow top-left",
+          "checkbox next to title if to-do"
+        ],
+        "resource_hints": [
+          "Add title"
+        ]
+      },
+      {
+        "id": "note_viewer",
+        "description": "Joplin note view (read-only)",
+        "visual_cues": [
+          "title at top",
+          "content rendered",
+          "red FAB with pencil icon bottom-right",
+          "back arrow top-left",
+          "three-dot menu top-right"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "sort_menu",
+        "description": "'Sort notes by' dialog",
+        "visual_cues": [
+          "Updated date/Created date/Title options",
+          "[ Reverse sort order ] toggle",
+          "[ Show completed to-dos ] toggle"
+        ],
+        "resource_hints": [
+          "Sort notes by",
+          "Reverse sort order",
+          "Show completed to-dos"
+        ]
+      },
+      {
+        "id": "search_view",
+        "description": "Joplin search interface",
+        "visual_cues": [
+          "search input field at top",
+          "keyboard",
+          "filtered results list",
+          "clear X button"
+        ],
+        "resource_hints": [
+          "search"
+        ]
+      },
+      {
+        "id": "note_options_menu",
+        "description": "Overflow menu in note viewer",
+        "visual_cues": [
+          "Attach...",
+          "Tags",
+          "Set alarm",
+          "Convert to note",
+          "Share",
+          "Delete"
+        ],
+        "resource_hints": [
+          "Set alarm",
+          "Convert to note",
+          "Tags"
+        ]
+      },
+      {
+        "id": "tags_dialog",
+        "description": "Tag assignment dialog",
+        "visual_cues": [
+          "'New tags:' input",
+          "OK/Cancel buttons"
+        ],
+        "resource_hints": [
+          "New tags"
+        ]
+      },
+      {
+        "id": "alarm_dialog",
+        "description": "Set alarm dialog with date/time pickers",
+        "visual_cues": [
+          "SET DATE button",
+          "SAVE ALARM",
+          "CLEAR ALARM",
+          "CANCEL"
+        ],
+        "resource_hints": [
+          "Set alarm",
+          "SAVE ALARM"
+        ]
+      },
+      {
+        "id": "edit_notebook",
+        "description": "Create/edit notebook screen",
+        "visual_cues": [
+          "'Enter notebook title' input",
+          "save (floppy) icon top-left"
+        ],
+        "resource_hints": [
+          "Enter notebook title"
+        ]
+      },
+      {
+        "id": "edit_link_dialog",
+        "description": "Insert hyperlink dialog",
+        "visual_cues": [
+          "Link text field",
+          "URL field"
+        ],
+        "resource_hints": [
+          "Link description",
+          "URL"
+        ]
+      }
+    ],
+    "transitions": [
+      {
+        "from_state": "home_screen",
+        "to_state": "app_drawer",
+        "action": "swipe_up",
+        "precondition": "app not on home screen",
+        "postcondition": "app drawer visible"
+      },
+      {
+        "from_state": "app_drawer",
+        "to_state": "all_notes",
+        "action": "click(joplin_icon)",
+        "precondition": "",
+        "postcondition": "app launches"
+      },
+      {
+        "from_state": "all_notes",
+        "to_state": "navigation_drawer",
+        "action": "click(hamburger_menu_top_left)",
+        "precondition": "",
+        "postcondition": "drawer opens"
+      },
+      {
+        "from_state": "navigation_drawer",
+        "to_state": "notebook_view",
+        "action": "click(notebook_name)",
+        "precondition": "",
+        "postcondition": "notebook contents displayed"
+      },
+      {
+        "from_state": "navigation_drawer",
+        "to_state": "edit_notebook",
+        "action": "click('New Notebook')",
+        "precondition": "",
+        "postcondition": "notebook title input shown"
+      },
+      {
+        "from_state": "edit_notebook",
+        "to_state": "navigation_drawer",
+        "action": "click(save_icon)",
+        "precondition": "title entered",
+        "postcondition": "notebook saved"
+      },
+      {
+        "from_state": "all_notes",
+        "to_state": "create_menu",
+        "action": "click(fab_plus)",
+        "precondition": "",
+        "postcondition": "create options shown"
+      },
+      {
+        "from_state": "notebook_view",
+        "to_state": "create_menu",
+        "action": "click(fab_plus)",
+        "precondition": "",
+        "postcondition": "create options shown"
+      },
+      {
+        "from_state": "create_menu",
+        "to_state": "note_editor",
+        "action": "click('New to-do' or 'New note')",
+        "precondition": "",
+        "postcondition": "empty editor opened"
+      },
+      {
+        "from_state": "note_editor",
+        "to_state": "note_viewer",
+        "action": "click(back_arrow)",
+        "precondition": "changes auto-saved",
+        "postcondition": "returns to view mode"
+      },
+      {
+        "from_state": "note_viewer",
+        "to_state": "note_editor",
+        "action": "click(fab_pencil)",
+        "precondition": "",
+        "postcondition": "edit mode entered"
+      },
+      {
+        "from_state": "all_notes",
+        "to_state": "note_viewer",
+        "action": "click(note_in_list)",
+        "precondition": "",
+        "postcondition": "note opened"
+      },
+      {
+        "from_state": "notebook_view",
+        "to_state": "note_viewer",
+        "action": "click(note_in_list)",
+        "precondition": "",
+        "postcondition": "note opened"
+      },
+      {
+        "from_state": "all_notes",
+        "to_state": "sort_menu",
+        "action": "click(sort_icon_top_right)",
+        "precondition": "",
+        "postcondition": "sort dialog shown"
+      },
+      {
+        "from_state": "sort_menu",
+        "to_state": "all_notes",
+        "action": "click(option) or tap outside",
+        "precondition": "",
+        "postcondition": "sort applied"
+      },
+      {
+        "from_state": "all_notes",
+        "to_state": "search_view",
+        "action": "click(search_icon)",
+        "precondition": "",
+        "postcondition": "search bar active"
+      },
+      {
+        "from_state": "search_view",
+        "to_state": "all_notes",
+        "action": "click(back_arrow)",
+        "precondition": "",
+        "postcondition": "returns to list"
+      },
+      {
+        "from_state": "note_viewer",
+        "to_state": "note_options_menu",
+        "action": "click(three_dot_menu)",
+        "precondition": "",
+        "postcondition": "menu shown"
+      },
+      {
+        "from_state": "note_options_menu",
+        "to_state": "tags_dialog",
+        "action": "click('Tags')",
+        "precondition": "",
+        "postcondition": "tag input shown"
+      },
+      {
+        "from_state": "note_options_menu",
+        "to_state": "alarm_dialog",
+        "action": "click('Set alarm')",
+        "precondition": "",
+        "postcondition": "alarm dialog shown"
+      },
+      {
+        "from_state": "note_options_menu",
+        "to_state": "note_viewer",
+        "action": "click('Convert to note')",
+        "precondition": "item is to-do",
+        "postcondition": "converted to note"
+      },
+      {
+        "from_state": "all_notes",
+        "to_state": "all_notes",
+        "action": "click(checkbox_of_todo)",
+        "precondition": "item is to-do",
+        "postcondition": "completion toggled"
+      },
+      {
+        "from_state": "note_editor",
+        "to_state": "edit_link_dialog",
+        "action": "click(link_icon_in_toolbar)",
+        "precondition": "",
+        "postcondition": "link dialog shown"
+      }
+    ],
+    "strategies": [
+      {
+        "name": "CREATE_NOTE_IN_NOTEBOOK",
+        "preconditions": "home_screen or all_notes",
+        "steps": [
+          "Open app drawer (swipe up) and tap Joplin icon",
+          "Tap hamburger menu top-left",
+          "Tap target notebook in drawer",
+          "Tap red + FAB",
+          "Tap 'New note'",
+          "Tap 'Add title' and type title",
+          "Tap body area and type content",
+          "Tap back arrow to save"
+        ],
+        "success_signal": "Returns to notebook view with new note listed showing correct title and content",
+        "fallback": "If wrong notebook, re-open drawer and select correct one before tapping FAB"
+      },
+      {
+        "name": "CREATE_TODO_IN_NOTEBOOK",
+        "preconditions": "home_screen or all_notes",
+        "steps": [
+          "Launch Joplin via app drawer",
+          "Open hamburger menu and select target notebook",
+          "Tap red + FAB",
+          "Tap 'New to-do'",
+          "Tap title field and type title",
+          "Optionally type body content",
+          "Tap back arrow to save"
+        ],
+        "success_signal": "Notebook view shows new item with empty checkbox and correct title",
+        "fallback": "If created as note, use options menu 'Convert to to-do' or recreate"
+      },
+      {
+        "name": "EDIT_NOTE_CONTENT",
+        "preconditions": "all_notes",
+        "steps": [
+          "Tap note in list to open viewer",
+          "Tap red pencil FAB to enter edit mode",
+          "Tap at end of existing text to position cursor",
+          "Type new text (prefix with space or newline if appending)",
+          "Tap back arrow to save"
+        ],
+        "success_signal": "Note viewer shows updated content",
+        "fallback": "If cursor lands mid-word, tap empty area below text or press Enter first"
+      },
+      {
+        "name": "RENAME_NOTE",
+        "preconditions": "all_notes",
+        "steps": [
+          "Tap target note to open",
+          "Tap pencil FAB for edit mode",
+          "Tap title; long-press to bring selection menu",
+          "Tap 'Select all'",
+          "Type new title",
+          "Tap back arrow to save"
+        ],
+        "success_signal": "Note viewer shows updated title",
+        "fallback": "If text inserted instead of replaced, long-press again, select all, retype"
+      },
+      {
+        "name": "MARK_TODO_COMPLETE",
+        "preconditions": "all_notes or notebook_view",
+        "steps": [
+          "Locate to-do in list (use search if needed)",
+          "Tap checkbox to left of title"
+        ],
+        "success_signal": "Checkbox shows checkmark and title becomes greyed; item may disappear if 'Show completed' is off",
+        "fallback": "If item not found, use search icon and type keyword"
+      },
+      {
+        "name": "SORT_AND_FILTER_LIST",
+        "preconditions": "all_notes",
+        "steps": [
+          "Tap sort icon top-right",
+          "Select sort criterion (e.g., Title, Created date)",
+          "Reopen menu if needed and toggle '[ Reverse sort order ]' for A-Z",
+          "Reopen menu and toggle '[ Show completed to-dos ]' as desired"
+        ],
+        "success_signal": "List re-orders alphabetically/by date and completed items hidden/shown per settings",
+        "fallback": "Reopen sort menu to verify state of toggles"
+      },
+      {
+        "name": "SEARCH_AND_COUNT",
+        "preconditions": "all_notes",
+        "steps": [
+          "Tap search icon top-right",
+          "Type keyword",
+          "Scroll through results distinguishing notes (no checkbox) vs to-dos (checkbox)",
+          "Count matching items",
+          "Provide answer"
+        ],
+        "success_signal": "Filtered list shows all matching items",
+        "fallback": "Clear search and re-type if results look incomplete"
+      },
+      {
+        "name": "CREATE_NOTEBOOK_AND_ADD_ITEM",
+        "preconditions": "all_notes",
+        "steps": [
+          "Open hamburger menu",
+          "Tap 'New Notebook'",
+          "Type notebook title",
+          "Tap save icon top-left",
+          "New notebook auto-opens; tap + FAB",
+          "Choose 'New to-do' or 'New note'",
+          "Enter title/content",
+          "Tap back arrow"
+        ],
+        "success_signal": "Inside new notebook header, new item is listed",
+        "fallback": "If notebook not auto-selected, reopen drawer and tap it"
+      },
+      {
+        "name": "SET_REMINDER_ALARM",
+        "preconditions": "note_viewer",
+        "steps": [
+          "Open three-dot menu",
+          "Tap 'Set alarm'",
+          "Tap 'SET DATE', choose date, OK",
+          "Choose time, OK",
+          "Tap 'SAVE ALARM'",
+          "Grant notification permission if prompted"
+        ],
+        "success_signal": "Alarm dialog closes; date appears in note",
+        "fallback": "If permission denied, alarm may not fire; re-enable in system settings"
+      },
+      {
+        "name": "APPEND_TEXT_TO_NOTE",
+        "preconditions": "all_notes",
+        "steps": [
+          "Open note",
+          "Tap pencil FAB",
+          "Tap at very end of text or press Enter for new line",
+          "Type required text with leading space if needed",
+          "Tap back arrow"
+        ],
+        "success_signal": "Note view shows appended text at end",
+        "fallback": "If cursor misplaced, tap below content or use Enter key first"
+      },
+      {
+        "name": "INSERT_HYPERLINK",
+        "preconditions": "note_editor",
+        "steps": [
+          "Tap link icon in formatting toolbar",
+          "Tap 'Link description' field, type anchor text",
+          "Tap 'URL' field, type URL",
+          "Confirm/close dialog"
+        ],
+        "success_signal": "Markdown link inserted in body as [text](url)",
+        "fallback": "Manually type markdown link syntax"
+      },
+      {
+        "name": "ASSIGN_TAG_AND_CONVERT",
+        "preconditions": "note_viewer",
+        "steps": [
+          "Tap three-dot menu",
+          "Tap 'Tags', type tag name, tap OK",
+          "Reopen three-dot menu",
+          "Tap 'Convert to note' (or 'Convert to to-do')"
+        ],
+        "success_signal": "Tag added; checkbox removed/added per conversion",
+        "fallback": ""
+      }
+    ],
+    "dead_ends": [
+      {
+        "state": "all_notes",
+        "failed_action": "Repeated tap on item checkbox when list re-sorts after each toggle",
+        "note": "After checking a to-do, list may reorder/hide item; subsequent taps may hit the wrong item. Verify by visually scanning before re-tapping."
+      },
+      {
+        "state": "note_editor",
+        "failed_action": "Typing title without focusing field first",
+        "note": "If text field is not focused (keyboard not visible), type action does nothing. Explicitly tap 'Add title' first."
+      },
+      {
+        "state": "note_editor",
+        "failed_action": "Typing new title without selecting old text",
+        "note": "Text gets inserted into existing title rather than replacing it. Use long-press + 'Select all' first."
+      },
+      {
+        "state": "all_notes",
+        "failed_action": "Manual scrolling to count many items",
+        "note": "Error-prone. Use the search function to filter and count reliably."
+      },
+      {
+        "state": "sort_menu",
+        "failed_action": "Selecting Title without checking Reverse sort order",
+        "note": "Default reverse may cause Z-A order. Reopen menu and uncheck '[ Reverse sort order ]'."
+      },
+      {
+        "state": "note_viewer",
+        "failed_action": "Searching for sort/filter inside Configuration",
+        "note": "Sort options live on list screen via the sort icon, not in app Configuration."
+      },
+      {
+        "state": "home_screen",
+        "failed_action": "Tapping wrong colored icon assuming it is Joplin",
+        "note": "Joplin icon is a blue circle with white 'J'; do not confuse with similarly colored apps like Messages or Broccoli."
+      }
+    ]
+  },
+  "layer2": {
+    "categories": [
+      {
+        "name": "ADD_ENTRY",
+        "precondition": "App is open and the target container (list/category/folder) is reachable from the main navigation",
+        "abstract_steps": [
+          "Navigate to the target container if entries are scoped to one",
+          "Invoke the primary create action (typically a floating add control)",
+          "Choose the entry subtype if multiple are offered",
+          "Focus the title/name field and enter the required text",
+          "Focus secondary fields (body, metadata) and fill required values",
+          "Persist via explicit save or by exiting the editor (auto-save)"
+        ],
+        "failure_modes": [
+          "Tapping placeholder text that isn't interactive instead of using the FAB",
+          "Typing before the input field is focused so text is dropped",
+          "Creating in the wrong container because navigation was skipped",
+          "Selecting wrong subtype (e.g., note vs task)",
+          "Missing required configuration that blocks save"
+        ],
+        "verification_checklist": [
+          "New entry visible in the target container's list",
+          "Title and content match the requested values",
+          "Subtype indicator (e.g., checkbox for tasks) is correct",
+          "No error/toast indicating save failure"
+        ]
+      },
+      {
+        "name": "EDIT_ENTRY",
+        "precondition": "Target entry exists and can be opened from a list",
+        "abstract_steps": [
+          "Locate entry via list scroll or search",
+          "Open entry to viewer mode",
+          "Switch to edit mode via edit affordance",
+          "Position cursor at the desired location (end of text for append, select all for replace)",
+          "Type or replace text",
+          "Exit/save to persist changes"
+        ],
+        "failure_modes": [
+          "Cursor lands inside an existing word leading to corrupted text",
+          "Typing inserts instead of replacing when text isn't selected",
+          "Edit mode not entered so input is ignored",
+          "Accidentally opening wrong entry with similar name"
+        ],
+        "verification_checklist": [
+          "Viewer mode shows updated text",
+          "No leftover artifacts from previous content",
+          "Entry still exists in the same container"
+        ]
+      },
+      {
+        "name": "DELETE_OR_COMPLETE_ENTRY",
+        "precondition": "Entry/task is visible in a list and supports a completion or delete action",
+        "abstract_steps": [
+          "Locate target via scroll or search",
+          "Tap the dedicated completion checkbox or delete control",
+          "If multiple items, repeat for each"
+        ],
+        "failure_modes": [
+          "List reorders after each action causing misclicks on next item",
+          "Filter hides completed items immediately, making verification harder",
+          "Tapping the row instead of the checkbox opens the entry"
+        ],
+        "verification_checklist": [
+          "Checkbox shows checked state or item removed from active list",
+          "Item count decreased as expected"
+        ]
+      },
+      {
+        "name": "QUERY_INFO",
+        "precondition": "Data of interest exists somewhere in the app",
+        "abstract_steps": [
+          "Navigate to the relevant section",
+          "Use search or scroll to locate target",
+          "Open entry if needed to read full content",
+          "Extract the requested field/value",
+          "Return answer"
+        ],
+        "failure_modes": [
+          "Mis-counting items by confusing similar subtypes",
+          "Scrolling past target items",
+          "Reading a stale cached view"
+        ],
+        "verification_checklist": [
+          "Answer matches text visible on screen",
+          "Distinguished correct subtype (e.g., task vs note) when relevant"
+        ]
+      },
+      {
+        "name": "NAVIGATE_TO",
+        "precondition": "App launched",
+        "abstract_steps": [
+          "Open primary navigation (drawer/menu)",
+          "Select target container or section",
+          "Confirm header/title matches target"
+        ],
+        "failure_modes": [
+          "Tapping wrong icon (top-right vs top-left)",
+          "Opening a similarly named item by accident"
+        ],
+        "verification_checklist": [
+          "Header reflects target name",
+          "Expected list/content for that section is visible"
+        ]
+      },
+      {
+        "name": "CONFIGURE_VIEW",
+        "precondition": "On a list/main screen that supports view options",
+        "abstract_steps": [
+          "Open the sort/filter affordance",
+          "Select desired sort key",
+          "Toggle direction or visibility flags as needed",
+          "Close menu and verify list reflects settings"
+        ],
+        "failure_modes": [
+          "Forgetting to disable reverse-order toggle",
+          "Looking for options in global settings rather than list view",
+          "Menu closes after one selection requiring reopening"
+        ],
+        "verification_checklist": [
+          "List ordering matches desired key/direction",
+          "Visibility toggles produce the expected filtered list",
+          "Reopening the menu confirms persisted selections"
+        ]
+      },
+      {
+        "name": "CREATE_CONTAINER",
+        "precondition": "App supports user-defined containers (notebooks/categories)",
+        "abstract_steps": [
+          "Open navigation drawer or relevant management screen",
+          "Invoke 'create new container' action",
+          "Enter container name",
+          "Save"
+        ],
+        "failure_modes": [
+          "Required dependent settings missing (e.g., region/language) blocking creation",
+          "Container created but not auto-selected, causing subsequent items to land in wrong place"
+        ],
+        "verification_checklist": [
+          "New container appears in list",
+          "Subsequent additions show inside it"
+        ]
+      },
+      {
+        "name": "ATTACH_MEDIA",
+        "precondition": "Editor supports media attachment and external camera/gallery is available",
+        "abstract_steps": [
+          "Tap the media/attach control",
+          "Choose source (camera vs gallery)",
+          "Configure capture options if needed",
+          "Confirm and return to editor",
+          "Save entry"
+        ],
+        "failure_modes": [
+          "Permission dialogs interrupt flow",
+          "Accidentally tapping image area dismisses or opens unintended picker",
+          "Source returns no recent items"
+        ],
+        "verification_checklist": [
+          "Media preview visible in editor",
+          "Entry saved with media attached"
+        ]
+      },
+      {
+        "name": "SET_REMINDER",
+        "precondition": "Entry supports an alarm/notification feature",
+        "abstract_steps": [
+          "Open entry options/overflow menu",
+          "Select alarm/reminder option",
+          "Pick date and time",
+          "Confirm/save the alarm",
+          "Grant notification permission if prompted"
+        ],
+        "failure_modes": [
+          "Skipping permission grant means alarms won't fire",
+          "Confusing date confirmation with final save"
+        ],
+        "verification_checklist": [
+          "Alarm indicator visible on entry",
+          "System permission granted"
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "built_at": "2025-01-15T00:00:00Z",
+    "n_episodes": 80,
+    "n_successful": 80,
+    "n_episodes_input": 80,
+    "synthesizer_model": "claude-opus-4-7",
+    "synthesizer_temperature": 0.3
+  }
+}

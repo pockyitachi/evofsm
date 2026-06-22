@@ -1,0 +1,326 @@
+{
+  "version": "0.1.0",
+  "app": "wikipedia",
+  "layer1": {
+    "app": "wikipedia",
+    "category": "Books & Reference",
+    "states": [
+      {
+        "id": "android_home",
+        "description": "Android device home screen",
+        "visual_cues": [
+          "app icons",
+          "Google search bar",
+          "clock widget"
+        ],
+        "resource_hints": [
+          "Home",
+          "Phone",
+          "Chrome"
+        ]
+      },
+      {
+        "id": "explore_feed",
+        "description": "Wikipedia main Explore feed",
+        "visual_cues": [
+          "bottom nav with Explore/Saved/Search/Edits/More",
+          "Today on Wikipedia card",
+          "Search Wikipedia bar at top"
+        ],
+        "resource_hints": [
+          "Explore",
+          "Saved",
+          "Search",
+          "Edits",
+          "More",
+          "Today on Wikipedia",
+          "Search Wikipedia"
+        ]
+      },
+      {
+        "id": "more_menu",
+        "description": "More bottom-sheet menu accessed from bottom nav",
+        "visual_cues": [
+          "Log in / join Wikipedia entry",
+          "Places, Settings, Donate items"
+        ],
+        "resource_hints": [
+          "Log in / join Wikipedia",
+          "Places",
+          "Settings",
+          "Donate"
+        ]
+      },
+      {
+        "id": "settings",
+        "description": "Wikipedia Settings screen",
+        "visual_cues": [
+          "Navigate up arrow",
+          "General section",
+          "Show link previews toggle",
+          "Explore Feed entry",
+          "Collapse tables toggle",
+          "App theme"
+        ],
+        "resource_hints": [
+          "Settings",
+          "General",
+          "Wikipedia languages",
+          "Explore Feed",
+          "Show link previews",
+          "Collapse tables",
+          "App theme"
+        ]
+      },
+      {
+        "id": "customize_feed",
+        "description": "Customize the Explore feed screen with toggles per card type",
+        "visual_cues": [
+          "Title 'Customize the feed'",
+          "List of feed card types with toggles",
+          "Top read row",
+          "Featured article row"
+        ],
+        "resource_hints": [
+          "Customize the feed",
+          "Featured article",
+          "Top read",
+          "Picture of the day",
+          "In the news",
+          "On this day",
+          "Randomizer"
+        ]
+      },
+      {
+        "id": "saved_tab",
+        "description": "Saved/Reading lists tab",
+        "visual_cues": [
+          "Saved header",
+          "Filter my lists",
+          "Sync reading lists prompt"
+        ],
+        "resource_hints": [
+          "Saved",
+          "Filter my lists",
+          "Sync reading lists",
+          "Log in / join Wikipedia",
+          "Not now"
+        ]
+      },
+      {
+        "id": "search_tab",
+        "description": "Search tab with history and search bar",
+        "visual_cues": [
+          "Search header",
+          "Search Wikipedia input",
+          "History section",
+          "No recently viewed articles message"
+        ],
+        "resource_hints": [
+          "Search",
+          "Search Wikipedia",
+          "History",
+          "Voice input search"
+        ]
+      }
+    ],
+    "transitions": [
+      {
+        "from_state": "android_home",
+        "to_state": "explore_feed",
+        "action": "open_app(Wikipedia)",
+        "precondition": "Wikipedia installed",
+        "postcondition": "Explore feed shown"
+      },
+      {
+        "from_state": "explore_feed",
+        "to_state": "more_menu",
+        "action": "click(More tab)",
+        "precondition": "",
+        "postcondition": "Bottom sheet visible"
+      },
+      {
+        "from_state": "explore_feed",
+        "to_state": "saved_tab",
+        "action": "click(Saved tab)",
+        "precondition": "",
+        "postcondition": "Saved screen active"
+      },
+      {
+        "from_state": "explore_feed",
+        "to_state": "search_tab",
+        "action": "click(Search tab)",
+        "precondition": "",
+        "postcondition": "Search screen active"
+      },
+      {
+        "from_state": "more_menu",
+        "to_state": "settings",
+        "action": "click(Settings)",
+        "precondition": "",
+        "postcondition": "Settings opened"
+      },
+      {
+        "from_state": "settings",
+        "to_state": "customize_feed",
+        "action": "click(Explore Feed)",
+        "precondition": "",
+        "postcondition": "Customize feed shown"
+      },
+      {
+        "from_state": "settings",
+        "to_state": "settings",
+        "action": "click(Show link previews toggle)",
+        "precondition": "toggle currently on/off",
+        "postcondition": "Toggle state flipped"
+      },
+      {
+        "from_state": "customize_feed",
+        "to_state": "customize_feed",
+        "action": "click(Top read toggle)",
+        "precondition": "toggle visible",
+        "postcondition": "Toggle state flipped"
+      },
+      {
+        "from_state": "customize_feed",
+        "to_state": "settings",
+        "action": "click(Navigate up)",
+        "precondition": "",
+        "postcondition": "Returned to Settings"
+      },
+      {
+        "from_state": "settings",
+        "to_state": "explore_feed",
+        "action": "click(Navigate up)",
+        "precondition": "",
+        "postcondition": "Returned to Explore"
+      }
+    ],
+    "strategies": [
+      {
+        "name": "DISABLE_LINK_PREVIEWS_AND_TOP_READ",
+        "preconditions": "Starting from android_home or explore_feed",
+        "steps": [
+          "open_app(Wikipedia) if not in app",
+          "click(More) in bottom nav",
+          "click(Settings) in bottom sheet",
+          "click(Show link previews toggle) to turn off",
+          "click(Explore Feed) to open feed customization",
+          "click(Top read toggle) to turn off",
+          "click(Navigate up) to return to Settings",
+          "click(Navigate up) again to return to Explore feed"
+        ],
+        "success_signal": "Explore feed visible with both toggles previously turned off; ending on explore_feed state, not settings",
+        "fallback": "If still on settings, click Navigate up one more time until Explore feed visible"
+      },
+      {
+        "name": "NAVIGATE_TO_SAVED_TAB",
+        "preconditions": "Starting from android_home",
+        "steps": [
+          "open_app(Wikipedia)",
+          "click(Saved) in bottom nav"
+        ],
+        "success_signal": "Saved header visible and Saved tab highlighted in bottom nav",
+        "fallback": "If wrong tab active, re-click Saved entry in bottom nav"
+      },
+      {
+        "name": "NAVIGATE_TO_SEARCH_TAB",
+        "preconditions": "Starting from android_home",
+        "steps": [
+          "open_app(Wikipedia)",
+          "click(Search) in bottom nav"
+        ],
+        "success_signal": "Search header visible with Search Wikipedia input and History section",
+        "fallback": "If wrong tab active, re-click Search entry in bottom nav"
+      }
+    ],
+    "dead_ends": [
+      {
+        "state": "settings",
+        "failed_action": "status(complete) while still on Settings screen",
+        "note": "Task required returning to the main Explore feed; declaring complete on Settings page misses one back navigation and scores as failure"
+      },
+      {
+        "state": "customize_feed",
+        "failed_action": "status(complete) after only one back press from customize_feed",
+        "note": "One back lands on Settings, not on Explore; a second Navigate up is needed to reach the Explore feed"
+      }
+    ]
+  },
+  "layer2": {
+    "categories": [
+      {
+        "name": "TOGGLE_SETTING",
+        "precondition": "App is open and user can reach the settings area",
+        "abstract_steps": [
+          "Open the app if not already in it",
+          "Navigate to the settings/preferences area via the overflow or 'more' entry",
+          "Locate the target preference row",
+          "Read the current toggle state",
+          "Tap the toggle if its state differs from desired",
+          "Verify the toggle visually reflects the new state"
+        ],
+        "failure_modes": [
+          "Tapping a toggle that is already in the desired state, flipping it the wrong way",
+          "Confusing similar-sounding preferences",
+          "Declaring completion before verifying the toggle changed"
+        ],
+        "verification_checklist": [
+          "Toggle indicator shows the desired on/off color/position",
+          "No confirmation dialog left unhandled",
+          "Other preferences not unintentionally modified"
+        ]
+      },
+      {
+        "name": "MULTI_STEP_SETTINGS_THEN_RETURN",
+        "precondition": "Task requires changing one or more nested preferences and then returning to a specific starting screen",
+        "abstract_steps": [
+          "Enter settings",
+          "Adjust top-level preferences",
+          "Drill into a nested preferences subscreen if needed",
+          "Adjust nested preferences",
+          "Back-navigate out of the nested screen",
+          "Back-navigate out of settings until the originally requested screen is shown",
+          "Only then signal completion"
+        ],
+        "failure_modes": [
+          "Stopping completion signal while still inside settings or a nested subscreen",
+          "Skipping a needed back-press because intermediate screen looks like the target",
+          "Confusing the bottom-nav of the settings area with the main app navigation"
+        ],
+        "verification_checklist": [
+          "Final visible screen matches the requested destination's distinctive cues",
+          "All requested toggles ended in the requested state",
+          "No modal/snackbar blocking the destination"
+        ]
+      },
+      {
+        "name": "NAVIGATE_TO_TAB",
+        "precondition": "App has a primary tab/navigation bar and target tab is one of its entries",
+        "abstract_steps": [
+          "Open the app if not already in it",
+          "Locate the primary navigation bar",
+          "Tap the entry matching the target tab name",
+          "Confirm the tab indicator/highlight moved to the target"
+        ],
+        "failure_modes": [
+          "Clicking a similarly named element outside the navigation bar",
+          "Assuming completion without checking the active-tab indicator"
+        ],
+        "verification_checklist": [
+          "Target tab is visually highlighted",
+          "Screen header/content matches the target tab",
+          "No login/sync prompt is mistaken as a failure state"
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "built_at": "2025-01-27T00:00:00Z",
+    "n_episodes": 80,
+    "n_successful": 74,
+    "n_episodes_input": 80,
+    "synthesizer_model": "claude-opus-4-7",
+    "synthesizer_temperature": 0.3
+  }
+}

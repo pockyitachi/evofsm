@@ -1,0 +1,630 @@
+{
+  "version": "0.1.0",
+  "app": "maps_me",
+  "layer1": {
+    "app": "maps_me",
+    "category": "Maps & Navigation",
+    "states": [
+      {
+        "id": "android_home",
+        "description": "Android device home screen",
+        "visual_cues": [
+          "app icons (Phone, Chrome, Settings)",
+          "Google search bar",
+          "date widget"
+        ],
+        "resource_hints": [
+          "Home",
+          "Search"
+        ]
+      },
+      {
+        "id": "map_main",
+        "description": "MAPS.ME main map view",
+        "visual_cues": [
+          "map of Chico, California",
+          "Download map prompt",
+          "Map Ruler",
+          "Zoom In/Out",
+          "Map Location button",
+          "bottom navigation bar"
+        ],
+        "resource_hints": [
+          "California",
+          "Chico",
+          "52.71 MB",
+          "Map Ruler",
+          "Zoom In",
+          "Zoom Out",
+          "Map Location"
+        ]
+      },
+      {
+        "id": "map_main_with_product_hub",
+        "description": "Main map with Product Hub promotional banner",
+        "visual_cues": [
+          "Product Hub banner at bottom",
+          "Book a hotel banner",
+          "map controls"
+        ],
+        "resource_hints": [
+          "Product Hub",
+          "Book a hotel",
+          "Anywhere in the world"
+        ]
+      },
+      {
+        "id": "search_overlay",
+        "description": "Search overlay with history and category icons",
+        "visual_cues": [
+          "search text field",
+          "keyboard",
+          "category icons (Hotel, Groceries, etc.)",
+          "prior searches list (e.g., 'open ai', 'Street')"
+        ],
+        "resource_hints": [
+          "Search",
+          "Icon item",
+          "open ai",
+          "open",
+          "Street"
+        ]
+      },
+      {
+        "id": "search_no_results",
+        "description": "Search results with no matches",
+        "visual_cues": [
+          "'Unfortunately we didn't find anything' message",
+          "'Try changing your search terms' hint",
+          "Close button"
+        ],
+        "resource_hints": [
+          "Search results",
+          "search mode indicator",
+          "Close"
+        ]
+      },
+      {
+        "id": "search_results_list",
+        "description": "Search returned results list",
+        "visual_cues": [
+          "Relevance label",
+          "list of POIs with distance",
+          "View on map button"
+        ],
+        "resource_hints": [
+          "Search results",
+          "Relevance",
+          "View on map",
+          "Town",
+          "Airport"
+        ]
+      },
+      {
+        "id": "work_address_search",
+        "description": "Search overlay for setting Work address",
+        "visual_cues": [
+          "'Work address' header",
+          "My location entry",
+          "search field",
+          "prior search entries"
+        ],
+        "resource_hints": [
+          "Work address",
+          "My location"
+        ]
+      },
+      {
+        "id": "route_planner",
+        "description": "Route planning panel with start/destination",
+        "visual_cues": [
+          "Route header",
+          "My location field",
+          "Where to field",
+          "Freeride/transport mode buttons"
+        ],
+        "resource_hints": [
+          "Route",
+          "Freeride",
+          "my location",
+          "My location"
+        ]
+      },
+      {
+        "id": "map_settings_overlay",
+        "description": "Map style and settings overlay",
+        "visual_cues": [
+          "Map style toggle",
+          "Map settings",
+          "Layers, Isolines, 3D buildings options",
+          "Subway layer"
+        ],
+        "resource_hints": [
+          "Map style",
+          "Map settings",
+          "Layers",
+          "Isolines",
+          "3D buildings"
+        ]
+      },
+      {
+        "id": "map_settings_secondary",
+        "description": "Map settings secondary submenu (My places, etc.)",
+        "visual_cues": [
+          "My places On/Off toggle",
+          "map option icons"
+        ],
+        "resource_hints": [
+          "My places",
+          "On",
+          "map option icon"
+        ]
+      },
+      {
+        "id": "road_alerts_settings",
+        "description": "Road alerts settings sub-screen",
+        "visual_cues": [
+          "Road alerts header",
+          "Active routing",
+          "backButton"
+        ],
+        "resource_hints": [
+          "Road alerts",
+          "backButton",
+          "Active routing"
+        ]
+      },
+      {
+        "id": "profile_screen",
+        "description": "MAPS.ME profile / sign-in screen",
+        "visual_cues": [
+          "Welcome to MAPS.ME Profile",
+          "Sign in button",
+          "Download Maps",
+          "Record activity"
+        ],
+        "resource_hints": [
+          "Welcome to MAPS.ME Profile",
+          "Sign in",
+          "Download Maps",
+          "Record activity"
+        ]
+      },
+      {
+        "id": "no_internet_state",
+        "description": "Map screen showing No internet connection error",
+        "visual_cues": [
+          "'No internet connection' message",
+          "Retry button",
+          "map controls disabled"
+        ],
+        "resource_hints": [
+          "No internet connection",
+          "Retry"
+        ]
+      },
+      {
+        "id": "clear_history_dialog",
+        "description": "Confirmation dialog for clearing search history",
+        "visual_cues": [
+          "bottom sheet",
+          "Clear search history button",
+          "Cancel button"
+        ],
+        "resource_hints": [
+          "close bottom sheet",
+          "Clear search history",
+          "Cancel"
+        ]
+      },
+      {
+        "id": "select_point_screen",
+        "description": "Select point screen for choosing a map location",
+        "visual_cues": [
+          "'Select point' label",
+          "Unknown Place",
+          "Download map prompt"
+        ],
+        "resource_hints": [
+          "Download map",
+          "Map Location"
+        ]
+      },
+      {
+        "id": "android_settings",
+        "description": "Android Settings app",
+        "visual_cues": [
+          "Profile picture",
+          "Search settings",
+          "Network & internet"
+        ],
+        "resource_hints": [
+          "Settings",
+          "Network & internet"
+        ]
+      }
+    ],
+    "transitions": [
+      {
+        "from_state": "android_home",
+        "to_state": "map_main",
+        "action": "open_app(MAPS.ME)",
+        "precondition": "",
+        "postcondition": "App launches to last map view"
+      },
+      {
+        "from_state": "map_main",
+        "to_state": "work_address_search",
+        "action": "click(Work button in bottom bar)",
+        "precondition": "Work bookmark not yet set",
+        "postcondition": ""
+      },
+      {
+        "from_state": "map_main",
+        "to_state": "search_overlay",
+        "action": "click(Search icon)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "map_main",
+        "to_state": "route_planner",
+        "action": "click(Route icon)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "map_main",
+        "to_state": "map_settings_overlay",
+        "action": "click(layers icon)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "map_main",
+        "to_state": "map_main_with_product_hub",
+        "action": "app_state_change",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "map_main_with_product_hub",
+        "to_state": "route_planner",
+        "action": "click(Route icon)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "search_overlay",
+        "to_state": "search_no_results",
+        "action": "input_text(query) | click(history item)",
+        "precondition": "query not in offline data",
+        "postcondition": ""
+      },
+      {
+        "from_state": "search_overlay",
+        "to_state": "search_results_list",
+        "action": "input_text(query)",
+        "precondition": "query matches indexed POI",
+        "postcondition": ""
+      },
+      {
+        "from_state": "search_no_results",
+        "to_state": "search_overlay",
+        "action": "click(clear icon)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "search_no_results",
+        "to_state": "map_main",
+        "action": "click(Close)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "work_address_search",
+        "to_state": "search_no_results",
+        "action": "input_text(query)",
+        "precondition": "query not found",
+        "postcondition": ""
+      },
+      {
+        "from_state": "work_address_search",
+        "to_state": "map_main",
+        "action": "navigate_back",
+        "precondition": "",
+        "postcondition": "Work address NOT saved"
+      },
+      {
+        "from_state": "route_planner",
+        "to_state": "search_overlay",
+        "action": "click(Where to field)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "route_planner",
+        "to_state": "select_point_screen",
+        "action": "click(Freeride mode toggle)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "map_settings_overlay",
+        "to_state": "map_main",
+        "action": "navigate_back",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "map_settings_overlay",
+        "to_state": "map_settings_secondary",
+        "action": "click(Map settings)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "map_settings_overlay",
+        "to_state": "road_alerts_settings",
+        "action": "click(Road alerts entry)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "map_main",
+        "to_state": "profile_screen",
+        "action": "click(More/profile)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "map_main",
+        "to_state": "no_internet_state",
+        "action": "click(Download map)",
+        "precondition": "device offline",
+        "postcondition": ""
+      },
+      {
+        "from_state": "no_internet_state",
+        "to_state": "no_internet_state",
+        "action": "click(Retry)",
+        "precondition": "still offline",
+        "postcondition": "no change"
+      },
+      {
+        "from_state": "search_overlay",
+        "to_state": "clear_history_dialog",
+        "action": "click(Clear search history)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "clear_history_dialog",
+        "to_state": "search_overlay",
+        "action": "click(Cancel)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "android_home",
+        "to_state": "android_settings",
+        "action": "click(Settings icon)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "android_settings",
+        "to_state": "android_home",
+        "action": "navigate_home",
+        "precondition": "",
+        "postcondition": ""
+      }
+    ],
+    "strategies": [
+      {
+        "name": "SET_WORK_ADDRESS_VIA_HISTORY",
+        "preconditions": "map_main with Work button visible in bottom bar",
+        "steps": [
+          "click Work button to open work_address_search",
+          "type the POI name (e.g., 'Microsoft headquarters Redmond') into the search field",
+          "if results found, tap the matching result; if app shows history entry from a previous typed query, tap that entry",
+          "confirm selection saves it as Work address"
+        ],
+        "success_signal": "Returns to map view with Work pin set and toast/check indicating saved",
+        "fallback": "If POI not found, try simpler/canonical name or skip and mark infeasible"
+      },
+      {
+        "name": "INITIATE_ROUTE",
+        "preconditions": "map_main",
+        "steps": [
+          "click Route icon in bottom navigation",
+          "tap Where to field",
+          "type or pick destination from search history",
+          "wait for route panel to compute distance/time"
+        ],
+        "success_signal": "Route polyline drawn and distance/time displayed in route panel",
+        "fallback": "If destination not found, try alternate name or canonical address"
+      },
+      {
+        "name": "FIND_NEAREST_POI",
+        "preconditions": "map_main",
+        "steps": [
+          "click Search icon",
+          "tap a category chip (e.g., Hotel, Groceries) or type category keyword",
+          "review search results list ordered by distance",
+          "tap nearest result to view details"
+        ],
+        "success_signal": "Results list shows POIs with distances; nearest entry selectable",
+        "fallback": "If 'didn't find anything', zoom in, ensure map is centered on user location, or try synonym (grocery store vs supermarket)"
+      }
+    ],
+    "dead_ends": [
+      {
+        "state": "work_address_search",
+        "failed_action": "input_text 'Microsoft' / 'Stanford University' / 'Apple'",
+        "note": "Offline map of Chico has no global POI data; brand-name searches consistently return 'didn't find anything'"
+      },
+      {
+        "state": "search_no_results",
+        "failed_action": "repeated re-typing of same query",
+        "note": "Re-issuing identical or near-identical queries yields the same empty result; agent loops"
+      },
+      {
+        "state": "map_settings_overlay",
+        "failed_action": "clicking Map style / Map settings repeatedly to dismiss",
+        "note": "Overlay must be dismissed with navigate_back, not by tapping internal toggles"
+      },
+      {
+        "state": "no_internet_state",
+        "failed_action": "click(Retry)",
+        "note": "Device-level offline state cannot be resolved inside app; tasks needing online search become infeasible"
+      },
+      {
+        "state": "map_main_with_product_hub",
+        "failed_action": "repeated scroll up/down to reveal route inputs",
+        "note": "Product Hub banner is fixed; route planner is opened via the Route icon, not by scrolling"
+      },
+      {
+        "state": "route_planner",
+        "failed_action": "input destination that has typo or non-indexed name",
+        "note": "Search returns no results; route cannot be computed"
+      }
+    ]
+  },
+  "layer2": {
+    "categories": [
+      {
+        "name": "SET_SAVED_PLACE",
+        "precondition": "App is open at a state exposing a 'Saved place' shortcut (e.g., Home/Work)",
+        "abstract_steps": [
+          "Open the saved-place editor for the target slot",
+          "Enter a query identifying the desired location",
+          "Select a matching result from suggestions or the map",
+          "Confirm to persist the saved place"
+        ],
+        "failure_modes": [
+          "Offline data set lacks the target POI",
+          "Query is too generic or misspelled",
+          "User exits editor before confirming, losing changes",
+          "Search returns history entries that are not real POIs"
+        ],
+        "verification_checklist": [
+          "After confirmation, the saved slot displays the chosen location name",
+          "Re-opening the slot shows the new address",
+          "Map shows a pin/icon for the saved place"
+        ]
+      },
+      {
+        "name": "COMPUTE_ROUTE",
+        "precondition": "App is open with route/directions feature accessible",
+        "abstract_steps": [
+          "Open route planner",
+          "Set origin (current location or specific place)",
+          "Set destination via search or map tap",
+          "Choose travel mode (drive/walk/transit/bike) if applicable",
+          "Wait for route calculation and read distance/time"
+        ],
+        "failure_modes": [
+          "Origin or destination cannot be found in available data",
+          "Selected travel mode unsupported in region/offline",
+          "Connectivity required but unavailable",
+          "Promotional banner obscures route inputs and agent loops scrolling"
+        ],
+        "verification_checklist": [
+          "Both endpoints visible in route panel",
+          "A route line is drawn on the map",
+          "Numeric distance and ETA are displayed",
+          "Travel mode indicator matches the intended mode"
+        ]
+      },
+      {
+        "name": "QUERY_NEAREST_POI",
+        "precondition": "App is open with search functionality and current/user location available",
+        "abstract_steps": [
+          "Open search",
+          "Enter category keyword or tap category chip",
+          "Allow app to return ranked list by proximity",
+          "Pick top/nearest result"
+        ],
+        "failure_modes": [
+          "Map data offline and lacks POI category",
+          "Search term overly specific or misspelled",
+          "No internet for online POI lookups",
+          "User location not set, so distances cannot be ranked"
+        ],
+        "verification_checklist": [
+          "Results list shows at least one POI with distance",
+          "Nearest entry is highlighted or top of list",
+          "Selecting it reveals its details and map pin"
+        ]
+      },
+      {
+        "name": "RECOVER_FROM_EMPTY_SEARCH",
+        "precondition": "A search has returned an empty result",
+        "abstract_steps": [
+          "Clear the query field",
+          "Try a broader/simpler term or canonical name",
+          "If still empty, try a synonym or related category",
+          "If repeated failures, abandon and mark task infeasible"
+        ],
+        "failure_modes": [
+          "Repeatedly re-issuing the same query",
+          "Concatenating new text onto leftover text in field",
+          "Mistaking offline-data limitation for a typo"
+        ],
+        "verification_checklist": [
+          "Field is empty before retry",
+          "Each retry uses a meaningfully different term",
+          "Loop is bounded (e.g., max 3 retries) before declaring infeasible"
+        ]
+      },
+      {
+        "name": "DISMISS_OVERLAY",
+        "precondition": "A modal overlay or settings panel is blocking the main view",
+        "abstract_steps": [
+          "Use system back/navigate-back gesture",
+          "If back fails, look for explicit close affordance",
+          "Avoid tapping internal toggles thinking they dismiss the overlay"
+        ],
+        "failure_modes": [
+          "Tapping header items toggles internal state instead of closing",
+          "Repeatedly clicking same element with no effect",
+          "Confusing overlay with main screen"
+        ],
+        "verification_checklist": [
+          "Main map/content visible again",
+          "Overlay-specific widgets no longer present",
+          "Subsequent actions on main view succeed"
+        ]
+      },
+      {
+        "name": "HANDLE_OFFLINE_STATE",
+        "precondition": "App reports no internet and required feature needs online data",
+        "abstract_steps": [
+          "Attempt one retry of network action",
+          "If still offline, exit app or check device network settings",
+          "If device cannot be brought online, declare task infeasible"
+        ],
+        "failure_modes": [
+          "Looping on Retry without network change",
+          "Navigating to device settings but not toggling connectivity",
+          "Assuming offline maps cover online-only POIs"
+        ],
+        "verification_checklist": [
+          "Connectivity indicator shows online",
+          "Previously failing search/route now returns data",
+          "No 'No internet connection' banner visible"
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "built_at": "2025-01-26T00:00:00Z",
+    "n_episodes": 40,
+    "n_successful": 0,
+    "n_episodes_input": 40,
+    "synthesizer_model": "claude-opus-4-7",
+    "synthesizer_temperature": 0.3
+  }
+}

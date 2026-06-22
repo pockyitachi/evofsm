@@ -1,0 +1,1023 @@
+{
+  "version": "0.1.0",
+  "app": "clock",
+  "layer1": {
+    "app": "clock",
+    "category": "Tools",
+    "states": [
+      {
+        "id": "home_screen",
+        "description": "Device home screen",
+        "visual_cues": [
+          "app shortcuts (Gmail, Photos, YouTube)",
+          "bottom dock",
+          "search bar"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "app_drawer",
+        "description": "All installed apps grid",
+        "visual_cues": [
+          "grid of app icons",
+          "suggested apps row",
+          "All apps section"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "world_clock_tab",
+        "description": "Clock tab showing world clock list",
+        "visual_cues": [
+          "local time display",
+          "date below time",
+          "list of city cards",
+          "floating + button bottom-center",
+          "bottom nav bar with Alarm/Clock/Timer/Stopwatch/Bedtime"
+        ],
+        "resource_hints": [
+          "Clock tab"
+        ]
+      },
+      {
+        "id": "city_search",
+        "description": "Search for a city screen",
+        "visual_cues": [
+          "Search for a city placeholder",
+          "search bar at top",
+          "back arrow",
+          "magnifying glass icon",
+          "keyboard"
+        ],
+        "resource_hints": [
+          "Search for a city"
+        ]
+      },
+      {
+        "id": "city_search_results",
+        "description": "City search results listing",
+        "visual_cues": [
+          "list of matching cities with local times",
+          "search field with text"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "city_search_offline",
+        "description": "Offline state on city search",
+        "visual_cues": [
+          "'Go online for more cities' header",
+          "offline icon",
+          "limited cities message"
+        ],
+        "resource_hints": [
+          "Go online for more cities"
+        ]
+      },
+      {
+        "id": "alarm_tab",
+        "description": "Alarms list tab",
+        "visual_cues": [
+          "list of alarm cards with times",
+          "toggle switches",
+          "expand arrows",
+          "+ button at bottom"
+        ],
+        "resource_hints": [
+          "Alarm tab"
+        ]
+      },
+      {
+        "id": "alarm_expanded",
+        "description": "Expanded alarm card with details",
+        "visual_cues": [
+          "day-of-week circles S M T W T F S",
+          "Add label field",
+          "Sound option",
+          "Vibrate option",
+          "Delete button",
+          "large time display"
+        ],
+        "resource_hints": [
+          "Add label",
+          "Vibrate",
+          "Delete"
+        ]
+      },
+      {
+        "id": "time_picker_dial",
+        "description": "Time selection clock dial",
+        "visual_cues": [
+          "circular clock face",
+          "Hour/Minute fields",
+          "keyboard icon toggle",
+          "OK/Cancel buttons"
+        ],
+        "resource_hints": [
+          "Select time"
+        ]
+      },
+      {
+        "id": "time_picker_keypad",
+        "description": "Time selection keyboard input",
+        "visual_cues": [
+          "Hour and Minute boxes",
+          "numeric keypad",
+          "OK/Cancel buttons"
+        ],
+        "resource_hints": [
+          "Select time"
+        ]
+      },
+      {
+        "id": "label_dialog",
+        "description": "Text dialog to enter alarm/timer label",
+        "visual_cues": [
+          "Label title",
+          "text input field",
+          "OK/Cancel"
+        ],
+        "resource_hints": [
+          "Label"
+        ]
+      },
+      {
+        "id": "timer_tab",
+        "description": "Timer setup with numeric keypad",
+        "visual_cues": [
+          "00h 00m 00s display",
+          "numeric keypad",
+          "play button at bottom"
+        ],
+        "resource_hints": [
+          "Timer"
+        ]
+      },
+      {
+        "id": "timer_running",
+        "description": "Active running timer",
+        "visual_cues": [
+          "countdown ring",
+          "timer label at top (e.g., 5m Timer)",
+          "pause button",
+          "+ to add timer"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "stopwatch_tab",
+        "description": "Stopwatch interface",
+        "visual_cues": [
+          "00 00 display",
+          "play button center",
+          "reset on left",
+          "lap button on right"
+        ],
+        "resource_hints": [
+          "Stopwatch"
+        ]
+      },
+      {
+        "id": "stopwatch_running",
+        "description": "Running stopwatch with optional laps",
+        "visual_cues": [
+          "incrementing timer",
+          "pause button center",
+          "lap button right",
+          "lap list below"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "stopwatch_paused",
+        "description": "Paused stopwatch with lap times",
+        "visual_cues": [
+          "frozen time display",
+          "play button center",
+          "reset button left",
+          "lap list"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "bedtime_tab_intro",
+        "description": "Bedtime introduction screen",
+        "visual_cues": [
+          "'Set a consistent bedtime' text",
+          "Get started button"
+        ],
+        "resource_hints": [
+          "Get started"
+        ]
+      },
+      {
+        "id": "bedtime_wake_setup",
+        "description": "Set regular wake-up alarm screen",
+        "visual_cues": [
+          "wake-up time (default 07:00)",
+          "day selector row",
+          "Sunrise Alarm toggle",
+          "Sound option",
+          "Vibrate option",
+          "Next button"
+        ],
+        "resource_hints": [
+          "Set a regular wake-up alarm",
+          "Sunrise Alarm"
+        ]
+      },
+      {
+        "id": "bedtime_sleep_setup",
+        "description": "Set bedtime and silence device screen",
+        "visual_cues": [
+          "bedtime (default 23:00)",
+          "day selector row",
+          "Done button"
+        ],
+        "resource_hints": [
+          "Set bedtime and silence your device"
+        ]
+      },
+      {
+        "id": "bedtime_dashboard",
+        "description": "Configured bedtime schedule view",
+        "visual_cues": [
+          "Schedule card",
+          "BEDTIME and WAKE-UP times",
+          "Next alarm on..."
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "overflow_menu",
+        "description": "Three-dot menu dropdown",
+        "visual_cues": [
+          "Screen saver",
+          "Settings",
+          "Privacy policy",
+          "Send feedback",
+          "Help"
+        ],
+        "resource_hints": [
+          "Send feedback",
+          "Settings",
+          "Screen saver"
+        ]
+      },
+      {
+        "id": "settings_screen",
+        "description": "Clock app settings",
+        "visual_cues": [
+          "Clock section (Style)",
+          "Alarms section (Silence after, Snooze length)"
+        ],
+        "resource_hints": [
+          "Style",
+          "Silence after",
+          "Snooze length"
+        ]
+      },
+      {
+        "id": "screen_saver",
+        "description": "Screen saver mode active",
+        "visual_cues": [
+          "black background",
+          "dim minimal clock"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "send_feedback",
+        "description": "Send feedback form",
+        "visual_cues": [
+          "From field",
+          "feedback text area",
+          "Screenshot attachment",
+          "System logs checkbox",
+          "send (paper plane) icon"
+        ],
+        "resource_hints": [
+          "Send Feedback",
+          "Screenshot",
+          "System logs",
+          "From"
+        ]
+      },
+      {
+        "id": "logs_permission_dialog",
+        "description": "Permission to access device logs",
+        "visual_cues": [
+          "Allow Google Play services to access all device logs?",
+          "Allow one-time access",
+          "Don't allow"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "screenshot_editor",
+        "description": "Feedback screenshot annotation editor",
+        "visual_cues": [
+          "yellow highlight tool",
+          "black redaction tool",
+          "undo button",
+          "checkmark to save",
+          "GOT IT overlay first time"
+        ],
+        "resource_hints": [
+          "Highlight issues or hide sensitive information"
+        ]
+      },
+      {
+        "id": "system_logs_viewer",
+        "description": "System information / log viewer dialog",
+        "visual_cues": [
+          "system information dialog"
+        ],
+        "resource_hints": []
+      }
+    ],
+    "transitions": [
+      {
+        "from_state": "home_screen",
+        "to_state": "app_drawer",
+        "action": "swipe_up_from_bottom",
+        "precondition": "Clock not on home",
+        "postcondition": "app drawer visible"
+      },
+      {
+        "from_state": "app_drawer",
+        "to_state": "world_clock_tab",
+        "action": "click(Clock icon)",
+        "precondition": "",
+        "postcondition": "Clock app open on default tab"
+      },
+      {
+        "from_state": "world_clock_tab",
+        "to_state": "city_search",
+        "action": "click(fab_plus)",
+        "precondition": "on Clock tab",
+        "postcondition": "search screen open with keyboard"
+      },
+      {
+        "from_state": "city_search",
+        "to_state": "city_search_results",
+        "action": "type(city_name) and submit/refocus",
+        "precondition": "online",
+        "postcondition": "matching cities listed"
+      },
+      {
+        "from_state": "city_search",
+        "to_state": "city_search_offline",
+        "action": "view when offline",
+        "precondition": "no internet",
+        "postcondition": "offline message shown"
+      },
+      {
+        "from_state": "city_search_results",
+        "to_state": "world_clock_tab",
+        "action": "click(city_result)",
+        "precondition": "",
+        "postcondition": "city added to world clock list"
+      },
+      {
+        "from_state": "city_search",
+        "to_state": "world_clock_tab",
+        "action": "click(back_arrow)",
+        "precondition": "",
+        "postcondition": "returns to clock tab"
+      },
+      {
+        "from_state": "world_clock_tab",
+        "to_state": "alarm_tab",
+        "action": "click(Alarm tab)",
+        "precondition": "",
+        "postcondition": "alarm list visible"
+      },
+      {
+        "from_state": "world_clock_tab",
+        "to_state": "timer_tab",
+        "action": "click(Timer tab)",
+        "precondition": "",
+        "postcondition": "timer setup visible"
+      },
+      {
+        "from_state": "world_clock_tab",
+        "to_state": "stopwatch_tab",
+        "action": "click(Stopwatch tab)",
+        "precondition": "",
+        "postcondition": "stopwatch visible"
+      },
+      {
+        "from_state": "world_clock_tab",
+        "to_state": "bedtime_tab_intro",
+        "action": "click(Bedtime tab)",
+        "precondition": "not configured",
+        "postcondition": ""
+      },
+      {
+        "from_state": "world_clock_tab",
+        "to_state": "bedtime_dashboard",
+        "action": "click(Bedtime tab)",
+        "precondition": "configured",
+        "postcondition": ""
+      },
+      {
+        "from_state": "alarm_tab",
+        "to_state": "time_picker_dial",
+        "action": "click(fab_plus)",
+        "precondition": "",
+        "postcondition": "time selection dialog"
+      },
+      {
+        "from_state": "time_picker_dial",
+        "to_state": "time_picker_keypad",
+        "action": "click(keyboard_icon)",
+        "precondition": "",
+        "postcondition": "keypad input mode"
+      },
+      {
+        "from_state": "time_picker_keypad",
+        "to_state": "alarm_expanded",
+        "action": "type(hour) -> click(minute field) -> type(minute) -> click(OK)",
+        "precondition": "from new alarm",
+        "postcondition": "alarm created and expanded"
+      },
+      {
+        "from_state": "time_picker_dial",
+        "to_state": "alarm_expanded",
+        "action": "tap clock face for hour and minute -> click(OK)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "alarm_tab",
+        "to_state": "alarm_expanded",
+        "action": "click(expand_arrow)",
+        "precondition": "alarm exists",
+        "postcondition": "card expanded"
+      },
+      {
+        "from_state": "alarm_expanded",
+        "to_state": "label_dialog",
+        "action": "click(Add label)",
+        "precondition": "",
+        "postcondition": "label dialog open"
+      },
+      {
+        "from_state": "label_dialog",
+        "to_state": "alarm_expanded",
+        "action": "type(label) -> click(OK)",
+        "precondition": "",
+        "postcondition": "label saved"
+      },
+      {
+        "from_state": "alarm_expanded",
+        "to_state": "time_picker_dial",
+        "action": "click(time_display)",
+        "precondition": "",
+        "postcondition": "edit time"
+      },
+      {
+        "from_state": "alarm_expanded",
+        "to_state": "alarm_tab",
+        "action": "click(Delete) or click(day_circle) to toggle days",
+        "precondition": "",
+        "postcondition": "alarm removed or days updated"
+      },
+      {
+        "from_state": "timer_tab",
+        "to_state": "timer_running",
+        "action": "type(digits via keypad) -> click(play)",
+        "precondition": "duration entered",
+        "postcondition": "countdown running"
+      },
+      {
+        "from_state": "timer_running",
+        "to_state": "label_dialog",
+        "action": "click(timer_label)",
+        "precondition": "",
+        "postcondition": "rename timer"
+      },
+      {
+        "from_state": "stopwatch_tab",
+        "to_state": "stopwatch_running",
+        "action": "click(play)",
+        "precondition": "",
+        "postcondition": "stopwatch ticking"
+      },
+      {
+        "from_state": "stopwatch_running",
+        "to_state": "stopwatch_running",
+        "action": "click(lap_button)",
+        "precondition": "running",
+        "postcondition": "lap recorded"
+      },
+      {
+        "from_state": "stopwatch_running",
+        "to_state": "stopwatch_paused",
+        "action": "click(pause)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "stopwatch_paused",
+        "to_state": "stopwatch_tab",
+        "action": "click(reset)",
+        "precondition": "",
+        "postcondition": "cleared to 00:00"
+      },
+      {
+        "from_state": "bedtime_tab_intro",
+        "to_state": "bedtime_wake_setup",
+        "action": "click(Get started)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "bedtime_wake_setup",
+        "to_state": "bedtime_sleep_setup",
+        "action": "click(Next)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "bedtime_sleep_setup",
+        "to_state": "bedtime_dashboard",
+        "action": "click(Done)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "world_clock_tab",
+        "to_state": "overflow_menu",
+        "action": "click(three_dots)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "overflow_menu",
+        "to_state": "settings_screen",
+        "action": "click(Settings)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "overflow_menu",
+        "to_state": "screen_saver",
+        "action": "click(Screen saver)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "overflow_menu",
+        "to_state": "send_feedback",
+        "action": "click(Send feedback)",
+        "precondition": "",
+        "postcondition": "may show logs permission dialog first"
+      },
+      {
+        "from_state": "send_feedback",
+        "to_state": "logs_permission_dialog",
+        "action": "auto-shown on entry",
+        "precondition": "first time",
+        "postcondition": ""
+      },
+      {
+        "from_state": "logs_permission_dialog",
+        "to_state": "send_feedback",
+        "action": "click(Allow one-time access)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "send_feedback",
+        "to_state": "screenshot_editor",
+        "action": "click(Screenshot card)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "screenshot_editor",
+        "to_state": "send_feedback",
+        "action": "click(checkmark)",
+        "precondition": "edits made",
+        "postcondition": "edits saved"
+      },
+      {
+        "from_state": "send_feedback",
+        "to_state": "system_logs_viewer",
+        "action": "click(View) under System logs",
+        "precondition": "logs enabled",
+        "postcondition": ""
+      },
+      {
+        "from_state": "send_feedback",
+        "to_state": "world_clock_tab",
+        "action": "click(send paper plane)",
+        "precondition": "text entered",
+        "postcondition": "feedback sent"
+      }
+    ],
+    "strategies": [
+      {
+        "name": "ADD_WORLD_CLOCK_CITY",
+        "preconditions": "App open, on Clock tab",
+        "steps": [
+          "click fab + button",
+          "type city name in search",
+          "if results don't appear, tap search bar to refocus or tap keyboard search",
+          "click matching city in results"
+        ],
+        "success_signal": "City card appears below local time on Clock tab",
+        "fallback": "Clear search with X, retype; or tap search field to bring back keyboard"
+      },
+      {
+        "name": "CREATE_ALARM",
+        "preconditions": "On Alarm tab",
+        "steps": [
+          "click fab + button",
+          "tap keyboard icon to switch to keypad",
+          "type hour",
+          "tap minute field",
+          "type minute",
+          "click OK",
+          "toggle day-of-week circles for repeat days",
+          "click Add label, type label, click OK"
+        ],
+        "success_signal": "New alarm appears in list with correct time, days, and label, toggle on",
+        "fallback": "Tap the time on expanded card to reopen picker if time was wrong"
+      },
+      {
+        "name": "EDIT_EXISTING_ALARM",
+        "preconditions": "On Alarm tab with target alarm visible",
+        "steps": [
+          "click expand arrow on alarm card",
+          "tap time display to change time if needed",
+          "toggle day circles as needed",
+          "click Add label and update label",
+          "toggle Vibrate as needed"
+        ],
+        "success_signal": "Card shows updated values",
+        "fallback": ""
+      },
+      {
+        "name": "DELETE_ALARM",
+        "preconditions": "On Alarm tab",
+        "steps": [
+          "click expand arrow on target alarm",
+          "scroll if needed",
+          "click Delete (trash icon)"
+        ],
+        "success_signal": "Alarm removed; 'Alarm deleted' toast",
+        "fallback": ""
+      },
+      {
+        "name": "SET_AND_START_TIMER",
+        "preconditions": "On Timer tab",
+        "steps": [
+          "tap digits on numeric keypad (right-to-left fills s, m, h)",
+          "use 00 shortcut where helpful",
+          "click play button"
+        ],
+        "success_signal": "Countdown ring active with chosen duration",
+        "fallback": "If wrong duration, edit before pressing play"
+      },
+      {
+        "name": "RENAME_RUNNING_TIMER",
+        "preconditions": "Timer running",
+        "steps": [
+          "tap default timer label (e.g., '5m Timer')",
+          "type new label",
+          "click OK"
+        ],
+        "success_signal": "Timer card shows new label",
+        "fallback": ""
+      },
+      {
+        "name": "STOPWATCH_LAP_FLOW",
+        "preconditions": "On Stopwatch tab",
+        "steps": [
+          "click play",
+          "wait until desired elapsed time",
+          "click lap button to record each lap",
+          "click pause when done",
+          "click reset to clear"
+        ],
+        "success_signal": "Lap entries listed below; reset returns to 00 00",
+        "fallback": "If accidentally paused, press play to resume before lapping"
+      },
+      {
+        "name": "CONFIGURE_BEDTIME_SCHEDULE",
+        "preconditions": "Bedtime tab, not configured",
+        "steps": [
+          "click Get started",
+          "tap wake-up time, set via clock face or keypad, OK",
+          "toggle weekday circles",
+          "toggle Sunrise Alarm / Vibrate as needed",
+          "click Next",
+          "tap bedtime, set time, OK",
+          "ensure day selection",
+          "click Done"
+        ],
+        "success_signal": "Bedtime dashboard shows schedule with BEDTIME/WAKE-UP and 'Next alarm on...'",
+        "fallback": ""
+      },
+      {
+        "name": "SEND_FEEDBACK_WITH_LOGS",
+        "preconditions": "Clock app open",
+        "steps": [
+          "click three-dot menu",
+          "click Send feedback",
+          "click Allow one-time access in permission dialog",
+          "tap text field and type feedback message",
+          "dismiss keyboard with Back to see checkboxes",
+          "check System logs / uncheck Screenshot as required",
+          "click send (paper plane)"
+        ],
+        "success_signal": "Returns to Clock main interface (form closed)",
+        "fallback": "Re-open menu and try again if menu dismissed"
+      },
+      {
+        "name": "EDIT_FEEDBACK_SCREENSHOT",
+        "preconditions": "On Send Feedback with screenshot attachment",
+        "steps": [
+          "click Screenshot card / 'Highlight or hide info'",
+          "click GOT IT on intro overlay",
+          "select highlight (yellow) or redact (black) tool",
+          "swipe across target area",
+          "click checkmark to save"
+        ],
+        "success_signal": "Returns to feedback form with edited screenshot",
+        "fallback": "Use undo if mistake"
+      },
+      {
+        "name": "QUERY_ALARM_INFO",
+        "preconditions": "App open",
+        "steps": [
+          "navigate to Alarm tab",
+          "read alarm cards for time, days, label, toggle state"
+        ],
+        "success_signal": "Information visible on screen",
+        "fallback": ""
+      },
+      {
+        "name": "QUERY_CITY_TIME",
+        "preconditions": "App open",
+        "steps": [
+          "go to Clock tab",
+          "click + and search city",
+          "select result",
+          "read time shown on city card"
+        ],
+        "success_signal": "City time displayed",
+        "fallback": ""
+      }
+    ],
+    "dead_ends": [
+      {
+        "state": "city_search",
+        "failed_action": "type city + tap keyboard search",
+        "note": "Search may not populate results; remedy is to tap the search field again to refocus or clear with X and retype"
+      },
+      {
+        "state": "city_search",
+        "failed_action": "search while offline",
+        "note": "Only limited cities shown; need network for full results"
+      },
+      {
+        "state": "world_clock_tab",
+        "failed_action": "click(fab_plus) intending alarm",
+        "note": "FAB on Clock tab adds a city, not an alarm; must switch to Alarm tab first"
+      },
+      {
+        "state": "time_picker_keypad",
+        "failed_action": "type minute without selecting minute field",
+        "note": "Time may save as HH:00; tap minute field before typing"
+      },
+      {
+        "state": "settings_screen",
+        "failed_action": "look for per-timer label here",
+        "note": "Timer labels are set on the running timer card, not in Settings"
+      },
+      {
+        "state": "send_feedback",
+        "failed_action": "interact with checkboxes while keyboard open",
+        "note": "Keyboard hides Screenshot/System logs; dismiss keyboard with Back first"
+      }
+    ]
+  },
+  "layer2": {
+    "categories": [
+      {
+        "name": "ADD_ENTRY",
+        "precondition": "Application open at a list/collection view supporting additions",
+        "abstract_steps": [
+          "Navigate to the relevant section/tab",
+          "Invoke the add affordance (e.g., FAB)",
+          "Provide identifying input (search/type)",
+          "Submit/confirm query if results don't auto-populate",
+          "Select the desired item from results"
+        ],
+        "failure_modes": [
+          "Add affordance triggers wrong context due to current tab",
+          "Search results fail to populate until field is refocused",
+          "Offline state limits available items",
+          "Item already exists but task asks for new instance"
+        ],
+        "verification_checklist": [
+          "New entry visible in the list after returning",
+          "Identifying attributes match input",
+          "No duplicate created if uniqueness expected"
+        ]
+      },
+      {
+        "name": "CREATE_TIMED_ENTRY",
+        "precondition": "On section supporting creation of time-based items",
+        "abstract_steps": [
+          "Open creation flow",
+          "Switch input mode to most precise (e.g., keypad over dial)",
+          "Enter primary value (e.g., hour)",
+          "Shift focus to next field and enter secondary value",
+          "Confirm time",
+          "Configure recurrence/days",
+          "Add label via dialog",
+          "Configure auxiliary options (sound, vibration)"
+        ],
+        "failure_modes": [
+          "Confirming dialog before all fields entered",
+          "Recurrence days mis-toggled (off when expected on)",
+          "Label dialog dismissed before OK",
+          "24h vs 12h confusion"
+        ],
+        "verification_checklist": [
+          "Created card shows correct time",
+          "Repeat days highlighted as intended",
+          "Label text matches",
+          "Entry is enabled/active"
+        ]
+      },
+      {
+        "name": "EDIT_ENTRY",
+        "precondition": "Target entry exists in a list",
+        "abstract_steps": [
+          "Locate target by its identifier",
+          "Expand or open its detail view",
+          "Modify each requested attribute",
+          "Confirm each modification dialog"
+        ],
+        "failure_modes": [
+          "Toggling an already-on option turns it off",
+          "Editing wrong entry due to similar identifiers",
+          "Forgetting to confirm a sub-dialog"
+        ],
+        "verification_checklist": [
+          "All requested fields show new values",
+          "Unchanged fields untouched",
+          "Entry remains enabled"
+        ]
+      },
+      {
+        "name": "DELETE_ENTRY",
+        "precondition": "Target entry exists",
+        "abstract_steps": [
+          "Open detail/expanded view of target",
+          "Trigger delete action",
+          "Confirm if prompted"
+        ],
+        "failure_modes": [
+          "Confusing delete with disable/toggle",
+          "Deleting wrong item"
+        ],
+        "verification_checklist": [
+          "Entry no longer in list",
+          "Confirmation toast or empty state shown"
+        ]
+      },
+      {
+        "name": "QUERY_INFO",
+        "precondition": "Application open",
+        "abstract_steps": [
+          "Navigate to the screen displaying the requested info",
+          "Visually parse the relevant fields",
+          "Format answer per requested format"
+        ],
+        "failure_modes": [
+          "Reading info from collapsed card without expanding",
+          "Confusing similar entries",
+          "Reporting unrelated value"
+        ],
+        "verification_checklist": [
+          "Source screen actually contains the field",
+          "Format exactly matches requested"
+        ]
+      },
+      {
+        "name": "NAVIGATE_TO",
+        "precondition": "Anywhere in app",
+        "abstract_steps": [
+          "Identify bottom or top navigation control to target section",
+          "Tap target tab/menu item",
+          "If hidden, open overflow/options menu first"
+        ],
+        "failure_modes": [
+          "Wrong tab tapped due to similar icons",
+          "Overflow menu auto-dismissed"
+        ],
+        "verification_checklist": [
+          "Target section's distinctive UI visible",
+          "Active tab indicator on target"
+        ]
+      },
+      {
+        "name": "RUN_TRANSIENT_OPERATION",
+        "precondition": "On screen with a controllable timed/measured activity",
+        "abstract_steps": [
+          "Configure duration/parameters",
+          "Start operation",
+          "Optionally record intermediate events (laps)",
+          "Stop or pause",
+          "Reset to clear if needed"
+        ],
+        "failure_modes": [
+          "Pausing when meaning to record an event",
+          "Resetting before recording all needed events",
+          "Starting before configuration complete"
+        ],
+        "verification_checklist": [
+          "Active state indicator visible",
+          "Recorded events listed",
+          "Final state matches request (running/paused/reset)"
+        ]
+      },
+      {
+        "name": "SUBMIT_FEEDBACK_OR_REPORT",
+        "precondition": "App provides a feedback/report form via overflow menu",
+        "abstract_steps": [
+          "Open overflow/options menu",
+          "Choose feedback/report option",
+          "Grant any required permission via dialog",
+          "Enter required text",
+          "Dismiss keyboard to access attachment options",
+          "Toggle attachment checkboxes per requirements",
+          "Optionally edit attached media with provided tools",
+          "Submit via send action"
+        ],
+        "failure_modes": [
+          "Submitting before attachment toggles configured",
+          "Permission dialog blocking progress",
+          "Editor tutorial overlay blocking tool selection"
+        ],
+        "verification_checklist": [
+          "Returns to prior screen indicating send",
+          "All attachment checkboxes match requested state",
+          "Text body matches request"
+        ]
+      },
+      {
+        "name": "CONFIGURE_SETTING",
+        "precondition": "App has a settings area",
+        "abstract_steps": [
+          "Open overflow menu",
+          "Enter Settings",
+          "Locate target setting",
+          "Select desired value from chooser",
+          "Verify value reflected"
+        ],
+        "failure_modes": [
+          "Setting located in section-specific menu not global settings",
+          "Picking the wrong value due to similar labels"
+        ],
+        "verification_checklist": [
+          "Setting row shows new selected value",
+          "Effect visible where applicable"
+        ]
+      },
+      {
+        "name": "MULTI_STEP_WIZARD",
+        "precondition": "Feature requires guided setup",
+        "abstract_steps": [
+          "Trigger 'Get started' or equivalent",
+          "Complete each step's required input",
+          "Advance with Next",
+          "Finish with Done/Save"
+        ],
+        "failure_modes": [
+          "Skipping a sub-field before advancing",
+          "Default values left when task requires changes"
+        ],
+        "verification_checklist": [
+          "Final summary shows requested values",
+          "Wizard intro no longer appears upon revisit"
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "built_at": "2025-01-15T00:00:00Z",
+    "n_episodes": 74,
+    "n_successful": 74,
+    "n_episodes_input": 74,
+    "synthesizer_model": "claude-opus-4-7",
+    "synthesizer_temperature": 0.3
+  }
+}

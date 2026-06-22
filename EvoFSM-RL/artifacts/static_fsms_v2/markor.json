@@ -1,0 +1,919 @@
+{
+  "version": "0.1.0",
+  "app": "markor",
+  "layer1": {
+    "app": "markor",
+    "category": "Productivity",
+    "states": [
+      {
+        "id": "home_screen",
+        "description": "Android device home screen",
+        "visual_cues": [
+          "app icons grid",
+          "dock with default apps",
+          "Markor icon may not be visible"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "app_drawer",
+        "description": "Android app drawer with installed apps",
+        "visual_cues": [
+          "alphabetical grid of all installed apps"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "file_browser",
+        "description": "Markor Files tab listing markdown/text files in a directory",
+        "visual_cues": [
+          "path label e.g. /storage/emulated/0/Documents",
+          "list of .md/.txt files",
+          "red FAB with + in bottom-right",
+          "bottom nav (Files/To-Do/QuickNote/More)",
+          "search icon in top bar",
+          "overflow menu (3-dots)"
+        ],
+        "resource_hints": [
+          "fab_add",
+          "Files tab"
+        ]
+      },
+      {
+        "id": "new_file_dialog",
+        "description": "Create New file/folder dialog",
+        "visual_cues": [
+          "Name input pre-filled with 'my_note'",
+          ".md extension shown",
+          "Type dropdown (Markdown/Plain Text/todo.txt)",
+          "FOLDER / CANCEL / OK buttons"
+        ],
+        "resource_hints": [
+          "Name",
+          "FOLDER",
+          "OK"
+        ]
+      },
+      {
+        "id": "editor_edit_mode",
+        "description": "Markor text editor in edit mode",
+        "visual_cues": [
+          "text input area with cursor",
+          "keyboard visible",
+          "formatting toolbar above keyboard (checkbox/bullet/B/@/star/trash icons)",
+          "top bar with eye icon, save (floppy), search icons"
+        ],
+        "resource_hints": [
+          "save_icon",
+          "eye_icon",
+          "search_icon"
+        ]
+      },
+      {
+        "id": "editor_view_mode",
+        "description": "Markor rendered preview mode",
+        "visual_cues": [
+          "rendered markdown content",
+          "pencil icon in top bar instead of eye icon"
+        ],
+        "resource_hints": [
+          "pencil_icon"
+        ]
+      },
+      {
+        "id": "todo_tab",
+        "description": "To-Do tab editor (todo.txt format)",
+        "visual_cues": [
+          "highlighted To-Do bottom nav tab",
+          "formatting toolbar with checkbox, @, +, star icons",
+          "todo.txt syntax highlighting"
+        ],
+        "resource_hints": [
+          "To-Do tab"
+        ]
+      },
+      {
+        "id": "quicknote_tab",
+        "description": "QuickNote scratchpad editor",
+        "visual_cues": [
+          "highlighted QuickNote bottom nav tab",
+          "blank/preloaded markdown editor"
+        ],
+        "resource_hints": [
+          "QuickNote tab"
+        ]
+      },
+      {
+        "id": "more_tab",
+        "description": "More tab with app info, version, settings shortcut",
+        "visual_cues": [
+          "version number",
+          "Project Team section",
+          "links to settings/help"
+        ],
+        "resource_hints": [
+          "More tab"
+        ]
+      },
+      {
+        "id": "search_documents_dialog",
+        "description": "Simple Search documents dialog (file browser)",
+        "visual_cues": [
+          "Search text field",
+          "checkboxes: Regex search, Case sensitive, Search in content",
+          "Stop search after first match (appears after enabling content search)",
+          "SEARCH / REPLACE button (bottom-left in editor context)",
+          "OK/CANCEL"
+        ],
+        "resource_hints": [
+          "Regex search",
+          "Case sensitive",
+          "Search in content",
+          "Stop search after first match"
+        ]
+      },
+      {
+        "id": "search_replace_dialog",
+        "description": "Editor Search/Replace dialog",
+        "visual_cues": [
+          "Search for and Replace with fields",
+          "Regex and Multiline checkboxes",
+          "Matches counter",
+          "Replace (n) and Replace all buttons"
+        ],
+        "resource_hints": [
+          "Search for",
+          "Replace with",
+          "Regex",
+          "Multiline",
+          "Replace all"
+        ]
+      },
+      {
+        "id": "priority_dialog",
+        "description": "Priority selection dialog for todo.txt items",
+        "visual_cues": [
+          "radio list None, A, B, C, D, E, F"
+        ],
+        "resource_hints": [
+          "Priority"
+        ]
+      },
+      {
+        "id": "context_dialog",
+        "description": "Insert contexts dialog (@tag)",
+        "visual_cues": [
+          "Search / Custom input",
+          "list of existing contexts"
+        ],
+        "resource_hints": [
+          "Insert contexts",
+          "Search / Custom"
+        ]
+      },
+      {
+        "id": "project_dialog",
+        "description": "Insert projects dialog (+tag)",
+        "visual_cues": [
+          "Search / Custom input",
+          "list of existing projects"
+        ],
+        "resource_hints": [
+          "Insert projects"
+        ]
+      },
+      {
+        "id": "overflow_menu",
+        "description": "3-dot overflow menu",
+        "visual_cues": [
+          "File settings, Share, Tools, Info, Reload, Settings"
+        ],
+        "resource_hints": [
+          "File settings",
+          "Tools",
+          "Settings"
+        ]
+      },
+      {
+        "id": "tools_submenu",
+        "description": "Tools submenu under overflow",
+        "visual_cues": [
+          "Speed Read option only"
+        ],
+        "resource_hints": [
+          "Speed Read"
+        ]
+      },
+      {
+        "id": "settings_screen",
+        "description": "Markor general settings",
+        "visual_cues": [
+          "General, Other, Edit mode, View mode categories",
+          "App start tab, App start folder under Miscellaneous"
+        ],
+        "resource_hints": [
+          "App start tab",
+          "App start folder"
+        ]
+      },
+      {
+        "id": "browse_todo_dialog",
+        "description": "Browse todo dialog with filter categories",
+        "visual_cues": [
+          "Priority, Due date, Project, Context, Advanced filtering"
+        ],
+        "resource_hints": [
+          "Browse todo"
+        ]
+      },
+      {
+        "id": "browse_by_due_date_dialog",
+        "description": "Filter checkboxes for due date categories",
+        "visual_cues": [
+          "Due in future, Due today, Overdue checkboxes"
+        ],
+        "resource_hints": [
+          "Browse by due date"
+        ]
+      },
+      {
+        "id": "file_selection_mode",
+        "description": "Multi-select mode in file browser after long-press",
+        "visual_cues": [
+          "red checkmarks on selected files",
+          "contextual action bar with star/AI(rename)/info/trash icons"
+        ],
+        "resource_hints": [
+          "trash_icon",
+          "rename_icon"
+        ]
+      },
+      {
+        "id": "rename_dialog",
+        "description": "Rename file dialog",
+        "visual_cues": [
+          "text field with current filename",
+          "OK/CANCEL"
+        ],
+        "resource_hints": [
+          "Rename"
+        ]
+      },
+      {
+        "id": "confirm_delete_dialog",
+        "description": "Confirm Delete dialog listing selected paths",
+        "visual_cues": [
+          "list of file paths",
+          "OK/CANCEL"
+        ],
+        "resource_hints": [
+          "Confirm Delete"
+        ]
+      },
+      {
+        "id": "empty_select_dialog",
+        "description": "Shrug emoticon dialog indicating empty result/folder",
+        "visual_cues": [
+          "¯\\_(ツ)_/¯ kaomoji",
+          "CANCEL button"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "wrong_app_broccoli",
+        "description": "Accidentally opened Broccoli recipe app due to similar green tree icon",
+        "visual_cues": [
+          "Recipes header",
+          "No recipes found"
+        ],
+        "resource_hints": []
+      }
+    ],
+    "transitions": [
+      {
+        "from_state": "home_screen",
+        "to_state": "app_drawer",
+        "action": "swipe_up_from_bottom",
+        "precondition": "Markor not on home screen",
+        "postcondition": "app drawer visible"
+      },
+      {
+        "from_state": "home_screen",
+        "to_state": "wrong_app_broccoli",
+        "action": "click(green_tree_icon)",
+        "precondition": "Broccoli icon mistaken for Markor",
+        "postcondition": "wrong app opened"
+      },
+      {
+        "from_state": "wrong_app_broccoli",
+        "to_state": "home_screen",
+        "action": "system_button(Home)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "app_drawer",
+        "to_state": "file_browser",
+        "action": "click(markor_icon)",
+        "precondition": "",
+        "postcondition": "Markor launched"
+      },
+      {
+        "from_state": "file_browser",
+        "to_state": "new_file_dialog",
+        "action": "click(fab_plus)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "new_file_dialog",
+        "to_state": "file_browser",
+        "action": "click(FOLDER)",
+        "precondition": "name entered",
+        "postcondition": "folder created"
+      },
+      {
+        "from_state": "new_file_dialog",
+        "to_state": "editor_edit_mode",
+        "action": "click(OK)",
+        "precondition": "name entered",
+        "postcondition": "file created and opened"
+      },
+      {
+        "from_state": "new_file_dialog",
+        "to_state": "file_browser",
+        "action": "click(CANCEL)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "file_browser",
+        "to_state": "editor_edit_mode",
+        "action": "click(file_row)",
+        "precondition": "",
+        "postcondition": "file opened"
+      },
+      {
+        "from_state": "file_browser",
+        "to_state": "search_documents_dialog",
+        "action": "click(search_icon)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "file_browser",
+        "to_state": "todo_tab",
+        "action": "click(todo_nav_tab)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "file_browser",
+        "to_state": "quicknote_tab",
+        "action": "click(quicknote_nav_tab)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "file_browser",
+        "to_state": "more_tab",
+        "action": "click(more_nav_tab)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "file_browser",
+        "to_state": "file_selection_mode",
+        "action": "long_press(file_row)",
+        "precondition": "",
+        "postcondition": "selection mode active"
+      },
+      {
+        "from_state": "file_selection_mode",
+        "to_state": "rename_dialog",
+        "action": "click(rename_icon)",
+        "precondition": "single item selected",
+        "postcondition": ""
+      },
+      {
+        "from_state": "file_selection_mode",
+        "to_state": "confirm_delete_dialog",
+        "action": "click(trash_icon)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "confirm_delete_dialog",
+        "to_state": "file_browser",
+        "action": "click(OK)",
+        "precondition": "",
+        "postcondition": "files deleted"
+      },
+      {
+        "from_state": "rename_dialog",
+        "to_state": "file_browser",
+        "action": "click(OK)",
+        "precondition": "new name entered",
+        "postcondition": "file renamed"
+      },
+      {
+        "from_state": "editor_edit_mode",
+        "to_state": "editor_view_mode",
+        "action": "click(eye_icon)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "editor_view_mode",
+        "to_state": "editor_edit_mode",
+        "action": "click(pencil_icon)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "editor_edit_mode",
+        "to_state": "search_documents_dialog",
+        "action": "click(search_icon)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "search_documents_dialog",
+        "to_state": "search_replace_dialog",
+        "action": "click(SEARCH / REPLACE)",
+        "precondition": "in editor context",
+        "postcondition": ""
+      },
+      {
+        "from_state": "search_replace_dialog",
+        "to_state": "editor_edit_mode",
+        "action": "click(Replace all)",
+        "precondition": "Matches > 0",
+        "postcondition": "text replaced"
+      },
+      {
+        "from_state": "search_replace_dialog",
+        "to_state": "editor_edit_mode",
+        "action": "click(CANCEL)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "search_documents_dialog",
+        "to_state": "empty_select_dialog",
+        "action": "click(OK)",
+        "precondition": "no matches",
+        "postcondition": ""
+      },
+      {
+        "from_state": "empty_select_dialog",
+        "to_state": "file_browser",
+        "action": "click(CANCEL)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "editor_edit_mode",
+        "to_state": "priority_dialog",
+        "action": "click(star_icon_toolbar)",
+        "precondition": "todo file",
+        "postcondition": ""
+      },
+      {
+        "from_state": "priority_dialog",
+        "to_state": "todo_tab",
+        "action": "click(A-F)",
+        "precondition": "",
+        "postcondition": "priority inserted"
+      },
+      {
+        "from_state": "todo_tab",
+        "to_state": "context_dialog",
+        "action": "click(@_icon_toolbar)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "context_dialog",
+        "to_state": "todo_tab",
+        "action": "type(custom) + select",
+        "precondition": "",
+        "postcondition": "@context inserted"
+      },
+      {
+        "from_state": "todo_tab",
+        "to_state": "project_dialog",
+        "action": "click(+_icon_toolbar)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "editor_edit_mode",
+        "to_state": "overflow_menu",
+        "action": "click(3_dots)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "overflow_menu",
+        "to_state": "tools_submenu",
+        "action": "click(Tools)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "overflow_menu",
+        "to_state": "settings_screen",
+        "action": "click(Settings)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "todo_tab",
+        "to_state": "browse_todo_dialog",
+        "action": "click(title_bar)",
+        "precondition": "view mode",
+        "postcondition": ""
+      },
+      {
+        "from_state": "browse_todo_dialog",
+        "to_state": "browse_by_due_date_dialog",
+        "action": "click(Due date)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "editor_edit_mode",
+        "to_state": "file_browser",
+        "action": "click(save_icon) then back",
+        "precondition": "changes pending",
+        "postcondition": "saved, save icon greyed out"
+      }
+    ],
+    "strategies": [
+      {
+        "name": "CREATE_FOLDER_AND_FILE",
+        "preconditions": "file_browser at target parent directory",
+        "steps": [
+          "click(fab_plus)",
+          "long_press(name_field) to select default 'my_note'",
+          "type(folder_name)",
+          "click(FOLDER)",
+          "click(new_folder_row) to enter it",
+          "click(fab_plus)",
+          "replace default name with desired filename",
+          "select Type if needed (Plain Text for .txt)",
+          "click(OK) to create and open file"
+        ],
+        "success_signal": "Editor opens with target filename in top bar",
+        "fallback": "If existing name conflicts (file not overwritten), choose a different unique name"
+      },
+      {
+        "name": "EDIT_AND_SAVE_NOTE",
+        "preconditions": "file open in editor_edit_mode",
+        "steps": [
+          "long_press text to bring up selection menu and click 'Select all' if clearing existing content",
+          "click backspace to delete selection",
+          "type the new markdown content (use **bold**, - [ ] checkbox, # header, - bullet)",
+          "click(save_icon) in top bar"
+        ],
+        "success_signal": "save icon becomes greyed out indicating no unsaved changes",
+        "fallback": "If formatting toolbar buttons split content across lines, clear and type raw markdown directly"
+      },
+      {
+        "name": "SEARCH_REPLACE_IN_FILE",
+        "preconditions": "file open in editor_edit_mode",
+        "steps": [
+          "click(search_icon)",
+          "click(SEARCH / REPLACE) to open full dialog",
+          "click 'Search for' and type pattern (escape brackets if Regex on)",
+          "click 'Replace with' and type replacement",
+          "toggle Regex checkbox per requirement",
+          "verify 'Matches: N' > 0",
+          "click(Replace all)"
+        ],
+        "success_signal": "Editor shows replaced text",
+        "fallback": "If Matches=0, verify Regex setting matches pattern; ensure target text exists in file"
+      },
+      {
+        "name": "SEARCH_FILES_IN_DIRECTORY",
+        "preconditions": "file_browser at desired folder",
+        "steps": [
+          "click(search_icon)",
+          "type search term in Search field",
+          "toggle 'Regex search', 'Case sensitive', 'Search in content' as required",
+          "if needed, enable 'Stop search after first match' (visible after Search in content enabled)",
+          "click(OK)"
+        ],
+        "success_signal": "Filtered results shown or shrug dialog indicates none found",
+        "fallback": "Press system Back if a stray Select dialog appears; reopen search and retry"
+      },
+      {
+        "name": "ADD_TODO_TASK",
+        "preconditions": "todo_tab open in edit mode",
+        "steps": [
+          "tap blank area to focus editor",
+          "OPTION A: type the full todo.txt line directly e.g. '(A) Task desc +project @context'",
+          "OPTION B: use toolbar (star for priority, @ for context, + for project) being careful that they may insert on new line",
+          "click(save_icon)"
+        ],
+        "success_signal": "Syntax highlighting applied; save icon greys out",
+        "fallback": "If toolbar splits across lines, long_press + Select all + delete, then type the raw todo.txt line manually"
+      },
+      {
+        "name": "MARK_TODO_COMPLETE",
+        "preconditions": "cursor on task line in todo_tab edit mode",
+        "steps": [
+          "tap on the task line text to position cursor",
+          "click checkbox icon in formatting toolbar"
+        ],
+        "success_signal": "Line prefixed with 'x YYYY-MM-DD' and shown with strikethrough",
+        "fallback": "Re-position cursor explicitly before tapping the checkbox icon"
+      },
+      {
+        "name": "TOGGLE_PREVIEW",
+        "preconditions": "file open in editor_edit_mode",
+        "steps": [
+          "click(eye_icon) to enter view mode",
+          "click(pencil_icon) to return to edit mode"
+        ],
+        "success_signal": "Rendered markdown displayed; toolbar icon toggles between eye and pencil",
+        "fallback": ""
+      },
+      {
+        "name": "DELETE_FILES_BY_PATTERN",
+        "preconditions": "file_browser shows the directory",
+        "steps": [
+          "long_press(first_matching_file) to enter selection mode",
+          "click each additional matching file to add to selection",
+          "scroll to verify no more matches",
+          "click(trash_icon)",
+          "click(OK) in Confirm Delete dialog"
+        ],
+        "success_signal": "Selected files no longer in list",
+        "fallback": "If search dialog gives empty results, fall back to visually scanning list and multi-selecting"
+      },
+      {
+        "name": "CONFIGURE_STARTUP",
+        "preconditions": "file_browser",
+        "steps": [
+          "click(3_dots) > Settings",
+          "click(General)",
+          "click(App start tab) and choose desired tab",
+          "click(App start folder) and choose folder"
+        ],
+        "success_signal": "Selected values shown under Miscellaneous",
+        "fallback": ""
+      },
+      {
+        "name": "RENAME_FILE",
+        "preconditions": "file_browser",
+        "steps": [
+          "long_press(file_row)",
+          "click(rename_icon) in action bar",
+          "long_press the text field then click 'Select all'",
+          "type(new_filename_with_ext)",
+          "click(OK)"
+        ],
+        "success_signal": "File appears under new name in list",
+        "fallback": "If new name was prepended instead of replaced, cancel and reopen, then explicitly select all before typing"
+      }
+    ],
+    "dead_ends": [
+      {
+        "state": "wrong_app_broccoli",
+        "failed_action": "click(green tree icon on home screen)",
+        "note": "Broccoli recipe app has a similar green tree icon; always confirm app from app drawer instead"
+      },
+      {
+        "state": "tools_submenu",
+        "failed_action": "search for 'Browse by context' or 'Find and Replace' under Tools",
+        "note": "Tools submenu contains only 'Speed Read'; advanced filters live elsewhere (title bar tap in view mode for Browse todo; search icon for Find/Replace)"
+      },
+      {
+        "state": "search_replace_dialog",
+        "failed_action": "Replace all with Matches: 0",
+        "note": "Often because Regex is on but pattern uses unescaped brackets, or target text not in document; ensure file content matches and regex flag is correct"
+      },
+      {
+        "state": "search_documents_dialog",
+        "failed_action": "click OK while empty/kaomoji background visible",
+        "note": "OK click can pass through to background triggering Select dialog; use keyboard Enter or back out and retry"
+      },
+      {
+        "state": "editor_edit_mode",
+        "failed_action": "use toolbar checkbox/star/bold after typing text",
+        "note": "Toolbar buttons often insert formatting on a NEW line, splitting tasks; insert formatting FIRST or type raw markdown/todo.txt directly"
+      },
+      {
+        "state": "new_file_dialog",
+        "failed_action": "click OK without changing default name",
+        "note": "If 'my_note.md' already exists, creation silently fails ('Files and folders are not overwritten'); pick unique name"
+      },
+      {
+        "state": "file_browser",
+        "failed_action": "App paused due to Digital Wellbeing timer",
+        "note": "Resolve by deleting the App timer in Settings before launching"
+      }
+    ]
+  },
+  "layer2": {
+    "categories": [
+      {
+        "name": "NAVIGATE_TO",
+        "precondition": "Device home screen or unrelated app is active",
+        "abstract_steps": [
+          "Verify target app identity before launching (icon ambiguity is common)",
+          "Open the all-apps drawer if the target app is not pinned",
+          "Launch the target app and wait for splash to settle",
+          "Use the bottom navigation or top menu to reach the desired section"
+        ],
+        "failure_modes": [
+          "Launching a visually similar but different app",
+          "Acting on splash screen before UI is interactive",
+          "Assuming a feature exists under a menu that only holds unrelated entries"
+        ],
+        "verification_checklist": [
+          "App title/header matches the intended app",
+          "The active tab/section indicator highlights the target screen",
+          "Expected screen-specific controls are visible"
+        ]
+      },
+      {
+        "name": "ADD_ENTRY",
+        "precondition": "Application is at the list/editor where new entries can be created",
+        "abstract_steps": [
+          "Trigger the create action (FAB or compose control)",
+          "Provide required fields (name, type, content) replacing defaults explicitly",
+          "Confirm creation and verify the new entry exists or is opened"
+        ],
+        "failure_modes": [
+          "Default placeholder name conflicts with an existing entry causing silent failure",
+          "Typing without first replacing the default leads to concatenated values",
+          "Selecting the wrong creation variant (file vs folder, regular vs quick)"
+        ],
+        "verification_checklist": [
+          "New entry appears in the list or opens in an editor",
+          "Entry name and type match the request",
+          "No duplicate-name error dialogs are present"
+        ]
+      },
+      {
+        "name": "EDIT_ENTRY",
+        "precondition": "Target entry is opened in an editor",
+        "abstract_steps": [
+          "If replacing content, select all existing content and delete it",
+          "Insert formatting markers BEFORE typing text where toolbar buttons may misbehave",
+          "Type the new content using the underlying markup directly when toolbar buttons split across lines",
+          "Persist changes via the save control"
+        ],
+        "failure_modes": [
+          "Toolbar formatting buttons insert on new line, splitting the intended single-line entry",
+          "Autocorrect/auto-list continuation causes duplicated prefixes",
+          "Saving forgotten, leaving unsaved-changes indicator active"
+        ],
+        "verification_checklist": [
+          "Rendered/raw content matches the requested formatting",
+          "Save indicator returns to a neutral state (e.g., disabled/greyed)",
+          "Reopening the entry shows the persisted content"
+        ]
+      },
+      {
+        "name": "DELETE_ENTRY",
+        "precondition": "List view showing the target entries",
+        "abstract_steps": [
+          "Enter multi-select mode via long-press on a target",
+          "Tap each additional matching item to add to selection",
+          "Scroll to confirm no further matches are hidden below the fold",
+          "Invoke delete and confirm in the dialog"
+        ],
+        "failure_modes": [
+          "Missing items hidden by scroll",
+          "Accidentally selecting non-matching items",
+          "Dismissing the confirmation dialog instead of confirming"
+        ],
+        "verification_checklist": [
+          "Target items no longer appear in the list",
+          "No remaining items match the deletion criterion",
+          "No error toast displayed"
+        ]
+      },
+      {
+        "name": "RENAME_ENTRY",
+        "precondition": "Entry is selectable in a list",
+        "abstract_steps": [
+          "Select the entry to expose contextual actions",
+          "Open the rename control",
+          "Explicitly select-all current text before typing the new name",
+          "Confirm the rename"
+        ],
+        "failure_modes": [
+          "New text is prepended/appended because old text was not fully selected",
+          "Forgetting required file extension"
+        ],
+        "verification_checklist": [
+          "Entry now displays the exact new name including extension",
+          "No conflict dialog appears"
+        ]
+      },
+      {
+        "name": "QUERY_INFO",
+        "precondition": "App opened",
+        "abstract_steps": [
+          "Navigate to the screen most likely to display the requested metadata",
+          "Read the displayed value verbatim",
+          "Return the answer in the requested format"
+        ],
+        "failure_modes": [
+          "Opening the entry instead of reading list-level metadata",
+          "Confusing similar-looking fields"
+        ],
+        "verification_checklist": [
+          "The text shown matches the requested field",
+          "Answer formatting matches the prompt's expectation"
+        ]
+      },
+      {
+        "name": "SEARCH_OR_FILTER",
+        "precondition": "On a screen that exposes a search/filter affordance",
+        "abstract_steps": [
+          "Open the search/filter dialog",
+          "Enter the query string",
+          "Toggle option flags (case sensitivity, regex, scope, stop-after-first) as required",
+          "Note that some options only appear once a parent option is enabled",
+          "Execute the search and inspect results"
+        ],
+        "failure_modes": [
+          "Treating regex metacharacters as literals (or vice versa) due to wrong flag state",
+          "Submit gestures passing through dialog to background triggering unexpected popups",
+          "Required option hidden behind a parent toggle"
+        ],
+        "verification_checklist": [
+          "Query and option flags reflect the request",
+          "Match count or filtered list confirms expected scope",
+          "Empty-result indicator distinguishes 'no match' from dialog dismissal"
+        ]
+      },
+      {
+        "name": "FIND_AND_REPLACE",
+        "precondition": "Entry is open in an editor that supports find/replace",
+        "abstract_steps": [
+          "Open the search dialog and transition to the replace variant if separate",
+          "Enter the find pattern and replacement string in their respective fields",
+          "Configure regex/multiline flags as required, escaping characters appropriately",
+          "Verify a positive match count before executing",
+          "Execute replace-all and inspect the document"
+        ],
+        "failure_modes": [
+          "Match count remains zero because of regex flag mismatch or empty target",
+          "Dialog closes unexpectedly due to misplaced taps; pattern is typed into the document instead"
+        ],
+        "verification_checklist": [
+          "Replacement is visible in the rendered/raw content",
+          "No occurrences of the original pattern remain (for replace-all)",
+          "Document saved if persistence is required"
+        ]
+      },
+      {
+        "name": "CONFIGURE_SETTINGS",
+        "precondition": "App opened",
+        "abstract_steps": [
+          "Open the overflow/options menu and enter Settings",
+          "Drill into the appropriate category",
+          "Select the setting and choose the desired value from the dialog"
+        ],
+        "failure_modes": [
+          "Looking for the setting under an unrelated category",
+          "Closing the dialog without selecting"
+        ],
+        "verification_checklist": [
+          "Updated value displayed beneath the setting name",
+          "Behavior change observed on next relevant action/launch"
+        ]
+      },
+      {
+        "name": "TOGGLE_VIEW_MODE",
+        "precondition": "Entry is open in an editor that has edit/preview modes",
+        "abstract_steps": [
+          "Tap the mode-toggle control",
+          "Confirm the alternate icon appears indicating the new mode"
+        ],
+        "failure_modes": [
+          "Misidentifying the mode toggle among toolbar icons"
+        ],
+        "verification_checklist": [
+          "Rendered content is visible when in preview",
+          "Toggle icon now offers the inverse action"
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "built_at": "2025-01-23T00:00:00Z",
+    "n_episodes": 60,
+    "n_successful": 60,
+    "n_episodes_input": 60,
+    "synthesizer_model": "claude-opus-4-7",
+    "synthesizer_temperature": 0.3
+  }
+}

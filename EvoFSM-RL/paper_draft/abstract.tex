@@ -1,0 +1,28 @@
+\begin{abstract}
+Mobile GUI agents now handle multi-step tasks on familiar apps, but generalizing
+to applications never seen during training remains the bottleneck: recent work
+shows that online reinforcement learning improves a vision-language agent on
+unseen task instances by large margins yet barely moves the needle on unseen
+\emph{applications}, and points to few-shot test-time adaptation as a promising
+but preliminary remedy. We develop that direction into \textbf{EvoFSM-RL}, a
+test-time adaptation framework that, when deploying to a new app on a small
+adaptation budget, co-adapts two channels in a single loop: it evolves a
+structured in-context prior \emph{and} updates the policy weights. The prior is a
+two-layer finite state machine whose lower layer is app-specific and whose upper
+layer is a category-generic, linter-enforced unit of cross-app transfer; the loop
+mutates the upper layer via a frozen reference language model and updates a LoRA
+adapter via group-relative policy optimization, and the same loop runs at
+source-pool pretraining and at target-app deployment. We evaluate at two levels
+of generalization that share this method. \emph{Within} a benchmark
+(AndroidWorld+), under a protocol that is simultaneously pool-, category-, and
+template-disjoint, static category knowledge lifts near-transfer success by
+$+9.3$~pp over a zero-shot baseline and online upper-layer evolution adds another
+$+3.7$~pp, with a far-transfer panel acting as a built-in null control.
+\emph{Across} benchmarks (AndroidWorld+ to an independently authored MobileWorld
+deployment target), we find that priors which transfer within a benchmark
+collapse across the benchmark boundary, and trace the collapse to interpretable
+causes that motivate adapting the prior on the target rather than transplanting
+it. The paper contributes a method for test-time adaptation to unseen apps, a
+joint prompt-and-weight adaptation algorithm, and a multi-level benchmark
+partition for measuring mobile-agent generalization.
+\end{abstract}

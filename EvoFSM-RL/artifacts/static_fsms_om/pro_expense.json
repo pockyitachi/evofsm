@@ -1,0 +1,807 @@
+{
+  "version": "0.1.0",
+  "app": "pro_expense",
+  "layer1": {
+    "app": "pro_expense",
+    "category": "Finance",
+    "states": [
+      {
+        "id": "home_launcher",
+        "description": "Android device home screen",
+        "visual_cues": [
+          "default app icons (Gmail, Photos, YouTube)",
+          "bottom dock",
+          "wallpaper"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "app_drawer",
+        "description": "Android app drawer with installed apps listed alphabetically",
+        "visual_cues": [
+          "search bar at top",
+          "grid of app icons",
+          "alphabetical scrolling"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "home_dashboard",
+        "description": "Pro Expense main Home screen with totals and recent transactions",
+        "visual_cues": [
+          "'Totals' section (INCOME/OUTCOME)",
+          "'Expenses in this Week' chart",
+          "'Recent' list at bottom",
+          "hamburger menu top-left",
+          "FAB plus button bottom-right",
+          "'MORE' button under Recent"
+        ],
+        "resource_hints": [
+          "Totals",
+          "Recent",
+          "MORE"
+        ]
+      },
+      {
+        "id": "nav_drawer",
+        "description": "Side navigation menu",
+        "visual_cues": [
+          "Home",
+          "Expense Logs",
+          "Statistics",
+          "Backup",
+          "Feedback",
+          "About",
+          "Settings"
+        ],
+        "resource_hints": [
+          "Home",
+          "Expense Logs",
+          "Statistics",
+          "Backup",
+          "Settings"
+        ]
+      },
+      {
+        "id": "expense_entry",
+        "description": "Form to create a new expense entry",
+        "visual_cues": [
+          "'Expense Entry' title",
+          "Name field",
+          "Amount field with USD",
+          "category chips (Food/Income/Housing/Social/Entertainment)",
+          "Note field",
+          "SAVE button",
+          "calendar icon top-right",
+          "clock icon top-right",
+          "continuous-entry loop icon next to SAVE"
+        ],
+        "resource_hints": [
+          "Name",
+          "Amount",
+          "Note",
+          "SAVE",
+          "NEXT"
+        ]
+      },
+      {
+        "id": "expense_detail",
+        "description": "Bottom sheet showing details of a transaction",
+        "visual_cues": [
+          "'Expense Detail' header",
+          "Amount, Date, Note fields",
+          "red trash can icon top-right",
+          "EDIT button at bottom",
+          "down arrow to dismiss"
+        ],
+        "resource_hints": [
+          "Expense Detail",
+          "EDIT"
+        ]
+      },
+      {
+        "id": "update_data",
+        "description": "Form to edit an existing expense entry",
+        "visual_cues": [
+          "'Update Data' title",
+          "editable Name/Amount/category/Note",
+          "calendar & clock icons top-right",
+          "UPDATE button"
+        ],
+        "resource_hints": [
+          "Update Data",
+          "UPDATE"
+        ]
+      },
+      {
+        "id": "date_picker",
+        "description": "Calendar date picker dialog",
+        "visual_cues": [
+          "month calendar grid",
+          "year header tappable",
+          "OK/CANCEL buttons"
+        ],
+        "resource_hints": [
+          "OK",
+          "CANCEL"
+        ]
+      },
+      {
+        "id": "time_picker",
+        "description": "Time picker (clock-face) dialog",
+        "visual_cues": [
+          "circular clock face",
+          "AM/PM toggle",
+          "keyboard icon to switch to text input",
+          "OK/CANCEL"
+        ],
+        "resource_hints": [
+          "AM",
+          "PM",
+          "OK"
+        ]
+      },
+      {
+        "id": "time_picker_text",
+        "description": "Time picker in manual text-entry mode",
+        "visual_cues": [
+          "hour and minute text fields",
+          "AM/PM dropdown",
+          "Set time label"
+        ],
+        "resource_hints": [
+          "Set time"
+        ]
+      },
+      {
+        "id": "delete_confirm",
+        "description": "Confirmation dialog before deleting an expense",
+        "visual_cues": [
+          "'Delete Items' title",
+          "'item will be deleted!' message",
+          "red CONFIRM button"
+        ],
+        "resource_hints": [
+          "Delete Items",
+          "CONFIRM"
+        ]
+      },
+      {
+        "id": "expense_logs",
+        "description": "Full list of expense transactions (Expense Logs)",
+        "visual_cues": [
+          "scrollable list grouped by date",
+          "swipe-to-reveal Delete button",
+          "header date range"
+        ],
+        "resource_hints": [
+          "Expense Logs",
+          "Delete"
+        ]
+      },
+      {
+        "id": "statistics",
+        "description": "Statistics screen with category breakdown",
+        "visual_cues": [
+          "date header",
+          "Category Statistics section",
+          "percentage bars per category"
+        ],
+        "resource_hints": [
+          "Category Statistics"
+        ]
+      },
+      {
+        "id": "backup_screen",
+        "description": "Backup section showing Export/Import and Backup Logs",
+        "visual_cues": [
+          "Export button",
+          "Import button",
+          "Backup Logs list (may show 'No Data')"
+        ],
+        "resource_hints": [
+          "Export",
+          "Import",
+          "Backup Logs"
+        ]
+      },
+      {
+        "id": "export_dialog",
+        "description": "Bottom sheet to confirm backup filename",
+        "visual_cues": [
+          "pre-filled filename like Backup_<Date>_<Time>",
+          "SAVE AS button"
+        ],
+        "resource_hints": [
+          "SAVE AS"
+        ]
+      },
+      {
+        "id": "system_file_picker",
+        "description": "Android file picker shown to choose backup save location",
+        "visual_cues": [
+          "folder navigation",
+          "filename text field",
+          "SAVE button"
+        ],
+        "resource_hints": [
+          "SAVE",
+          "Downloads"
+        ]
+      },
+      {
+        "id": "settings_screen",
+        "description": "Pro Expense Settings screen",
+        "visual_cues": [
+          "Language",
+          "Currency",
+          "Theme Mode options"
+        ],
+        "resource_hints": [
+          "Settings",
+          "Language",
+          "Currency",
+          "Theme Mode"
+        ]
+      },
+      {
+        "id": "splash",
+        "description": "App launching splash screen",
+        "visual_cues": [
+          "solid blue background",
+          "white square logo"
+        ],
+        "resource_hints": []
+      }
+    ],
+    "transitions": [
+      {
+        "from_state": "home_launcher",
+        "to_state": "app_drawer",
+        "action": "swipe_up_from_bottom",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "app_drawer",
+        "to_state": "splash",
+        "action": "click(Pro Expense icon)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "splash",
+        "to_state": "home_dashboard",
+        "action": "wait",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "app_drawer",
+        "to_state": "home_dashboard",
+        "action": "click(Pro Expense icon)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "home_dashboard",
+        "to_state": "expense_entry",
+        "action": "click(fab_plus)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "home_dashboard",
+        "to_state": "expense_detail",
+        "action": "click(transaction in Recent)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "home_dashboard",
+        "to_state": "expense_logs",
+        "action": "click(MORE)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "home_dashboard",
+        "to_state": "nav_drawer",
+        "action": "click(hamburger)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "nav_drawer",
+        "to_state": "statistics",
+        "action": "click(Statistics)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "nav_drawer",
+        "to_state": "backup_screen",
+        "action": "click(Backup)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "nav_drawer",
+        "to_state": "settings_screen",
+        "action": "click(Settings)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "nav_drawer",
+        "to_state": "expense_logs",
+        "action": "click(Expense Logs)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "expense_entry",
+        "to_state": "date_picker",
+        "action": "click(calendar_icon)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "expense_entry",
+        "to_state": "time_picker",
+        "action": "click(clock_icon)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "expense_entry",
+        "to_state": "home_dashboard",
+        "action": "click(SAVE)",
+        "precondition": "valid name/amount entered",
+        "postcondition": "new entry appears in Recent"
+      },
+      {
+        "from_state": "expense_entry",
+        "to_state": "expense_entry",
+        "action": "click(NEXT)",
+        "precondition": "continuous entry mode enabled",
+        "postcondition": "entry saved, form cleared"
+      },
+      {
+        "from_state": "date_picker",
+        "to_state": "expense_entry",
+        "action": "click(OK)",
+        "precondition": "",
+        "postcondition": "date applied"
+      },
+      {
+        "from_state": "time_picker",
+        "to_state": "time_picker_text",
+        "action": "click(keyboard_icon)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "time_picker_text",
+        "to_state": "expense_entry",
+        "action": "click(OK)",
+        "precondition": "",
+        "postcondition": "time applied"
+      },
+      {
+        "from_state": "time_picker",
+        "to_state": "expense_entry",
+        "action": "click(OK)",
+        "precondition": "",
+        "postcondition": "time applied"
+      },
+      {
+        "from_state": "expense_detail",
+        "to_state": "update_data",
+        "action": "click(EDIT)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "expense_detail",
+        "to_state": "delete_confirm",
+        "action": "click(trash_icon)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "delete_confirm",
+        "to_state": "home_dashboard",
+        "action": "click(CONFIRM)",
+        "precondition": "",
+        "postcondition": "entry removed"
+      },
+      {
+        "from_state": "update_data",
+        "to_state": "date_picker",
+        "action": "click(calendar_icon)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "update_data",
+        "to_state": "time_picker",
+        "action": "click(clock_icon)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "update_data",
+        "to_state": "home_dashboard",
+        "action": "click(UPDATE)",
+        "precondition": "",
+        "postcondition": "changes saved"
+      },
+      {
+        "from_state": "expense_logs",
+        "to_state": "expense_detail",
+        "action": "click(transaction)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "expense_logs",
+        "to_state": "delete_confirm",
+        "action": "long_press(transaction) then click(Delete)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "backup_screen",
+        "to_state": "export_dialog",
+        "action": "click(Export)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "export_dialog",
+        "to_state": "system_file_picker",
+        "action": "click(SAVE AS)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "system_file_picker",
+        "to_state": "backup_screen",
+        "action": "click(SAVE)",
+        "precondition": "",
+        "postcondition": "backup log entry created"
+      }
+    ],
+    "strategies": [
+      {
+        "name": "ADD_EXPENSE_BASIC",
+        "preconditions": "home_dashboard reachable",
+        "steps": [
+          "From home_launcher, swipe up to app_drawer (or scroll) to find 'Pro Expense'",
+          "Click Pro Expense icon -> home_dashboard",
+          "Click FAB '+' bottom-right -> expense_entry",
+          "Tap Name field, type expense name",
+          "Tap Amount field, type amount",
+          "Tap desired category chip (Food/Housing/Social/etc.)",
+          "(Optional) tap Note field and type note",
+          "(Optional) tap calendar icon to set date, OK",
+          "(Optional) tap clock icon (prefer keyboard icon for manual entry) to set time, OK",
+          "Click SAVE",
+          "Verify new entry appears under Recent on home_dashboard"
+        ],
+        "success_signal": "New entry shows in Recent list with correct name/amount/category icon",
+        "fallback": "If amount missing -> tooltip 'Cost is Empty' appears; enter a value and SAVE again"
+      },
+      {
+        "name": "EDIT_EXPENSE",
+        "preconditions": "home_dashboard reachable; target entry exists",
+        "steps": [
+          "Locate the target entry under Recent (scroll or click MORE -> expense_logs)",
+          "Click the entry -> expense_detail",
+          "Click EDIT -> update_data",
+          "For text fields: long-press field -> Select all -> type new value (overwrites)",
+          "For category: tap the desired chip",
+          "For date/time: open calendar/clock icon and confirm with OK",
+          "Click UPDATE",
+          "Verify change reflected in Recent / expense_logs"
+        ],
+        "success_signal": "Returned to home_dashboard and target entry shows updated values",
+        "fallback": "If new text appended to old, use long-press + Select all + type, OR use long_press(backspace) on keyboard"
+      },
+      {
+        "name": "DELETE_EXPENSE",
+        "preconditions": "Target entry exists",
+        "steps": [
+          "Open the entry: click it in Recent or expense_logs -> expense_detail",
+          "Click the red trash icon next to title -> delete_confirm",
+          "Click CONFIRM",
+          "Verify entry no longer appears in Recent/expense_logs"
+        ],
+        "success_signal": "Entry no longer present in lists; totals updated",
+        "fallback": "From expense_logs, long-press entry to expose Delete button as alternative"
+      },
+      {
+        "name": "QUERY_TRANSACTION_DETAIL",
+        "preconditions": "Transaction exists",
+        "steps": [
+          "Open app and reach home_dashboard",
+          "Locate target transaction in Recent (or MORE -> expense_logs)",
+          "Click transaction -> expense_detail to read Amount/Date/Note",
+          "If category label needed, click EDIT -> update_data and read highlighted category chip",
+          "Return answer"
+        ],
+        "success_signal": "Required fields read from detail/edit view",
+        "fallback": "If date shows 'Today/Yesterday', open EDIT to see absolute date in header"
+      },
+      {
+        "name": "QUERY_DASHBOARD_TOTAL",
+        "preconditions": "home_dashboard reachable",
+        "steps": [
+          "Open Pro Expense and reach home_dashboard",
+          "Read 'Totals' section for INCOME/OUTCOME for the displayed period",
+          "Provide value with currency"
+        ],
+        "success_signal": "Value extracted from Totals card",
+        "fallback": ""
+      },
+      {
+        "name": "QUERY_CATEGORY_STATISTICS",
+        "preconditions": "home_dashboard reachable",
+        "steps": [
+          "Open hamburger menu -> Statistics",
+          "Ensure desired date is shown",
+          "Read percentage next to target category"
+        ],
+        "success_signal": "Percentage value identified",
+        "fallback": ""
+      },
+      {
+        "name": "BACKUP_EXPORT",
+        "preconditions": "home_dashboard reachable",
+        "steps": [
+          "Open hamburger menu -> Backup",
+          "Click Export -> export_dialog",
+          "Click SAVE AS -> system_file_picker",
+          "Click SAVE in picker",
+          "Verify new entry appears under Backup Logs"
+        ],
+        "success_signal": "New row in Backup Logs with timestamp and item count",
+        "fallback": ""
+      },
+      {
+        "name": "ENABLE_CONTINUOUS_ENTRY_AND_ADD",
+        "preconditions": "expense_entry reachable",
+        "steps": [
+          "Open FAB '+' to reach expense_entry",
+          "Tap the loop/chain icon next to SAVE to enable continuous mode (SAVE becomes NEXT)",
+          "Fill Name/Amount/Category as normal",
+          "Click NEXT to save and reset form for another entry"
+        ],
+        "success_signal": "Loop icon highlighted; after NEXT, blank form appears ready for next entry",
+        "fallback": "Continuous entry is NOT in Settings; do not search there"
+      }
+    ],
+    "dead_ends": [
+      {
+        "state": "app_drawer",
+        "failed_action": "horizontal swipe to paginate",
+        "note": "App drawer scrolls vertically; left/right swipes do not change page"
+      },
+      {
+        "state": "home_launcher",
+        "failed_action": "swipe up missed and triggered long-press menu",
+        "note": "Opens 'Wallpaper & style / Widgets / Home settings' menu; press Back or Home to recover"
+      },
+      {
+        "state": "update_data",
+        "failed_action": "type new text without clearing field",
+        "note": "Typing appends to existing value, producing jumbled text; must Select all or long-press backspace first"
+      },
+      {
+        "state": "time_picker",
+        "failed_action": "tapping AM/PM toggle on clock face",
+        "note": "Toggle can be unresponsive; use keyboard icon to switch to manual text entry mode"
+      },
+      {
+        "state": "time_picker",
+        "failed_action": "tap hour number on clock face",
+        "note": "Touch is imprecise; advancing to minute view with wrong hour. Prefer text input."
+      },
+      {
+        "state": "settings_screen",
+        "failed_action": "search for 'continuous entry mode' here",
+        "note": "Settings only contains Language/Currency/Theme; continuous entry toggle is on expense_entry screen"
+      },
+      {
+        "state": "home_dashboard",
+        "failed_action": "click 'MORE' assumed to expand list",
+        "note": "Sometimes opens detail of a different recent item; verify before deleting/editing"
+      },
+      {
+        "state": "expense_entry",
+        "failed_action": "click SAVE with empty Amount",
+        "note": "Shows 'Cost is Empty' tooltip; must enter a numeric amount (even 0) to proceed"
+      },
+      {
+        "state": "app_drawer",
+        "failed_action": "open 'Broccoli' assuming it is finance",
+        "note": "Broccoli is a recipe app; the correct app is 'Pro Expense'"
+      }
+    ]
+  },
+  "layer2": {
+    "categories": [
+      {
+        "name": "ADD_ENTRY",
+        "precondition": "Target app is installed and reachable from the launcher",
+        "abstract_steps": [
+          "Launch the target app from launcher/app list",
+          "Open the create-new-entry affordance (commonly a floating + button)",
+          "Fill required fields in order: title/name, amount/value, classification (category), optional notes",
+          "Adjust date/time via pickers if specified",
+          "Commit via save/confirm button",
+          "Return to a list/summary view and verify the new entry is present"
+        ],
+        "failure_modes": [
+          "Required numeric field left blank causing validation error",
+          "Typing into a field that still contains default text, producing concatenated text",
+          "Wrong app launched due to ambiguous icon/name",
+          "Picker dialog closed without confirming, losing the selection"
+        ],
+        "verification_checklist": [
+          "New entry visible in recent/list view",
+          "Displayed values match requested name/amount/category/date/time/note",
+          "Aggregate totals updated accordingly"
+        ]
+      },
+      {
+        "name": "EDIT_ENTRY",
+        "precondition": "Target entry exists in the app's data store",
+        "abstract_steps": [
+          "Navigate to the entry via list/search",
+          "Open the entry's detail view",
+          "Enter edit mode",
+          "Clear existing field content before typing (select-all or long-press backspace)",
+          "Apply changes to each requested field (text, classification, date/time)",
+          "Commit changes via update/save button",
+          "Verify modifications in the list/detail view"
+        ],
+        "failure_modes": [
+          "Appending new text instead of replacing",
+          "Cursor positioned at start so backspace does nothing",
+          "Picker confirms inadvertently dismissed, leaving old value",
+          "Selecting wrong category chip due to default selection"
+        ],
+        "verification_checklist": [
+          "Updated values reflected in detail view",
+          "Updated values reflected in list/summary",
+          "No residual original text remains"
+        ]
+      },
+      {
+        "name": "DELETE_ENTRY",
+        "precondition": "Target entry exists and is identifiable",
+        "abstract_steps": [
+          "Locate the entry in a list (may require expanding/scrolling)",
+          "Open detail view or expose row actions",
+          "Invoke delete affordance",
+          "Confirm in the confirmation dialog",
+          "Verify entry is removed from the list"
+        ],
+        "failure_modes": [
+          "Tapping wrong row due to similar names/dates",
+          "Dismissing confirmation accidentally",
+          "Mistaking 'MORE' or similar buttons for delete"
+        ],
+        "verification_checklist": [
+          "Target entry no longer appears",
+          "Aggregate totals decrease appropriately",
+          "Detail view for that entry is no longer accessible"
+        ]
+      },
+      {
+        "name": "QUERY_INFO",
+        "precondition": "Information is recorded in the app",
+        "abstract_steps": [
+          "Navigate to the relevant screen (summary dashboard, list, statistics, or item detail)",
+          "If summary view lacks precise data, open the item detail or edit view to see absolute values",
+          "Read requested fields verbatim",
+          "Return answer in requested format"
+        ],
+        "failure_modes": [
+          "Reading relative date label ('Today'/'Yesterday') instead of absolute date",
+          "Value partially occluded by floating buttons",
+          "Filtering by wrong date range"
+        ],
+        "verification_checklist": [
+          "Values match the targeted entry/period",
+          "Currency/units included when relevant",
+          "Output formatted as user requested"
+        ]
+      },
+      {
+        "name": "NAVIGATE_TO",
+        "precondition": "Target screen is reachable through known menu structure",
+        "abstract_steps": [
+          "Open the main navigation drawer/menu",
+          "Select the named destination",
+          "Confirm landing on the expected screen via headers/visual cues"
+        ],
+        "failure_modes": [
+          "Looping into the wrong menu (e.g., Settings) searching for a feature located elsewhere",
+          "Accidentally triggering long-press menus on the launcher"
+        ],
+        "verification_checklist": [
+          "Header/title of destination screen matches expectation",
+          "Expected widgets present"
+        ]
+      },
+      {
+        "name": "EXPORT_BACKUP",
+        "precondition": "App provides a backup/export feature",
+        "abstract_steps": [
+          "Navigate to the backup/export section via the main menu",
+          "Trigger the export action",
+          "Confirm filename in the export dialog",
+          "Choose save location in the system file picker and confirm",
+          "Verify a new entry appears in backup history"
+        ],
+        "failure_modes": [
+          "Dismissing system file picker before saving",
+          "Choosing import instead of export"
+        ],
+        "verification_checklist": [
+          "Backup history shows a new timestamped entry",
+          "Saved file exists at chosen location"
+        ]
+      },
+      {
+        "name": "SET_DATE_TIME",
+        "precondition": "An editable date/time field exists",
+        "abstract_steps": [
+          "Open the date or time picker via the dedicated icon",
+          "If a graphical clock/calendar is imprecise, switch to numeric/text input mode",
+          "Enter hour, minute, AM/PM (and year/month/day) explicitly",
+          "Confirm the dialog to apply",
+          "Re-open header to verify the displayed timestamp"
+        ],
+        "failure_modes": [
+          "Imprecise taps on clock face selecting adjacent values",
+          "AM/PM toggle unresponsive on clock-face mode",
+          "Dialog dismissed without confirming"
+        ],
+        "verification_checklist": [
+          "Header on edit/entry screen shows requested date/time",
+          "Saved entry shows the requested date/time after commit"
+        ]
+      },
+      {
+        "name": "TOGGLE_FEATURE",
+        "precondition": "Feature toggle exists somewhere in the UI",
+        "abstract_steps": [
+          "Look first on the screen where the feature is used (in-context toggles)",
+          "If absent, check the settings/preferences screen",
+          "Tap the toggle and confirm it visually indicates active state",
+          "Proceed with the dependent action"
+        ],
+        "failure_modes": [
+          "Searching only in settings when the toggle is contextual",
+          "Mis-identifying the toggle icon"
+        ],
+        "verification_checklist": [
+          "Toggle shows active/highlighted visual state",
+          "Subsequent action behaves according to enabled mode"
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "built_at": "2025-01-22T00:00:00Z",
+    "n_episodes": 67,
+    "n_successful": 67,
+    "n_episodes_input": 67,
+    "synthesizer_model": "claude-opus-4-7",
+    "synthesizer_temperature": 0.3
+  }
+}

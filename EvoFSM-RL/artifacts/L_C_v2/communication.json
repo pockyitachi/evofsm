@@ -1,0 +1,453 @@
+{
+  "category": "Communication",
+  "layer2": {
+    "categories": [
+      {
+        "name": "NAVIGATE_TO",
+        "precondition": "Starting at home or app's root, or at some default landing screen; user knows the destination screen exists within the app",
+        "abstract_steps": [
+          "Open the app drawer if app shortcut not on home",
+          "Launch target app",
+          "Dismiss permission prompts and onboarding tooltips",
+          "Identify if target location is a virtual category or a physical path",
+          "From the current screen, identify the likely entry point (top-bar icon, menu item, settings row, primary navigation menu)",
+          "Select the appropriate top-level destination",
+          "Drill down through sub-folders/tabs/menus toward the target screen",
+          "If the resulting screen is wrong, back out and try the next candidate, iterating through known entry points (info icon, gear, overflow) systematically",
+          "Confirm target screen is visible"
+        ],
+        "failure_modes": [
+          "Confusing a category filter applied within the current folder with global navigation to that category",
+          "Opening the wrong adjacent item due to imprecise tap coordinates",
+          "Swipe gesture interpreted as long-press, opening home customization menu",
+          "Launching a similarly-named but wrong app (e.g. dialer vs. contacts manager)",
+          "Tooltip overlays obscuring desired control",
+          "Confusing icons with similar appearance",
+          "Getting trapped in modal dialogs (permissions, defaults) that close the app on cancel",
+          "Mis-tapping on adjacent UI elements"
+        ],
+        "verification_checklist": [
+          "Header/breadcrumb/page title reflects the intended destination",
+          "Visible content matches expectations for that location",
+          "Expected controls are interactive",
+          "Target screen's distinguishing visual cues are present",
+          "Back navigation returns to a known prior screen"
+        ]
+      },
+      {
+        "name": "QUERY_INFO",
+        "precondition": "Target item, list, or information is reachable somewhere in the app",
+        "abstract_steps": [
+          "Navigate to the most likely container screen (list / detail / about / settings / tab / help)",
+          "Optionally apply filters or search to narrow the view",
+          "Use search or scroll to locate the data",
+          "Read the requested attribute/value/count/status from the list card, item-detail/info screen, or rendered UI",
+          "Return the value in the requested format"
+        ],
+        "failure_modes": [
+          "Reading from a filtered subset that excludes the target",
+          "Confusing modification time with creation time",
+          "Counting items while extra filters are still active",
+          "Misreading empty-state as a value other than zero",
+          "Filter not applied, leading to wrong count",
+          "Information located in a different app than expected",
+          "Reading truncated preview text instead of the full content",
+          "Assuming a value from the list when the detail differs",
+          "Searching with overly strict formatting (e.g., punctuation) and getting no results",
+          "Looking in the wrong menu (overflow vs info icon vs gear)"
+        ],
+        "verification_checklist": [
+          "Value taken from the authoritative detail view when precision is needed",
+          "All required filters are active and only those",
+          "Result reported in the requested units/format",
+          "Source screen clearly shows the answered value",
+          "Empty-state messages map to 0/None",
+          "Value matches the literal text shown on screen",
+          "If multiple matches exist, the correct contextual one was chosen"
+        ]
+      },
+      {
+        "name": "SEARCH_ENTRY",
+        "precondition": "App provides a search affordance and/or filter chips on a listing view",
+        "abstract_steps": [
+          "Open the search interface or tap filter chip",
+          "Type the query string or provide selection",
+          "Optionally apply category/type filters",
+          "Submit if needed (keyboard enter)",
+          "Inspect results or empty state"
+        ],
+        "failure_modes": [
+          "Searching within a narrower scope than intended",
+          "Typing into a non-focused field (accidentally editing content)",
+          "Chip is off-screen; needs horizontal swipe",
+          "Search not executed because submit not pressed",
+          "No results misinterpreted"
+        ],
+        "verification_checklist": [
+          "Query text shown in the search bar",
+          "Applied filters are highlighted/active",
+          "Result list (or explicit no-match state) is visible"
+        ]
+      },
+      {
+        "name": "DELETE_HISTORY_ENTRY",
+        "precondition": "Search interface exposes recent queries",
+        "abstract_steps": [
+          "Open search, ensure input is empty so history is shown",
+          "Locate the target history row",
+          "Tap the per-row dismiss control"
+        ],
+        "failure_modes": [
+          "Target entry not present (already cleared or never recorded)",
+          "Confusing executing a new search with viewing history"
+        ],
+        "verification_checklist": [
+          "Target row no longer appears in the history list"
+        ]
+      },
+      {
+        "name": "CHANGE_VIEW_OR_SORT",
+        "precondition": "List/grid view is currently shown",
+        "abstract_steps": [
+          "Locate the layout toggle or overflow menu",
+          "Toggle layout or pick the desired sort criterion",
+          "Confirm the visible change"
+        ],
+        "failure_modes": [
+          "Misreading the toggle icon (it represents the alternate mode, not the current one)",
+          "Selection mode blocking interaction with view controls"
+        ],
+        "verification_checklist": [
+          "Items visibly re-arranged in target layout/order",
+          "Toggle icon now shows the opposite state"
+        ]
+      },
+      {
+        "name": "ADD_ENTRY",
+        "precondition": "User is in a list-style or writable container screen of the relevant data domain with an add affordance available, and permission/default-app prerequisites satisfied",
+        "abstract_steps": [
+          "Trigger the add-new-entry control (primary create affordance, floating action button, '+' icon, or overflow create menu)",
+          "Choose the create-new option if a menu appears",
+          "Focus each required input field explicitly before typing",
+          "Type each piece of data into the corresponding field",
+          "If a field's label/category is configurable, open its selector and choose the requested option",
+          "Optionally attach media (capture or pick) via the dedicated picker dialog",
+          "Dismiss the on-screen keyboard if it hides remaining fields (system back) or scroll the form",
+          "If a follow-up form appears, fill remaining required fields",
+          "Submit/save using the primary action (often top-right) or confirm with checkmark/OK"
+        ],
+        "failure_modes": [
+          "Attempting to create in a virtual/filtered view that disallows creation",
+          "Submitting without entering a name",
+          "Tapping near the avatar/header accidentally opens the photo picker",
+          "Typing without focusing a field causes data loss or duplication",
+          "Premature save with empty required fields triggers validation error",
+          "Auto-suggested text or pre-existing text concatenates with typed text",
+          "Tapping a similar icon that opens a different mode (e.g., add-participant vs add-contact)",
+          "Forgetting to press the final Save/checkmark, leaving changes unpersisted",
+          "Dismissing required permission/default-handler prompts and being kicked out of the app"
+        ],
+        "verification_checklist": [
+          "New entry appears in the destination list or relevant screen",
+          "Breadcrumb/location is the intended container",
+          "Post-save detail view shows all entered values",
+          "Confirmation toast/snackbar appears with entity name",
+          "Configurable labels reflect chosen option",
+          "Attached media renders as expected",
+          "Returning to the list and re-opening shows the entry persisted"
+        ]
+      },
+      {
+        "name": "EDIT_ENTRY",
+        "precondition": "Target item can be selected and an action menu is reachable, or entry detail view is open",
+        "abstract_steps": [
+          "Long-press or otherwise select the item, or open the entity detail view",
+          "Activate edit mode (e.g., pencil icon) or open the action menu and choose the edit/rename action",
+          "Focus the field needing change",
+          "Clear existing content via long-press select or backspace",
+          "Type corrected value while preserving constraints (e.g., extensions)",
+          "Scroll to reveal fields hidden by the keyboard",
+          "Confirm/save the change"
+        ],
+        "failure_modes": [
+          "Single-tap inadvertently opens the item instead of selecting it",
+          "Overwriting protected portions like the file extension",
+          "Replacing text without selecting first causes append instead of overwrite",
+          "Dismissing without saving loses edits",
+          "Editing a similarly-named entity by mistake",
+          "Keyboard obscuring fields, leading to no input",
+          "Field unfocused at moment of typing, so input is lost"
+        ],
+        "verification_checklist": [
+          "Updated value appears in the list",
+          "Constraints preserved (extension, type)",
+          "Detail view reflects updated values",
+          "No leftover duplicate characters",
+          "Confirmation toast appears",
+          "Re-entering edit mode shows persisted values"
+        ]
+      },
+      {
+        "name": "MOVE_OR_COPY_ENTRY",
+        "precondition": "Item is selectable; destination is accessible",
+        "abstract_steps": [
+          "Select the item and choose move/copy",
+          "Navigate the destination picker to the target container",
+          "Optionally create a new sub-container at the destination",
+          "Confirm the operation"
+        ],
+        "failure_modes": [
+          "Confirming at the wrong directory (placing item in parent rather than new sub-folder)",
+          "Cancelling by pressing back at the picker"
+        ],
+        "verification_checklist": [
+          "Source no longer contains the item (for move) or still contains it (for copy)",
+          "Destination contains the item"
+        ]
+      },
+      {
+        "name": "DELETE_ENTRY",
+        "precondition": "Target item exists and is selectable/locatable via list, search, or detail view, and a delete action exists",
+        "abstract_steps": [
+          "Locate the target item (scroll or search)",
+          "Enter selection or detail mode (long-press for list items, open detail for single items)",
+          "Invoke the delete affordance (trash icon or overflow -> Delete)",
+          "Confirm the destructive action in the confirmation dialog"
+        ],
+        "failure_modes": [
+          "Single-tap opening the item instead of selecting",
+          "Cancelling the confirmation",
+          "Entry not found -> nothing to delete (may already be absent)",
+          "Confirmation dialog dismissed accidentally",
+          "Selecting the wrong item due to similar names/numbers",
+          "Confusing delete-thread with delete-message-content",
+          "Repeating confirm taps because UI state did not refresh"
+        ],
+        "verification_checklist": [
+          "Toast/snackbar/feedback indicating deletion",
+          "Item no longer appears in the list or search",
+          "Empty-state text or updated count is shown",
+          "No success toast indicates pending action; re-check to ensure removal"
+        ]
+      },
+      {
+        "name": "OPEN_WITH_EXTERNAL_APP",
+        "precondition": "System chooser is available for the item type",
+        "abstract_steps": [
+          "Trigger open action on the item",
+          "Select desired handler app in the chooser",
+          "Choose one-time or default association"
+        ],
+        "failure_modes": [
+          "Confirming 'Always/Just once' before selecting an app (controls disabled)",
+          "Chooser not appearing because a default is already set"
+        ],
+        "verification_checklist": [
+          "Target app launches with the item loaded",
+          "If permanent default was requested, subsequent opens skip the chooser"
+        ]
+      },
+      {
+        "name": "EDIT_TEXT_DOCUMENT",
+        "precondition": "Document open in a text editor",
+        "abstract_steps": [
+          "Position cursor via tap or search tool",
+          "Insert, delete, or replace content",
+          "Optionally toggle preview to verify rendering",
+          "Save changes"
+        ],
+        "failure_modes": [
+          "Edits made outside the intended region",
+          "Forgetting to save (save indicator still active)"
+        ],
+        "verification_checklist": [
+          "Save indicator is inactive/greyed",
+          "Reopen shows updated content"
+        ]
+      },
+      {
+        "name": "FIND_AND_REPLACE_IN_DOCUMENT",
+        "precondition": "Editor exposes a find/replace tool",
+        "abstract_steps": [
+          "Open the search tool",
+          "Switch to the find-and-replace mode if a simple search appears first",
+          "Enter search and replacement strings",
+          "Apply replace-all and save"
+        ],
+        "failure_modes": [
+          "Using a search-only dialog and missing the toggle to replace mode",
+          "Replacing partial matches due to case/whole-word options"
+        ],
+        "verification_checklist": [
+          "Match count shown before replace",
+          "Document content reflects all replacements",
+          "File saved"
+        ]
+      },
+      {
+        "name": "FIND_TEXT_IN_RENDERED_PAGE",
+        "precondition": "Page is rendered in a browser-like viewer",
+        "abstract_steps": [
+          "Open the browser menu",
+          "Choose Find in page",
+          "Type the query and read the match counter",
+          "If counter is 0/0, ensure page is fully loaded/interacted with"
+        ],
+        "failure_modes": [
+          "Page not yet rendered when searching",
+          "Dynamic content requiring interaction to appear"
+        ],
+        "verification_checklist": [
+          "Counter reflects expected occurrences",
+          "Highlighted matches visible on page"
+        ]
+      },
+      {
+        "name": "SHARE_ENTRY",
+        "precondition": "Item selectable; share intent supported",
+        "abstract_steps": [
+          "Select the item",
+          "Invoke share action",
+          "Choose a sharing channel",
+          "Complete channel-specific steps"
+        ],
+        "failure_modes": [
+          "Channel requires capability not present (e.g., no paired devices)",
+          "Permissions or system toggles disabled"
+        ],
+        "verification_checklist": [
+          "Send/Completed indication from the share target",
+          "If unable to complete, document the blocker and continue"
+        ]
+      },
+      {
+        "name": "CHANGE_SETTING",
+        "precondition": "On the app's settings/preferences area or system settings screen reachable from the app, or relevant setting exists in an overflow menu",
+        "abstract_steps": [
+          "Open the overflow menu or settings screen within the relevant scope",
+          "Locate the section containing the setting/preference (scroll if necessary)",
+          "Tap the row/toggle to open chooser dialog or toggle directly",
+          "Select desired option / flip toggle / input the desired value",
+          "Confirm any follow-up dialog or save if required"
+        ],
+        "failure_modes": [
+          "Setting only applies within current scope/view",
+          "Setting requires elevated permission",
+          "Setting not present where expected (looking in wrong submenu)",
+          "Dialog dismissed without selecting, leaving setting unchanged",
+          "Confusing 'system' vs 'app' setting locations",
+          "Mistaking an adjacent option (e.g., icon color vs theme)",
+          "Forgetting to press the final save control",
+          "Triggering a warning dialog and not understanding it"
+        ],
+        "verification_checklist": [
+          "Menu reflects new state on reopen",
+          "Content view reflects the new behavior",
+          "Sub-label or toggle state reflects new value",
+          "Returning to setting later still shows the value",
+          "Visual effect (color, language) is applied across the UI"
+        ]
+      },
+      {
+        "name": "BLOCK_OR_RESTRICT_ITEM",
+        "precondition": "On a management screen exposing a block/restriction list",
+        "abstract_steps": [
+          "Open the add-restriction control",
+          "Focus the identifier input field explicitly",
+          "Type the identifier",
+          "Confirm via primary action button (only enabled when input populated)"
+        ],
+        "failure_modes": [
+          "Typing without focus leaves field empty and confirm disabled",
+          "Toggling unrelated switches by mistake"
+        ],
+        "verification_checklist": [
+          "Item appears in restriction list",
+          "Toggle states match intent"
+        ]
+      },
+      {
+        "name": "IMPORT_OR_EXPORT_DATA",
+        "precondition": "On management/tools screen offering import/export actions",
+        "abstract_steps": [
+          "Select the desired import/export action",
+          "Use the file picker drawer to choose source/destination folder",
+          "Confirm save or select file"
+        ],
+        "failure_modes": [
+          "Source has no data to import (empty SIM/file)",
+          "File picker defaults to wrong location"
+        ],
+        "verification_checklist": [
+          "Confirmation toast or new file presence",
+          "Or clear message indicating empty source"
+        ]
+      },
+      {
+        "name": "MARK_FAVORITE_OR_FLAG",
+        "precondition": "Entry detail view open with star/flag affordance",
+        "abstract_steps": [
+          "Tap the star/flag icon",
+          "Verify icon state changed"
+        ],
+        "failure_modes": [
+          "Tapping wrong icon (overflow vs star)",
+          "Icon state ambiguous; repeated taps may un-favorite"
+        ],
+        "verification_checklist": [
+          "Icon filled/highlighted",
+          "Entry appears under favorites list"
+        ]
+      },
+      {
+        "name": "COMPOSE_AND_SEND_MESSAGE",
+        "precondition": "Messaging surface available and recipient identifiable",
+        "abstract_steps": [
+          "Open or create the target conversation by recipient identifier",
+          "Focus the message input field",
+          "Enter the message text",
+          "Trigger the send control",
+          "Verify the sent indicator (bubble + delivery mark) appears"
+        ],
+        "failure_modes": [
+          "Sending in the wrong thread because of a similar number",
+          "Hitting send before text is committed",
+          "Permissions/default-handler prompt blocking the send",
+          "Typing into a different focused field (e.g., recipient instead of body)"
+        ],
+        "verification_checklist": [
+          "Outgoing bubble with exact text appears in the thread",
+          "Delivery/sent indicator shown",
+          "Recipient header matches target"
+        ]
+      },
+      {
+        "name": "HANDLE_PERMISSION_OR_DEFAULT_HANDLER_PROMPT",
+        "precondition": "App requires a system role or permission that has not yet been granted",
+        "abstract_steps": [
+          "Read the dialog and identify the required role/permission",
+          "Select the correct option (often the target app's own entry)",
+          "Press the affirmative confirm button",
+          "Wait for app's main UI to load"
+        ],
+        "failure_modes": [
+          "Pressing cancel/back and getting bounced out of the app",
+          "Selecting the wrong app in a chooser",
+          "Repeatedly toggling the role and creating loops"
+        ],
+        "verification_checklist": [
+          "Dialog dismisses and app's main UI is visible",
+          "Subsequent actions that depend on the role succeed"
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "source": "static_seed_25app",
+    "apps": [
+      "chrome",
+      "contacts",
+      "simple_sms_messenger"
+    ]
+  }
+}

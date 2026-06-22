@@ -1,0 +1,975 @@
+{
+  "version": "0.1.0",
+  "app": "simple_calendar_pro",
+  "layer1": {
+    "app": "simple_calendar_pro",
+    "category": "Productivity",
+    "states": [
+      {
+        "id": "home_screen",
+        "description": "Android device home screen",
+        "visual_cues": [
+          "app icons (Gmail, Photos, YouTube, etc.)",
+          "bottom dock"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "app_drawer",
+        "description": "Android app drawer listing installed apps",
+        "visual_cues": [
+          "alphabetical grid of app icons",
+          "search bar at top"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "month_view",
+        "description": "Main monthly calendar view of Simple Calendar Pro",
+        "visual_cues": [
+          "month grid with day numbers",
+          "event labels in cells",
+          "month name in header",
+          "left/right arrows for month navigation",
+          "search icon",
+          "gear icon",
+          "three-dot overflow menu",
+          "floating + button at bottom right"
+        ],
+        "resource_hints": [
+          "Search",
+          "Settings gear",
+          "fab"
+        ]
+      },
+      {
+        "id": "day_view",
+        "description": "Daily agenda view showing events for a selected date",
+        "visual_cues": [
+          "date header (e.g. 'October 14 (Sat)')",
+          "list of events with time ranges",
+          "back arrow",
+          "floating + button"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "fab_menu",
+        "description": "Expanded floating action button menu with Task/Event options",
+        "visual_cues": [
+          "Task button with checkmark icon",
+          "Event button with calendar icon"
+        ],
+        "resource_hints": [
+          "Task",
+          "Event"
+        ]
+      },
+      {
+        "id": "new_event_form",
+        "description": "Form to create or edit an event",
+        "visual_cues": [
+          "Title field",
+          "Location field",
+          "Description field",
+          "All-day checkbox",
+          "start/end date and time",
+          "Reminder row",
+          "Repetition row",
+          "Event color row",
+          "checkmark save icon top-right"
+        ],
+        "resource_hints": [
+          "Title",
+          "Location",
+          "Description",
+          "All-day",
+          "Event color",
+          "No repetition"
+        ]
+      },
+      {
+        "id": "new_task_form",
+        "description": "Form to create or edit a task",
+        "visual_cues": [
+          "Title field",
+          "Description field",
+          "Date/time fields",
+          "Reminder row",
+          "Repetition row",
+          "Task color row",
+          "checkmark save icon top-right"
+        ],
+        "resource_hints": [
+          "Title",
+          "Description"
+        ]
+      },
+      {
+        "id": "edit_event_screen",
+        "description": "Edit existing event screen with delete icon",
+        "visual_cues": [
+          "pre-filled fields",
+          "trash icon top-right",
+          "duplicate icon top-right",
+          "checkmark save icon"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "date_picker_dialog",
+        "description": "Calendar date selection dialog",
+        "visual_cues": [
+          "month/year header",
+          "calendar grid",
+          "OK/Cancel buttons"
+        ],
+        "resource_hints": [
+          "OK",
+          "Cancel"
+        ]
+      },
+      {
+        "id": "time_picker_dialog",
+        "description": "Time selection dialog with clock face or keypad",
+        "visual_cues": [
+          "clock face with hour/minute selection",
+          "hour and minute display boxes",
+          "keyboard icon to toggle input mode",
+          "OK/Cancel buttons"
+        ],
+        "resource_hints": [
+          "OK"
+        ]
+      },
+      {
+        "id": "month_year_picker",
+        "description": "Picker dialog for selecting month and year via scrollable columns",
+        "visual_cues": [
+          "scrollable month column",
+          "scrollable year column",
+          "OK/Cancel"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "repetition_dialog",
+        "description": "Dialog to select repetition frequency",
+        "visual_cues": [
+          "No repetition / Daily / Weekly / Monthly / Yearly / Custom options"
+        ],
+        "resource_hints": [
+          "Daily",
+          "Weekly",
+          "Monthly",
+          "Yearly"
+        ]
+      },
+      {
+        "id": "reminder_dialog",
+        "description": "Dialog to select reminder time before event",
+        "visual_cues": [
+          "preset options like 'At start', '10 minutes before', '1 hour before'",
+          "Custom option"
+        ],
+        "resource_hints": [
+          "Custom"
+        ]
+      },
+      {
+        "id": "custom_reminder_dialog",
+        "description": "Dialog for entering a custom reminder value and unit",
+        "visual_cues": [
+          "numeric value field",
+          "minutes/hours/days radio buttons"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "color_picker_dialog",
+        "description": "Color picker for event/event-type color",
+        "visual_cues": [
+          "preset color circles row (red/blue/green/yellow/orange)",
+          "gradient picker",
+          "hex code field",
+          "OK/Cancel"
+        ],
+        "resource_hints": [
+          "#"
+        ]
+      },
+      {
+        "id": "event_type_dialog",
+        "description": "Dialog listing existing event types with add/manage options",
+        "visual_cues": [
+          "list of existing event types",
+          "'Add a new type'",
+          "'Manage event types'"
+        ],
+        "resource_hints": [
+          "Add a new type",
+          "Manage event types"
+        ]
+      },
+      {
+        "id": "add_event_type_dialog",
+        "description": "Dialog to create or edit an event type with title and color",
+        "visual_cues": [
+          "Title field",
+          "Color circle",
+          "OK/Cancel"
+        ],
+        "resource_hints": [
+          "Title",
+          "Color"
+        ]
+      },
+      {
+        "id": "overflow_menu",
+        "description": "Three-dot overflow menu in main calendar",
+        "visual_cues": [
+          "Go to date",
+          "Print",
+          "Add holidays",
+          "Add contact anniversaries",
+          "About"
+        ],
+        "resource_hints": [
+          "Go to date",
+          "Print",
+          "Add holidays"
+        ]
+      },
+      {
+        "id": "settings_screen",
+        "description": "App settings",
+        "visual_cues": [
+          "COLOR CUSTOMIZATION section",
+          "GENERAL section",
+          "Language",
+          "Manage event types",
+          "Highlight weekends",
+          "Start week on Sunday",
+          "REMINDERS section"
+        ],
+        "resource_hints": [
+          "Language",
+          "Manage event types",
+          "Customize colors",
+          "Highlight weekends",
+          "Use 24-hour time format"
+        ]
+      },
+      {
+        "id": "language_selection",
+        "description": "Language selection list",
+        "visual_cues": [
+          "Suggested languages",
+          "All languages list"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "customize_colors_screen",
+        "description": "Color customization sub-screen",
+        "visual_cues": [
+          "Theme option",
+          "Text/Background/Primary color rows",
+          "App icon color"
+        ],
+        "resource_hints": [
+          "Theme",
+          "Primary color"
+        ]
+      },
+      {
+        "id": "manage_event_types_screen",
+        "description": "List of event types with color indicators",
+        "visual_cues": [
+          "list of event types with color circles",
+          "+ button to add new type"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "search_results",
+        "description": "Search results list filtered by query",
+        "visual_cues": [
+          "search bar with query and X clear icon",
+          "list of matching events grouped by date"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "disclaimer_dialog",
+        "description": "Dialog warning about reminder/battery settings",
+        "visual_cues": [
+          "Disclaimer text about battery/notification",
+          "Settings and OK buttons"
+        ],
+        "resource_hints": [
+          "Disclaimer",
+          "OK"
+        ]
+      },
+      {
+        "id": "delete_confirmation_dialog",
+        "description": "Dialog confirming event deletion",
+        "visual_cues": [
+          "'Are you sure...' message",
+          "Yes/No buttons"
+        ],
+        "resource_hints": [
+          "Yes"
+        ]
+      },
+      {
+        "id": "print_preview",
+        "description": "System print preview screen",
+        "visual_cues": [
+          "printer selector dropdown",
+          "paper size",
+          "orientation",
+          "color mode",
+          "PDF save circular button"
+        ],
+        "resource_hints": [
+          "Save as PDF",
+          "Letter",
+          "Landscape",
+          "Portrait"
+        ]
+      },
+      {
+        "id": "file_save_dialog",
+        "description": "System file save dialog for PDF output",
+        "visual_cues": [
+          "folder navigator",
+          "file name field",
+          "SAVE button"
+        ],
+        "resource_hints": [
+          "SAVE"
+        ]
+      },
+      {
+        "id": "app_info_screen",
+        "description": "Android system App info page for the app",
+        "visual_cues": [
+          "Open/Uninstall/Force stop buttons",
+          "Notifications/Permissions sections",
+          "Pause app activity toggle"
+        ],
+        "resource_hints": [
+          "Force stop",
+          "Pause app activity if unused"
+        ]
+      }
+    ],
+    "transitions": [
+      {
+        "from_state": "home_screen",
+        "to_state": "app_drawer",
+        "action": "swipe_up",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "app_drawer",
+        "to_state": "month_view",
+        "action": "click(orange_calendar_icon)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "month_view",
+        "to_state": "day_view",
+        "action": "click(day_cell)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "day_view",
+        "to_state": "month_view",
+        "action": "click(back)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "day_view",
+        "to_state": "edit_event_screen",
+        "action": "click(event_in_list)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "month_view",
+        "to_state": "edit_event_screen",
+        "action": "click(event_label_in_grid)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "month_view",
+        "to_state": "fab_menu",
+        "action": "click(fab_plus)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "fab_menu",
+        "to_state": "new_event_form",
+        "action": "click(Event)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "fab_menu",
+        "to_state": "new_task_form",
+        "action": "click(Task)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "new_event_form",
+        "to_state": "date_picker_dialog",
+        "action": "click(date_field)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "new_event_form",
+        "to_state": "time_picker_dialog",
+        "action": "click(time_field)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "new_event_form",
+        "to_state": "repetition_dialog",
+        "action": "click(No repetition)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "new_event_form",
+        "to_state": "reminder_dialog",
+        "action": "click(reminder_row)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "new_event_form",
+        "to_state": "color_picker_dialog",
+        "action": "click(Event color)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "new_event_form",
+        "to_state": "event_type_dialog",
+        "action": "click(event_type_row)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "event_type_dialog",
+        "to_state": "add_event_type_dialog",
+        "action": "click(Add a new type)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "add_event_type_dialog",
+        "to_state": "color_picker_dialog",
+        "action": "click(color_circle)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "date_picker_dialog",
+        "to_state": "new_event_form",
+        "action": "click(OK)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "time_picker_dialog",
+        "to_state": "new_event_form",
+        "action": "click(OK)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "time_picker_dialog",
+        "to_state": "time_picker_dialog",
+        "action": "click(keyboard_icon)",
+        "precondition": "switch to text input mode",
+        "postcondition": ""
+      },
+      {
+        "from_state": "reminder_dialog",
+        "to_state": "custom_reminder_dialog",
+        "action": "click(Custom)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "new_event_form",
+        "to_state": "disclaimer_dialog",
+        "action": "click(save_checkmark)",
+        "precondition": "first save triggers warning",
+        "postcondition": ""
+      },
+      {
+        "from_state": "disclaimer_dialog",
+        "to_state": "month_view",
+        "action": "click(OK)",
+        "precondition": "",
+        "postcondition": "event saved"
+      },
+      {
+        "from_state": "edit_event_screen",
+        "to_state": "delete_confirmation_dialog",
+        "action": "click(trash_icon)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "delete_confirmation_dialog",
+        "to_state": "day_view",
+        "action": "click(Yes)",
+        "precondition": "",
+        "postcondition": "event deleted"
+      },
+      {
+        "from_state": "edit_event_screen",
+        "to_state": "new_event_form",
+        "action": "click(duplicate_icon)",
+        "precondition": "",
+        "postcondition": "copy with prefilled fields"
+      },
+      {
+        "from_state": "month_view",
+        "to_state": "search_results",
+        "action": "click(search_bar) + type(query)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "search_results",
+        "to_state": "edit_event_screen",
+        "action": "click(result_item)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "month_view",
+        "to_state": "overflow_menu",
+        "action": "click(three_dots)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "overflow_menu",
+        "to_state": "print_preview",
+        "action": "click(Print)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "month_view",
+        "to_state": "settings_screen",
+        "action": "click(gear_icon)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "settings_screen",
+        "to_state": "manage_event_types_screen",
+        "action": "click(Manage event types)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "settings_screen",
+        "to_state": "language_selection",
+        "action": "click(Language)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "settings_screen",
+        "to_state": "customize_colors_screen",
+        "action": "click(Customize colors)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "manage_event_types_screen",
+        "to_state": "add_event_type_dialog",
+        "action": "click(existing_type) or click(+)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "print_preview",
+        "to_state": "file_save_dialog",
+        "action": "select Save as PDF + click(save_button)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "month_view",
+        "to_state": "month_year_picker",
+        "action": "click(month_header)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "month_year_picker",
+        "to_state": "month_view",
+        "action": "tap(month/year) + click(OK)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "app_drawer",
+        "to_state": "app_info_screen",
+        "action": "long_press(icon) + click(info)",
+        "precondition": "",
+        "postcondition": ""
+      }
+    ],
+    "strategies": [
+      {
+        "name": "CREATE_EVENT",
+        "preconditions": "month_view open",
+        "steps": [
+          "Click floating + button",
+          "Click 'Event' in FAB menu",
+          "Type title in Title field",
+          "Optionally tap Location and type location",
+          "Optionally tap Description and type description",
+          "Tap start date and select target date in date picker, click OK",
+          "Tap start/end time and select hours/minutes (use keyboard icon for precise input), click OK",
+          "Optionally tap 'No repetition' and pick Daily/Weekly/Monthly/Yearly",
+          "Optionally tap reminder and pick preset or Custom",
+          "Optionally tap 'Event color' and choose preset or hex code, click OK",
+          "Click checkmark in top-right to save",
+          "Dismiss Disclaimer dialog with OK if shown"
+        ],
+        "success_signal": "Returned to month/day view and new event label visible on the chosen date",
+        "fallback": "If save did not register, reopen event and re-tap checkmark"
+      },
+      {
+        "name": "CREATE_TASK",
+        "preconditions": "month_view open",
+        "steps": [
+          "Click floating + button",
+          "Click 'Task' in FAB menu",
+          "Type title",
+          "Optionally type description",
+          "Optionally enable All-day checkbox",
+          "Adjust date/time via pickers",
+          "Adjust repetition and reminders",
+          "Click checkmark to save and dismiss Disclaimer"
+        ],
+        "success_signal": "Task entry with checkmark icon appears on the chosen date",
+        "fallback": "Re-tap checkmark; verify required fields"
+      },
+      {
+        "name": "EDIT_EVENT_VIA_SEARCH",
+        "preconditions": "month_view open",
+        "steps": [
+          "Click search icon/bar",
+          "Type event title substring",
+          "Tap matching result to open Edit Event screen",
+          "Modify location/description/time/all-day/etc.",
+          "Click checkmark to save"
+        ],
+        "success_signal": "Edit screen closes; updated values visible when reopened",
+        "fallback": "Reopen event from search results to verify save"
+      },
+      {
+        "name": "DELETE_EVENT",
+        "preconditions": "month_view open",
+        "steps": [
+          "Navigate to date via month grid click",
+          "Tap event in day view to open Edit Event",
+          "Tap trash icon in top-right",
+          "Confirm with Yes in confirmation dialog"
+        ],
+        "success_signal": "Day view no longer lists the deleted event",
+        "fallback": "If still listed, repeat with confirm dialog"
+      },
+      {
+        "name": "QUERY_EVENTS_ON_DATE",
+        "preconditions": "month_view open",
+        "steps": [
+          "Tap the target day cell",
+          "Read events in the day agenda",
+          "Provide count or details via answer action"
+        ],
+        "success_signal": "Correct count/text supplied",
+        "fallback": "Use search with keyword to cross-check"
+      },
+      {
+        "name": "QUERY_EVENTS_BY_KEYWORD",
+        "preconditions": "month_view open",
+        "steps": [
+          "Tap search bar",
+          "Type keyword",
+          "Submit search",
+          "Scroll through grouped results to count or read"
+        ],
+        "success_signal": "Returned numerical/textual answer",
+        "fallback": "Scroll up/down to verify no results were missed"
+      },
+      {
+        "name": "MANAGE_EVENT_TYPE",
+        "preconditions": "month_view open",
+        "steps": [
+          "Click gear icon to open Settings",
+          "Click 'Manage event types'",
+          "Click existing type to edit, or + to add new",
+          "Type title; tap color circle and select preset/hex code; click OK",
+          "Click OK to save type"
+        ],
+        "success_signal": "Updated type with new name and color appears in list",
+        "fallback": "Re-open type and re-confirm color/name"
+      },
+      {
+        "name": "CHANGE_APP_SETTING",
+        "preconditions": "month_view open",
+        "steps": [
+          "Click gear icon",
+          "Locate the desired toggle/option",
+          "Tap to toggle or open sub-screen",
+          "Confirm selection"
+        ],
+        "success_signal": "Setting reflects desired state",
+        "fallback": "Scroll within settings if not visible"
+      },
+      {
+        "name": "NAVIGATE_TO_DISTANT_MONTH",
+        "preconditions": "month_view open",
+        "steps": [
+          "Tap month header to open month/year picker",
+          "Tap target year value, then target month value",
+          "Click OK"
+        ],
+        "success_signal": "Header shows target month and year",
+        "fallback": "Avoid swiping the picker columns (often dismisses dialog); tap values directly"
+      },
+      {
+        "name": "PRINT_TO_PDF",
+        "preconditions": "month_view open",
+        "steps": [
+          "Open three-dot overflow menu",
+          "Click Print",
+          "Open printer selector and choose 'Save as PDF'",
+          "Adjust orientation/color/paper size if needed (only active after printer chosen)",
+          "Tap PDF save circular button",
+          "Confirm with SAVE in file dialog"
+        ],
+        "success_signal": "Returned to calendar after file save dialog closes",
+        "fallback": "If options grayed out, ensure a printer (Save as PDF) is selected first"
+      }
+    ],
+    "dead_ends": [
+      {
+        "state": "month_view",
+        "failed_action": "tap gear icon while overflow menu open",
+        "note": "First tap only dismisses overflow menu; need second tap on gear"
+      },
+      {
+        "state": "time_picker_dialog",
+        "failed_action": "tap inner circle hour (e.g. 14, 18) on clock face",
+        "note": "Imprecise taps often select outer-ring counterpart (e.g. 2/6); switch to keypad via keyboard icon"
+      },
+      {
+        "state": "month_year_picker",
+        "failed_action": "swipe on month/year columns",
+        "note": "Swipes can be interpreted as outside-dialog taps and dismiss the picker; tap values directly instead"
+      },
+      {
+        "state": "search_results",
+        "failed_action": "expect list to refresh after edit",
+        "note": "Search results cache; re-open event to verify save or exit search"
+      },
+      {
+        "state": "print_preview",
+        "failed_action": "change orientation/color before selecting printer",
+        "note": "Options are disabled until a printer (Save as PDF) is chosen"
+      },
+      {
+        "state": "app_drawer",
+        "failed_action": "search by 'Simple Calendar Pro' name",
+        "note": "App appears as plain 'Calendar' (orange icon); search via that label or browse"
+      }
+    ]
+  },
+  "layer2": {
+    "categories": [
+      {
+        "name": "ADD_ENTRY",
+        "precondition": "Application is on its main list/overview screen",
+        "abstract_steps": [
+          "Trigger the create-new affordance (e.g., floating add button)",
+          "If a type chooser appears, pick the desired entry kind",
+          "Fill required text fields (title at minimum)",
+          "Open and set structured pickers (date, time, recurrence, reminder, category/color) as needed",
+          "Confirm/save via the primary confirm control",
+          "Dismiss any post-save warning/disclaimer dialogs"
+        ],
+        "failure_modes": [
+          "Tapping outside an open menu dismisses it instead of selecting an option",
+          "Forgetting to dismiss a post-save dialog leaves entry uncommitted",
+          "Default values (date/time/reminder) not changed to match the requested values",
+          "Imprecise taps on circular pickers select neighboring values"
+        ],
+        "verification_checklist": [
+          "Newly created entry appears in list/overview at the correct slot",
+          "All requested attributes match when entry is reopened",
+          "No leftover blocking dialog remains on screen"
+        ]
+      },
+      {
+        "name": "EDIT_ENTRY",
+        "precondition": "Entry exists and is reachable via navigation or search",
+        "abstract_steps": [
+          "Locate the entry (via direct navigation or text search)",
+          "Open the entry to enter edit mode",
+          "Modify the targeted fields (replace text via select-all + retype when needed)",
+          "Adjust structured pickers as required",
+          "Confirm/save and dismiss any warning dialogs"
+        ],
+        "failure_modes": [
+          "Typing into a field without selecting existing text causes concatenation",
+          "Stale cached lists do not reflect the change visually until reopened",
+          "Save action overlaps with a dialog that must be dismissed first"
+        ],
+        "verification_checklist": [
+          "Reopening the entry shows the updated values",
+          "Overview reflects new attributes (e.g., new color/label/time)"
+        ]
+      },
+      {
+        "name": "DELETE_ENTRY",
+        "precondition": "Entry exists and can be opened",
+        "abstract_steps": [
+          "Open the entry's detail/edit screen",
+          "Activate the delete control",
+          "Confirm deletion in the confirmation dialog"
+        ],
+        "failure_modes": [
+          "Dismissing the confirmation dialog without confirming",
+          "Deleting a different occurrence when the entry is recurring"
+        ],
+        "verification_checklist": [
+          "Entry no longer appears in the relevant view",
+          "Search by its identifier returns no result"
+        ]
+      },
+      {
+        "name": "QUERY_INFO",
+        "precondition": "Data is browsable or searchable",
+        "abstract_steps": [
+          "Navigate to the relevant view (date, settings page, etc.) or use search",
+          "Read the displayed information",
+          "Aggregate (count/sum/extract) as required",
+          "Return the answer via the answer action"
+        ],
+        "failure_modes": [
+          "Truncated labels in compact views hide full text; need detail/search view",
+          "Scrollable lists may have items off-screen; failing to scroll causes undercount",
+          "Confusing similar items (e.g., events spanning midnight assigned to wrong day)"
+        ],
+        "verification_checklist": [
+          "All matching items inspected via scroll/search",
+          "Answer matches the requested format (single number, list, etc.)"
+        ]
+      },
+      {
+        "name": "NAVIGATE_TO",
+        "precondition": "Target screen/date is reachable from current state",
+        "abstract_steps": [
+          "Use header pickers, arrow controls, or search to jump to the target",
+          "Prefer direct taps over swipes inside dialog pickers",
+          "Confirm the navigation (e.g., OK)"
+        ],
+        "failure_modes": [
+          "Swipe gestures inside picker dialogs dismiss them",
+          "Multiple consecutive month navigations are slow vs. using a year/month picker"
+        ],
+        "verification_checklist": [
+          "Header or context shows the intended target",
+          "Subsequent operations occur in the correct context"
+        ]
+      },
+      {
+        "name": "CONFIGURE_SETTING",
+        "precondition": "App settings reachable",
+        "abstract_steps": [
+          "Open settings (gear or equivalent)",
+          "Locate the target option, scrolling if needed",
+          "Toggle/select the new value",
+          "Verify the change persists"
+        ],
+        "failure_modes": [
+          "Setting hidden behind a parent option (e.g., theme must be 'Custom' to expose color choices)",
+          "Tap registers on adjacent option due to dense layout"
+        ],
+        "verification_checklist": [
+          "Setting visually reflects the new state",
+          "Behavior in app changes accordingly when reopened"
+        ]
+      },
+      {
+        "name": "MANAGE_CATEGORY",
+        "precondition": "Settings exposes a 'manage categories/types' area",
+        "abstract_steps": [
+          "Navigate into the category management screen",
+          "Add a new category or edit an existing one",
+          "Set its name and visual attribute (e.g., color via preset or hex)",
+          "Save and verify presence in the list"
+        ],
+        "failure_modes": [
+          "Closing the dialog without selecting a color leaves default",
+          "Saving without filling required name field"
+        ],
+        "verification_checklist": [
+          "Category appears with correct name and color",
+          "Category can be assigned to entries"
+        ]
+      },
+      {
+        "name": "EXPORT_OR_PRINT",
+        "precondition": "Print/export action available from menu",
+        "abstract_steps": [
+          "Open the overflow menu and choose Print/Export",
+          "Select destination (e.g., Save as PDF)",
+          "Adjust output options after destination is set",
+          "Trigger save and confirm in file dialog"
+        ],
+        "failure_modes": [
+          "Output options remain disabled until destination is selected",
+          "Multiple rapid taps on save button may re-open creation flows after return"
+        ],
+        "verification_checklist": [
+          "File save dialog closes successfully",
+          "Returned to the originating screen"
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "built_at": "2025-01-15T00:00:00Z",
+    "n_episodes": 56,
+    "n_successful": 56,
+    "n_episodes_input": 56,
+    "synthesizer_model": "claude-opus-4-7",
+    "synthesizer_temperature": 0.3
+  }
+}

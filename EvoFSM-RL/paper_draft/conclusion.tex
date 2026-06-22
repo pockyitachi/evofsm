@@ -1,0 +1,38 @@
+\section{Conclusion}
+\label{sec:conclusion}
+
+We have taken up the generalization regime that recent work identifies as the
+hardest for mobile GUI agents---adapting to an application the agent has never
+seen---together with the few-shot test-time adaptation that the same work flags
+as a promising but preliminary direction~\citep{gu2026generalization}, and
+developed it into a full framework. EvoFSM-RL represents the agent's prior as a
+two-layer finite state machine whose upper layer is given a structural,
+linter-enforced meaning of ``transferable,'' and adapts at deployment time
+through a single loop that co-evolves two channels: it mutates the upper-layer
+FSM via a frozen reference language model and updates a LoRA adapter via
+group-relative policy optimization. The same loop runs at source-pool
+pretraining and at target-app deployment, so test-time adaptation is a
+well-defined operation rather than an ad-hoc fine-tune.
+
+We evaluated the framework at two levels of generalization. Within a benchmark,
+static category knowledge lifts near-transfer success by $+9.3$~pp and online
+upper-layer evolution adds another $+3.7$~pp, with a far-transfer panel serving
+as a built-in null control that confirms the gains are mechanism-bound rather
+than artifact-bound. Across benchmarks, we showed that priors which transfer
+within a benchmark collapse across the benchmark boundary, and traced the
+collapse to interpretable causes---source-environment state descriptions
+displacing grounded behavior, app-granular knowledge transferring better than
+category aggregates, and the within-benchmark recipe failing to carry over. This
+establishes why a prior must be \emph{adapted on the target} rather than shipped
+verbatim, and the joint adaptation of the symbolic prior together with the policy
+weights is precisely the mechanism EvoFSM-RL puts in place to do so.
+
+More broadly, the design space between hand-written agent prompts and full
+per-app fine-tuning is wider than it has been treated. Structuring an agent's
+prompt so that one layer of it can be safely mutated by an automated,
+RL-coupled process is a small commitment with a clear payoff, and the two-layer
+FSM is one concrete instantiation. The same framework extends naturally to
+stronger backbones, to additional deployment benchmarks, and to other structured
+prior forms---state-and-skill libraries, retrieved snippets, executable
+verifiers---in agent settings whose task vocabulary is rich enough to support
+such structure.

@@ -1,0 +1,179 @@
+{
+  "category": "Video Players & Editors",
+  "layer2": {
+    "categories": [
+      {
+        "name": "NAVIGATE_TO",
+        "precondition": "App launched and on any primary screen",
+        "abstract_steps": [
+          "Identify the target screen's parent category (main library / file browser / settings / about)",
+          "Use the primary bottom navigation to switch to that category",
+          "Drill down via lists, sub-tabs, or directory entries to reach the target"
+        ],
+        "failure_modes": [
+          "Tapping a similar-looking icon for the wrong app/tab",
+          "Mistaking a sort/filter icon for the overflow menu",
+          "Believing target exists in a section where it doesn't"
+        ],
+        "verification_checklist": [
+          "Breadcrumb or active tab indicator matches the target",
+          "Expected section headers or content visible"
+        ]
+      },
+      {
+        "name": "ADD_ENTRY",
+        "precondition": "On a list/browser where new entries can be created (playlist, favorite, server, stream)",
+        "abstract_steps": [
+          "Trigger the 'add' action from an overflow menu or per-row context menu",
+          "Select sub-type if applicable (protocol, target list)",
+          "Focus the input field by tapping it",
+          "Type the required text",
+          "Dismiss keyboard if it covers the confirm button",
+          "Confirm via OK / enter / list selection"
+        ],
+        "failure_modes": [
+          "Typing before the input is focused",
+          "Confirm button hidden behind keyboard",
+          "Using a favorites-style entry that lacks the add option"
+        ],
+        "verification_checklist": [
+          "Dialog dismisses without error",
+          "New entry visible in its containing list",
+          "Re-opening source context menu shows 'Remove' instead of 'Add'"
+        ]
+      },
+      {
+        "name": "DELETE_ENTRY",
+        "precondition": "Entry exists in a managed list (favorite, playlist, history)",
+        "abstract_steps": [
+          "Open the entry's context menu via three-dot / long-press",
+          "Choose the remove/clear action",
+          "Confirm in any subsequent dialog"
+        ],
+        "failure_modes": [
+          "Confusing a toggle (enable/disable saving) with an actual clear/delete",
+          "Operating on the wrong row due to imprecise tap"
+        ],
+        "verification_checklist": [
+          "Entry no longer appears in list",
+          "Confirmation toast or dialog dismissal"
+        ]
+      },
+      {
+        "name": "EDIT_ENTRY",
+        "precondition": "Target setting or item exists",
+        "abstract_steps": [
+          "Navigate to the settings/preferences area",
+          "Locate the specific entry (scroll or use sub-categories)",
+          "Tap to open its selection dialog or toggle its checkbox",
+          "Choose the desired value"
+        ],
+        "failure_modes": [
+          "Setting located in a sub-category rather than main settings",
+          "Dependent setting being greyed out until parent is enabled",
+          "Accidentally toggling instead of opening details"
+        ],
+        "verification_checklist": [
+          "Subtitle/value reflects the new choice",
+          "Checkbox state matches intent"
+        ]
+      },
+      {
+        "name": "QUERY_INFO",
+        "precondition": "App provides the requested info in a visible UI area",
+        "abstract_steps": [
+          "Navigate to the most likely informational area (About, properties, folder listing)",
+          "Scroll if necessary",
+          "Tap on aggregated values (e.g. version label) if a details popup is expected",
+          "Read the value and report it"
+        ],
+        "failure_modes": [
+          "Searching settings for info that's only on an About page",
+          "Reporting a count without scrolling through full list",
+          "Missing horizontally-scrollable items"
+        ],
+        "verification_checklist": [
+          "Information matches exact format requested",
+          "All scrollable content checked",
+          "Answer derived from currently visible UI state"
+        ]
+      },
+      {
+        "name": "SEARCH",
+        "precondition": "On a list view supporting search",
+        "abstract_steps": [
+          "Activate the search affordance",
+          "Type the query string",
+          "If scoped, broaden to global/all results via the provided button",
+          "Inspect results or empty-state message"
+        ],
+        "failure_modes": [
+          "Forgetting to broaden scope when query targets the whole library",
+          "Searching in the wrong sub-tab"
+        ],
+        "verification_checklist": [
+          "Query string visible in the search bar",
+          "Results list or 'no results' message displayed"
+        ]
+      },
+      {
+        "name": "SORT_OR_FILTER",
+        "precondition": "On a list view",
+        "abstract_steps": [
+          "Open sort/filter menu",
+          "Choose desired criterion",
+          "Re-open menu to verify arrow direction; tap again to toggle order if needed"
+        ],
+        "failure_modes": [
+          "Desired criterion unavailable on current sub-tab",
+          "Confusing display-layout overflow with sort menu"
+        ],
+        "verification_checklist": [
+          "Selected criterion highlighted with arrow",
+          "List visibly reorders if items present"
+        ]
+      },
+      {
+        "name": "TRIGGER_ACTION",
+        "precondition": "Inside a container offering bulk actions (play all, scan, refresh)",
+        "abstract_steps": [
+          "Locate the appropriate action affordance (FAB, overflow item, context menu)",
+          "Invoke it",
+          "Confirm any subsequent prompt"
+        ],
+        "failure_modes": [
+          "Action affordance hidden in a different mode (e.g. search view)",
+          "Invoking action on empty container produces no visible feedback"
+        ],
+        "verification_checklist": [
+          "Toast/dialog or state change confirms action",
+          "For playback: media player view opens or audio starts"
+        ]
+      },
+      {
+        "name": "LAUNCH_APP",
+        "precondition": "Device on home screen or app drawer",
+        "abstract_steps": [
+          "If icon not on home, open app drawer",
+          "Scroll alphabetically to the target letter",
+          "Tap the correct icon, verifying its distinctive logo",
+          "Dismiss any first-run permission dialogs"
+        ],
+        "failure_modes": [
+          "Tapping a different app with a similarly colored icon",
+          "Permission dialog blocking subsequent interactions"
+        ],
+        "verification_checklist": [
+          "App's main screen visible",
+          "Bottom navigation/tabs of the intended app present"
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "source": "static_seed_25app",
+    "apps": [
+      "vlc"
+    ]
+  }
+}

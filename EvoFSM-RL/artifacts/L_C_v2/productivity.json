@@ -1,0 +1,476 @@
+{
+  "category": "Productivity",
+  "layer2": {
+    "categories": [
+      {
+        "name": "ADD_ENTRY",
+        "precondition": "Application is open at its main list/collection screen and the target container (list/category/folder) is reachable from the main navigation",
+        "abstract_steps": [
+          "Navigate to the target container if entries are scoped to one",
+          "Invoke the primary create affordance (typically a floating add control or compose control)",
+          "Choose the entry subtype/variant if multiple are offered",
+          "Focus the title/name field and enter the required text, replacing any default placeholder explicitly",
+          "Focus secondary fields (body, metadata, description) and fill required values",
+          "Open and configure structured pickers (date, time, recurrence, reminder, priority, tags, location, category/color) via their respective rows",
+          "For each property choose either a quick preset or open an advanced picker",
+          "Confirm each picker sub-dialog",
+          "Persist via explicit save/confirm control or by exiting the editor (auto-save)",
+          "Dismiss any post-save warning/disclaimer dialogs"
+        ],
+        "failure_modes": [
+          "Tapping placeholder text that isn't interactive instead of using the primary create affordance",
+          "Typing before the input field is focused so text is dropped or goes into wrong widget",
+          "Creating in the wrong container because navigation was skipped",
+          "Selecting wrong subtype (e.g., note vs task, file vs folder, regular vs quick)",
+          "Missing required configuration that blocks save",
+          "Default placeholder name conflicts with an existing entry causing silent failure",
+          "Typing without first replacing the default leads to concatenated values",
+          "Tapping outside an open menu dismisses it instead of selecting an option",
+          "Forgetting to dismiss a post-save dialog leaves entry uncommitted",
+          "Default values (date/time/reminder) not changed to match the requested values",
+          "Imprecise taps on circular pickers select neighboring values",
+          "Pressing back before saving discards the entry",
+          "Quick presets not matching the required value, requiring advanced picker",
+          "24-hour vs 12-hour confusion when entering times"
+        ],
+        "verification_checklist": [
+          "New entry visible in the target container's list at the correct slot",
+          "Title and content match the requested values",
+          "Subtype indicator (e.g., checkbox for tasks) is correct",
+          "No error/toast indicating save failure",
+          "No duplicate-name error dialogs are present",
+          "All requested attributes match when entry is reopened",
+          "No leftover blocking dialog remains on screen",
+          "Displayed metadata (date/time/priority badges) matches input",
+          "Reopening the entry shows all configured fields persisted"
+        ]
+      },
+      {
+        "name": "EDIT_ENTRY",
+        "precondition": "Target entry exists and can be opened from a list or reached via search",
+        "abstract_steps": [
+          "Locate the entry via list scroll or text search",
+          "Open the entry to viewer/detail mode (avoiding completion/delete affordances)",
+          "Switch to edit mode via edit affordance",
+          "Position cursor at the desired location (end of text for append, select all for replace)",
+          "If replacing content, select all existing content and delete it",
+          "Insert formatting markers BEFORE typing text where toolbar buttons may misbehave",
+          "Type or replace text, using underlying markup directly when toolbar buttons split across lines",
+          "Adjust structured pickers as required",
+          "Confirm any sub-dialogs that appear",
+          "Persist changes via the explicit save control or by exiting editor"
+        ],
+        "failure_modes": [
+          "Cursor lands inside an existing word leading to corrupted text",
+          "Typing inserts instead of replacing when text isn't selected",
+          "Edit mode not entered so input is ignored",
+          "Accidentally opening wrong entry with similar name",
+          "Toolbar formatting buttons insert on new line, splitting the intended single-line entry",
+          "Autocorrect/auto-list continuation causes duplicated prefixes",
+          "Saving forgotten, leaving unsaved-changes indicator active",
+          "Typing into a field without selecting existing text causes concatenation",
+          "Stale cached lists do not reflect the change visually until reopened",
+          "Save action overlaps with a dialog that must be dismissed first",
+          "Tapping the wrong row item (e.g., adjacent entry) opens incorrect detail",
+          "Tapping a status checkbox marks complete instead of opening detail",
+          "Unsaved changes lost when navigating back without confirmation"
+        ],
+        "verification_checklist": [
+          "Viewer/detail mode shows updated text",
+          "No leftover artifacts from previous content",
+          "Entry still exists in the same container",
+          "Rendered/raw content matches the requested formatting",
+          "Save indicator returns to a neutral state (e.g., disabled/greyed)",
+          "Reopening the entry shows the persisted/updated values",
+          "Overview/list view badges update to reflect changes (e.g., new color/label/time)",
+          "No unsaved-changes prompt appears on subsequent navigation"
+        ]
+      },
+      {
+        "name": "DELETE_OR_COMPLETE_ENTRY",
+        "precondition": "Entry/task is visible in a list and supports a completion or delete action, or can be opened to its detail screen",
+        "abstract_steps": [
+          "Locate target via scroll or search",
+          "Tap the dedicated completion checkbox/status toggle, or open detail and use the delete control",
+          "For bulk delete: enter multi-select mode via long-press on a target, tap each additional matching item, scroll to confirm no further matches are hidden below the fold",
+          "Invoke delete and confirm in the confirmation dialog",
+          "If multiple items, repeat for each"
+        ],
+        "failure_modes": [
+          "List reorders after each action causing misclicks on next item",
+          "Filter hides completed items immediately, making verification harder",
+          "Tapping the row instead of the checkbox opens the entry",
+          "Tap location too close to text opens detail instead of toggling",
+          "Bulk operations require menu access not always discoverable",
+          "Missing items hidden by scroll",
+          "Accidentally selecting non-matching items",
+          "Dismissing the confirmation dialog instead of confirming",
+          "Deleting a different occurrence when the entry is recurring"
+        ],
+        "verification_checklist": [
+          "Checkbox shows checked state or item removed from active list",
+          "Item count decreased as expected",
+          "Entry disappears from active list or appears struck-through in completed section",
+          "Confirmation toast displayed",
+          "Target items no longer appear in the list",
+          "No remaining items match the deletion criterion",
+          "No error toast displayed",
+          "Search by its identifier returns no result"
+        ]
+      },
+      {
+        "name": "RENAME_ENTRY",
+        "precondition": "Entry is selectable in a list",
+        "abstract_steps": [
+          "Select the entry to expose contextual actions",
+          "Open the rename control",
+          "Explicitly select-all current text before typing the new name",
+          "Confirm the rename"
+        ],
+        "failure_modes": [
+          "New text is prepended/appended because old text was not fully selected",
+          "Forgetting required file extension"
+        ],
+        "verification_checklist": [
+          "Entry now displays the exact new name including extension",
+          "No conflict dialog appears"
+        ]
+      },
+      {
+        "name": "QUERY_INFO",
+        "precondition": "Data of interest exists somewhere in the app and is browsable or searchable",
+        "abstract_steps": [
+          "Navigate to the relevant section/view (date, settings page, collection screen, etc.) or use search",
+          "Use search or scroll to locate target/matching entries",
+          "Open entry if needed to read full content or hidden fields",
+          "Read the displayed value verbatim from list row or detail",
+          "Aggregate (count/sum/extract) the requested field/value across scrolled views carefully to avoid double counting",
+          "Return the answer in the requested format"
+        ],
+        "failure_modes": [
+          "Mis-counting items by confusing similar subtypes",
+          "Scrolling past target items",
+          "Reading a stale cached view",
+          "Opening the entry instead of reading list-level metadata",
+          "Confusing similar-looking fields",
+          "Truncated labels in compact views hide full text; need detail/search view",
+          "Scrollable lists may have items off-screen; failing to scroll causes undercount",
+          "Confusing similar items (e.g., events spanning midnight assigned to wrong day)",
+          "Over- or under-counting due to large scroll jumps",
+          "Confusing similar-looking date labels (relative vs absolute)",
+          "Treating completed/struck-through entries as active or vice versa"
+        ],
+        "verification_checklist": [
+          "Answer matches text visible on screen",
+          "Distinguished correct subtype (e.g., task vs note) when relevant",
+          "Answer formatting matches the prompt's expectation",
+          "All matching items inspected via scroll/search",
+          "Scrolled through entire list at least once in both directions",
+          "Distinct entries counted exactly once"
+        ]
+      },
+      {
+        "name": "NAVIGATE_TO",
+        "precondition": "Device home screen, another app, or current app state from which target screen/date is reachable",
+        "abstract_steps": [
+          "Verify target app identity before launching (icon ambiguity is common)",
+          "Return to home if necessary",
+          "Open the all-apps drawer if the target app is not pinned",
+          "Scroll to find target app (alphabetical)",
+          "Launch the target app and wait for splash to settle, verifying its label",
+          "Open primary navigation (drawer/menu) or use bottom navigation / top menu",
+          "Use header pickers, arrow controls, or search to jump to the target container/section/date",
+          "Prefer direct taps over swipes inside dialog pickers",
+          "Select target container or section and confirm navigation (e.g., OK)",
+          "Confirm header/title matches target"
+        ],
+        "failure_modes": [
+          "Tapping wrong icon (top-right vs top-left)",
+          "Opening a similarly named item by accident",
+          "Launching a visually similar but different app",
+          "Acting on splash screen before UI is interactive",
+          "Assuming a feature exists under a menu that only holds unrelated entries",
+          "Swipe gestures inside picker dialogs dismiss them",
+          "Multiple consecutive month navigations are slow vs. using a year/month picker",
+          "Splash screen still loading - need to wait",
+          "Network/sync errors blocking initial entry"
+        ],
+        "verification_checklist": [
+          "Header reflects target name",
+          "Expected list/content for that section is visible",
+          "App title/header matches the intended app",
+          "The active tab/section indicator highlights the target screen",
+          "Expected screen-specific controls are visible",
+          "App's main screen rendered with expected widgets",
+          "Subsequent operations occur in the correct context"
+        ]
+      },
+      {
+        "name": "CONFIGURE_VIEW",
+        "precondition": "On a list/main screen that supports view options (sort/group/filter affordances)",
+        "abstract_steps": [
+          "Open the sort/filter/view configuration affordance (often a dedicated icon, not the overflow menu)",
+          "Tap the dimension to change (grouping / sorting / completed sorting)",
+          "Select the desired sort key or option from the option sheet",
+          "Toggle direction, visibility flags, or boolean preferences (e.g., move-completed-to-bottom) as needed",
+          "Close menu and verify list reflects settings"
+        ],
+        "failure_modes": [
+          "Forgetting to disable reverse-order toggle",
+          "Looking for options in global settings rather than list view",
+          "Menu closes after one selection requiring reopening",
+          "Confusing overflow menu with sort menu",
+          "Selection not registering and needing a retry",
+          "Settings scoped per-list and not global"
+        ],
+        "verification_checklist": [
+          "List ordering matches desired key/direction",
+          "Visibility toggles produce the expected filtered list",
+          "Reopening the menu confirms persisted selections",
+          "Configuration sheet displays the chosen labels",
+          "List visibly re-orders/regroups to reflect selection"
+        ]
+      },
+      {
+        "name": "CONFIGURE_SETTINGS",
+        "precondition": "App opened; settings reachable",
+        "abstract_steps": [
+          "Open the overflow/options menu and enter Settings (gear or equivalent)",
+          "Drill into the appropriate category, scrolling if needed",
+          "Select the target setting and choose the desired value from the dialog",
+          "Toggle/select the new value",
+          "Verify the change persists"
+        ],
+        "failure_modes": [
+          "Looking for the setting under an unrelated category",
+          "Closing the dialog without selecting",
+          "Setting hidden behind a parent option (e.g., theme must be 'Custom' to expose color choices)",
+          "Tap registers on adjacent option due to dense layout"
+        ],
+        "verification_checklist": [
+          "Updated value displayed beneath the setting name",
+          "Setting visually reflects the new state",
+          "Behavior change observed on next relevant action/launch"
+        ]
+      },
+      {
+        "name": "CREATE_CONTAINER",
+        "precondition": "App supports user-defined containers (notebooks/categories)",
+        "abstract_steps": [
+          "Open navigation drawer or relevant management screen",
+          "Invoke 'create new container' action",
+          "Enter container name",
+          "Save"
+        ],
+        "failure_modes": [
+          "Required dependent settings missing (e.g., region/language) blocking creation",
+          "Container created but not auto-selected, causing subsequent items to land in wrong place"
+        ],
+        "verification_checklist": [
+          "New container appears in list",
+          "Subsequent additions show inside it"
+        ]
+      },
+      {
+        "name": "MANAGE_CATEGORY",
+        "precondition": "Settings exposes a 'manage categories/types' area",
+        "abstract_steps": [
+          "Navigate into the category management screen",
+          "Add a new category or edit an existing one",
+          "Set its name and visual attribute (e.g., color via preset or hex)",
+          "Save and verify presence in the list"
+        ],
+        "failure_modes": [
+          "Closing the dialog without selecting a color leaves default",
+          "Saving without filling required name field"
+        ],
+        "verification_checklist": [
+          "Category appears with correct name and color",
+          "Category can be assigned to entries"
+        ]
+      },
+      {
+        "name": "ATTACH_MEDIA",
+        "precondition": "Editor supports media attachment and external camera/gallery is available",
+        "abstract_steps": [
+          "Tap the media/attach control",
+          "Choose source (camera vs gallery)",
+          "Configure capture options if needed",
+          "Confirm and return to editor",
+          "Save entry"
+        ],
+        "failure_modes": [
+          "Permission dialogs interrupt flow",
+          "Accidentally tapping image area dismisses or opens unintended picker",
+          "Source returns no recent items"
+        ],
+        "verification_checklist": [
+          "Media preview visible in editor",
+          "Entry saved with media attached"
+        ]
+      },
+      {
+        "name": "ATTACH_LOCATION",
+        "precondition": "In editor with location field; device supports map services",
+        "abstract_steps": [
+          "Open location picker",
+          "Center map on current position or search",
+          "Grant location permission if requested",
+          "Accept any certificate or trust prompts",
+          "Confirm selection"
+        ],
+        "failure_modes": [
+          "Map fails to load due to untrusted certificate",
+          "Permission denial blocks current-location fix",
+          "Internal errors after selection require retrying"
+        ],
+        "verification_checklist": [
+          "Address text appears in the editor's location row",
+          "Map reopens with same pin if revisited"
+        ]
+      },
+      {
+        "name": "SET_REMINDER",
+        "precondition": "Entry supports an alarm/notification feature",
+        "abstract_steps": [
+          "Open entry options/overflow menu",
+          "Select alarm/reminder option",
+          "Pick date and time",
+          "Confirm/save the alarm",
+          "Grant notification permission if prompted"
+        ],
+        "failure_modes": [
+          "Skipping permission grant means alarms won't fire",
+          "Confusing date confirmation with final save"
+        ],
+        "verification_checklist": [
+          "Alarm indicator visible on entry",
+          "System permission granted"
+        ]
+      },
+      {
+        "name": "SET_DATE_TIME",
+        "precondition": "In an editor with a date/time row",
+        "abstract_steps": [
+          "Open the date/time picker via the date row",
+          "Choose a date via calendar navigation or preset",
+          "Choose a time via preset, analog clock, or keyboard-numeric entry",
+          "Account for 24-hour clock when converting AM/PM",
+          "Confirm sub-dialogs in order (time then combined date+time)"
+        ],
+        "failure_modes": [
+          "Selecting AM time when PM intended",
+          "Picker dialog confirmations skipped, losing selection",
+          "Calendar arrow navigation overshooting target month"
+        ],
+        "verification_checklist": [
+          "Editor row shows the selected absolute date and time",
+          "Reopening the picker shows the same selection highlighted"
+        ]
+      },
+      {
+        "name": "SET_CUSTOM_RECURRENCE",
+        "precondition": "In an editor where simple presets are insufficient",
+        "abstract_steps": [
+          "Open recurrence menu and choose Custom",
+          "Set numeric interval, carefully handling text-field editing",
+          "Choose unit (day/week/month/year)",
+          "Select specific days of week or month if applicable",
+          "Choose end condition (never, on date, after N occurrences)",
+          "Apply via back/confirm control"
+        ],
+        "failure_modes": [
+          "Numeric field appends instead of replacing, producing wrong interval",
+          "Forgetting to select end condition leaves it as Never",
+          "Confusing two identical letter buttons (e.g., two 'T' for Tue/Thu)"
+        ],
+        "verification_checklist": [
+          "Editor summary line accurately reflects interval, days, and end condition"
+        ]
+      },
+      {
+        "name": "SEARCH_OR_FILTER",
+        "precondition": "On a screen that exposes a search/filter affordance",
+        "abstract_steps": [
+          "Open the search/filter dialog",
+          "Enter the query string",
+          "Toggle option flags (case sensitivity, regex, scope, stop-after-first) as required",
+          "Note that some options only appear once a parent option is enabled",
+          "Execute the search and inspect results"
+        ],
+        "failure_modes": [
+          "Treating regex metacharacters as literals (or vice versa) due to wrong flag state",
+          "Submit gestures passing through dialog to background triggering unexpected popups",
+          "Required option hidden behind a parent toggle"
+        ],
+        "verification_checklist": [
+          "Query and option flags reflect the request",
+          "Match count or filtered list confirms expected scope",
+          "Empty-result indicator distinguishes 'no match' from dialog dismissal"
+        ]
+      },
+      {
+        "name": "FIND_AND_REPLACE",
+        "precondition": "Entry is open in an editor that supports find/replace",
+        "abstract_steps": [
+          "Open the search dialog and transition to the replace variant if separate",
+          "Enter the find pattern and replacement string in their respective fields",
+          "Configure regex/multiline flags as required, escaping characters appropriately",
+          "Verify a positive match count before executing",
+          "Execute replace-all and inspect the document"
+        ],
+        "failure_modes": [
+          "Match count remains zero because of regex flag mismatch or empty target",
+          "Dialog closes unexpectedly due to misplaced taps; pattern is typed into the document instead"
+        ],
+        "verification_checklist": [
+          "Replacement is visible in the rendered/raw content",
+          "No occurrences of the original pattern remain (for replace-all)",
+          "Document saved if persistence is required"
+        ]
+      },
+      {
+        "name": "TOGGLE_VIEW_MODE",
+        "precondition": "Entry is open in an editor that has edit/preview modes",
+        "abstract_steps": [
+          "Tap the mode-toggle control",
+          "Confirm the alternate icon appears indicating the new mode"
+        ],
+        "failure_modes": [
+          "Misidentifying the mode toggle among toolbar icons"
+        ],
+        "verification_checklist": [
+          "Rendered content is visible when in preview",
+          "Toggle icon now offers the inverse action"
+        ]
+      },
+      {
+        "name": "EXPORT_OR_PRINT",
+        "precondition": "Print/export action available from menu",
+        "abstract_steps": [
+          "Open the overflow menu and choose Print/Export",
+          "Select destination (e.g., Save as PDF)",
+          "Adjust output options after destination is set",
+          "Trigger save and confirm in file dialog"
+        ],
+        "failure_modes": [
+          "Output options remain disabled until destination is selected",
+          "Multiple rapid taps on save button may re-open creation flows after return"
+        ],
+        "verification_checklist": [
+          "File save dialog closes successfully",
+          "Returned to the originating screen"
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "source": "static_seed_25app",
+    "apps": [
+      "joplin",
+      "markor",
+      "simple_calendar_pro",
+      "tasks_org"
+    ]
+  }
+}

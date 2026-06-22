@@ -1,0 +1,214 @@
+{
+  "category": "Food & Drink",
+  "layer2": {
+    "categories": [
+      {
+        "name": "ADD_ENTRY",
+        "precondition": "On the main list screen of a collection-style app",
+        "abstract_steps": [
+          "Trigger create action (commonly via a floating + button)",
+          "Fill required text fields (title first)",
+          "Dismiss keyboard or scroll to reveal hidden fields if needed",
+          "Optionally set secondary attributes (categories, quantities, durations, media)",
+          "Confirm via Save/Done action"
+        ],
+        "failure_modes": [
+          "Tapping unintended adjacent field due to dense form",
+          "Required attribute relies on a prerequisite that doesn't yet exist (e.g. empty category list)",
+          "Keyboard hides target fields; not scrolling causes blind clicks",
+          "Save button missed because it is in top app bar while keyboard is open"
+        ],
+        "verification_checklist": [
+          "After save, the new item appears in the main list",
+          "Detail view of the new item shows all entered attributes",
+          "A success toast or status message is observed (if applicable)"
+        ]
+      },
+      {
+        "name": "DELETE_ENTRY",
+        "precondition": "Target item exists and is reachable from a list",
+        "abstract_steps": [
+          "Open the item's detail view",
+          "Open the item's overflow/options menu",
+          "Choose Delete",
+          "Confirm in the confirmation dialog"
+        ],
+        "failure_modes": [
+          "Confirmation dialog dismissed without confirming (tap outside)",
+          "Auto-navigation to next item after deletion gives false impression of failure",
+          "Multiple duplicate items: deleting one leaves others; must repeat"
+        ],
+        "verification_checklist": [
+          "Returned to list and target item is no longer present",
+          "If duplicates existed, count is decreased by one per deletion"
+        ]
+      },
+      {
+        "name": "EDIT_ENTRY",
+        "precondition": "Target item exists and supports edit",
+        "abstract_steps": [
+          "Open item detail view",
+          "Open overflow menu and choose Edit",
+          "Focus the field to modify",
+          "Clear existing value (place cursor at end, long-press backspace, or long-press then Select all)",
+          "Type new value",
+          "Save changes"
+        ],
+        "failure_modes": [
+          "Typing without clearing causes appended/duplicated text",
+          "Cursor stuck mid-text so backspace only deletes a portion",
+          "Forgetting to tap Save loses changes",
+          "Editing wrong field due to mis-tap"
+        ],
+        "verification_checklist": [
+          "Detail view reflects the new value",
+          "Persists after navigating away and back",
+          "Success toast or returns to detail without error"
+        ]
+      },
+      {
+        "name": "TOGGLE_FLAG",
+        "precondition": "On item detail view with a toggleable state icon (e.g. favorite, bookmark)",
+        "abstract_steps": [
+          "Locate the toggle icon (often top-right of detail view)",
+          "Tap exactly once",
+          "Observe visual change (outline → filled)"
+        ],
+        "failure_modes": [
+          "Tapping repeatedly toggles state back to original",
+          "Misjudging current state when icon is small / on light background"
+        ],
+        "verification_checklist": [
+          "Icon visual matches desired state (filled/empty)",
+          "Item appears (or disappears) in the corresponding filtered list"
+        ]
+      },
+      {
+        "name": "FILTER_LIST",
+        "precondition": "On a list with a category/filter selector",
+        "abstract_steps": [
+          "Open the filter/category dropdown header",
+          "Select the desired filter option"
+        ],
+        "failure_modes": [
+          "Filter shows empty though an item should match (prior action did not persist)",
+          "Dropdown not opened due to mis-tap"
+        ],
+        "verification_checklist": [
+          "Header now displays chosen filter label",
+          "Visible items correspond to the filter"
+        ]
+      },
+      {
+        "name": "SEARCH_QUERY",
+        "precondition": "On a list with search affordance",
+        "abstract_steps": [
+          "Open search interface",
+          "Type query string",
+          "Optionally pick a result"
+        ],
+        "failure_modes": [
+          "Misspelled query yields zero results",
+          "Search scope differs from expected category"
+        ],
+        "verification_checklist": [
+          "Result list contains expected matches",
+          "Selecting a result navigates to its detail view"
+        ]
+      },
+      {
+        "name": "QUERY_INFO",
+        "precondition": "Target item exists and is reachable",
+        "abstract_steps": [
+          "Navigate to item detail view",
+          "Read requested attribute(s) from the screen",
+          "Return answer in requested format"
+        ],
+        "failure_modes": [
+          "Reading attribute from wrong item due to duplicates",
+          "Unit or format mismatch in the answer"
+        ],
+        "verification_checklist": [
+          "Answer is taken from the correct item",
+          "Format matches the user's requested format"
+        ]
+      },
+      {
+        "name": "COMPARE_ITEMS",
+        "precondition": "Multiple items exist and a common attribute can be compared",
+        "abstract_steps": [
+          "Open first item, read attribute, remember it",
+          "Navigate back to list",
+          "Open second item, read attribute",
+          "Compute comparison and produce final answer"
+        ],
+        "failure_modes": [
+          "Forgetting first value after navigation",
+          "Comparing different units (e.g. minutes vs hours) without conversion"
+        ],
+        "verification_checklist": [
+          "Both attribute values are recorded",
+          "Comparison uses normalized units",
+          "Answer matches requested response format"
+        ]
+      },
+      {
+        "name": "NAVIGATE_TO_SECTION",
+        "precondition": "App has a side drawer or hierarchical menu",
+        "abstract_steps": [
+          "Open drawer/hamburger menu",
+          "Select target section"
+        ],
+        "failure_modes": [
+          "Drawer fails to open on first attempt",
+          "Selection ignored if tapped during animation"
+        ],
+        "verification_checklist": [
+          "Target section title/header is visible"
+        ]
+      },
+      {
+        "name": "CONFIGURE_INLINE_SETTING",
+        "precondition": "A modal/dialog exposes adjustable settings",
+        "abstract_steps": [
+          "Open the configuration dialog",
+          "Select appropriate mode/tab",
+          "Adjust value via +/- controls or numeric input (clear existing value first)",
+          "Confirm with OK/Apply"
+        ],
+        "failure_modes": [
+          "Leaving stray characters when overwriting numeric input",
+          "Confirming on wrong tab"
+        ],
+        "verification_checklist": [
+          "Underlying content reflects the new setting",
+          "Dialog closes without error"
+        ]
+      },
+      {
+        "name": "ATTACH_MEDIA",
+        "precondition": "An entry editor supports media attachment",
+        "abstract_steps": [
+          "Tap media placeholder or attach control",
+          "Choose source (existing library or capture new)",
+          "Complete selection/capture flow",
+          "Return to editor and save"
+        ],
+        "failure_modes": [
+          "Selected source has no content (empty gallery)",
+          "Capture not registered on first tap of shutter"
+        ],
+        "verification_checklist": [
+          "Editor shows the attached media replacing the placeholder",
+          "After save, detail view shows the media"
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "source": "static_seed_25app",
+    "apps": [
+      "broccoli"
+    ]
+  }
+}

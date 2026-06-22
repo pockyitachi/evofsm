@@ -1,0 +1,179 @@
+{
+  "category": "Art & Design",
+  "layer2": {
+    "categories": [
+      {
+        "name": "EXPORT_ARTIFACT_WITH_NAME_AND_FORMAT",
+        "precondition": "Editor open with content ready to export",
+        "abstract_steps": [
+          "Invoke export/save action from primary toolbar",
+          "Select desired output format in export dialog",
+          "Clear default filename (select-all or long-press delete)",
+          "Type target filename",
+          "Confirm dialog to advance to destination picker",
+          "Navigate to target destination",
+          "Confirm final save"
+        ],
+        "failure_modes": [
+          "Typing appends to default name instead of replacing it",
+          "Backspace ineffective when cursor at start of field",
+          "Confirming too early before destination/format are correct"
+        ],
+        "verification_checklist": [
+          "Filename field shows exact requested name",
+          "Format/extension matches request",
+          "Destination path matches request",
+          "Editor returns to main view or success toast appears"
+        ]
+      },
+      {
+        "name": "CREATE_CONTAINER_IN_PICKER",
+        "precondition": "Inside a system file/folder picker at parent location",
+        "abstract_steps": [
+          "Invoke create-new-container action",
+          "Type container name",
+          "Confirm to create and auto-enter container",
+          "Verify breadcrumb shows the new container"
+        ],
+        "failure_modes": [
+          "Creating container at wrong parent path",
+          "Confirming save before entering the new container"
+        ],
+        "verification_checklist": [
+          "Breadcrumb path reflects intended nesting",
+          "Container is the active save location before final confirmation"
+        ]
+      },
+      {
+        "name": "CONFIGURE_VIEW_OR_SORT",
+        "precondition": "Inside a list/grid presenting items with view controls",
+        "abstract_steps": [
+          "Toggle view layout via dedicated icon if needed",
+          "Open overflow menu and choose sort option",
+          "Select desired sort criterion"
+        ],
+        "failure_modes": [
+          "Confusing view-toggle icon with sort/menu"
+        ],
+        "verification_checklist": [
+          "Layout matches requested mode",
+          "Order reflects chosen sort key"
+        ]
+      },
+      {
+        "name": "APPLY_COLOR_BY_HEX",
+        "precondition": "Color picker dialog open",
+        "abstract_steps": [
+          "Focus hex input field",
+          "Select-all existing hex text",
+          "Type the 6-digit hex code",
+          "Confirm to apply"
+        ],
+        "failure_modes": [
+          "Partial clearing leaves residual characters",
+          "Cursor mid-string causes corrupt hex",
+          "Auto-suggest replaces characters during typing"
+        ],
+        "verification_checklist": [
+          "Preview swatch matches expected color",
+          "Hex field shows exact requested code"
+        ]
+      },
+      {
+        "name": "APPLY_TOOL_AND_PARAMETER",
+        "precondition": "Editor with tool palette and parameter slider visible",
+        "abstract_steps": [
+          "Tap desired tool icon to activate it",
+          "Adjust parameter slider by tapping at desired position (avoid swiping across canvas area)",
+          "Apply tool to content area"
+        ],
+        "failure_modes": [
+          "Swiping slider triggers drawing strokes",
+          "Wrong tool remains active after color/format changes"
+        ],
+        "verification_checklist": [
+          "Tool icon is highlighted as active",
+          "Slider thumb sits at intended position",
+          "Effect on content matches expectation"
+        ]
+      },
+      {
+        "name": "SHARE_TO_EXTERNAL_APP",
+        "precondition": "Editor with content; system share entry point available",
+        "abstract_steps": [
+          "Invoke share from primary toolbar",
+          "Pick target app from system share sheet",
+          "Handle any default-app or permission prompts",
+          "Provide recipient/destination in target app",
+          "Confirm send"
+        ],
+        "failure_modes": [
+          "Target app requires being set as default before use",
+          "Picking wrong icon in share sheet",
+          "Network/MMS limitations prevent delivery"
+        ],
+        "verification_checklist": [
+          "Target app shows attached content",
+          "Recipient field correctly populated",
+          "Send action invoked"
+        ]
+      },
+      {
+        "name": "PRINT_OR_EXPORT_PDF",
+        "precondition": "Editor with print entry in overflow menu",
+        "abstract_steps": [
+          "Open overflow menu and choose print",
+          "Select a printer destination (real or virtual PDF)",
+          "Adjust paper size, orientation, color, copies",
+          "Trigger print/save action",
+          "Confirm destination in file picker"
+        ],
+        "failure_modes": [
+          "Print settings disabled until printer selected",
+          "Virtual PDF printer caps copies to 1"
+        ],
+        "verification_checklist": [
+          "All requested print parameters are reflected in preview",
+          "Output file or job is produced"
+        ]
+      },
+      {
+        "name": "QUERY_INFO_FROM_DIALOG",
+        "precondition": "Need to read a static value from a UI element",
+        "abstract_steps": [
+          "Navigate to the relevant dialog/screen",
+          "Read the displayed value(s)",
+          "Return answer without modifying state"
+        ],
+        "failure_modes": [
+          "Modifying state unnecessarily and triggering side effects"
+        ],
+        "verification_checklist": [
+          "Answer captured verbatim from UI"
+        ]
+      },
+      {
+        "name": "LAUNCH_APP_FROM_LAUNCHER",
+        "precondition": "On device home screen",
+        "abstract_steps": [
+          "Open app drawer via swipe-up",
+          "Locate app by icon (label may differ from full product name)",
+          "Tap icon to launch"
+        ],
+        "failure_modes": [
+          "Missing app because actual label differs from product name",
+          "Accidentally activating search bar"
+        ],
+        "verification_checklist": [
+          "App's main screen is shown"
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "source": "static_seed_25app",
+    "apps": [
+      "simple_draw_pro"
+    ]
+  }
+}

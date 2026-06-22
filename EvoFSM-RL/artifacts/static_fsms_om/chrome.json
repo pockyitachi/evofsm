@@ -1,0 +1,1096 @@
+{
+  "version": "0.1.0",
+  "app": "chrome",
+  "layer1": {
+    "app": "chrome",
+    "category": "Communication",
+    "states": [
+      {
+        "id": "home_screen",
+        "description": "Android device home screen",
+        "visual_cues": [
+          "app icons grid",
+          "Google search bar at bottom",
+          "dock with Phone/Messages/Chrome"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "app_drawer",
+        "description": "All installed apps drawer",
+        "visual_cues": [
+          "alphabetical app grid",
+          "search bar at top"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "files_downloads",
+        "description": "Files app Downloads folder (default view)",
+        "visual_cues": [
+          "'Downloads' header",
+          "hamburger menu top-left",
+          "search icon top-right",
+          "filter chips (Images/Audio/Videos/Documents)",
+          "view toggle icon",
+          "file cards"
+        ],
+        "resource_hints": [
+          "task.html"
+        ]
+      },
+      {
+        "id": "files_nav_drawer",
+        "description": "Files app left navigation drawer",
+        "visual_cues": [
+          "Recent/Images/Videos/Audio/Documents/Downloads list",
+          "internal storage entry (sdk_gphone64_...)"
+        ],
+        "resource_hints": [
+          "sdk_gphone64_arm64",
+          "sdk_gphone64_x86_64"
+        ]
+      },
+      {
+        "id": "files_category_view",
+        "description": "Category view (Images/Videos/Audio/Documents/Recent) accessed from nav drawer",
+        "visual_cues": [
+          "category title",
+          "filter chips (Large files/This week)",
+          "view toggle",
+          "may show 'No items' or 'No matches'"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "files_internal_storage",
+        "description": "Root directory of internal storage",
+        "visual_cues": [
+          "breadcrumb 'sdk_gphone64_...'",
+          "grid of folders (Alarms/Android/DCIM/Documents/Download/Movies/Music/Pictures/Ringtones/etc.)"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "files_folder_view",
+        "description": "Generic folder content view inside internal storage",
+        "visual_cues": [
+          "breadcrumb path",
+          "files/folders grid or list",
+          "filter chips"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "files_search",
+        "description": "Files app search interface",
+        "visual_cues": [
+          "search text field with cursor",
+          "keyboard open",
+          "filter chips below",
+          "recent search history (with X to delete)"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "files_search_results",
+        "description": "Search results with possible filter applied",
+        "visual_cues": [
+          "query in search bar",
+          "active filter chips",
+          "'Files in <location>' header",
+          "results or 'No matches'"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "files_selection_mode",
+        "description": "Selection mode after long-press on a file",
+        "visual_cues": [
+          "'1 selected' header",
+          "X to deselect",
+          "share/trash icons",
+          "three-dot overflow menu"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "files_overflow_menu",
+        "description": "Three-dot overflow menu in Files",
+        "visual_cues": [
+          "dropdown with: New window/New folder/Sort by/Select all/Get info/Show hidden files/Open with/Copy to/Move to/Rename"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "files_sort_dialog",
+        "description": "Sort by bottom sheet",
+        "visual_cues": [
+          "options: File name, Modified (newest first), Type, Size"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "files_new_folder_dialog",
+        "description": "Dialog for creating a new folder",
+        "visual_cues": [
+          "'New folder' title",
+          "'Folder name' input",
+          "CANCEL/OK buttons"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "files_rename_dialog",
+        "description": "Rename file dialog",
+        "visual_cues": [
+          "'Rename' title",
+          "filename text field with name highlighted (extension preserved)"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "files_move_picker",
+        "description": "Destination picker after Move to/Copy to",
+        "visual_cues": [
+          "folder navigation",
+          "CANCEL/MOVE buttons at bottom",
+          "add-new-folder icon top-right"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "files_info_screen",
+        "description": "Get info screen for a file",
+        "visual_cues": [
+          "Type/Size/Modified rows",
+          "filename header"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "open_with_dialog",
+        "description": "System Open with chooser",
+        "visual_cues": [
+          "app list (Markor/Chrome/HTML Viewer)",
+          "Just once / Always buttons"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "share_sheet",
+        "description": "Android share sheet for selected file",
+        "visual_cues": [
+          "filename header",
+          "row of apps (Nearby/Bluetooth/Messenger/etc.)"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "delete_confirm_dialog",
+        "description": "Confirm deletion dialog",
+        "visual_cues": [
+          "'Delete \"<file>\"?'",
+          "CANCEL/OK"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "markor_editor",
+        "description": "Markor text editor view of file",
+        "visual_cues": [
+          "raw source code area",
+          "top toolbar (save floppy, search magnifier, eye preview, undo)",
+          "bottom format toolbar (checkbox/clock/etc.)"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "markor_preview",
+        "description": "Markor preview mode",
+        "visual_cues": [
+          "rendered HTML",
+          "pencil icon top-right to return to editor"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "markor_search_dialog",
+        "description": "Markor simple Search documents dialog",
+        "visual_cues": [
+          "Search input",
+          "SEARCH / REPLACE button bottom-left"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "markor_search_replace_dialog",
+        "description": "Markor Search/Replace dialog",
+        "visual_cues": [
+          "Search for field",
+          "Replace with field",
+          "match count",
+          "Replace all button"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "markor_format_dialog",
+        "description": "Markor date/time Format dialog (from clock icon)",
+        "visual_cues": [
+          "'Always use current date & time' checkbox",
+          "format presets (yyyy-MM-dd, Date only, Time only)",
+          "CANCEL/OK"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "chrome_welcome",
+        "description": "Chrome first-run welcome screens",
+        "visual_cues": [
+          "'Welcome to Chrome'",
+          "'Accept & continue'",
+          "'Turn on sync?' with No thanks"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "chrome_viewer",
+        "description": "Chrome browser viewing the loaded HTML file",
+        "visual_cues": [
+          "address bar with content:// URL",
+          "rendered page",
+          "three-dot menu"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "chrome_find_in_page",
+        "description": "Chrome Find in page bar",
+        "visual_cues": [
+          "text input at top with N/N counter"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "html_viewer",
+        "description": "Built-in HTML Viewer",
+        "visual_cues": [
+          "minimal rendered page",
+          "back arrow only"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "gallery_app",
+        "description": "Fallback Gallery app",
+        "visual_cues": [
+          "folder grid (Internal)",
+          "timeline view",
+          "search bar"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "app_paused_dialog",
+        "description": "Digital Wellbeing 'App paused' dialog blocking Files",
+        "visual_cues": [
+          "'App paused' text",
+          "OK button"
+        ],
+        "resource_hints": []
+      }
+    ],
+    "transitions": [
+      {
+        "from_state": "home_screen",
+        "to_state": "app_drawer",
+        "action": "swipe_up_from_bottom",
+        "precondition": "Files not on home",
+        "postcondition": "app drawer visible"
+      },
+      {
+        "from_state": "app_drawer",
+        "to_state": "files_downloads",
+        "action": "click(Files app icon)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "files_downloads",
+        "to_state": "files_nav_drawer",
+        "action": "click(hamburger_menu)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "files_nav_drawer",
+        "to_state": "files_category_view",
+        "action": "click(Images|Videos|Audio|Documents|Recent)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "files_nav_drawer",
+        "to_state": "files_internal_storage",
+        "action": "click(sdk_gphone64_...)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "files_internal_storage",
+        "to_state": "files_folder_view",
+        "action": "click(folder)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "files_downloads",
+        "to_state": "files_search",
+        "action": "click(search_icon)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "files_search",
+        "to_state": "files_search_results",
+        "action": "type(query)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "files_search_results",
+        "to_state": "files_search",
+        "action": "click(clear_X)",
+        "precondition": "",
+        "postcondition": "history visible"
+      },
+      {
+        "from_state": "files_downloads",
+        "to_state": "files_selection_mode",
+        "action": "long_press(file)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "files_selection_mode",
+        "to_state": "files_overflow_menu",
+        "action": "click(three_dots)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "files_overflow_menu",
+        "to_state": "open_with_dialog",
+        "action": "click(Open with)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "files_overflow_menu",
+        "to_state": "files_rename_dialog",
+        "action": "click(Rename)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "files_overflow_menu",
+        "to_state": "files_move_picker",
+        "action": "click(Move to)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "files_overflow_menu",
+        "to_state": "files_info_screen",
+        "action": "click(Get info)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "files_overflow_menu",
+        "to_state": "files_sort_dialog",
+        "action": "click(Sort by)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "files_overflow_menu",
+        "to_state": "files_new_folder_dialog",
+        "action": "click(New folder)",
+        "precondition": "in physical directory (not category view)",
+        "postcondition": ""
+      },
+      {
+        "from_state": "files_downloads",
+        "to_state": "open_with_dialog",
+        "action": "click(file)",
+        "precondition": "no default set",
+        "postcondition": ""
+      },
+      {
+        "from_state": "open_with_dialog",
+        "to_state": "markor_editor",
+        "action": "click(Markor)+Just once|Always",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "open_with_dialog",
+        "to_state": "chrome_welcome",
+        "action": "click(Chrome)+Just once",
+        "precondition": "first-run",
+        "postcondition": ""
+      },
+      {
+        "from_state": "open_with_dialog",
+        "to_state": "chrome_viewer",
+        "action": "click(Chrome)+Just once",
+        "precondition": "post first-run",
+        "postcondition": ""
+      },
+      {
+        "from_state": "open_with_dialog",
+        "to_state": "html_viewer",
+        "action": "click(HTML Viewer)+Just once",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "chrome_welcome",
+        "to_state": "chrome_viewer",
+        "action": "click(Accept & continue) then No thanks",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "chrome_viewer",
+        "to_state": "chrome_find_in_page",
+        "action": "click(three_dots)->Find in page",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "markor_editor",
+        "to_state": "markor_preview",
+        "action": "click(eye_icon)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "markor_preview",
+        "to_state": "markor_editor",
+        "action": "click(pencil_icon)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "markor_editor",
+        "to_state": "markor_search_dialog",
+        "action": "click(search_icon)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "markor_search_dialog",
+        "to_state": "markor_search_replace_dialog",
+        "action": "click(SEARCH / REPLACE)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "markor_editor",
+        "to_state": "markor_format_dialog",
+        "action": "click(clock_icon)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "files_selection_mode",
+        "to_state": "share_sheet",
+        "action": "click(share_icon)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "files_selection_mode",
+        "to_state": "delete_confirm_dialog",
+        "action": "click(trash_icon)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "files_move_picker",
+        "to_state": "files_new_folder_dialog",
+        "action": "click(add_folder_icon)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "files_new_folder_dialog",
+        "to_state": "files_folder_view",
+        "action": "type(name)+confirm",
+        "precondition": "",
+        "postcondition": "folder created and opened"
+      }
+    ],
+    "strategies": [
+      {
+        "name": "OPEN_FILES_APP",
+        "preconditions": "home_screen",
+        "steps": [
+          "swipe up to open app drawer",
+          "click Files app icon",
+          "land on Downloads view by default"
+        ],
+        "success_signal": "'Downloads' header visible",
+        "fallback": "If 'App paused' dialog appears (Digital Wellbeing), dismiss and use Gallery as fallback for media"
+      },
+      {
+        "name": "NAVIGATE_TO_INTERNAL_STORAGE_ROOT",
+        "preconditions": "files_downloads",
+        "steps": [
+          "click hamburger menu (top-left)",
+          "in nav drawer, click 'sdk_gphone64_arm64' or 'sdk_gphone64_x86_64'"
+        ],
+        "success_signal": "breadcrumb shows device storage name; standard root folders (Alarms, Android, DCIM...) visible",
+        "fallback": "If wrong folder opened, press Back and re-tap correct one"
+      },
+      {
+        "name": "NAVIGATE_TO_CATEGORY",
+        "preconditions": "files_downloads",
+        "steps": [
+          "click hamburger menu",
+          "click desired category (Images/Videos/Audio/Documents/Recent)"
+        ],
+        "success_signal": "category title shown at top",
+        "fallback": "Tapping category chip in Downloads only filters that folder; use nav drawer instead"
+      },
+      {
+        "name": "APPLY_FILTERS_AND_COUNT",
+        "preconditions": "in a category or folder view",
+        "steps": [
+          "tap each required filter chip (e.g., Large files, This week, Documents, Audio, Images, Videos)",
+          "verify chips highlighted with checkmark",
+          "read results: count items or observe 'No matches' = 0"
+        ],
+        "success_signal": "active chips checked; result list or empty state shown",
+        "fallback": "If multiple chips give ambiguous count, toggle one at a time"
+      },
+      {
+        "name": "SEARCH_FILE",
+        "preconditions": "files_downloads",
+        "steps": [
+          "click search icon (top-right)",
+          "type query in search field",
+          "optionally tap filter chip to narrow (Documents/Images/Audio/Videos)",
+          "read results"
+        ],
+        "success_signal": "matching file appears or 'No matches in <scope>'",
+        "fallback": "Clear search via X to reveal recent history"
+      },
+      {
+        "name": "DELETE_SEARCH_HISTORY_ENTRY",
+        "preconditions": "files_search",
+        "steps": [
+          "ensure search field empty (tap X if needed)",
+          "locate entry with clock icon",
+          "tap the X next to the entry"
+        ],
+        "success_signal": "entry removed from list",
+        "fallback": "If target entry not present, history may already be clear"
+      },
+      {
+        "name": "CHANGE_VIEW_LAYOUT",
+        "preconditions": "any folder/category view",
+        "steps": [
+          "locate view toggle icon on right of folder header",
+          "tap to switch; icon shown represents the OTHER mode (list icon means current is grid)"
+        ],
+        "success_signal": "items visibly re-laid as grid cards or single-line list",
+        "fallback": "Deselect any selected files first if toggle is inert"
+      },
+      {
+        "name": "SORT_BY_DATE",
+        "preconditions": "any folder/category view",
+        "steps": [
+          "click three-dot menu",
+          "click 'Sort by...'",
+          "select 'Modified (newest first)'"
+        ],
+        "success_signal": "list order reflects modification date",
+        "fallback": ""
+      },
+      {
+        "name": "CREATE_NEW_FOLDER",
+        "preconditions": "in a physical directory (internal storage path), not a category virtual view",
+        "steps": [
+          "tap three-dot menu",
+          "tap 'New folder'",
+          "type folder name",
+          "confirm"
+        ],
+        "success_signal": "new folder appears in current directory",
+        "fallback": "If 'New folder' missing, you are in a category view; switch to internal storage path"
+      },
+      {
+        "name": "RENAME_FILE",
+        "preconditions": "files_downloads with file visible",
+        "steps": [
+          "long-press file to select",
+          "tap three-dot menu",
+          "tap 'Rename'",
+          "type new base name (extension preserved as unhighlighted suffix)",
+          "confirm"
+        ],
+        "success_signal": "file shown with new name",
+        "fallback": ""
+      },
+      {
+        "name": "MOVE_FILE_TO_NEW_FOLDER",
+        "preconditions": "file located",
+        "steps": [
+          "long-press file",
+          "three-dot menu -> Move to...",
+          "navigate via hamburger to destination root (e.g., internal storage)",
+          "optionally tap add-new-folder icon and create destination folder, type name",
+          "open the new folder",
+          "tap MOVE"
+        ],
+        "success_signal": "'Moving 1 item' toast; file appears in destination",
+        "fallback": "Press Back to abort move; restart"
+      },
+      {
+        "name": "DELETE_FILE",
+        "preconditions": "file located",
+        "steps": [
+          "long-press file (don't single-tap, which opens it)",
+          "tap trash icon",
+          "confirm OK in dialog"
+        ],
+        "success_signal": "'Deleting 1 item' toast; file removed",
+        "fallback": "If file opened instead, press Back and long-press"
+      },
+      {
+        "name": "GET_FILE_INFO",
+        "preconditions": "file located",
+        "steps": [
+          "long-press file",
+          "three-dot menu -> Get info"
+        ],
+        "success_signal": "Info screen shows Type/Size/Modified",
+        "fallback": "For quick size/time, read directly from card under filename in Downloads"
+      },
+      {
+        "name": "OPEN_FILE_WITH_APP",
+        "preconditions": "file located",
+        "steps": [
+          "tap file (or long-press -> three-dot -> Open with)",
+          "in 'Open with' choose desired app (Markor for editing, Chrome for rendering, HTML Viewer for simple preview)",
+          "tap 'Just once' or 'Always' to set default"
+        ],
+        "success_signal": "target app loads file",
+        "fallback": "If Chrome first-run: Accept & continue, No thanks to sync; then re-open file"
+      },
+      {
+        "name": "EDIT_AND_SAVE_IN_MARKOR",
+        "preconditions": "file open in markor_editor",
+        "steps": [
+          "tap inside text area to place cursor (or use search to find target)",
+          "insert/delete characters; optional bottom toolbar (checkbox, clock for date/time) ",
+          "tap save (floppy) icon in top toolbar",
+          "save icon becomes greyed out when saved"
+        ],
+        "success_signal": "save icon greyed; reopening shows new content",
+        "fallback": "Use undo arrow to revert mistakes"
+      },
+      {
+        "name": "FIND_AND_REPLACE_IN_MARKOR",
+        "preconditions": "markor_editor",
+        "steps": [
+          "tap search (magnifier) icon",
+          "tap 'SEARCH / REPLACE' at bottom-left",
+          "fill 'Search for' and 'Replace with' fields",
+          "tap 'Replace all'",
+          "tap save"
+        ],
+        "success_signal": "match count displayed; text updated",
+        "fallback": "If simple search dialog appears, click SEARCH/REPLACE to switch modes"
+      },
+      {
+        "name": "PREVIEW_HTML_IN_MARKOR",
+        "preconditions": "markor_editor",
+        "steps": [
+          "tap eye icon",
+          "view rendered output",
+          "tap pencil to return"
+        ],
+        "success_signal": "rendered page shown",
+        "fallback": ""
+      },
+      {
+        "name": "FIND_IN_PAGE_CHROME",
+        "preconditions": "chrome_viewer with file loaded",
+        "steps": [
+          "tap three-dot menu",
+          "tap 'Find in page'",
+          "type query",
+          "read N/N counter"
+        ],
+        "success_signal": "counter shows total matches",
+        "fallback": "If 0/0 and page seems blank, pull-to-refresh to reload"
+      },
+      {
+        "name": "SET_DEFAULT_APP_FOR_FILE",
+        "preconditions": "open_with_dialog visible from a single tap on the file",
+        "steps": [
+          "select desired app row to enable Always button",
+          "tap 'Always'"
+        ],
+        "success_signal": "subsequent taps open in that app without chooser",
+        "fallback": "If 'Always' disabled, must select an app row first; do not use long-press->Open with route"
+      },
+      {
+        "name": "ANSWER_FROM_FILE_CARD",
+        "preconditions": "file listed in Downloads/folder",
+        "steps": [
+          "read size and time displayed under filename on the card"
+        ],
+        "success_signal": "values read directly without opening Info",
+        "fallback": "Use Get info for full date and exact time"
+      }
+    ],
+    "dead_ends": [
+      {
+        "state": "files_category_view",
+        "failed_action": "click(three_dots) expecting 'New folder'",
+        "note": "Category views (Images/Documents/etc.) are virtual filters and do not allow folder creation. Navigate to internal storage path instead."
+      },
+      {
+        "state": "files_downloads",
+        "failed_action": "click(category chip) to navigate to global category",
+        "note": "Tapping a chip in Downloads only filters Downloads (often 'No matches'). Use hamburger -> category."
+      },
+      {
+        "state": "html_viewer",
+        "failed_action": "expect interactive/dynamic HTML to render",
+        "note": "Built-in HTML Viewer may show blank for JS-heavy pages. Use Chrome instead."
+      },
+      {
+        "state": "share_sheet",
+        "failed_action": "share via Bluetooth with no paired devices",
+        "note": "Bluetooth discovery returns no devices in emulator; sharing cannot complete. Move on to next sub-task."
+      },
+      {
+        "state": "app_paused_dialog",
+        "failed_action": "open Files repeatedly",
+        "note": "Digital Wellbeing timer blocks Files; OK dismiss only. Use Gallery as fallback for media queries."
+      },
+      {
+        "state": "open_with_dialog",
+        "failed_action": "tap 'Always' before selecting an app",
+        "note": "Just once/Always buttons are greyed until an app row is selected."
+      },
+      {
+        "state": "files_downloads",
+        "failed_action": "single-tap file expecting to select it",
+        "note": "Single tap opens the file; use long-press to select for share/delete/rename/move."
+      },
+      {
+        "state": "markor_search_dialog",
+        "failed_action": "type query and expect replacement option",
+        "note": "Simple search has no replace; tap 'SEARCH / REPLACE' bottom button to access find+replace."
+      },
+      {
+        "state": "chrome_viewer",
+        "failed_action": "use Find in page on a blank page",
+        "note": "If page hasn't rendered (0/0 matches), pull-to-refresh; otherwise interactive elements may need clicking."
+      },
+      {
+        "state": "files_search_results",
+        "failed_action": "toggle multiple category filters to count items",
+        "note": "Having two category filters active simultaneously may show union, not intersection, causing miscounts; isolate one filter at a time."
+      }
+    ]
+  },
+  "layer2": {
+    "categories": [
+      {
+        "name": "NAVIGATE_TO",
+        "precondition": "App is open at some default landing screen",
+        "abstract_steps": [
+          "Identify if target location is a virtual category or a physical path",
+          "Open the primary navigation menu",
+          "Select the appropriate top-level destination",
+          "Drill down through sub-folders as needed"
+        ],
+        "failure_modes": [
+          "Confusing a category filter applied within the current folder with global navigation to that category",
+          "Opening the wrong adjacent item due to imprecise tap coordinates"
+        ],
+        "verification_checklist": [
+          "Header/breadcrumb reflects the intended destination",
+          "Visible content matches expectations for that location"
+        ]
+      },
+      {
+        "name": "QUERY_INFO",
+        "precondition": "Target item or list is reachable in the app",
+        "abstract_steps": [
+          "Navigate to the relevant scope",
+          "Optionally apply filters or search to narrow",
+          "Read the requested attribute from the list card or an item-detail/info screen",
+          "Return the value in the requested format"
+        ],
+        "failure_modes": [
+          "Reading from a filtered subset that excludes the target",
+          "Confusing modification time with creation time",
+          "Counting items while extra filters are still active"
+        ],
+        "verification_checklist": [
+          "Value taken from the authoritative detail view when precision is needed",
+          "All required filters are active and only those",
+          "Result reported in the requested units/format"
+        ]
+      },
+      {
+        "name": "SEARCH_ENTRY",
+        "precondition": "App provides a search affordance",
+        "abstract_steps": [
+          "Open the search interface",
+          "Type the query string",
+          "Optionally apply category/type filters",
+          "Inspect results or empty state"
+        ],
+        "failure_modes": [
+          "Searching within a narrower scope than intended",
+          "Typing into a non-focused field (accidentally editing content)"
+        ],
+        "verification_checklist": [
+          "Query text shown in the search bar",
+          "Applied filters are highlighted",
+          "Result list (or explicit no-match state) is visible"
+        ]
+      },
+      {
+        "name": "DELETE_HISTORY_ENTRY",
+        "precondition": "Search interface exposes recent queries",
+        "abstract_steps": [
+          "Open search, ensure input is empty so history is shown",
+          "Locate the target history row",
+          "Tap the per-row dismiss control"
+        ],
+        "failure_modes": [
+          "Target entry not present (already cleared or never recorded)",
+          "Confusing executing a new search with viewing history"
+        ],
+        "verification_checklist": [
+          "Target row no longer appears in the history list"
+        ]
+      },
+      {
+        "name": "CHANGE_VIEW_OR_SORT",
+        "precondition": "List/grid view is currently shown",
+        "abstract_steps": [
+          "Locate the layout toggle or overflow menu",
+          "Toggle layout or pick the desired sort criterion",
+          "Confirm the visible change"
+        ],
+        "failure_modes": [
+          "Misreading the toggle icon (it represents the alternate mode, not the current one)",
+          "Selection mode blocking interaction with view controls"
+        ],
+        "verification_checklist": [
+          "Items visibly re-arranged in target layout/order",
+          "Toggle icon now shows the opposite state"
+        ]
+      },
+      {
+        "name": "ADD_ENTRY",
+        "precondition": "Currently inside a writable container (not a virtual/filtered view)",
+        "abstract_steps": [
+          "Open the overflow/create menu",
+          "Choose the create-new option",
+          "Provide the required name/content",
+          "Confirm creation"
+        ],
+        "failure_modes": [
+          "Attempting to create in a virtual/filtered view that disallows creation",
+          "Submitting without entering a name"
+        ],
+        "verification_checklist": [
+          "New entry appears in the destination",
+          "Breadcrumb/location is the intended container"
+        ]
+      },
+      {
+        "name": "EDIT_ENTRY",
+        "precondition": "Target item can be selected and an action menu is reachable",
+        "abstract_steps": [
+          "Long-press or otherwise select the item",
+          "Open the action menu and choose the edit/rename action",
+          "Modify the value while preserving constraints (e.g., extensions)",
+          "Confirm the change"
+        ],
+        "failure_modes": [
+          "Single-tap inadvertently opens the item instead of selecting it",
+          "Overwriting protected portions like the file extension"
+        ],
+        "verification_checklist": [
+          "Updated value appears in the list",
+          "Constraints preserved (extension, type)"
+        ]
+      },
+      {
+        "name": "MOVE_OR_COPY_ENTRY",
+        "precondition": "Item is selectable; destination is accessible",
+        "abstract_steps": [
+          "Select the item and choose move/copy",
+          "Navigate the destination picker to the target container",
+          "Optionally create a new sub-container at the destination",
+          "Confirm the operation"
+        ],
+        "failure_modes": [
+          "Confirming at the wrong directory (placing item in parent rather than new sub-folder)",
+          "Cancelling by pressing back at the picker"
+        ],
+        "verification_checklist": [
+          "Source no longer contains the item (for move) or still contains it (for copy)",
+          "Destination contains the item"
+        ]
+      },
+      {
+        "name": "DELETE_ENTRY",
+        "precondition": "Item is selectable and a delete action exists",
+        "abstract_steps": [
+          "Select the item",
+          "Invoke the delete action",
+          "Confirm in the dialog"
+        ],
+        "failure_modes": [
+          "Single-tap opening the item instead of selecting",
+          "Cancelling the confirmation"
+        ],
+        "verification_checklist": [
+          "Toast/feedback indicating deletion",
+          "Item no longer in list"
+        ]
+      },
+      {
+        "name": "OPEN_WITH_EXTERNAL_APP",
+        "precondition": "System chooser is available for the item type",
+        "abstract_steps": [
+          "Trigger open action on the item",
+          "Select desired handler app in the chooser",
+          "Choose one-time or default association"
+        ],
+        "failure_modes": [
+          "Confirming 'Always/Just once' before selecting an app (controls disabled)",
+          "Chooser not appearing because a default is already set"
+        ],
+        "verification_checklist": [
+          "Target app launches with the item loaded",
+          "If permanent default was requested, subsequent opens skip the chooser"
+        ]
+      },
+      {
+        "name": "EDIT_TEXT_DOCUMENT",
+        "precondition": "Document open in a text editor",
+        "abstract_steps": [
+          "Position cursor via tap or search tool",
+          "Insert, delete, or replace content",
+          "Optionally toggle preview to verify rendering",
+          "Save changes"
+        ],
+        "failure_modes": [
+          "Edits made outside the intended region",
+          "Forgetting to save (save indicator still active)"
+        ],
+        "verification_checklist": [
+          "Save indicator is inactive/greyed",
+          "Reopen shows updated content"
+        ]
+      },
+      {
+        "name": "FIND_AND_REPLACE_IN_DOCUMENT",
+        "precondition": "Editor exposes a find/replace tool",
+        "abstract_steps": [
+          "Open the search tool",
+          "Switch to the find-and-replace mode if a simple search appears first",
+          "Enter search and replacement strings",
+          "Apply replace-all and save"
+        ],
+        "failure_modes": [
+          "Using a search-only dialog and missing the toggle to replace mode",
+          "Replacing partial matches due to case/whole-word options"
+        ],
+        "verification_checklist": [
+          "Match count shown before replace",
+          "Document content reflects all replacements",
+          "File saved"
+        ]
+      },
+      {
+        "name": "FIND_TEXT_IN_RENDERED_PAGE",
+        "precondition": "Page is rendered in a browser-like viewer",
+        "abstract_steps": [
+          "Open the browser menu",
+          "Choose Find in page",
+          "Type the query and read the match counter",
+          "If counter is 0/0, ensure page is fully loaded/interacted with"
+        ],
+        "failure_modes": [
+          "Page not yet rendered when searching",
+          "Dynamic content requiring interaction to appear"
+        ],
+        "verification_checklist": [
+          "Counter reflects expected occurrences",
+          "Highlighted matches visible on page"
+        ]
+      },
+      {
+        "name": "SHARE_ENTRY",
+        "precondition": "Item selectable; share intent supported",
+        "abstract_steps": [
+          "Select the item",
+          "Invoke share action",
+          "Choose a sharing channel",
+          "Complete channel-specific steps"
+        ],
+        "failure_modes": [
+          "Channel requires capability not present (e.g., no paired devices)",
+          "Permissions or system toggles disabled"
+        ],
+        "verification_checklist": [
+          "Send/Completed indication from the share target",
+          "If unable to complete, document the blocker and continue"
+        ]
+      },
+      {
+        "name": "TOGGLE_APP_SETTING",
+        "precondition": "Relevant setting exists in an overflow menu",
+        "abstract_steps": [
+          "Open the overflow menu within the relevant scope",
+          "Tap the setting toggle",
+          "Verify the change takes effect"
+        ],
+        "failure_modes": [
+          "Setting only applies within current scope/view",
+          "Setting requires elevated permission"
+        ],
+        "verification_checklist": [
+          "Menu reflects new state on reopen",
+          "Content view reflects the new behavior"
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "built_at": "2025-02-14T00:00:00Z",
+    "n_episodes": 102,
+    "n_successful": 102,
+    "n_episodes_input": 102,
+    "synthesizer_model": "claude-opus-4-7",
+    "synthesizer_temperature": 0.3
+  }
+}

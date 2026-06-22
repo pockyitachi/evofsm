@@ -1,0 +1,854 @@
+{
+  "version": "0.1.0",
+  "app": "broccoli",
+  "layer1": {
+    "app": "broccoli",
+    "category": "Food & Drink",
+    "states": [
+      {
+        "id": "home_screen",
+        "description": "Android device home screen",
+        "visual_cues": [
+          "default apps like Gmail, Photos, YouTube",
+          "app dock at bottom"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "app_drawer",
+        "description": "Android app drawer showing all installed apps",
+        "visual_cues": [
+          "grid of app icons",
+          "alphabetically sorted"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "recipe_list",
+        "description": "Main 'All recipes' list screen",
+        "visual_cues": [
+          "list of recipe cards with title and short description",
+          "green header bar with category filter dropdown",
+          "search icon (top-right)",
+          "hamburger menu (top-left)",
+          "floating + button (bottom-right)"
+        ],
+        "resource_hints": [
+          "All recipes",
+          "Favorites",
+          "Seasonal recipes",
+          "Recipes without category"
+        ]
+      },
+      {
+        "id": "category_filter_dropdown",
+        "description": "Dropdown menu listing recipe categories to filter list",
+        "visual_cues": [
+          "dropdown menu with items: All recipes, Seasonal recipes, Recipes without category, Favorites"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "search_screen",
+        "description": "Search interface for recipes",
+        "visual_cues": [
+          "search bar at top with 'Search in ALL RECIPES' hint",
+          "filtered recipe results"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "recipe_details",
+        "description": "Single recipe details page",
+        "visual_cues": [
+          "recipe title in top bar",
+          "person icon w/ servings",
+          "clock icon w/ prep time",
+          "Ingredients section",
+          "Directions section",
+          "heart icon (favorite) top-right",
+          "three-dot overflow menu top-right",
+          "floating fork-and-knife action button bottom-right",
+          "back arrow top-left"
+        ],
+        "resource_hints": [
+          "servings",
+          "mins",
+          "hrs",
+          "Ingredients",
+          "Directions"
+        ]
+      },
+      {
+        "id": "recipe_overflow_menu",
+        "description": "Dropdown menu on recipe details page",
+        "visual_cues": [
+          "Share, Share as file, Edit, Delete options"
+        ],
+        "resource_hints": [
+          "Share",
+          "Edit",
+          "Delete"
+        ]
+      },
+      {
+        "id": "delete_confirmation_dialog",
+        "description": "Confirmation dialog for recipe deletion",
+        "visual_cues": [
+          "'Delete this recipe?' prompt",
+          "CANCEL and DELETE buttons"
+        ],
+        "resource_hints": [
+          "Delete this recipe?",
+          "CANCEL",
+          "DELETE"
+        ]
+      },
+      {
+        "id": "new_recipe_editor",
+        "description": "Create/Edit recipe form",
+        "visual_cues": [
+          "'New Recipe' title",
+          "Title, Categories, Description, Source, Servings, Time, Ingredients, Directions fields",
+          "image placeholder at top with camera icon",
+          "SAVE button top-right"
+        ],
+        "resource_hints": [
+          "Title",
+          "Categories",
+          "Description",
+          "Source",
+          "Servings",
+          "Time",
+          "Ingredients",
+          "Directions",
+          "SAVE"
+        ]
+      },
+      {
+        "id": "categories_dialog",
+        "description": "Dialog shown when tapping Categories on a new recipe (may show 'No categories have been created yet')",
+        "visual_cues": [
+          "'No categories have been created yet.' message",
+          "OK button"
+        ],
+        "resource_hints": [
+          "No categories have been created yet"
+        ]
+      },
+      {
+        "id": "change_photo_dialog",
+        "description": "Dialog to choose how to provide a recipe cover photo",
+        "visual_cues": [
+          "'Pick photo' option",
+          "'Take photo' option"
+        ],
+        "resource_hints": [
+          "Pick photo",
+          "Take photo"
+        ]
+      },
+      {
+        "id": "photo_picker",
+        "description": "System photo picker / Gallery / Photos selection screen",
+        "visual_cues": [
+          "'Recent images' section",
+          "browse files in other apps list"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "in_app_camera",
+        "description": "Camera viewfinder for taking a photo",
+        "visual_cues": [
+          "live camera preview",
+          "shutter button at bottom center"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "cooking_view",
+        "description": "Full-screen immersive cooking guide for a recipe",
+        "visual_cues": [
+          "dark theme",
+          "Ingredients/step pagination dots at bottom",
+          "close (x) top-left",
+          "sliders/settings icon top-right",
+          "swipe between Ingredients and step slides"
+        ],
+        "resource_hints": [
+          "Ingredients",
+          "various amounts"
+        ]
+      },
+      {
+        "id": "adjust_ingredients_dialog",
+        "description": "Dialog to scale recipe ingredients",
+        "visual_cues": [
+          "SIMPLE and PRO tabs",
+          "Servings field with +/- (SIMPLE)",
+          "Scaling factor input (PRO)",
+          "OK button"
+        ],
+        "resource_hints": [
+          "SIMPLE",
+          "PRO",
+          "Servings",
+          "Scaling factor",
+          "OK"
+        ]
+      },
+      {
+        "id": "navigation_drawer",
+        "description": "Side navigation drawer",
+        "visual_cues": [
+          "Recipes, Categories, Seasonal calendar, Settings options"
+        ],
+        "resource_hints": [
+          "Recipes",
+          "Categories",
+          "Seasonal calendar",
+          "Settings"
+        ]
+      },
+      {
+        "id": "categories_screen",
+        "description": "Screen listing custom categories with FAB to add",
+        "visual_cues": [
+          "'Create custom categories to manage your recipes.' empty hint",
+          "floating + button bottom-right"
+        ],
+        "resource_hints": [
+          "Categories"
+        ]
+      },
+      {
+        "id": "add_category_dialog",
+        "description": "Dialog to enter a new category name",
+        "visual_cues": [
+          "'Add category' title",
+          "Name text field",
+          "CANCEL and SAVE buttons"
+        ],
+        "resource_hints": [
+          "Add category",
+          "Name",
+          "SAVE"
+        ]
+      },
+      {
+        "id": "full_screen_view_overlay",
+        "description": "First-run informational overlay shown when entering cooking view",
+        "visual_cues": [
+          "'Viewing full screen' message",
+          "'Got it' button"
+        ],
+        "resource_hints": [
+          "Viewing full screen",
+          "Got it"
+        ]
+      }
+    ],
+    "transitions": [
+      {
+        "from_state": "home_screen",
+        "to_state": "app_drawer",
+        "action": "swipe_up_from_bottom",
+        "precondition": "Broccoli icon not on home",
+        "postcondition": "App drawer visible"
+      },
+      {
+        "from_state": "home_screen",
+        "to_state": "recipe_list",
+        "action": "click(broccoli_icon_on_dock)",
+        "precondition": "Broccoli icon present in dock",
+        "postcondition": "App launched"
+      },
+      {
+        "from_state": "app_drawer",
+        "to_state": "recipe_list",
+        "action": "click(broccoli_app_icon)",
+        "precondition": "",
+        "postcondition": "App launched"
+      },
+      {
+        "from_state": "recipe_list",
+        "to_state": "recipe_details",
+        "action": "click(recipe_card)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "recipe_list",
+        "to_state": "category_filter_dropdown",
+        "action": "click(category_header_dropdown)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "category_filter_dropdown",
+        "to_state": "recipe_list",
+        "action": "click(category_option)",
+        "precondition": "",
+        "postcondition": "List filtered"
+      },
+      {
+        "from_state": "recipe_list",
+        "to_state": "search_screen",
+        "action": "click(search_icon)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "search_screen",
+        "to_state": "recipe_details",
+        "action": "type_query_then_click(result)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "recipe_list",
+        "to_state": "new_recipe_editor",
+        "action": "click(fab_plus)",
+        "precondition": "",
+        "postcondition": "Empty new recipe form"
+      },
+      {
+        "from_state": "recipe_list",
+        "to_state": "navigation_drawer",
+        "action": "click(hamburger_menu)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "navigation_drawer",
+        "to_state": "categories_screen",
+        "action": "click(Categories)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "categories_screen",
+        "to_state": "add_category_dialog",
+        "action": "click(fab_plus)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "add_category_dialog",
+        "to_state": "categories_screen",
+        "action": "click(SAVE)",
+        "precondition": "Name entered",
+        "postcondition": "Category created"
+      },
+      {
+        "from_state": "recipe_details",
+        "to_state": "recipe_list",
+        "action": "click(back_arrow)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "recipe_details",
+        "to_state": "recipe_overflow_menu",
+        "action": "click(three_dot_menu)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "recipe_overflow_menu",
+        "to_state": "new_recipe_editor",
+        "action": "click(Edit)",
+        "precondition": "",
+        "postcondition": "Fields pre-populated with existing recipe data"
+      },
+      {
+        "from_state": "recipe_overflow_menu",
+        "to_state": "delete_confirmation_dialog",
+        "action": "click(Delete)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "delete_confirmation_dialog",
+        "to_state": "recipe_list",
+        "action": "click(DELETE)",
+        "precondition": "",
+        "postcondition": "Recipe removed"
+      },
+      {
+        "from_state": "delete_confirmation_dialog",
+        "to_state": "recipe_details",
+        "action": "click(CANCEL)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "recipe_details",
+        "to_state": "recipe_details",
+        "action": "click(heart_icon)",
+        "precondition": "",
+        "postcondition": "Favorite toggled"
+      },
+      {
+        "from_state": "recipe_details",
+        "to_state": "cooking_view",
+        "action": "click(fab_fork_knife)",
+        "precondition": "",
+        "postcondition": "May show full_screen_view_overlay first time"
+      },
+      {
+        "from_state": "full_screen_view_overlay",
+        "to_state": "cooking_view",
+        "action": "click(Got it)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "cooking_view",
+        "to_state": "adjust_ingredients_dialog",
+        "action": "click(sliders_icon)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "adjust_ingredients_dialog",
+        "to_state": "cooking_view",
+        "action": "click(OK)",
+        "precondition": "Value set",
+        "postcondition": "Ingredients scaled"
+      },
+      {
+        "from_state": "cooking_view",
+        "to_state": "cooking_view",
+        "action": "swipe_left_or_right",
+        "precondition": "",
+        "postcondition": "Navigates between Ingredients and step slides"
+      },
+      {
+        "from_state": "new_recipe_editor",
+        "to_state": "recipe_details",
+        "action": "click(SAVE)",
+        "precondition": "Required fields filled",
+        "postcondition": "Recipe saved"
+      },
+      {
+        "from_state": "new_recipe_editor",
+        "to_state": "categories_dialog",
+        "action": "click(Categories_field)",
+        "precondition": "No categories created yet",
+        "postcondition": ""
+      },
+      {
+        "from_state": "categories_dialog",
+        "to_state": "new_recipe_editor",
+        "action": "click(OK)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "new_recipe_editor",
+        "to_state": "change_photo_dialog",
+        "action": "click(image_placeholder_or_camera_icon)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "change_photo_dialog",
+        "to_state": "photo_picker",
+        "action": "click(Pick photo)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "change_photo_dialog",
+        "to_state": "in_app_camera",
+        "action": "click(Take photo)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "in_app_camera",
+        "to_state": "new_recipe_editor",
+        "action": "click(shutter_button)",
+        "precondition": "",
+        "postcondition": "Captured photo set as cover"
+      },
+      {
+        "from_state": "photo_picker",
+        "to_state": "new_recipe_editor",
+        "action": "click(image) or back",
+        "precondition": "",
+        "postcondition": ""
+      }
+    ],
+    "strategies": [
+      {
+        "name": "OPEN_APP",
+        "preconditions": "On Android home_screen",
+        "steps": [
+          "If Broccoli icon visible on home/dock, click it",
+          "Else swipe up to open app_drawer",
+          "Click Broccoli app icon"
+        ],
+        "success_signal": "Recipe list ('All recipes') is shown",
+        "fallback": "If wrong app opens, press Home and retry"
+      },
+      {
+        "name": "CREATE_RECIPE",
+        "preconditions": "On recipe_list",
+        "steps": [
+          "Click floating + (FAB) bottom-right to open new_recipe_editor",
+          "Click Title field and type recipe name",
+          "Press Back to dismiss keyboard if subsequent fields hidden",
+          "Optionally fill Categories, Description, Source, Servings, Time, Ingredients, Directions",
+          "For multi-line ingredients, press Enter between items",
+          "Click SAVE in top-right"
+        ],
+        "success_signal": "Recipe details page shown with entered title; toast 'The recipe has been saved'",
+        "fallback": "If Categories shows 'No categories have been created yet.', dismiss with OK and save without category, or create category first via navigation_drawer > Categories > FAB"
+      },
+      {
+        "name": "DELETE_RECIPE",
+        "preconditions": "On recipe_list with target recipe visible",
+        "steps": [
+          "Click recipe card to open recipe_details",
+          "Click three-dot overflow menu top-right",
+          "Click Delete",
+          "Click DELETE in confirmation dialog"
+        ],
+        "success_signal": "Returned to recipe_list and recipe absent (or 'No recipes found')",
+        "fallback": "If app auto-navigates to next recipe, press Back and verify list; for duplicates, repeat process"
+      },
+      {
+        "name": "EDIT_RECIPE_FIELD",
+        "preconditions": "On recipe_details for target recipe",
+        "steps": [
+          "Click three-dot menu > Edit to open new_recipe_editor pre-filled",
+          "Tap target field (e.g. Time, Servings, Title, Ingredients, Description)",
+          "To replace text: long-press to bring up selection menu, choose Select all, then type new value (or place cursor at end and long-press backspace)",
+          "Click SAVE top-right"
+        ],
+        "success_signal": "Recipe details page shows updated value; toast 'The recipe has been saved'",
+        "fallback": "If cursor is mid-word, tap end of text then long-press backspace; ensure entire old value is cleared before typing"
+      },
+      {
+        "name": "FAVORITE_RECIPE",
+        "preconditions": "On recipe_details",
+        "steps": [
+          "Click heart icon top-right (becomes solid white when favorited)"
+        ],
+        "success_signal": "Heart icon is filled solid",
+        "fallback": "If multiple taps occur it toggles off; verify by returning to list, opening filter dropdown and selecting Favorites"
+      },
+      {
+        "name": "FILTER_BY_CATEGORY",
+        "preconditions": "On recipe_list",
+        "steps": [
+          "Click 'All recipes' header dropdown",
+          "Select desired category (All recipes / Seasonal recipes / Recipes without category / Favorites)"
+        ],
+        "success_signal": "Header text shows chosen filter and list updates accordingly",
+        "fallback": "If list empty though item should be present, re-do favoriting/categorization"
+      },
+      {
+        "name": "SEARCH_RECIPE",
+        "preconditions": "On recipe_list",
+        "steps": [
+          "Click search (magnifying glass) icon top-right",
+          "Type query into 'Search in ALL RECIPES' field",
+          "Click desired matching result"
+        ],
+        "success_signal": "Filtered results visible matching query",
+        "fallback": "Scroll list manually if search returns no results"
+      },
+      {
+        "name": "VIEW_RECIPE_INFO",
+        "preconditions": "On recipe_list",
+        "steps": [
+          "Click recipe card",
+          "Read servings (next to person icon), time (next to clock icon), Ingredients, Directions"
+        ],
+        "success_signal": "Required info read off details page",
+        "fallback": "Use Back to return to list to view other recipes"
+      },
+      {
+        "name": "ENTER_COOKING_VIEW_AND_SCALE",
+        "preconditions": "On recipe_details",
+        "steps": [
+          "Click floating fork-and-knife FAB bottom-right",
+          "Dismiss 'Viewing full screen' overlay with 'Got it' if present",
+          "Click sliders/settings icon top-right",
+          "Choose SIMPLE tab and use +/- on Servings, or PRO tab and type Scaling factor",
+          "Click OK"
+        ],
+        "success_signal": "Cooking view shows updated ingredient amounts",
+        "fallback": "If PRO input shows leftover digits, tap end of text and use backspace to clear before typing"
+      },
+      {
+        "name": "CREATE_CATEGORY",
+        "preconditions": "On recipe_list",
+        "steps": [
+          "Click hamburger menu top-left",
+          "Click Categories",
+          "Click floating + FAB",
+          "Tap Name field, type category name",
+          "Click SAVE"
+        ],
+        "success_signal": "New category appears in categories list",
+        "fallback": "If drawer fails to open or selection ignored, re-tap hamburger menu and retry"
+      },
+      {
+        "name": "ADD_RECIPE_PHOTO",
+        "preconditions": "In new_recipe_editor",
+        "steps": [
+          "Tap image placeholder / camera icon",
+          "In Change photo dialog choose 'Take photo' (or 'Pick photo')",
+          "Tap shutter button to capture (or select an image)"
+        ],
+        "success_signal": "Photo replaces default placeholder at top of editor",
+        "fallback": "If gallery/photos appear empty, back out and use 'Take photo'"
+      }
+    ],
+    "dead_ends": [
+      {
+        "state": "categories_dialog",
+        "failed_action": "Trying to select a non-existent category from new_recipe_editor",
+        "note": "App shows 'No categories have been created yet.'; loop of dismissing OK does not create one. Must navigate via drawer > Categories > FAB to create the category first"
+      },
+      {
+        "state": "new_recipe_editor",
+        "failed_action": "Repeated backspace long-press on Time/Servings/Ingredients field with cursor in middle of text",
+        "note": "Only deletes characters left of cursor, leaving residual text. Place cursor at end first or use long-press + Select all"
+      },
+      {
+        "state": "recipe_details",
+        "failed_action": "Tapping heart icon multiple times",
+        "note": "Each tap toggles favorite; even number of taps leaves recipe unfavorited. Verify by checking Favorites filter"
+      },
+      {
+        "state": "photo_picker",
+        "failed_action": "Pick photo when gallery is empty",
+        "note": "Recent images may show 'No items'. Use 'Take photo' with in-app camera or browse other providers"
+      },
+      {
+        "state": "new_recipe_editor",
+        "failed_action": "Typing new value without clearing/selecting existing text first",
+        "note": "Causes appended text (e.g. 'Beef Stir FryBeef and Vegetable Stir Fry'). Always Select all or fully clear before typing"
+      }
+    ]
+  },
+  "layer2": {
+    "categories": [
+      {
+        "name": "ADD_ENTRY",
+        "precondition": "On the main list screen of a collection-style app",
+        "abstract_steps": [
+          "Trigger create action (commonly via a floating + button)",
+          "Fill required text fields (title first)",
+          "Dismiss keyboard or scroll to reveal hidden fields if needed",
+          "Optionally set secondary attributes (categories, quantities, durations, media)",
+          "Confirm via Save/Done action"
+        ],
+        "failure_modes": [
+          "Tapping unintended adjacent field due to dense form",
+          "Required attribute relies on a prerequisite that doesn't yet exist (e.g. empty category list)",
+          "Keyboard hides target fields; not scrolling causes blind clicks",
+          "Save button missed because it is in top app bar while keyboard is open"
+        ],
+        "verification_checklist": [
+          "After save, the new item appears in the main list",
+          "Detail view of the new item shows all entered attributes",
+          "A success toast or status message is observed (if applicable)"
+        ]
+      },
+      {
+        "name": "DELETE_ENTRY",
+        "precondition": "Target item exists and is reachable from a list",
+        "abstract_steps": [
+          "Open the item's detail view",
+          "Open the item's overflow/options menu",
+          "Choose Delete",
+          "Confirm in the confirmation dialog"
+        ],
+        "failure_modes": [
+          "Confirmation dialog dismissed without confirming (tap outside)",
+          "Auto-navigation to next item after deletion gives false impression of failure",
+          "Multiple duplicate items: deleting one leaves others; must repeat"
+        ],
+        "verification_checklist": [
+          "Returned to list and target item is no longer present",
+          "If duplicates existed, count is decreased by one per deletion"
+        ]
+      },
+      {
+        "name": "EDIT_ENTRY",
+        "precondition": "Target item exists and supports edit",
+        "abstract_steps": [
+          "Open item detail view",
+          "Open overflow menu and choose Edit",
+          "Focus the field to modify",
+          "Clear existing value (place cursor at end, long-press backspace, or long-press then Select all)",
+          "Type new value",
+          "Save changes"
+        ],
+        "failure_modes": [
+          "Typing without clearing causes appended/duplicated text",
+          "Cursor stuck mid-text so backspace only deletes a portion",
+          "Forgetting to tap Save loses changes",
+          "Editing wrong field due to mis-tap"
+        ],
+        "verification_checklist": [
+          "Detail view reflects the new value",
+          "Persists after navigating away and back",
+          "Success toast or returns to detail without error"
+        ]
+      },
+      {
+        "name": "TOGGLE_FLAG",
+        "precondition": "On item detail view with a toggleable state icon (e.g. favorite, bookmark)",
+        "abstract_steps": [
+          "Locate the toggle icon (often top-right of detail view)",
+          "Tap exactly once",
+          "Observe visual change (outline → filled)"
+        ],
+        "failure_modes": [
+          "Tapping repeatedly toggles state back to original",
+          "Misjudging current state when icon is small / on light background"
+        ],
+        "verification_checklist": [
+          "Icon visual matches desired state (filled/empty)",
+          "Item appears (or disappears) in the corresponding filtered list"
+        ]
+      },
+      {
+        "name": "FILTER_LIST",
+        "precondition": "On a list with a category/filter selector",
+        "abstract_steps": [
+          "Open the filter/category dropdown header",
+          "Select the desired filter option"
+        ],
+        "failure_modes": [
+          "Filter shows empty though an item should match (prior action did not persist)",
+          "Dropdown not opened due to mis-tap"
+        ],
+        "verification_checklist": [
+          "Header now displays chosen filter label",
+          "Visible items correspond to the filter"
+        ]
+      },
+      {
+        "name": "SEARCH_QUERY",
+        "precondition": "On a list with search affordance",
+        "abstract_steps": [
+          "Open search interface",
+          "Type query string",
+          "Optionally pick a result"
+        ],
+        "failure_modes": [
+          "Misspelled query yields zero results",
+          "Search scope differs from expected category"
+        ],
+        "verification_checklist": [
+          "Result list contains expected matches",
+          "Selecting a result navigates to its detail view"
+        ]
+      },
+      {
+        "name": "QUERY_INFO",
+        "precondition": "Target item exists and is reachable",
+        "abstract_steps": [
+          "Navigate to item detail view",
+          "Read requested attribute(s) from the screen",
+          "Return answer in requested format"
+        ],
+        "failure_modes": [
+          "Reading attribute from wrong item due to duplicates",
+          "Unit or format mismatch in the answer"
+        ],
+        "verification_checklist": [
+          "Answer is taken from the correct item",
+          "Format matches the user's requested format"
+        ]
+      },
+      {
+        "name": "COMPARE_ITEMS",
+        "precondition": "Multiple items exist and a common attribute can be compared",
+        "abstract_steps": [
+          "Open first item, read attribute, remember it",
+          "Navigate back to list",
+          "Open second item, read attribute",
+          "Compute comparison and produce final answer"
+        ],
+        "failure_modes": [
+          "Forgetting first value after navigation",
+          "Comparing different units (e.g. minutes vs hours) without conversion"
+        ],
+        "verification_checklist": [
+          "Both attribute values are recorded",
+          "Comparison uses normalized units",
+          "Answer matches requested response format"
+        ]
+      },
+      {
+        "name": "NAVIGATE_TO_SECTION",
+        "precondition": "App has a side drawer or hierarchical menu",
+        "abstract_steps": [
+          "Open drawer/hamburger menu",
+          "Select target section"
+        ],
+        "failure_modes": [
+          "Drawer fails to open on first attempt",
+          "Selection ignored if tapped during animation"
+        ],
+        "verification_checklist": [
+          "Target section title/header is visible"
+        ]
+      },
+      {
+        "name": "CONFIGURE_INLINE_SETTING",
+        "precondition": "A modal/dialog exposes adjustable settings",
+        "abstract_steps": [
+          "Open the configuration dialog",
+          "Select appropriate mode/tab",
+          "Adjust value via +/- controls or numeric input (clear existing value first)",
+          "Confirm with OK/Apply"
+        ],
+        "failure_modes": [
+          "Leaving stray characters when overwriting numeric input",
+          "Confirming on wrong tab"
+        ],
+        "verification_checklist": [
+          "Underlying content reflects the new setting",
+          "Dialog closes without error"
+        ]
+      },
+      {
+        "name": "ATTACH_MEDIA",
+        "precondition": "An entry editor supports media attachment",
+        "abstract_steps": [
+          "Tap media placeholder or attach control",
+          "Choose source (existing library or capture new)",
+          "Complete selection/capture flow",
+          "Return to editor and save"
+        ],
+        "failure_modes": [
+          "Selected source has no content (empty gallery)",
+          "Capture not registered on first tap of shutter"
+        ],
+        "verification_checklist": [
+          "Editor shows the attached media replacing the placeholder",
+          "After save, detail view shows the media"
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "built_at": "2025-01-26T00:00:00Z",
+    "n_episodes": 77,
+    "n_successful": 77,
+    "n_episodes_input": 77,
+    "synthesizer_model": "claude-opus-4-7",
+    "synthesizer_temperature": 0.3
+  }
+}

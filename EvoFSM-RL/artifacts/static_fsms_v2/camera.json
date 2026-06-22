@@ -1,0 +1,773 @@
+{
+  "version": "0.1.0",
+  "app": "camera",
+  "layer1": {
+    "app": "camera",
+    "category": "Photography",
+    "states": [
+      {
+        "id": "home_screen",
+        "description": "Android device home screen",
+        "visual_cues": [
+          "app icons in dock",
+          "Google search widget",
+          "wallpaper"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "app_drawer",
+        "description": "All installed apps grid",
+        "visual_cues": [
+          "grid of app icons",
+          "alphabetical list",
+          "All apps label"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "viewfinder_photo",
+        "description": "Camera app main viewfinder in photo mode",
+        "visual_cues": [
+          "live camera preview",
+          "MODE LIST button top-left",
+          "FILMSTRIP button top",
+          "Z- and Z+ zoom buttons top",
+          "red shutter button bottom-center with camera icon",
+          "three-dot menu bottom-right",
+          "thumbnail of last capture"
+        ],
+        "resource_hints": [
+          "MODE LIST",
+          "FILMSTRIP",
+          "Z-",
+          "Z+"
+        ]
+      },
+      {
+        "id": "viewfinder_video",
+        "description": "Camera app main viewfinder in video mode",
+        "visual_cues": [
+          "live camera preview",
+          "red record button bottom-center with video icon",
+          "MODE LIST/FILMSTRIP buttons top"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "viewfinder_recording",
+        "description": "Active video recording state",
+        "visual_cues": [
+          "square stop button bottom-center",
+          "recording timer top-left",
+          "red REC indicator"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "options_overlay",
+        "description": "Quick options strip above shutter (timer/grid/switch-camera)",
+        "visual_cues": [
+          "timer icon",
+          "grid icon (with slash if off)",
+          "camera-switch icon"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "mode_list",
+        "description": "Mode selection sidebar showing Camera/Video options",
+        "visual_cues": [
+          "Camera icon (blue)",
+          "Video icon (red)",
+          "left-side panel"
+        ],
+        "resource_hints": [
+          "Camera",
+          "Video"
+        ]
+      },
+      {
+        "id": "settings_main",
+        "description": "Camera Settings page",
+        "visual_cues": [
+          "Resolution & quality",
+          "Save location",
+          "Advanced",
+          "list of toggles/options"
+        ],
+        "resource_hints": [
+          "Resolution & quality",
+          "Save location",
+          "Advanced"
+        ]
+      },
+      {
+        "id": "resolution_quality",
+        "description": "Resolution & quality submenu",
+        "visual_cues": [
+          "Back camera photo",
+          "Front camera photo",
+          "Back camera video",
+          "Front camera video",
+          "megapixel labels"
+        ],
+        "resource_hints": [
+          "Back camera photo",
+          "Front camera photo",
+          "Back camera video",
+          "Front camera video"
+        ]
+      },
+      {
+        "id": "resolution_dialog",
+        "description": "Radio button dialog for selecting a resolution",
+        "visual_cues": [
+          "radio button list",
+          "megapixel options",
+          "CANCEL button"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "filmstrip_viewer",
+        "description": "Gallery view of last captured photo/video within camera",
+        "visual_cues": [
+          "full-screen photo/video",
+          "back arrow top-left",
+          "share icon",
+          "edit (pencil) icon",
+          "trash can icon bottom-right",
+          "three-dot menu top-right"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "filmstrip_overflow_menu",
+        "description": "Overflow menu in filmstrip viewer",
+        "visual_cues": [
+          "Details option visible"
+        ],
+        "resource_hints": [
+          "Details"
+        ]
+      },
+      {
+        "id": "details_dialog",
+        "description": "Photo/Video metadata dialog",
+        "visual_cues": [
+          "Title",
+          "Time",
+          "Width",
+          "Height",
+          "File size",
+          "Path",
+          "Maker",
+          "Model"
+        ],
+        "resource_hints": [
+          "Title",
+          "Width",
+          "Height",
+          "File size",
+          "Path",
+          "Duration"
+        ]
+      },
+      {
+        "id": "edit_with_chooser",
+        "description": "App chooser for editing photo",
+        "visual_cues": [
+          "Edit with bottom sheet",
+          "Draw",
+          "Gallery",
+          "Markup",
+          "Photos",
+          "Just once / Always buttons"
+        ],
+        "resource_hints": [
+          "Draw",
+          "Gallery",
+          "Markup",
+          "Photos"
+        ]
+      },
+      {
+        "id": "google_lens",
+        "description": "Google Lens (wrongly opened from search bar camera icon)",
+        "visual_cues": [
+          "Google Lens title",
+          "X close button top-left",
+          "Search with any image"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "splash_loading",
+        "description": "Camera app splash/loading screen",
+        "visual_cues": [
+          "dark background with camera icon"
+        ],
+        "resource_hints": []
+      }
+    ],
+    "transitions": [
+      {
+        "from_state": "home_screen",
+        "to_state": "app_drawer",
+        "action": "swipe_up_from_bottom",
+        "precondition": "Camera not on home screen",
+        "postcondition": "App drawer visible"
+      },
+      {
+        "from_state": "app_drawer",
+        "to_state": "splash_loading",
+        "action": "click(Camera_app_icon)",
+        "precondition": "",
+        "postcondition": "Camera launching"
+      },
+      {
+        "from_state": "splash_loading",
+        "to_state": "viewfinder_photo",
+        "action": "wait",
+        "precondition": "",
+        "postcondition": "Viewfinder ready"
+      },
+      {
+        "from_state": "home_screen",
+        "to_state": "google_lens",
+        "action": "click(camera_icon_in_search_widget)",
+        "precondition": "",
+        "postcondition": "Wrong app opened"
+      },
+      {
+        "from_state": "google_lens",
+        "to_state": "home_screen",
+        "action": "click(X_close) or press(Home)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "viewfinder_photo",
+        "to_state": "mode_list",
+        "action": "click(MODE_LIST)",
+        "precondition": "",
+        "postcondition": "Mode sidebar visible"
+      },
+      {
+        "from_state": "mode_list",
+        "to_state": "viewfinder_video",
+        "action": "click(Video)",
+        "precondition": "",
+        "postcondition": "Video mode active"
+      },
+      {
+        "from_state": "mode_list",
+        "to_state": "viewfinder_photo",
+        "action": "click(Camera)",
+        "precondition": "",
+        "postcondition": "Photo mode active"
+      },
+      {
+        "from_state": "viewfinder_photo",
+        "to_state": "options_overlay",
+        "action": "click(three_dot_menu_bottom_right)",
+        "precondition": "",
+        "postcondition": "Quick options shown"
+      },
+      {
+        "from_state": "viewfinder_video",
+        "to_state": "options_overlay",
+        "action": "click(three_dot_menu_bottom_right)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "options_overlay",
+        "to_state": "options_overlay",
+        "action": "click(timer_icon) cycle 3s/10s/off",
+        "precondition": "",
+        "postcondition": "Timer toggled"
+      },
+      {
+        "from_state": "options_overlay",
+        "to_state": "viewfinder_photo",
+        "action": "click(grid_icon)",
+        "precondition": "",
+        "postcondition": "Grid overlay toggled"
+      },
+      {
+        "from_state": "options_overlay",
+        "to_state": "viewfinder_photo",
+        "action": "click(camera_switch_icon)",
+        "precondition": "",
+        "postcondition": "Front/back toggled"
+      },
+      {
+        "from_state": "mode_list",
+        "to_state": "settings_main",
+        "action": "click(settings_gear_bottom_right)",
+        "precondition": "Tooltip points to gear",
+        "postcondition": "Settings opened"
+      },
+      {
+        "from_state": "settings_main",
+        "to_state": "resolution_quality",
+        "action": "click(Resolution & quality)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "resolution_quality",
+        "to_state": "resolution_dialog",
+        "action": "click(camera_or_video_entry)",
+        "precondition": "",
+        "postcondition": "Radio dialog shown"
+      },
+      {
+        "from_state": "resolution_dialog",
+        "to_state": "resolution_quality",
+        "action": "click(option) or click(CANCEL)",
+        "precondition": "",
+        "postcondition": "Selection saved"
+      },
+      {
+        "from_state": "viewfinder_photo",
+        "to_state": "viewfinder_photo",
+        "action": "click(shutter_button)",
+        "precondition": "",
+        "postcondition": "Photo captured, thumbnail updated"
+      },
+      {
+        "from_state": "viewfinder_video",
+        "to_state": "viewfinder_recording",
+        "action": "click(red_record_button)",
+        "precondition": "",
+        "postcondition": "Recording started"
+      },
+      {
+        "from_state": "viewfinder_recording",
+        "to_state": "viewfinder_video",
+        "action": "click(stop_button)",
+        "precondition": "",
+        "postcondition": "Video saved"
+      },
+      {
+        "from_state": "viewfinder_recording",
+        "to_state": "viewfinder_recording",
+        "action": "click(Z+) or long_press(Z+)",
+        "precondition": "",
+        "postcondition": "Zoom adjusted during recording"
+      },
+      {
+        "from_state": "viewfinder_photo",
+        "to_state": "viewfinder_photo",
+        "action": "click(Z+) / click(Z-)",
+        "precondition": "",
+        "postcondition": "Zoom changed"
+      },
+      {
+        "from_state": "viewfinder_photo",
+        "to_state": "filmstrip_viewer",
+        "action": "click(FILMSTRIP) or click(thumbnail)",
+        "precondition": "",
+        "postcondition": "Last media shown"
+      },
+      {
+        "from_state": "viewfinder_video",
+        "to_state": "filmstrip_viewer",
+        "action": "click(FILMSTRIP) or click(thumbnail)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "filmstrip_viewer",
+        "to_state": "viewfinder_photo",
+        "action": "click(back_arrow)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "filmstrip_viewer",
+        "to_state": "filmstrip_overflow_menu",
+        "action": "click(three_dot_top_right)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "filmstrip_overflow_menu",
+        "to_state": "details_dialog",
+        "action": "click(Details)",
+        "precondition": "",
+        "postcondition": "Metadata shown"
+      },
+      {
+        "from_state": "filmstrip_viewer",
+        "to_state": "edit_with_chooser",
+        "action": "click(edit_pencil)",
+        "precondition": "",
+        "postcondition": "App chooser shown"
+      },
+      {
+        "from_state": "edit_with_chooser",
+        "to_state": "edit_with_chooser",
+        "action": "click(target_app) then click(Just once|Always)",
+        "precondition": "",
+        "postcondition": "Editor launched"
+      },
+      {
+        "from_state": "filmstrip_viewer",
+        "to_state": "viewfinder_photo",
+        "action": "click(trash_can)",
+        "precondition": "",
+        "postcondition": "Item deleted, returns to viewfinder"
+      }
+    ],
+    "strategies": [
+      {
+        "name": "OPEN_CAMERA_APP",
+        "preconditions": "Starting at home_screen",
+        "steps": [
+          "swipe up from bottom to open app_drawer",
+          "click Camera app icon",
+          "wait for splash_loading to finish",
+          "verify viewfinder_photo visible"
+        ],
+        "success_signal": "Live preview with MODE LIST/FILMSTRIP/Z+/Z- buttons visible",
+        "fallback": "If Google Lens opened, press Home or click X then retry via app drawer (avoid search bar camera icon)"
+      },
+      {
+        "name": "TAKE_PHOTO",
+        "preconditions": "viewfinder_photo visible",
+        "steps": [
+          "Optionally click Z+ to zoom",
+          "click shutter button at bottom-center"
+        ],
+        "success_signal": "Thumbnail of new photo appears in bottom-right",
+        "fallback": "Retry shutter click"
+      },
+      {
+        "name": "SWITCH_TO_VIDEO_AND_RECORD",
+        "preconditions": "viewfinder_photo visible",
+        "steps": [
+          "click MODE LIST (top-left)",
+          "click Video option in mode_list",
+          "click red record button at bottom-center",
+          "wait desired duration",
+          "click stop button"
+        ],
+        "success_signal": "Stop button replaced by record button and thumbnail updated",
+        "fallback": "If top-right camera-toggle does not switch mode, use MODE LIST explicitly"
+      },
+      {
+        "name": "ENABLE_GRID_OVERLAY",
+        "preconditions": "viewfinder_photo visible",
+        "steps": [
+          "click three-dot menu at bottom-right",
+          "in options_overlay click grid icon (slash should disappear)"
+        ],
+        "success_signal": "3x3 grid visible over viewfinder",
+        "fallback": "If overlay not visible, click three-dot again"
+      },
+      {
+        "name": "SET_SELF_TIMER",
+        "preconditions": "viewfinder_photo visible",
+        "steps": [
+          "click three-dot menu",
+          "tap timer icon to cycle (off -> 3s -> 10s)",
+          "stop when desired value shown"
+        ],
+        "success_signal": "Timer label e.g. '10s' visible near shutter",
+        "fallback": "Continue tapping to cycle back"
+      },
+      {
+        "name": "SWITCH_CAMERA_FRONT_BACK",
+        "preconditions": "viewfinder visible",
+        "steps": [
+          "click three-dot menu",
+          "click camera-switch icon in options_overlay"
+        ],
+        "success_signal": "Preview shows other camera feed",
+        "fallback": "Re-open options overlay and try again"
+      },
+      {
+        "name": "OPEN_SETTINGS",
+        "preconditions": "viewfinder visible",
+        "steps": [
+          "click MODE LIST to reveal sidebar",
+          "click settings gear icon highlighted in bottom-right"
+        ],
+        "success_signal": "Settings page with Resolution & quality, Save location, Advanced visible",
+        "fallback": "If three-dot route fails, MODE_LIST + gear is the reliable path"
+      },
+      {
+        "name": "SET_MAX_RESOLUTION",
+        "preconditions": "settings_main visible",
+        "steps": [
+          "click Resolution & quality",
+          "for each of Back/Front camera photo and video: click entry, choose highest megapixel/resolution, confirm",
+          "return to settings"
+        ],
+        "success_signal": "Each entry shows the highest available value",
+        "fallback": "Cancel dialogs that opened wrong entry"
+      },
+      {
+        "name": "VIEW_LAST_MEDIA_DETAILS",
+        "preconditions": "viewfinder visible with captured media",
+        "steps": [
+          "click FILMSTRIP (or thumbnail) to open filmstrip_viewer",
+          "click three-dot menu top-right",
+          "click Details"
+        ],
+        "success_signal": "Details dialog shows Title/Width/Height/File size/Path",
+        "fallback": "If tap missed, re-open overflow menu"
+      },
+      {
+        "name": "DELETE_LAST_MEDIA",
+        "preconditions": "filmstrip_viewer open",
+        "steps": [
+          "click trash can icon bottom-right",
+          "observe Deleted snackbar"
+        ],
+        "success_signal": "Returns to viewfinder; 'Deleted' toast shown",
+        "fallback": "If item not loaded, navigate via FILMSTRIP first"
+      },
+      {
+        "name": "EDIT_WITH_EXTERNAL_APP",
+        "preconditions": "filmstrip_viewer open on media",
+        "steps": [
+          "click edit pencil icon",
+          "select target editor (Draw/Gallery/Markup/Photos)",
+          "click 'Just once' to confirm"
+        ],
+        "success_signal": "Target editor UI opens with the image",
+        "fallback": "Use back to retry chooser"
+      },
+      {
+        "name": "ZOOM_WITH_ZPLUS_BUTTON",
+        "preconditions": "viewfinder visible",
+        "steps": [
+          "click Z+ button at top-right to step zoom in",
+          "or long_press Z+ to reach maximum"
+        ],
+        "success_signal": "Visible magnification of preview",
+        "fallback": "Use Z- to decrease if overshot"
+      }
+    ],
+    "dead_ends": [
+      {
+        "state": "home_screen",
+        "failed_action": "click(camera_icon_inside_Google_search_widget)",
+        "note": "This launches Google Lens, not the Camera app. Always use the app drawer instead."
+      },
+      {
+        "state": "viewfinder_photo",
+        "failed_action": "click(green_privacy_indicator_top_right) to switch to video",
+        "note": "Top-right green dot is the Android privacy indicator, not interactive. Use MODE LIST instead."
+      },
+      {
+        "state": "viewfinder_photo",
+        "failed_action": "expecting a settings gear in main viewfinder",
+        "note": "No gear on the main view; settings reachable via MODE LIST sidebar's gear."
+      },
+      {
+        "state": "filmstrip_viewer",
+        "failed_action": "repeated click on Details when image fails to load",
+        "note": "Tapping center can hide UI; re-tap to bring back top bar, or capture a fresh photo to reset state."
+      },
+      {
+        "state": "home_screen",
+        "failed_action": "long_press while attempting swipe-up",
+        "note": "Triggers Wallpaper/Widgets/Home settings menu; press Back to dismiss."
+      }
+    ]
+  },
+  "layer2": {
+    "categories": [
+      {
+        "name": "LAUNCH_APP",
+        "precondition": "Device at home; target app may not be on home screen",
+        "abstract_steps": [
+          "Look for app icon on home screen",
+          "If absent, open the all-apps drawer (swipe up)",
+          "Tap the correct app icon (avoid lookalike shortcuts from widgets)",
+          "Wait for any splash/initialization screen"
+        ],
+        "failure_modes": [
+          "Tapping a search-widget icon that opens a different app",
+          "Triggering long-press home menu instead of swipe",
+          "Acting before app finishes loading"
+        ],
+        "verification_checklist": [
+          "Main UI of target app is visible",
+          "Expected primary controls are present"
+        ]
+      },
+      {
+        "name": "CAPTURE_MEDIA",
+        "precondition": "Capture surface (viewfinder) is ready",
+        "abstract_steps": [
+          "Ensure correct mode (photo vs video) via mode selector",
+          "Apply optional pre-capture settings (zoom, timer, grid, lens switch)",
+          "Trigger primary capture control",
+          "For timed/long captures, wait the required duration",
+          "Stop/finalize capture if applicable"
+        ],
+        "failure_modes": [
+          "Capturing in the wrong mode",
+          "Tap on capture control not registering; retry needed",
+          "Stopping recording prematurely or too late"
+        ],
+        "verification_checklist": [
+          "Thumbnail of new media appears",
+          "Capture control returns to idle state",
+          "Recording timer reaches required duration before stop"
+        ]
+      },
+      {
+        "name": "TOGGLE_SETTING",
+        "precondition": "Quick options or settings menu reachable",
+        "abstract_steps": [
+          "Open the options/settings surface",
+          "Locate the toggle/cycle control for the desired feature",
+          "Tap to enable/cycle to desired state",
+          "Close menu and verify on the main UI"
+        ],
+        "failure_modes": [
+          "Misreading slashed icon as enabled",
+          "Cycling past the desired state",
+          "Toggling the wrong icon"
+        ],
+        "verification_checklist": [
+          "Visible indicator (label/value/overlay) reflects new state",
+          "Behavior changes as expected on the main surface"
+        ]
+      },
+      {
+        "name": "CONFIGURE_NUMERIC_OPTION",
+        "precondition": "Settings page with selectable list entries",
+        "abstract_steps": [
+          "Navigate to the relevant settings submenu",
+          "Open the specific entry to reveal a list of choices",
+          "Select the desired value (e.g., highest/lowest)",
+          "Confirm and return; repeat for related entries"
+        ],
+        "failure_modes": [
+          "Opening the wrong entry (e.g., video vs photo)",
+          "Misidentifying the maximum/minimum option",
+          "Dialog dismissed without confirming selection"
+        ],
+        "verification_checklist": [
+          "Each related entry shows the intended value",
+          "No CANCEL was the final action on the dialog"
+        ]
+      },
+      {
+        "name": "VIEW_LAST_ITEM",
+        "precondition": "At least one item exists in the app's media list",
+        "abstract_steps": [
+          "Use the gallery/last-item shortcut from the capture surface",
+          "Confirm the most recent item is displayed"
+        ],
+        "failure_modes": [
+          "Opening the wrong gallery (system vs in-app)",
+          "Tapping when no item exists yet"
+        ],
+        "verification_checklist": [
+          "Item preview, action bar (share/edit/delete), and metadata access are visible"
+        ]
+      },
+      {
+        "name": "QUERY_METADATA",
+        "precondition": "Item is open in a viewer",
+        "abstract_steps": [
+          "Open the overflow/more options menu",
+          "Select the details/info action",
+          "Read required fields from the dialog"
+        ],
+        "failure_modes": [
+          "Tapping in immersive view hides UI controls",
+          "Menu closing before selection registers",
+          "Returning wrong field value"
+        ],
+        "verification_checklist": [
+          "Required field is present and value is read verbatim",
+          "Units/format match the question"
+        ]
+      },
+      {
+        "name": "DELETE_ENTRY",
+        "precondition": "Item is open in a viewer",
+        "abstract_steps": [
+          "Tap the delete/trash control",
+          "Confirm if prompted",
+          "Verify removal indicator"
+        ],
+        "failure_modes": [
+          "Deleting the wrong item if list wasn't sorted by recency",
+          "Missing confirmation step"
+        ],
+        "verification_checklist": [
+          "Snackbar/toast indicating deletion",
+          "Returning to capture surface or list without the item"
+        ]
+      },
+      {
+        "name": "EDIT_ENTRY_VIA_CHOOSER",
+        "precondition": "Item open in viewer with an edit action",
+        "abstract_steps": [
+          "Trigger edit action",
+          "From the app chooser, pick the requested editor",
+          "Confirm with one-time use (avoid setting default unless asked)"
+        ],
+        "failure_modes": [
+          "Choosing 'Always' inadvertently",
+          "Selecting a different editor than requested"
+        ],
+        "verification_checklist": [
+          "Target editor's UI loads with the item"
+        ]
+      },
+      {
+        "name": "NAVIGATE_TO_SUBSECTION",
+        "precondition": "Inside the app with a known menu structure",
+        "abstract_steps": [
+          "Open the main/overflow menu",
+          "Drill into the targeted submenu",
+          "Verify the section title"
+        ],
+        "failure_modes": [
+          "Menu tap not registering",
+          "Mistaking a tooltip target for the menu"
+        ],
+        "verification_checklist": [
+          "Header text of subsection matches the goal"
+        ]
+      },
+      {
+        "name": "RECOVER_FROM_WRONG_APP",
+        "precondition": "Unintended app launched",
+        "abstract_steps": [
+          "Close the wrong app via X/back/Home",
+          "Re-enter the app drawer instead of widgets",
+          "Launch the correct app icon"
+        ],
+        "failure_modes": [
+          "Repeatedly clicking the same wrong shortcut",
+          "Launcher becoming unresponsive after rapid actions"
+        ],
+        "verification_checklist": [
+          "Target app's main UI is now visible"
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "built_at": "2025-01-26T00:00:00Z",
+    "n_episodes": 47,
+    "n_successful": 47,
+    "n_episodes_input": 47,
+    "synthesizer_model": "claude-opus-4-7",
+    "synthesizer_temperature": 0.3
+  }
+}

@@ -1,0 +1,77 @@
+{
+  "category": "Books & Reference",
+  "layer2": {
+    "categories": [
+      {
+        "name": "TOGGLE_SETTING",
+        "precondition": "App is open and user can reach the settings area",
+        "abstract_steps": [
+          "Open the app if not already in it",
+          "Navigate to the settings/preferences area via the overflow or 'more' entry",
+          "Locate the target preference row",
+          "Read the current toggle state",
+          "Tap the toggle if its state differs from desired",
+          "Verify the toggle visually reflects the new state"
+        ],
+        "failure_modes": [
+          "Tapping a toggle that is already in the desired state, flipping it the wrong way",
+          "Confusing similar-sounding preferences",
+          "Declaring completion before verifying the toggle changed"
+        ],
+        "verification_checklist": [
+          "Toggle indicator shows the desired on/off color/position",
+          "No confirmation dialog left unhandled",
+          "Other preferences not unintentionally modified"
+        ]
+      },
+      {
+        "name": "MULTI_STEP_SETTINGS_THEN_RETURN",
+        "precondition": "Task requires changing one or more nested preferences and then returning to a specific starting screen",
+        "abstract_steps": [
+          "Enter settings",
+          "Adjust top-level preferences",
+          "Drill into a nested preferences subscreen if needed",
+          "Adjust nested preferences",
+          "Back-navigate out of the nested screen",
+          "Back-navigate out of settings until the originally requested screen is shown",
+          "Only then signal completion"
+        ],
+        "failure_modes": [
+          "Stopping completion signal while still inside settings or a nested subscreen",
+          "Skipping a needed back-press because intermediate screen looks like the target",
+          "Confusing the bottom-nav of the settings area with the main app navigation"
+        ],
+        "verification_checklist": [
+          "Final visible screen matches the requested destination's distinctive cues",
+          "All requested toggles ended in the requested state",
+          "No modal/snackbar blocking the destination"
+        ]
+      },
+      {
+        "name": "NAVIGATE_TO_TAB",
+        "precondition": "App has a primary tab/navigation bar and target tab is one of its entries",
+        "abstract_steps": [
+          "Open the app if not already in it",
+          "Locate the primary navigation bar",
+          "Tap the entry matching the target tab name",
+          "Confirm the tab indicator/highlight moved to the target"
+        ],
+        "failure_modes": [
+          "Clicking a similarly named element outside the navigation bar",
+          "Assuming completion without checking the active-tab indicator"
+        ],
+        "verification_checklist": [
+          "Target tab is visually highlighted",
+          "Screen header/content matches the target tab",
+          "No login/sync prompt is mistaken as a failure state"
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "source": "static_seed_25app",
+    "apps": [
+      "wikipedia"
+    ]
+  }
+}

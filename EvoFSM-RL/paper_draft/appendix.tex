@@ -1,0 +1,216 @@
+\section{Source pool composition (Level 1)}
+\label{app:source-pool}
+
+Table~\ref{tab:source-apps} lists the 12 source-pool apps of the within-benchmark
+level, grouped by Play Store category. Six categories anchor the pool; each
+per-category $L_C$ is produced by aggregating LAYER~2 across the same-category
+source apps. Episodes per app at $K{=}5$ seeds are also given.
+
+\begin{table}[t]
+\small
+\centering
+\begin{tabular}{lll r}
+\hline
+\textbf{App} & \textbf{Category} & \textbf{Templates} & \textbf{Episodes} \\
+\hline
+markor               & Productivity     & 14 & 70 \\
+tasks\_org           & Productivity     &  6 & 30 \\
+joplin               & Productivity     &  4 & 20 \\
+calculator           & Tools            & 19 & 95 \\
+clock                & Tools            &  3 & 15 \\
+files                & Tools            &  2 & 10 \\
+bluecoins            & Finance          & 15 & 75 \\
+pi\_music            & Music \& Audio   & 12 & 60 \\
+audio\_recorder      & Music \& Audio   &  2 & 10 \\
+snapseed             & Photography      & 11 & 55 \\
+simple\_sms\_messenger & Communication  &  6 & 30 \\
+contacts             & Communication    &  2 & 10 \\
+\hline
+\textbf{Total -- 6 categories} & & \textbf{96} & \textbf{480} \\
+\hline
+\end{tabular}
+\caption{Source-pool composition for the within-benchmark level. Productivity,
+Tools, and Communication have two to three apps each; Finance and Photography
+have a single source app, so the corresponding $L_C$ is the lone app's LAYER~2
+with no aggregation.}
+\label{tab:source-apps}
+\end{table}
+
+\section{MobileWorld deployment split (Level 2)}
+\label{app:mw-split}
+
+Table~\ref{tab:mw-coverage} gives the per-app adaptation/evaluation coverage of
+the cross-benchmark level. Every app receives at least one adaptation task; a
+multi-application task contributes to each app it touches, so per-app counts sum
+to more than 161. Mattermost, Camera, Clock, and Settings have thin adaptation
+coverage because their task totals are small to begin with.
+
+\begin{table}[t]
+\small
+\centering
+\begin{tabular}{llrr}
+\hline
+\textbf{Category} & \textbf{App} & \textbf{$T_{\text{adapt}}$} & \textbf{$T_{\text{eval}}$} \\
+\hline
+Communication      & Mail        & 12 & 31 \\
+Communication      & Messages    &  8 & 18 \\
+Communication      & Contacts    &  3 &  8 \\
+Communication      & Chrome      &  3 &  7 \\
+Productivity       & Calendar    &  6 & 21 \\
+Tools              & Files       & 10 & 21 \\
+Tools              & Clock       &  2 &  5 \\
+Tools              & Settings    &  2 &  5 \\
+Maps \& Navigation & Maps        &  4 &  5 \\
+Photography        & Gallery     &  2 &  9 \\
+Photography        & Camera      &  1 &  2 \\
+Books \& Reference & Docreader   &  3 &  7 \\
+Social (novel)     & Mastodon    & 11 & 30 \\
+Social (novel)     & Mattermost  &  2 & 15 \\
+Shopping (novel)   & Taodian     &  6 &  9 \\
+\hline
+\end{tabular}
+\caption{Per-app adaptation/evaluation coverage for the cross-benchmark level
+(MobileWorld GUI-only). Social and Shopping are the categories novel to the
+AndroidWorld+ training source (Tier-C); the remaining categories are
+source-seen.}
+\label{tab:mw-coverage}
+\end{table}
+
+\section{Hyperparameters}
+\label{app:hyper}
+
+Table~\ref{tab:hyper} consolidates the configuration shared across baselines and
+the EvoFSM-RL-specific knobs for the within-benchmark level; the paragraph below
+records the deltas for the cross-benchmark level.
+
+\begin{table}[t]
+\small
+\centering
+\begin{tabular}{lll}
+\hline
+\textbf{Parameter} & \textbf{Symbol} & \textbf{Value} \\
+\hline
+Backbone & --- & Qwen3-VL-8B-Instruct \\
+Action loop & --- & M3A (action + summary) \\
+Max steps per template & --- & 10 $\times$ default budget \\
+Generation precision & --- & bf16, temperature $0$ \\
+Image max-pixels & --- & $1{,}605{,}632$ \\
+\hline
+$L_C$ injection point & --- & after prefix, before goal/UI \\
+\hline
+M (variants per iter) & $M$ & 2 \\
+N (rollouts per variant) & $N$ & 1 (B3) / 2 (B4) \\
+TrueSkill prior mean / $\sigma$ & $\mu_0,\sigma_0$ & 25.0 / 8.33 \\
+Child $\sigma$ inflation & $\Delta\sigma$ & 1.5 \\
+Softmax optimism / temp & $\lambda,T$ & 1.5 / 1.0 \\
+Sliding window & $K_{\text{win}}$ & 15 \\
+Mutation cadence & --- & every iter if $r{>}0$, else every 3 \\
+Mutation model & $\pi_{\text{ref}}$ & frozen Claude Opus \\
+\hline
+LoRA rank / alpha / dropout & $r,\alpha$ & 16 / 32 / 0.05 \\
+LoRA target modules & --- & $q_{\text{proj}}, v_{\text{proj}}$ \\
+Optimizer / lr & --- & AdamW / $3\!\times\!10^{-4}$ \\
+GRPO buffer threshold & $K_{\text{buf}}$ & 10 \\
+Max gradient norm & --- & 1.0 \\
+Reward bonus weight & $w_e$ & 0.2 \\
+\hline
+Iterations / target (B3, B4) & --- & 20 \\
+$K_{\text{adapt}}$ / $K_{\text{eval}}$ seeds & --- & $\{30\!-\!34\}$ / $\{40\!-\!42\}$ \\
+\hline
+\end{tabular}
+\caption{Configuration. The first block is shared across B1--B4; the middle block
+is the FSM-evolution machinery (B3, B4); the lower block is the LoRA/GRPO
+machinery (B4).}
+\label{tab:hyper}
+\end{table}
+
+\paragraph{Cross-benchmark deltas (Level 2).} The cross-benchmark level keeps the
+same backbone but replaces the harness with a pure-vision loop using the
+backbone's native \texttt{mobile\_use} tool-call format (no accessibility
+channel). It evaluates on the 110-task MobileWorld $T_{\text{eval}}$ and adapts on
+the 51-task $T_{\text{adapt}}$ (Table~\ref{tab:mw-coverage}); there is no seed
+dimension ($K{=}1$). The static prior carried into the adaptation rungs is the
+app-granular LAYER~2 plus category $L_C$ configuration with entry-level retrieval
+(only the $\le 3$ task-relevant archetypes per block are injected). The weight
+channel uses the same group-relative update with a small KL anchor to the frozen
+reference ($\beta{=}10^{-3}$).
+
+\section{Example two-layer FSM}
+\label{app:fsm-example}
+
+To illustrate the structural separation the linter enforces,
+Figure~\ref{fig:layer1} sketches an excerpt of the LAYER~1 (app-specific) block
+of the static FSM for \texttt{markor}, and Figure~\ref{fig:layer2} the
+corresponding LAYER~2 (category-generic) entry for \texttt{QUERY\_INFO} from the
+Productivity $L_C$.
+
+\begin{table}[t]
+\small
+\begin{tabular}{p{0.92\columnwidth}}
+\hline
+\textbf{LAYER 1 (markor, excerpt)} \\
+\hline
+\texttt{S0: HOME\_SCREEN} -- Android home screen \\
+\hspace{1em} visual\_cues: Phone/Chrome icons, Search bar \\
+\texttt{S1: FILE\_LIST} -- Markor file browser \\
+\hspace{1em} visual\_cues: red plus FAB bottom-right, `Markor' title \\
+\hspace{1em} resource\_hints: Create a new file or folder, Markor \\
+\texttt{S3: NEW\_FILE\_DIALOG} \\
+\hspace{1em} visual\_cues: name field pre-filled `my\_note', OK/CANCEL/FOLDER \\
+\\
+TRANSITIONS: \\
+\texttt{S0 -open\_app(Markor)-> S1} \\
+\texttt{S1 -click(fab\_plus)-> S3} \\
+\texttt{S3 -click(OK)-> S8} (editor opens) \\
+\hline
+\end{tabular}
+\caption{LAYER~1 binds to Markor-specific strings (the FAB color and position,
+the dialog's default filename) and is therefore non-transferable across apps.}
+\label{fig:layer1}
+\end{table}
+
+\begin{table}[t]
+\small
+\begin{tabular}{p{0.92\columnwidth}}
+\hline
+\textbf{LAYER 2 (Productivity, \texttt{QUERY\_INFO})} \\
+\hline
+\textbf{precondition:} Target list/overview screen reachable from launcher; query
+specifies a filter (date / status / priority / attribute). \\
+\textbf{abstract\_steps:} (i) launch the relevant app; (ii) navigate to the
+primary list or named item; (iii) resolve relative terms (today, next week) to
+absolute values; (iv) scroll to enumerate all candidates; (v) apply the predicate
+using visible markers; (vi) aggregate matches into the requested output format;
+(vii) emit a single answer and immediately terminate. \\
+\textbf{failure\_modes:} declaring the query infeasible without opening the app;
+answering from a partial view without scrolling; confusing relative date labels
+with the queried absolute date; miscounting after partial scroll; looping on the
+same answer without terminating. \\
+\textbf{verification\_checklist:} reached the data-bearing screen; mapped all
+relative dates; scrolled until no new content appears; each returned item
+satisfies every conjunct of the filter; answer format matches the question; a
+single terminal completion signal is emitted. \\
+\hline
+\end{tabular}
+\caption{LAYER~2 contains no app name and no resource identifier. The Productivity
+$L_C$ was aggregated from \texttt{markor}, \texttt{joplin}, and
+\texttt{tasks\_org}; the block is the cross-source intersection plus an explicit
+enumeration of cross-source failure modes.}
+\label{fig:layer2}
+\end{table}
+
+\section{LAYER-2 mutation operator}
+\label{app:mutation}
+
+The mutation step in Algorithm~\ref{alg:evofsmrl} is implemented as a two-step
+prompt to the frozen reference $\pi_{\text{ref}}$. Step~1 builds a structured
+reflection: the FSM in JSON form, the recent rollout trajectories under the best
+variant (action sequence, screen tags, reward), and a directive to identify
+(a)~which abstract step or verification check appears to have been violated in
+failing rollouts and (b)~which step appears to have been load-bearing in
+successful rollouts. Step~2 takes that reflection and the FSM and asks for a
+JSON-typed diff over LAYER~2 only (operations: \texttt{add\_failure\_mode},
+\texttt{add\_verification\_check}, \texttt{rewrite\_abstract\_step},
+\texttt{add\_category}, and a small set of removals). The diff is validated
+against the FSM schema and lint-checked for app-specific tokens before being
+applied; rejected diffs are logged and do not enter the population.

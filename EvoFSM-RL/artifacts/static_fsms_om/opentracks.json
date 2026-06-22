@@ -1,0 +1,944 @@
+{
+  "version": "0.1.0",
+  "app": "opentracks",
+  "layer1": {
+    "app": "opentracks",
+    "category": "Health & Fitness",
+    "states": [
+      {
+        "id": "home_screen",
+        "description": "Android device home screen",
+        "visual_cues": [
+          "dock with default apps (Gmail, Photos, YouTube, Chrome)",
+          "Google search bar"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "app_drawer",
+        "description": "Android app drawer listing installed apps",
+        "visual_cues": [
+          "alphabetical grid of app icons",
+          "search bar at top"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "welcome_privacy",
+        "description": "First onboarding screen about privacy",
+        "visual_cues": [
+          "OpenTracks orange arrow logo",
+          "text 'OpenTracks is a sport tracking application that completely respects your privacy'",
+          "orange FAB with play icon bottom-right"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "welcome_map_info",
+        "description": "Second onboarding screen about external map (OSMDashboard)",
+        "visual_cues": [
+          "text 'OpenTracks itself does not provide a map. Please install OSMDashboard'",
+          "orange FAB with play icon bottom-right"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "track_list",
+        "description": "Main list of recorded tracks/activities",
+        "visual_cues": [
+          "chronological list of activities with name, duration, distance and date",
+          "three-dot overflow menu top-right",
+          "orange record FAB bottom-right"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "track_list_overflow_menu",
+        "description": "Overflow dropdown from track list top-right",
+        "visual_cues": [
+          "dropdown with 'Settings' and 'Help'"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "track_details_stats",
+        "description": "Track detail view, Stats tab",
+        "visual_cues": [
+          "tabs: Stats, Intervals, By time, By distance",
+          "metrics tiles (DISTANCE, MOVING TIME, MAX SPEED, FASTEST PACE, GAIN, LOSS)",
+          "bottom toolbar: back, map, share, overflow"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "track_details_intervals",
+        "description": "Track detail Intervals tab",
+        "visual_cues": [
+          "'Split interval' dropdown (e.g., '1 mi')",
+          "table of interval rows with distance/speed/elevation"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "track_details_by_time",
+        "description": "Track detail By time chart tab",
+        "visual_cues": [
+          "chart with Time x-axis and Speed y-axis"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "track_details_by_distance",
+        "description": "Track detail By distance chart tab",
+        "visual_cues": [
+          "chart with Distance x-axis (mi)"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "track_details_bottom_menu",
+        "description": "Overflow popup from track details bottom three-dot",
+        "visual_cues": [
+          "options: Markers, Edit, Delete, Resume track, Settings"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "track_edit",
+        "description": "Edit track screen",
+        "visual_cues": [
+          "Name field",
+          "Activity type field",
+          "Description field",
+          "Cancel and Save buttons"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "delete_confirm_dialog",
+        "description": "Confirmation dialog for deleting track",
+        "visual_cues": [
+          "title 'Delete track?'",
+          "OK and Cancel buttons"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "show_on_map_dialog",
+        "description": "Format selection dialog when tapping map icon",
+        "visual_cues": [
+          "title 'Select show on map behavior'",
+          "radio options: KMZ (with photos), KMZ (without photos), KML (without photos), GPX (without photos), CSV, OpenTracks Dashboard API",
+          "OK / Cancel buttons"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "no_apps_dialog",
+        "description": "System bottom sheet 'No apps can perform this action'",
+        "visual_cues": [
+          "bottom sheet with message about missing handler app"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "system_share_sheet",
+        "description": "Android system share sheet with KMZ/KML/GPX file",
+        "visual_cues": [
+          "file name e.g. '2023-..._Track.kmz'",
+          "share targets row (Nearby, SMS, Drive, OpenTracks)"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "recording_active",
+        "description": "Active recording dashboard for current track",
+        "visual_cues": [
+          "live Stats tab with running timer",
+          "orange square stop button bottom-right",
+          "bottom nav with map, marker-plus, overflow"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "insert_marker_screen",
+        "description": "Form to insert a waypoint/marker",
+        "visual_cues": [
+          "Name, Marker type, Description fields",
+          "Cancel / Add buttons"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "markers_list",
+        "description": "Markers list for a track or globally",
+        "visual_cues": [
+          "title 'Markers'",
+          "search icon top-right",
+          "'You don't have any markers' empty text"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "settings_main",
+        "description": "Main Settings page",
+        "visual_cues": [
+          "categories: Default Units and Activity, User Interface, GPS, Bluetooth Sensors, Statistics Announcements, Import/Export, Reset, Public API, About"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "settings_default_units",
+        "description": "Default Units and Activity sub-page",
+        "visual_cues": [
+          "Preferred units row showing 'Imperial (mi, ft)' or 'Metric'"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "settings_import_export",
+        "description": "Import/Export settings",
+        "visual_cues": [
+          "'Export/sharing file format' row showing current default (e.g., 'KMZ (with photos)')"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "export_format_dialog",
+        "description": "Dialog to pick export/sharing file format",
+        "visual_cues": [
+          "radio list of formats: KMZ (with photos), KMZ (without photos), KML (without photos), GPX (without photos), CSV (without photos)"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "settings_statistics_announcements",
+        "description": "Voice / Statistics Announcements settings",
+        "visual_cues": [
+          "Voice speed row",
+          "toggles: Total distance, Moving time, Average speed/pace, Lap speed/pace, Average heart rate",
+          "Time interval row",
+          "Lap length row"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "voice_speed_dialog",
+        "description": "Voice speed selection dialog",
+        "visual_cues": [
+          "radio list of speeds (0.7, 0.9, 1.0, 1.2, ...)"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "lap_length_dialog",
+        "description": "Lap length selection dialog",
+        "visual_cues": [
+          "radio list including 'Off', '1 mi', etc."
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "settings_public_api",
+        "description": "Public API settings page",
+        "visual_cues": [
+          "'Public API' toggle",
+          "'Automatic data transfer' toggle"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "import_completion_dialog",
+        "description": "Dialog shown after importing a shared file",
+        "visual_cues": [
+          "progress 'X/X'",
+          "'Errors N'",
+          "completion message"
+        ],
+        "resource_hints": []
+      }
+    ],
+    "transitions": [
+      {
+        "from_state": "home_screen",
+        "to_state": "app_drawer",
+        "action": "swipe_up_from_bottom",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "app_drawer",
+        "to_state": "welcome_privacy",
+        "action": "click(opentracks_icon)",
+        "precondition": "first launch",
+        "postcondition": ""
+      },
+      {
+        "from_state": "app_drawer",
+        "to_state": "track_list",
+        "action": "click(opentracks_icon)",
+        "precondition": "onboarding previously dismissed",
+        "postcondition": ""
+      },
+      {
+        "from_state": "welcome_privacy",
+        "to_state": "welcome_map_info",
+        "action": "click(orange_fab_next)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "welcome_map_info",
+        "to_state": "track_list",
+        "action": "click(orange_fab_next)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "track_list",
+        "to_state": "track_details_stats",
+        "action": "click(track_item)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "track_list",
+        "to_state": "track_list_overflow_menu",
+        "action": "click(overflow_top_right)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "track_list_overflow_menu",
+        "to_state": "settings_main",
+        "action": "click('Settings')",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "track_list",
+        "to_state": "recording_active",
+        "action": "click(record_fab)",
+        "precondition": "no recording",
+        "postcondition": "recording starts"
+      },
+      {
+        "from_state": "track_details_stats",
+        "to_state": "track_details_intervals",
+        "action": "click(tab 'Intervals')",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "track_details_stats",
+        "to_state": "track_details_by_time",
+        "action": "click(tab 'By time')",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "track_details_stats",
+        "to_state": "track_details_by_distance",
+        "action": "click(tab 'By distance')",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "track_details_stats",
+        "to_state": "track_details_bottom_menu",
+        "action": "click(overflow_bottom_right)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "track_details_stats",
+        "to_state": "show_on_map_dialog",
+        "action": "click(map_icon_bottom)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "track_details_stats",
+        "to_state": "system_share_sheet",
+        "action": "click(share_icon_bottom)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "track_details_bottom_menu",
+        "to_state": "track_edit",
+        "action": "click('Edit')",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "track_details_bottom_menu",
+        "to_state": "delete_confirm_dialog",
+        "action": "click('Delete')",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "track_details_bottom_menu",
+        "to_state": "recording_active",
+        "action": "click('Resume track')",
+        "precondition": "",
+        "postcondition": "recording resumes"
+      },
+      {
+        "from_state": "track_details_bottom_menu",
+        "to_state": "markers_list",
+        "action": "click('Markers')",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "track_edit",
+        "to_state": "track_details_stats",
+        "action": "click('Save')",
+        "precondition": "edits valid",
+        "postcondition": "title/description updated"
+      },
+      {
+        "from_state": "delete_confirm_dialog",
+        "to_state": "track_list",
+        "action": "click('OK')",
+        "precondition": "",
+        "postcondition": "track removed"
+      },
+      {
+        "from_state": "show_on_map_dialog",
+        "to_state": "no_apps_dialog",
+        "action": "click('OK')",
+        "precondition": "no compatible map app",
+        "postcondition": ""
+      },
+      {
+        "from_state": "settings_main",
+        "to_state": "settings_default_units",
+        "action": "click('Default Units and Activity')",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "settings_main",
+        "to_state": "settings_import_export",
+        "action": "click('Import/Export')",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "settings_main",
+        "to_state": "settings_statistics_announcements",
+        "action": "click('Statistics Announcements')",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "settings_main",
+        "to_state": "settings_public_api",
+        "action": "click('Public API')",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "settings_import_export",
+        "to_state": "export_format_dialog",
+        "action": "click('Export/sharing file format')",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "export_format_dialog",
+        "to_state": "settings_import_export",
+        "action": "click(format radio)",
+        "precondition": "",
+        "postcondition": "default format updated"
+      },
+      {
+        "from_state": "settings_statistics_announcements",
+        "to_state": "voice_speed_dialog",
+        "action": "click('Voice speed')",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "settings_statistics_announcements",
+        "to_state": "lap_length_dialog",
+        "action": "click('Lap length')",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "recording_active",
+        "to_state": "insert_marker_screen",
+        "action": "click(marker_plus_icon)",
+        "precondition": "recording in progress",
+        "postcondition": ""
+      },
+      {
+        "from_state": "insert_marker_screen",
+        "to_state": "recording_active",
+        "action": "click('Add')",
+        "precondition": "",
+        "postcondition": "marker saved"
+      },
+      {
+        "from_state": "markers_list",
+        "to_state": "markers_list",
+        "action": "click(search_icon) + type(query)",
+        "precondition": "",
+        "postcondition": "filtered list"
+      },
+      {
+        "from_state": "system_share_sheet",
+        "to_state": "import_completion_dialog",
+        "action": "click(opentracks_target)",
+        "precondition": "sharing back to app",
+        "postcondition": "track re-imported"
+      }
+    ],
+    "strategies": [
+      {
+        "name": "OPEN_APP_AND_REACH_TRACK_LIST",
+        "preconditions": "device home screen",
+        "steps": [
+          "swipe up to open app drawer",
+          "scroll down if needed to find OpenTracks (starts with 'O')",
+          "tap OpenTracks icon",
+          "if welcome_privacy shown, tap orange FAB to advance",
+          "if welcome_map_info shown, tap orange FAB to advance",
+          "arrive at track_list"
+        ],
+        "success_signal": "chronological list of recorded activities is visible",
+        "fallback": "if previous Back exited the app, relaunch from app drawer"
+      },
+      {
+        "name": "QUERY_TRACK_STATS",
+        "preconditions": "on track_list",
+        "steps": [
+          "scroll list to find target track by name",
+          "tap track item",
+          "on Stats tab, read DISTANCE/MOVING TIME/MAX SPEED/FASTEST PACE/GAIN/LOSS as required",
+          "answer with value(s) and unit(s)"
+        ],
+        "success_signal": "required metric values read off Stats tab",
+        "fallback": "use list-row summary text for distance/duration if details not needed"
+      },
+      {
+        "name": "COMPARE_TWO_TRACKS",
+        "preconditions": "on track_list",
+        "steps": [
+          "open first track, note metric, press back",
+          "open second track, note metric",
+          "compare and answer"
+        ],
+        "success_signal": "answer chosen based on greater/lesser metric",
+        "fallback": "if both metrics visible as summary on list, read directly without opening"
+      },
+      {
+        "name": "RENAME_OR_EDIT_TRACK",
+        "preconditions": "track exists in list",
+        "steps": [
+          "tap track to open details",
+          "tap bottom three-dot overflow",
+          "tap 'Edit'",
+          "tap Name field, type new name (highlighted text auto-replaces)",
+          "optionally tap Description and type",
+          "tap 'Save'",
+          "verify new title on details screen"
+        ],
+        "success_signal": "track title updated on details and list screens",
+        "fallback": "if Save not visible, dismiss keyboard or scroll"
+      },
+      {
+        "name": "DELETE_TRACK",
+        "preconditions": "track exists",
+        "steps": [
+          "open track details",
+          "tap bottom overflow",
+          "tap 'Delete'",
+          "tap 'OK' in confirmation dialog"
+        ],
+        "success_signal": "returned to track list and item no longer present",
+        "fallback": ""
+      },
+      {
+        "name": "RESUME_TRACK",
+        "preconditions": "track exists",
+        "steps": [
+          "open track details",
+          "tap bottom overflow",
+          "tap 'Resume track'"
+        ],
+        "success_signal": "recording_active screen with orange square stop button",
+        "fallback": ""
+      },
+      {
+        "name": "SHOW_TRACK_ON_MAP_WITH_FORMAT",
+        "preconditions": "on track details",
+        "steps": [
+          "tap map icon in bottom toolbar",
+          "in 'Select show on map behavior' dialog, select required format radio",
+          "tap 'OK'"
+        ],
+        "success_signal": "external map app launches or 'No apps can perform this action' bottom sheet (still counts as having attempted)",
+        "fallback": "if no external handler installed, task still considered fulfilled at app level"
+      },
+      {
+        "name": "SHARE_TRACK",
+        "preconditions": "on track details",
+        "steps": [
+          "tap share icon in bottom toolbar",
+          "system share sheet appears with track file"
+        ],
+        "success_signal": "Android share sheet visible",
+        "fallback": ""
+      },
+      {
+        "name": "ADD_WAYPOINT_DURING_RECORDING",
+        "preconditions": "no active recording or existing track to resume",
+        "steps": [
+          "start a recording from track_list FAB (or resume existing)",
+          "in active recording, tap marker (pin+plus) icon in bottom nav",
+          "fill or accept defaults on Insert marker screen",
+          "tap 'Add'"
+        ],
+        "success_signal": "returned to active recording with marker saved",
+        "fallback": "ensure a recording is active first - cannot add waypoint to past track"
+      },
+      {
+        "name": "CHANGE_DEFAULT_EXPORT_FORMAT",
+        "preconditions": "on track_list",
+        "steps": [
+          "tap top-right overflow",
+          "tap 'Settings'",
+          "tap 'Import/Export'",
+          "tap 'Export/sharing file format'",
+          "select desired radio (e.g., 'GPX (without photos)' or 'KMZ (with photos)')"
+        ],
+        "success_signal": "Import/Export page shows the chosen format under the row",
+        "fallback": ""
+      },
+      {
+        "name": "CONFIGURE_VOICE_ANNOUNCEMENTS",
+        "preconditions": "on track_list",
+        "steps": [
+          "open top-right overflow -> Settings",
+          "tap 'Statistics Announcements'",
+          "tap 'Voice speed' and select value",
+          "tap 'Lap length' and select value",
+          "toggle individual metric switches as needed"
+        ],
+        "success_signal": "labels reflect chosen values and toggle states",
+        "fallback": ""
+      },
+      {
+        "name": "ENABLE_PUBLIC_API",
+        "preconditions": "on track_list",
+        "steps": [
+          "overflow -> Settings -> 'Public API'",
+          "toggle 'Public API' on",
+          "toggle 'Automatic data transfer' on if required"
+        ],
+        "success_signal": "both toggles in active state",
+        "fallback": ""
+      },
+      {
+        "name": "SEARCH_MARKERS",
+        "preconditions": "on track details or app top-bar with markers icon",
+        "steps": [
+          "tap markers icon (or open Markers via bottom overflow on track)",
+          "tap search icon top-right",
+          "type query"
+        ],
+        "success_signal": "search field shows query; results or empty-list shown",
+        "fallback": ""
+      },
+      {
+        "name": "REIMPORT_VIA_SHARE",
+        "preconditions": "track exists",
+        "steps": [
+          "open track details and tap share",
+          "in share sheet, choose OpenTracks as target",
+          "wait for import completion dialog and read errors count"
+        ],
+        "success_signal": "import completion dialog shows progress and error count",
+        "fallback": ""
+      }
+    ],
+    "dead_ends": [
+      {
+        "state": "welcome_privacy",
+        "failed_action": "swipe from left edge / system Menu / tap top corners",
+        "note": "No navigation drawer or hidden menu exists on onboarding screens; only the orange FAB advances. Many failed runs wasted steps trying swipes and corner taps."
+      },
+      {
+        "state": "welcome_map_info",
+        "failed_action": "system Back",
+        "note": "Pressing Back here exits OpenTracks entirely back to the app drawer/home, forcing relaunch."
+      },
+      {
+        "state": "track_details_stats",
+        "failed_action": "click(map_icon) expecting in-app map",
+        "note": "Map icon opens an external-format chooser; if no compatible external app is installed, a 'No apps can perform this action' sheet appears. The app has no built-in map renderer."
+      },
+      {
+        "state": "track_list",
+        "failed_action": "looking for in-app waypoint add on a past track",
+        "note": "Waypoints can only be added during an active recording via the marker-plus icon; past tracks have no add-waypoint action."
+      },
+      {
+        "state": "track_list",
+        "failed_action": "answering '0' when welcome screen is mistaken for empty list",
+        "note": "Welcome/onboarding can be mistaken for empty state; must advance through onboarding to confirm whether tracks exist."
+      }
+    ]
+  },
+  "layer2": {
+    "categories": [
+      {
+        "name": "NAVIGATE_TO_APP",
+        "precondition": "Device is on home screen or another app; target app may not be on home screen",
+        "abstract_steps": [
+          "Open the app launcher/drawer",
+          "Scroll alphabetically to locate the target app",
+          "Tap the app icon",
+          "Advance through any first-run onboarding screens by tapping the primary forward control"
+        ],
+        "failure_modes": [
+          "Confusing onboarding with empty state and giving up early",
+          "Pressing system Back on an onboarding screen and exiting the app",
+          "Tapping the wrong adjacent icon in the drawer"
+        ],
+        "verification_checklist": [
+          "Main content list/dashboard of the app is visible",
+          "Onboarding text is no longer displayed"
+        ]
+      },
+      {
+        "name": "QUERY_INFO",
+        "precondition": "Target entity (record/item) exists in a list within the app",
+        "abstract_steps": [
+          "Reach the list of entities",
+          "Scroll to locate the named entity",
+          "Open the entity detail view",
+          "Read the requested field(s) including units",
+          "Return the value(s) verbatim"
+        ],
+        "failure_modes": [
+          "Reading from a summary row when full precision/units only appear in detail view",
+          "Confusing similarly named entities",
+          "Stopping at a tab that does not contain the requested metric"
+        ],
+        "verification_checklist": [
+          "Entity name on detail screen matches the requested one",
+          "Reported value(s) include correct units",
+          "If comparison, both items were checked before answering"
+        ]
+      },
+      {
+        "name": "COMPARE_ENTRIES",
+        "precondition": "Two named entities exist in the list",
+        "abstract_steps": [
+          "Open first entity, record metric, navigate back",
+          "Open second entity, record metric",
+          "Compute comparison or difference",
+          "Answer with the chosen entity and/or numeric result"
+        ],
+        "failure_modes": [
+          "Forgetting to convert units when mixed (e.g., feet vs miles)",
+          "Reading wrong metric label",
+          "Picking the wrong direction (greater vs lesser)"
+        ],
+        "verification_checklist": [
+          "Both metrics use the same unit",
+          "Answer matches the requested polarity (longer/higher/shorter)"
+        ]
+      },
+      {
+        "name": "EDIT_ENTRY",
+        "precondition": "Editable entity exists and is reachable from a list",
+        "abstract_steps": [
+          "Open entity detail",
+          "Open the contextual actions menu",
+          "Choose Edit",
+          "Tap target text field; existing text is typically auto-selected, so typing overwrites it",
+          "Modify additional fields if requested",
+          "Tap Save"
+        ],
+        "failure_modes": [
+          "Tapping save before all required fields are set",
+          "Editing wrong field due to mislocation",
+          "Failing to dismiss the keyboard, causing Save to be off-screen"
+        ],
+        "verification_checklist": [
+          "Detail header reflects new values after saving",
+          "List row shows updated values when navigating back"
+        ]
+      },
+      {
+        "name": "DELETE_ENTRY",
+        "precondition": "Entity exists in list",
+        "abstract_steps": [
+          "Open entity detail",
+          "Open contextual menu",
+          "Choose Delete",
+          "Confirm in the confirmation dialog"
+        ],
+        "failure_modes": [
+          "Dismissing the confirmation dialog by tapping outside",
+          "Deleting the wrong entity due to duplicate names"
+        ],
+        "verification_checklist": [
+          "List no longer contains the deleted entity",
+          "No error toast appeared"
+        ]
+      },
+      {
+        "name": "TOGGLE_SETTING",
+        "precondition": "Settings menu is reachable",
+        "abstract_steps": [
+          "Open overflow menu in app top bar",
+          "Open Settings",
+          "Navigate to the relevant settings subpage",
+          "Toggle switches or select desired option in dialog"
+        ],
+        "failure_modes": [
+          "Toggling a similarly named option",
+          "Not realizing some toggles are already in the desired state",
+          "Leaving extra toggles enabled when instruction implies exclusivity"
+        ],
+        "verification_checklist": [
+          "Each requested toggle is in the correct state",
+          "Any radio choice displays the desired value in its summary row"
+        ]
+      },
+      {
+        "name": "SELECT_FORMAT_OR_OPTION",
+        "precondition": "An action triggers a chooser/radio dialog",
+        "abstract_steps": [
+          "Trigger the action",
+          "Select the required radio in the dialog",
+          "Confirm with OK"
+        ],
+        "failure_modes": [
+          "Tapping Cancel after selecting",
+          "Assuming a default selection without verifying"
+        ],
+        "verification_checklist": [
+          "After confirm, the corresponding settings row or subsequent action reflects the chosen option"
+        ]
+      },
+      {
+        "name": "START_OR_RESUME_RECORDING",
+        "precondition": "On list or detail of an existing record",
+        "abstract_steps": [
+          "For new: tap the primary record floating action button",
+          "For resume: open detail -> contextual menu -> Resume"
+        ],
+        "failure_modes": [
+          "Trying to resume from list directly without opening detail",
+          "Starting a new recording when resume was requested"
+        ],
+        "verification_checklist": [
+          "Active recording screen with stop control is visible",
+          "Live timer is incrementing"
+        ]
+      },
+      {
+        "name": "ADD_SUB_ITEM_DURING_PARENT_ACTIVITY",
+        "precondition": "Parent activity (e.g., recording) is currently active",
+        "abstract_steps": [
+          "Ensure parent activity is running",
+          "Open the add sub-item control in the active activity UI",
+          "Fill required fields or accept defaults",
+          "Confirm/save"
+        ],
+        "failure_modes": [
+          "Attempting to add the sub-item while parent is not active",
+          "Cancelling instead of confirming"
+        ],
+        "verification_checklist": [
+          "Returned to parent activity screen",
+          "Sub-item appears in associated list if available"
+        ]
+      },
+      {
+        "name": "EXPORT_OR_SHARE",
+        "precondition": "Entity detail screen with share action",
+        "abstract_steps": [
+          "Tap share/export action",
+          "If a format chooser appears, select the requested format and confirm",
+          "Pick the target app in the system share sheet"
+        ],
+        "failure_modes": [
+          "No external handler installed leading to 'no apps' message; this may still satisfy in-app completion",
+          "Choosing a different format than requested"
+        ],
+        "verification_checklist": [
+          "System share sheet displayed correct file/format, or chosen target completed import"
+        ]
+      },
+      {
+        "name": "IMPORT_VIA_SHARE_BACK",
+        "precondition": "Entity can be shared as a file and the same app accepts imports",
+        "abstract_steps": [
+          "Initiate share from the entity",
+          "Choose the same app as the share target",
+          "Wait for import completion dialog and read its status (count, errors)"
+        ],
+        "failure_modes": [
+          "Closing dialog before reading values",
+          "Selecting a different target app"
+        ],
+        "verification_checklist": [
+          "Completion dialog shown",
+          "Error/success counts captured"
+        ]
+      },
+      {
+        "name": "SEARCH_WITHIN_LIST",
+        "precondition": "List screen exposes a search affordance",
+        "abstract_steps": [
+          "Open the list",
+          "Tap search icon",
+          "Type query",
+          "Inspect filtered results"
+        ],
+        "failure_modes": [
+          "Empty results misinterpreted as failure when list itself is empty",
+          "Typing in wrong field"
+        ],
+        "verification_checklist": [
+          "Search query echoed in field",
+          "Result list reflects query"
+        ]
+      },
+      {
+        "name": "SWITCH_VIEW_TAB",
+        "precondition": "Detail screen with tabbed views",
+        "abstract_steps": [
+          "Open entity detail",
+          "Tap target tab in the top tab bar"
+        ],
+        "failure_modes": [
+          "Selecting an adjacent tab",
+          "Mistaking bottom toolbar icons for tabs"
+        ],
+        "verification_checklist": [
+          "Selected tab is highlighted",
+          "Content matches expected axis/metric"
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "built_at": "2025-01-29T00:00:00Z",
+    "n_episodes": 73,
+    "n_successful": 73,
+    "n_episodes_input": 73,
+    "synthesizer_model": "claude-opus-4-7",
+    "synthesizer_temperature": 0.3
+  }
+}

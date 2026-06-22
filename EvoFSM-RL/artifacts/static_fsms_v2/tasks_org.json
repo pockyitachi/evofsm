@@ -1,0 +1,794 @@
+{
+  "version": "0.1.0",
+  "app": "tasks_org",
+  "layer1": {
+    "app": "tasks_org",
+    "category": "Productivity",
+    "states": [
+      {
+        "id": "home_screen",
+        "description": "Android device home screen",
+        "visual_cues": [
+          "app icons grid",
+          "bottom dock with Phone/Messages/Chrome"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "app_drawer",
+        "description": "Android app drawer listing all installed apps",
+        "visual_cues": [
+          "alphabetical grid of app icons",
+          "search bar at top"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "task_list",
+        "description": "Main My Tasks list screen",
+        "visual_cues": [
+          "list of tasks with checkboxes",
+          "day-of-week or date indicator on right (Tue/Fri/Yest/Tmrw/Oct N)",
+          "red floating + button at bottom center",
+          "bottom bar with hamburger, mic, sort, overflow icons"
+        ],
+        "resource_hints": [
+          "My Tasks"
+        ]
+      },
+      {
+        "id": "task_editor",
+        "description": "Task creation/edit screen",
+        "visual_cues": [
+          "Task name field at top",
+          "No start date / No due date rows with clock icon",
+          "Does not repeat row",
+          "Priority row with 4 colored circles (grey/blue/yellow/red)",
+          "Add location, Add tags, Add subtask, Description fields",
+          "floppy disk save icon top-left"
+        ],
+        "resource_hints": [
+          "Task name",
+          "No due date",
+          "Does not repeat",
+          "Priority",
+          "Add subtask",
+          "Add location",
+          "Add tags",
+          "Description"
+        ]
+      },
+      {
+        "id": "date_time_picker",
+        "description": "Bottom-sheet combined date and time picker",
+        "visual_cues": [
+          "calendar grid for month",
+          "quick date presets (Today/Tomorrow/Next Sun/No date) on left",
+          "quick time presets (09:00/13:00/17:00/20:00/Pick time/No time) on right",
+          "OK button bottom-right",
+          "month navigation arrows"
+        ],
+        "resource_hints": [
+          "Pick time",
+          "No time",
+          "Next Sun"
+        ]
+      },
+      {
+        "id": "clock_time_picker",
+        "description": "SELECT TIME dialog with analog clock face",
+        "visual_cues": [
+          "24h clock face (outer 1-12, inner 13-00)",
+          "Hour/Minute fields at top",
+          "keyboard icon bottom-left to toggle manual entry",
+          "OK/CANCEL buttons"
+        ],
+        "resource_hints": [
+          "SELECT TIME"
+        ]
+      },
+      {
+        "id": "manual_time_entry",
+        "description": "Keyboard input mode of time picker",
+        "visual_cues": [
+          "Hour and Minute numeric input boxes",
+          "numeric keypad",
+          "OK button"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "recurrence_menu",
+        "description": "Dialog listing recurrence options",
+        "visual_cues": [
+          "Does not repeat / Every day / Every week / Every month / Every year / Custom..."
+        ],
+        "resource_hints": [
+          "Every week",
+          "Every month",
+          "Custom"
+        ]
+      },
+      {
+        "id": "custom_recurrence",
+        "description": "Custom recurrence configuration screen",
+        "visual_cues": [
+          "Repeats every N [unit] field",
+          "Repeats on day-of-week circles (S M T W T F S)",
+          "Ends Never/On/After options",
+          "back arrow to apply"
+        ],
+        "resource_hints": [
+          "Repeats every",
+          "Repeats on",
+          "Ends"
+        ]
+      },
+      {
+        "id": "tags_screen",
+        "description": "Tag selection/creation screen",
+        "visual_cues": [
+          "Enter tag name input",
+          "Create \"<text>\" suggestion",
+          "list of existing tags with checkboxes",
+          "back arrow"
+        ],
+        "resource_hints": [
+          "Enter tag name"
+        ]
+      },
+      {
+        "id": "location_picker",
+        "description": "Map view for selecting task location",
+        "visual_cues": [
+          "map with central pin",
+          "crosshair current-location button",
+          "Select this location button at bottom",
+          "search bar at top"
+        ],
+        "resource_hints": [
+          "Select this location"
+        ]
+      },
+      {
+        "id": "cert_warning",
+        "description": "Certificate trust prompt for map/location service",
+        "visual_cues": [
+          "cert4android unknown certificate text",
+          "manual verification checkbox",
+          "ACCEPT / REJECT buttons"
+        ],
+        "resource_hints": [
+          "cert4android",
+          "ACCEPT",
+          "REJECT"
+        ]
+      },
+      {
+        "id": "sort_view_menu",
+        "description": "Bottom sheet for grouping, sorting, completed sorting, and toggles",
+        "visual_cues": [
+          "Grouping row",
+          "Sorting row",
+          "Completed row",
+          "Move completed tasks to bottom toggle"
+        ],
+        "resource_hints": [
+          "Grouping",
+          "Sorting",
+          "Completed",
+          "Move completed tasks to bottom"
+        ]
+      },
+      {
+        "id": "sort_option_sheet",
+        "description": "Bottom sheet listing sort criteria options",
+        "visual_cues": [
+          "By due date / By start date / By priority / By title / By last modified / Smart sort / By creation time / By completion time",
+          "currently selected highlighted purple"
+        ],
+        "resource_hints": [
+          "Smart sort",
+          "By priority",
+          "By due date",
+          "By creation time"
+        ]
+      },
+      {
+        "id": "overflow_menu",
+        "description": "Three-dot menu on task list",
+        "visual_cues": [
+          "Clear Completed",
+          "Collapse/Expand subtasks",
+          "Show completed",
+          "Show unstarted",
+          "Share"
+        ],
+        "resource_hints": [
+          "Clear Completed",
+          "Show completed"
+        ]
+      },
+      {
+        "id": "left_nav_drawer",
+        "description": "Hamburger side menu",
+        "visual_cues": [
+          "My Tasks / Filters / Tags / Settings"
+        ],
+        "resource_hints": [
+          "Filters",
+          "Settings"
+        ]
+      },
+      {
+        "id": "discard_dialog",
+        "description": "Confirm discard changes dialog",
+        "visual_cues": [
+          "Are you sure you want to discard your changes?",
+          "DISCARD / KEEP EDITING"
+        ],
+        "resource_hints": [
+          "DISCARD"
+        ]
+      },
+      {
+        "id": "splash",
+        "description": "App launch splash screen",
+        "visual_cues": [
+          "large blue circle with white checkmark"
+        ],
+        "resource_hints": []
+      }
+    ],
+    "transitions": [
+      {
+        "from_state": "home_screen",
+        "to_state": "app_drawer",
+        "action": "swipe_up_from_bottom",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "app_drawer",
+        "to_state": "app_drawer",
+        "action": "swipe_up_to_scroll",
+        "precondition": "target app not visible",
+        "postcondition": ""
+      },
+      {
+        "from_state": "app_drawer",
+        "to_state": "splash",
+        "action": "click(Tasks_icon)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "splash",
+        "to_state": "task_list",
+        "action": "wait",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "app_drawer",
+        "to_state": "task_list",
+        "action": "click(Tasks_icon)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "task_list",
+        "to_state": "task_editor",
+        "action": "click(task_row)",
+        "precondition": "editing existing task",
+        "postcondition": ""
+      },
+      {
+        "from_state": "task_list",
+        "to_state": "task_editor",
+        "action": "click(fab_plus)",
+        "precondition": "creating new task",
+        "postcondition": ""
+      },
+      {
+        "from_state": "task_list",
+        "to_state": "overflow_menu",
+        "action": "click(three_dots)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "task_list",
+        "to_state": "sort_view_menu",
+        "action": "click(sort_icon)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "task_list",
+        "to_state": "left_nav_drawer",
+        "action": "click(hamburger)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "task_editor",
+        "to_state": "date_time_picker",
+        "action": "click(No due date / date row)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "date_time_picker",
+        "to_state": "clock_time_picker",
+        "action": "click(Pick time)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "clock_time_picker",
+        "to_state": "manual_time_entry",
+        "action": "click(keyboard_icon)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "manual_time_entry",
+        "to_state": "date_time_picker",
+        "action": "click(OK)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "clock_time_picker",
+        "to_state": "date_time_picker",
+        "action": "click(OK)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "date_time_picker",
+        "to_state": "task_editor",
+        "action": "click(OK)",
+        "precondition": "",
+        "postcondition": "date/time saved on task"
+      },
+      {
+        "from_state": "task_editor",
+        "to_state": "recurrence_menu",
+        "action": "click(Does not repeat)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "recurrence_menu",
+        "to_state": "task_editor",
+        "action": "click(Every week/month/year/day)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "recurrence_menu",
+        "to_state": "custom_recurrence",
+        "action": "click(Custom...)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "custom_recurrence",
+        "to_state": "task_editor",
+        "action": "click(back_arrow)",
+        "precondition": "settings configured",
+        "postcondition": ""
+      },
+      {
+        "from_state": "task_editor",
+        "to_state": "tags_screen",
+        "action": "click(Add tags)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "tags_screen",
+        "to_state": "task_editor",
+        "action": "click(back_arrow)",
+        "precondition": "tag created/selected",
+        "postcondition": ""
+      },
+      {
+        "from_state": "task_editor",
+        "to_state": "location_picker",
+        "action": "click(Add location)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "location_picker",
+        "to_state": "cert_warning",
+        "action": "click(Select this location)",
+        "precondition": "first-time SSL trust required",
+        "postcondition": ""
+      },
+      {
+        "from_state": "cert_warning",
+        "to_state": "location_picker",
+        "action": "check_box + click(ACCEPT)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "location_picker",
+        "to_state": "task_editor",
+        "action": "click(Select this location)",
+        "precondition": "cert already trusted",
+        "postcondition": ""
+      },
+      {
+        "from_state": "task_editor",
+        "to_state": "task_list",
+        "action": "click(save_icon)",
+        "precondition": "required fields valid",
+        "postcondition": "task saved"
+      },
+      {
+        "from_state": "task_editor",
+        "to_state": "discard_dialog",
+        "action": "system_back",
+        "precondition": "unsaved changes",
+        "postcondition": ""
+      },
+      {
+        "from_state": "discard_dialog",
+        "to_state": "task_list",
+        "action": "click(DISCARD)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "sort_view_menu",
+        "to_state": "sort_option_sheet",
+        "action": "click(Sorting/Grouping/Completed)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "sort_option_sheet",
+        "to_state": "sort_view_menu",
+        "action": "click(option)",
+        "precondition": "",
+        "postcondition": "selection applied"
+      },
+      {
+        "from_state": "sort_view_menu",
+        "to_state": "task_list",
+        "action": "system_back or tap outside",
+        "precondition": "",
+        "postcondition": ""
+      }
+    ],
+    "strategies": [
+      {
+        "name": "CREATE_TASK_WITH_DATE_TIME",
+        "preconditions": "task_list visible",
+        "steps": [
+          "click red + FAB",
+          "type task name",
+          "click 'No due date'",
+          "select date via calendar or quick preset",
+          "select time via quick preset OR click 'Pick time' for custom",
+          "for non-preset times use clock face or keyboard icon for manual entry",
+          "click OK to confirm date/time",
+          "click save (floppy) icon top-left"
+        ],
+        "success_signal": "new task appears in My Tasks list with correct date/time chip",
+        "fallback": "reopen task by tapping its row to verify and edit fields"
+      },
+      {
+        "name": "EDIT_TASK_PROPERTIES",
+        "preconditions": "task_list visible and target task identifiable",
+        "steps": [
+          "tap on task row (not checkbox) to open editor",
+          "tap priority circle (red=high, yellow=medium, blue=low, grey=none)",
+          "tap 'Does not repeat' and choose recurrence preset, or Custom... for advanced",
+          "tap 'Add subtask', type name, press keyboard checkmark",
+          "tap save icon top-left"
+        ],
+        "success_signal": "task list shows updated color checkbox / repeat icon / subtask count",
+        "fallback": "if save returns to list without changes, reopen task and verify each field"
+      },
+      {
+        "name": "SET_CUSTOM_RECURRENCE",
+        "preconditions": "task_editor open, recurrence_menu accessible",
+        "steps": [
+          "click 'Does not repeat'",
+          "click 'Custom...'",
+          "tap 'Repeats every' number field and edit interval (clear existing digit carefully)",
+          "change unit dropdown if needed (week/month/etc.)",
+          "tap day-of-week circles to toggle desired days",
+          "under Ends pick On (date) or After (count) and edit value",
+          "tap back arrow to apply"
+        ],
+        "success_signal": "task_editor shows summary like 'Repeats every N <unit> on <days> until/occurs ...'",
+        "fallback": "re-enter Custom recurrence to fix interval typos like '21' instead of '2'"
+      },
+      {
+        "name": "CONFIGURE_SORT_AND_GROUP",
+        "preconditions": "task_list visible",
+        "steps": [
+          "click sort icon in bottom bar",
+          "click 'Grouping' and select desired option",
+          "click 'Sorting' and select desired option",
+          "click 'Completed' and select desired sort",
+          "toggle 'Move completed tasks to bottom' as needed",
+          "dismiss sheet via back or tap outside"
+        ],
+        "success_signal": "sort sheet labels reflect chosen options; list re-orders accordingly",
+        "fallback": "if overflow (three dots) was opened by mistake, close and use sort icon instead"
+      },
+      {
+        "name": "MARK_TASK_COMPLETE",
+        "preconditions": "task_list visible and target task located",
+        "steps": [
+          "tap the checkbox at left of the task row"
+        ],
+        "success_signal": "'Task completed' toast appears and task is removed from active section",
+        "fallback": "if details opened instead, back out and tap precisely on checkbox"
+      },
+      {
+        "name": "QUERY_TASK_FIELD",
+        "preconditions": "task_list visible",
+        "steps": [
+          "scan list for target task title",
+          "tap task row to open editor if field not shown in list",
+          "read value of date/time/priority/repeat/location row",
+          "provide answer"
+        ],
+        "success_signal": "answer matches the displayed value",
+        "fallback": "scroll list both directions to confirm count/values"
+      },
+      {
+        "name": "ATTACH_CURRENT_LOCATION",
+        "preconditions": "task_editor open",
+        "steps": [
+          "click 'Add location'",
+          "click crosshair button to center on current GPS",
+          "grant location permission if prompted",
+          "click 'Select this location'",
+          "if cert warning appears, check 'I have manually verified...' then ACCEPT, retry"
+        ],
+        "success_signal": "location address appears in task editor row",
+        "fallback": "if internal error toast appears, re-center and retry Select this location"
+      }
+    ],
+    "dead_ends": [
+      {
+        "state": "task_editor",
+        "failed_action": "tapping 'No due date' multiple times expecting menu",
+        "note": "some taps cycle text rather than open dialog; use Custom... in recurrence menu for advanced control"
+      },
+      {
+        "state": "custom_recurrence",
+        "failed_action": "typing into 'Repeats every' field",
+        "note": "typing appends instead of replacing; resulting in values like '21' or '12' - need to position cursor and backspace carefully"
+      },
+      {
+        "state": "clock_time_picker",
+        "failed_action": "selecting hour on inner ring imprecisely",
+        "note": "can accidentally jump to minute mode; switch to manual keyboard entry for precision"
+      },
+      {
+        "state": "location_picker",
+        "failed_action": "clicking 'Select this location' before cert trusted",
+        "note": "triggers cert4android warning; must accept certificate first"
+      },
+      {
+        "state": "task_editor",
+        "failed_action": "using 24h time picker for '1:00 PM'",
+        "note": "entering '1' yields 1:00 AM; must enter 13 or use 13:00 preset"
+      },
+      {
+        "state": "app_drawer",
+        "failed_action": "tapping Markor/Joplin/Calendar thinking it's Tasks",
+        "note": "these are different apps; Tasks icon is blue circle with white checkmark"
+      },
+      {
+        "state": "task_list",
+        "failed_action": "opening overflow (three dots) seeking sort options",
+        "note": "overflow only has Clear Completed/Show completed; sort lives in dedicated sort icon"
+      }
+    ]
+  },
+  "layer2": {
+    "categories": [
+      {
+        "name": "ADD_ENTRY",
+        "precondition": "Application is open at its main list/collection screen",
+        "abstract_steps": [
+          "Invoke the primary 'add new' affordance (usually a floating action button)",
+          "Enter the required title/name into the focused input",
+          "Open and configure secondary properties (date, time, recurrence, priority, tags, location, description) via their respective rows",
+          "For each property choose either a quick preset or open an advanced picker",
+          "Confirm each picker dialog",
+          "Commit the new entry via the save/confirm control"
+        ],
+        "failure_modes": [
+          "Pressing back before saving discards the entry",
+          "Quick presets not matching the required value, requiring advanced picker",
+          "Typing into a non-focused field (text goes into wrong widget)",
+          "24-hour vs 12-hour confusion when entering times"
+        ],
+        "verification_checklist": [
+          "New entry visible in the main list",
+          "Displayed metadata (date/time/priority badges) matches input",
+          "Reopening the entry shows all configured fields persisted"
+        ]
+      },
+      {
+        "name": "EDIT_ENTRY",
+        "precondition": "Target entry is visible in a list or reachable via search",
+        "abstract_steps": [
+          "Locate the target entry by scanning or searching",
+          "Open its detail/edit view by tapping the entry (avoiding completion/delete affordances)",
+          "Modify required property rows one at a time",
+          "Confirm any sub-dialogs that appear",
+          "Save via the explicit save control"
+        ],
+        "failure_modes": [
+          "Tapping the wrong row item (e.g., adjacent entry) opens incorrect detail",
+          "Tapping a status checkbox marks complete instead of opening detail",
+          "Unsaved changes lost when navigating back without confirmation"
+        ],
+        "verification_checklist": [
+          "Detail view reflects new values after save",
+          "List view badges update to reflect changes",
+          "No unsaved-changes prompt appears on subsequent navigation"
+        ]
+      },
+      {
+        "name": "DELETE_OR_COMPLETE_ENTRY",
+        "precondition": "Target entry visible in list",
+        "abstract_steps": [
+          "Identify target entry",
+          "Tap status toggle (checkbox) or open detail and use delete control",
+          "Confirm any prompt"
+        ],
+        "failure_modes": [
+          "Tap location too close to text opens detail instead of toggling",
+          "Bulk operations require menu access not always discoverable"
+        ],
+        "verification_checklist": [
+          "Entry disappears from active list or appears struck-through in completed section",
+          "Confirmation toast displayed"
+        ]
+      },
+      {
+        "name": "QUERY_INFO",
+        "precondition": "Data is stored within the app and reachable via list/detail screens",
+        "abstract_steps": [
+          "Open the relevant collection screen",
+          "Scroll or search to locate matching entries",
+          "Read the requested attribute from list row or open detail for hidden fields",
+          "Aggregate counts/values across scrolled views carefully to avoid double counting",
+          "Return the formatted answer"
+        ],
+        "failure_modes": [
+          "Over- or under-counting due to large scroll jumps",
+          "Confusing similar-looking date labels (relative vs absolute)",
+          "Treating completed/struck-through entries as active or vice versa"
+        ],
+        "verification_checklist": [
+          "Scrolled through entire list at least once in both directions",
+          "Answer format matches user's requested format",
+          "Distinct entries counted exactly once"
+        ]
+      },
+      {
+        "name": "CONFIGURE_VIEW_SETTINGS",
+        "precondition": "List screen visible with sort/group affordances",
+        "abstract_steps": [
+          "Open the sort/view configuration control (often a dedicated icon, not the overflow menu)",
+          "Tap the dimension to change (grouping / sorting / completed sorting)",
+          "Select the desired option from the option sheet",
+          "Toggle any boolean preferences (e.g., move-completed-to-bottom)",
+          "Dismiss the configuration sheet"
+        ],
+        "failure_modes": [
+          "Confusing overflow menu with sort menu",
+          "Selection not registering and needing a retry",
+          "Settings scoped per-list and not global"
+        ],
+        "verification_checklist": [
+          "Configuration sheet displays the chosen labels",
+          "List visibly re-orders/regroups to reflect selection"
+        ]
+      },
+      {
+        "name": "SET_DATE_TIME",
+        "precondition": "In an editor with a date/time row",
+        "abstract_steps": [
+          "Open the date/time picker via the date row",
+          "Choose a date via calendar navigation or preset",
+          "Choose a time via preset, analog clock, or keyboard-numeric entry",
+          "Account for 24-hour clock when converting AM/PM",
+          "Confirm sub-dialogs in order (time then combined date+time)"
+        ],
+        "failure_modes": [
+          "Selecting AM time when PM intended",
+          "Picker dialog confirmations skipped, losing selection",
+          "Calendar arrow navigation overshooting target month"
+        ],
+        "verification_checklist": [
+          "Editor row shows the selected absolute date and time",
+          "Reopening the picker shows the same selection highlighted"
+        ]
+      },
+      {
+        "name": "SET_CUSTOM_RECURRENCE",
+        "precondition": "In an editor where simple presets are insufficient",
+        "abstract_steps": [
+          "Open recurrence menu and choose Custom",
+          "Set numeric interval, carefully handling text-field editing",
+          "Choose unit (day/week/month/year)",
+          "Select specific days of week or month if applicable",
+          "Choose end condition (never, on date, after N occurrences)",
+          "Apply via back/confirm control"
+        ],
+        "failure_modes": [
+          "Numeric field appends instead of replacing, producing wrong interval",
+          "Forgetting to select end condition leaves it as Never",
+          "Confusing two identical letter buttons (e.g., two 'T' for Tue/Thu)"
+        ],
+        "verification_checklist": [
+          "Editor summary line accurately reflects interval, days, and end condition"
+        ]
+      },
+      {
+        "name": "ATTACH_LOCATION",
+        "precondition": "In editor with location field; device supports map services",
+        "abstract_steps": [
+          "Open location picker",
+          "Center map on current position or search",
+          "Grant location permission if requested",
+          "Accept any certificate or trust prompts",
+          "Confirm selection"
+        ],
+        "failure_modes": [
+          "Map fails to load due to untrusted certificate",
+          "Permission denial blocks current-location fix",
+          "Internal errors after selection require retrying"
+        ],
+        "verification_checklist": [
+          "Address text appears in the editor's location row",
+          "Map reopens with same pin if revisited"
+        ]
+      },
+      {
+        "name": "NAVIGATE_TO_APP",
+        "precondition": "Device on home screen or another app",
+        "abstract_steps": [
+          "Return to home if necessary",
+          "Open app drawer",
+          "Scroll to find target app (alphabetical)",
+          "Launch the correct icon, verifying its label"
+        ],
+        "failure_modes": [
+          "Launching a visually similar but different app",
+          "Splash screen still loading - need to wait",
+          "Network/sync errors blocking initial entry"
+        ],
+        "verification_checklist": [
+          "App's main screen rendered with expected widgets",
+          "Header/title matches expected app"
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "built_at": "2025-01-15T00:00:00Z",
+    "n_episodes": 73,
+    "n_successful": 73,
+    "n_episodes_input": 73,
+    "synthesizer_model": "claude-opus-4-7",
+    "synthesizer_temperature": 0.3
+  }
+}

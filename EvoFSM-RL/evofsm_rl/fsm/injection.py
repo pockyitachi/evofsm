@@ -16,12 +16,14 @@ L_C file (Tier-C) return ``None``.
 
 from __future__ import annotations
 
+import json
 from pathlib import Path
 from typing import Any
 
 import yaml
 
 from evofsm_rl.fsm.aggregator import category_to_slug, load_L_C
+from evofsm_rl.fsm.schema import FSM
 
 
 def _find_category(splits_data: dict[str, Any], app_name: str) -> str | None:
@@ -81,4 +83,44 @@ def resolve_l_c_for_app(
     return layer2.to_prompt_text(category=category)
 
 
-__all__ = ["resolve_l_c_for_app"]
+def resolve_app_guidance(
+    app_name: str,
+    splits_yaml_path: str | Path,
+    l_c_dir: str | Path,
+    fsm_dir: str | Path | None = None,
+) -> tuple[str | None, str]:
+    """Three-tier resolver for the symbolic guidance to inject for one app.
+
+    Tier order (most → least specific):
+      1. ``app``  — a per-app static FSM exists at ``{fsm_dir}/{app}.json``
+         ⇒ inject the FULL app FSM (Layer-1 states/transitions/strategies/
+         dead_ends + the app's own Layer-2). Most specific knowledge.
+      2. ``category`` — no app FSM, but the app's Play-category has an L_C
+         file at ``{l_c_dir}/{slug}.json`` ⇒ inject category Layer-2.
+      3. ``bootstrap`` — neither exists ⇒ return ``(None, "bootstrap")``;
+         the caller bootstraps from the target app's own trajectories.
+
+    ``fsm_dir=None`` disables tier-1 (collapses to the original
+    category→bootstrap behaviour of :func:`resolve_l_c_for_app`).
+
+    Returns ``(prompt_text_or_None, tier)`` where ``tier`` is one of
+    ``"app" | "category" | "bootstrap"`` — the tier label lets the caller
+    log / analyse which knowledge source fired.
+    """
+    # ── Tier 1: app-level static FSM ────────────────────────────────
+    if fsm_dir is not None:
+        fsm_path = Path(fsm_dir) / f"{app_name}.json"
+        if fsm_path.exists():
+            fsm = FSM.from_json(json.loads(fsm_path.read_text()))
+            return fsm.to_prompt_text(), "app"
+
+    # ── Tier 2: category-level L_C ──────────────────────────────────
+    text = resolve_l_c_for_app(app_name, splits_yaml_path, l_c_dir)
+    if text is not None:
+        return text, "category"
+
+    # ── Tier 3: bootstrap (caller handles) ──────────────────────────
+    return None, "bootstrap"
+
+
+__all__ = ["resolve_l_c_for_app", "resolve_app_guidance"]

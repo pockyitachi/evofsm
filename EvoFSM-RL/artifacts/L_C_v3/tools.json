@@ -1,0 +1,171 @@
+{
+  "category": "Tools",
+  "layer2": {
+    "categories": [
+      {
+        "name": "LAUNCH_APP",
+        "precondition": "Device launcher surface or application list visible; target application available",
+        "abstract_steps": [
+          "Invoke system-level application launch by its registered identifier (confirming any launch prompt if presented)",
+          "Wait for main view to render",
+          "Verify landing screen matches expected main state"
+        ],
+        "failure_modes": [
+          "Application not installed",
+          "Launcher blocks external intent",
+          "Landing on a different startup view (tutorial, permission prompt)"
+        ],
+        "verification_checklist": [
+          "Main workspace visible",
+          "Expected primary input/output areas present",
+          "No modal overlay blocking interaction"
+        ]
+      },
+      {
+        "name": "INPUT_LINEAR_EXPRESSION",
+        "precondition": "Main input surface active and empty or reset",
+        "abstract_steps": [
+          "Input first operand elements sequentially",
+          "Insert connector between operands",
+          "Input subsequent operand elements",
+          "Repeat until full expression entered",
+          "Optionally trigger evaluation/confirmation"
+        ],
+        "failure_modes": [
+          "Missing connector causes adjacent operand elements to merge unintentionally into a single token",
+          "Premature resetting of partial entry",
+          "Misreading auto-evaluated intermediate output as final state"
+        ],
+        "verification_checklist": [
+          "Expression matches intended sequence",
+          "No additional or omitted elements in the entered sequence",
+          "Result (if evaluated) matches expected value within tolerance"
+        ]
+      },
+      {
+        "name": "APPLY_UNARY_OPERATION",
+        "precondition": "Main input surface active; target operation available (possibly after revealing hidden controls)",
+        "abstract_steps": [
+          "If operation control not visible, toggle advanced/secondary panel",
+          "Apply operation before or after operand depending on its fixity (prefix vs postfix)",
+          "Enter operand if prefix style required",
+          "Confirm/evaluate if needed"
+        ],
+        "failure_modes": [
+          "Using incorrect fixity for the chosen operator (e.g., placing operator after operand when prefix position is required, or vice versa)",
+          "Substituting a different operation than the one intended (selecting a related but distinct function)",
+          "Not revealing hidden control panel before attempting to locate the control"
+        ],
+        "verification_checklist": [
+          "Expression displays the correct operator element",
+          "Result consistent with the intended operation semantics"
+        ]
+      },
+      {
+        "name": "APPLY_COMPOUND_FORMULA",
+        "precondition": "Main input surface active; all required operators/operands known",
+        "abstract_steps": [
+          "Plan full element sequence in advance",
+          "Use grouping markers around denominators or nested sub-expressions as needed to preserve intended structure of the formula",
+          "Enter elements strictly in left-to-right order",
+          "Close any opened grouping markers in matching nesting order to finalize the structure",
+          "Evaluate"
+        ],
+        "failure_modes": [
+          "Operator precedence errors caused by omitting appropriate grouping markers around sub-expressions",
+          "Forgetting to close an opened grouping marker before evaluation of the expression",
+          "Applying an exponent-like operator without grouping a composite exponent sub-expression, causing only part of it to be raised"
+        ],
+        "verification_checklist": [
+          "All grouping markers are balanced and correctly scoped to their intended sub-expressions within the formula",
+          "Result matches the expected correct answer",
+          "Expression visible in display matches planned sequence exactly"
+        ]
+      },
+      {
+        "name": "REVEAL_HIDDEN_CONTROL",
+        "precondition": "A required control is not visible in default layout",
+        "abstract_steps": [
+          "Identify a toggle that exposes additional controls",
+          "Activate the toggle",
+          "Locate and use the previously hidden control",
+          "Optionally return the panel to its compact state"
+        ],
+        "failure_modes": [
+          "Confusing an overflow/more-options menu with a feature-expansion toggle that swaps the displayed control set",
+          "Assuming control does not exist and declaring task infeasible",
+          "Getting stuck in sub-menu without ability to return"
+        ],
+        "verification_checklist": [
+          "Target control becomes visible and interactive",
+          "Primary workspace still reachable afterward"
+        ]
+      },
+      {
+        "name": "RESET_INPUT",
+        "precondition": "Input surface contains unwanted or incorrect content",
+        "abstract_steps": [
+          "Invoke the full-reset control that empties the entire input surface",
+          "Verify input surface is empty or at initial value",
+          "Begin fresh entry"
+        ],
+        "failure_modes": [
+          "Using partial-delete (removing a lone element) when a full reset was intended",
+          "Repeatedly performing a full reset without addressing the underlying conceptual error",
+          "Resetting after each element, preventing multi-element entry"
+        ],
+        "verification_checklist": [
+          "Input surface shows empty/initial state",
+          "Subsequent actions build expression from scratch"
+        ]
+      },
+      {
+        "name": "VERIFY_OUTPUT",
+        "precondition": "An operation has been evaluated",
+        "abstract_steps": [
+          "Read result field",
+          "Compare against expected value or symbolic form",
+          "Decide success or retry"
+        ],
+        "failure_modes": [
+          "Misinterpreting an auto-preview intermediate value as the final committed result",
+          "Stopping at an unexpected partial value and declaring completion prematurely without full evaluation",
+          "Not noticing mode or unit differences affecting interpretation"
+        ],
+        "verification_checklist": [
+          "Result is well-formed and finite",
+          "Value matches expected within appropriate precision",
+          "Mode/units appropriate for the problem"
+        ]
+      },
+      {
+        "name": "NAVIGATE_MENU",
+        "precondition": "Secondary menu or overlay opened",
+        "abstract_steps": [
+          "Scan menu for relevant item",
+          "Select it or dismiss if irrelevant",
+          "Return to main workspace via back/dismiss action"
+        ],
+        "failure_modes": [
+          "Treating the menu as a source of unrelated features",
+          "Leaving a modal overlay open and blocking further input"
+        ],
+        "verification_checklist": [
+          "Returned to main workspace",
+          "No lingering overlay or modal surface"
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "source": "exclude_system_passthrough",
+    "apps": [
+      "calculator"
+    ],
+    "excluded": [
+      "clock",
+      "files",
+      "system_settings"
+    ]
+  }
+}

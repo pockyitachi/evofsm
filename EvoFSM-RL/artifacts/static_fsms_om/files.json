@@ -1,0 +1,737 @@
+{
+  "version": "0.1.0",
+  "app": "files",
+  "layer1": {
+    "app": "files",
+    "category": "Tools",
+    "states": [
+      {
+        "id": "home_screen",
+        "description": "Android device home screen",
+        "visual_cues": [
+          "app icons dock",
+          "Google search bar",
+          "wallpaper"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "app_drawer",
+        "description": "Android app drawer listing all installed apps",
+        "visual_cues": [
+          "alphabetical app grid",
+          "search bar at top"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "downloads_folder",
+        "description": "Default Downloads folder view in Files app",
+        "visual_cues": [
+          "'Downloads' title header",
+          "filter chips (Images, Audio, Videos, Documents)",
+          "hamburger menu top-left",
+          "search icon top-right",
+          "three-dot menu top-right",
+          "view toggle icon",
+          "'No items' when empty"
+        ],
+        "resource_hints": [
+          "Downloads"
+        ]
+      },
+      {
+        "id": "nav_drawer",
+        "description": "Side navigation drawer for switching categories/storage",
+        "visual_cues": [
+          "Recent",
+          "Images",
+          "Videos",
+          "Audio",
+          "Documents",
+          "Downloads",
+          "internal storage entry (e.g., sdk_gphone64_arm64)"
+        ],
+        "resource_hints": [
+          "Recent",
+          "Images",
+          "Videos",
+          "Audio",
+          "Documents",
+          "Downloads"
+        ]
+      },
+      {
+        "id": "category_view",
+        "description": "Aggregated category view (Images/Videos/Audio/Documents/Recent)",
+        "visual_cues": [
+          "category title header",
+          "filter chips 'Large files', 'This week'",
+          "folder grid/list"
+        ],
+        "resource_hints": [
+          "Large files",
+          "This week"
+        ]
+      },
+      {
+        "id": "internal_storage_root",
+        "description": "Internal storage root directory",
+        "visual_cues": [
+          "device name title (e.g. sdk_gphone64_arm64)",
+          "system folders (Alarms, Android, DCIM, Documents, Download, Movies, Music, Pictures, Recordings, Ringtones)"
+        ],
+        "resource_hints": [
+          "sdk_gphone64_arm64"
+        ]
+      },
+      {
+        "id": "subfolder_view",
+        "description": "Inside a specific subfolder (e.g., Recordings, Ringtones, Documents)",
+        "visual_cues": [
+          "breadcrumb path at top",
+          "filter chips",
+          "view toggle",
+          "three-dot menu"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "options_menu",
+        "description": "Overflow dropdown menu opened from three-dot icon",
+        "visual_cues": [
+          "New window",
+          "New folder",
+          "Sort by...",
+          "Select all",
+          "Get info",
+          "Show hidden files / Don't show hidden files"
+        ],
+        "resource_hints": [
+          "New folder",
+          "Sort by...",
+          "Show hidden files"
+        ]
+      },
+      {
+        "id": "new_folder_dialog",
+        "description": "Dialog prompting for new folder name",
+        "visual_cues": [
+          "'New folder' title",
+          "'Folder name' text field highlighted blue",
+          "OK/Cancel buttons"
+        ],
+        "resource_hints": [
+          "Folder name"
+        ]
+      },
+      {
+        "id": "sort_by_sheet",
+        "description": "Bottom sheet with sort options",
+        "visual_cues": [
+          "'SORT BY' header",
+          "Name A-Z/Z-A",
+          "Modified newest/oldest first",
+          "Size largest/smallest first"
+        ],
+        "resource_hints": [
+          "Sort by"
+        ]
+      },
+      {
+        "id": "search_view",
+        "description": "Search interface with input bar and filter chips",
+        "visual_cues": [
+          "active 'Search...' bar",
+          "filter chips row",
+          "search history list",
+          "on-screen keyboard"
+        ],
+        "resource_hints": [
+          "Search"
+        ]
+      },
+      {
+        "id": "search_results",
+        "description": "Search results with optional filters and scope indicator",
+        "visual_cues": [
+          "query in search bar",
+          "filter chip(s) highlighted",
+          "'Files in <scope>' indicator",
+          "results grid/list or 'No matches in <scope>'"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "launcher_not_responding_dialog",
+        "description": "System dialog when launcher hangs",
+        "visual_cues": [
+          "'Pixel Launcher isn't responding'",
+          "Wait button",
+          "Close app button"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "home_long_press_menu",
+        "description": "Home screen long-press customization menu",
+        "visual_cues": [
+          "Wallpaper & style",
+          "Widgets",
+          "Home settings"
+        ],
+        "resource_hints": []
+      }
+    ],
+    "transitions": [
+      {
+        "from_state": "home_screen",
+        "to_state": "app_drawer",
+        "action": "swipe_up_from_bottom",
+        "precondition": "",
+        "postcondition": "app drawer visible"
+      },
+      {
+        "from_state": "home_screen",
+        "to_state": "home_long_press_menu",
+        "action": "long_press (accidental)",
+        "precondition": "",
+        "postcondition": "customization menu shown"
+      },
+      {
+        "from_state": "home_long_press_menu",
+        "to_state": "home_screen",
+        "action": "press_back",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "app_drawer",
+        "to_state": "downloads_folder",
+        "action": "click(Files app icon)",
+        "precondition": "",
+        "postcondition": "Files app launches to Downloads"
+      },
+      {
+        "from_state": "downloads_folder",
+        "to_state": "nav_drawer",
+        "action": "click(hamburger_menu)",
+        "precondition": "",
+        "postcondition": "drawer open"
+      },
+      {
+        "from_state": "subfolder_view",
+        "to_state": "nav_drawer",
+        "action": "click(hamburger_menu)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "category_view",
+        "to_state": "nav_drawer",
+        "action": "click(hamburger_menu)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "nav_drawer",
+        "to_state": "category_view",
+        "action": "click(category: Recent/Images/Videos/Audio/Documents)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "nav_drawer",
+        "to_state": "downloads_folder",
+        "action": "click(Downloads)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "nav_drawer",
+        "to_state": "internal_storage_root",
+        "action": "click(device_internal_storage_entry)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "internal_storage_root",
+        "to_state": "subfolder_view",
+        "action": "click(folder)",
+        "precondition": "",
+        "postcondition": "enters folder"
+      },
+      {
+        "from_state": "downloads_folder",
+        "to_state": "options_menu",
+        "action": "click(three_dot_menu)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "subfolder_view",
+        "to_state": "options_menu",
+        "action": "click(three_dot_menu)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "internal_storage_root",
+        "to_state": "options_menu",
+        "action": "click(three_dot_menu)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "options_menu",
+        "to_state": "new_folder_dialog",
+        "action": "click(New folder)",
+        "precondition": "physical directory (not category view)",
+        "postcondition": "dialog open"
+      },
+      {
+        "from_state": "options_menu",
+        "to_state": "sort_by_sheet",
+        "action": "click(Sort by...)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "options_menu",
+        "to_state": "downloads_folder",
+        "action": "click(Show hidden files)",
+        "precondition": "",
+        "postcondition": "hidden files toggled, menu closes"
+      },
+      {
+        "from_state": "new_folder_dialog",
+        "to_state": "subfolder_view",
+        "action": "type(folder_name) then confirm",
+        "precondition": "",
+        "postcondition": "new folder created"
+      },
+      {
+        "from_state": "sort_by_sheet",
+        "to_state": "downloads_folder",
+        "action": "click(sort option)",
+        "precondition": "",
+        "postcondition": "sort applied"
+      },
+      {
+        "from_state": "downloads_folder",
+        "to_state": "search_view",
+        "action": "click(search_icon)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "category_view",
+        "to_state": "search_view",
+        "action": "click(search_icon)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "subfolder_view",
+        "to_state": "search_view",
+        "action": "click(search_icon)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "search_view",
+        "to_state": "search_results",
+        "action": "type(query) + enter/select_chip",
+        "precondition": "",
+        "postcondition": "results limited to current scope"
+      },
+      {
+        "from_state": "search_results",
+        "to_state": "search_results",
+        "action": "click(filter_chip: Images/Audio/Videos/Documents)",
+        "precondition": "",
+        "postcondition": "filter toggled"
+      },
+      {
+        "from_state": "search_results",
+        "to_state": "downloads_folder",
+        "action": "press_back",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "downloads_folder",
+        "to_state": "downloads_folder",
+        "action": "click(filter_chip)",
+        "precondition": "",
+        "postcondition": "filter toggled in place"
+      },
+      {
+        "from_state": "downloads_folder",
+        "to_state": "downloads_folder",
+        "action": "click(view_toggle)",
+        "precondition": "",
+        "postcondition": "switches list/grid"
+      },
+      {
+        "from_state": "launcher_not_responding_dialog",
+        "to_state": "home_screen",
+        "action": "click(Wait/Close app)",
+        "precondition": "",
+        "postcondition": "dialog dismissed"
+      }
+    ],
+    "strategies": [
+      {
+        "name": "OPEN_FILES_APP",
+        "preconditions": "On home screen",
+        "steps": [
+          "Swipe up from bottom to open app drawer",
+          "Tap Files app icon",
+          "Wait for app to load to Downloads view"
+        ],
+        "success_signal": "Downloads header visible with filter chips",
+        "fallback": "If long-press menu appears, press Back; if launcher unresponsive dialog appears, click Wait or Close app and retry"
+      },
+      {
+        "name": "FILTER_IN_DOWNLOADS",
+        "preconditions": "In Downloads folder",
+        "steps": [
+          "Tap desired filter chip (Images/Audio/Videos/Documents)",
+          "Optionally tap additional chips to combine filters",
+          "Verify chip(s) highlighted blue with checkmark"
+        ],
+        "success_signal": "Chip(s) highlighted; either results shown or 'No matches in Downloads'",
+        "fallback": "If wrong scope, open hamburger menu and switch to global category"
+      },
+      {
+        "name": "NAVIGATE_TO_GLOBAL_CATEGORY",
+        "preconditions": "Files app open",
+        "steps": [
+          "Tap hamburger menu top-left",
+          "Tap desired category (Recent/Images/Videos/Audio/Documents)",
+          "Verify category title in header"
+        ],
+        "success_signal": "Header shows category name; aggregated folders/files appear",
+        "fallback": "If accidentally tapped wrong item, reopen drawer and re-select"
+      },
+      {
+        "name": "NAVIGATE_TO_INTERNAL_STORAGE_ROOT",
+        "preconditions": "Files app open",
+        "steps": [
+          "Tap hamburger menu",
+          "Tap device internal storage entry (e.g., sdk_gphone64_arm64)",
+          "Verify standard root folders visible (Alarms, Android, DCIM, etc.)"
+        ],
+        "success_signal": "Header shows device name; root folder grid visible",
+        "fallback": ""
+      },
+      {
+        "name": "CREATE_NEW_FOLDER",
+        "preconditions": "Inside a physical directory (Downloads, internal storage, or a subfolder), NOT inside a category aggregate view",
+        "steps": [
+          "Tap three-dot overflow menu top-right",
+          "Tap 'New folder'",
+          "Type the folder name in the dialog text field",
+          "Confirm (OK)"
+        ],
+        "success_signal": "New folder appears in the directory listing",
+        "fallback": "If 'New folder' option not visible, navigate to internal storage or a real folder (category views like Audio/Documents do not allow creation)"
+      },
+      {
+        "name": "SORT_FILES",
+        "preconditions": "Inside a folder",
+        "steps": [
+          "Tap three-dot menu",
+          "Tap 'Sort by...'",
+          "Select desired sort option (Name A-Z/Z-A, Modified newest/oldest, Size largest/smallest)"
+        ],
+        "success_signal": "Sort sheet closes; chosen option marked as active when reopened",
+        "fallback": ""
+      },
+      {
+        "name": "TOGGLE_HIDDEN_FILES",
+        "preconditions": "Inside a folder",
+        "steps": [
+          "Tap three-dot menu",
+          "Tap 'Show hidden files'"
+        ],
+        "success_signal": "Menu closes; reopening shows 'Don't show hidden files'",
+        "fallback": ""
+      },
+      {
+        "name": "TOGGLE_VIEW_LAYOUT",
+        "preconditions": "Inside a folder/category with files",
+        "steps": [
+          "Locate view toggle icon on right side under filter chips",
+          "Tap once to switch list<->grid",
+          "Note: icon shown represents the OPPOSITE of current layout"
+        ],
+        "success_signal": "File items rearrange between list rows and grid tiles",
+        "fallback": "If unclear, click toggle once more and observe layout change"
+      },
+      {
+        "name": "SEARCH_WITH_FILTER",
+        "preconditions": "Files app open at desired scope (folder or category)",
+        "steps": [
+          "Tap search icon top-right",
+          "Type query in search bar",
+          "Optionally tap file-type filter chip(s)",
+          "Submit via keyboard or wait for live results"
+        ],
+        "success_signal": "Query shown in search bar; filter chip highlighted; results or 'No matches in <scope>' displayed",
+        "fallback": "If 'No matches', press back and broaden scope (switch to internal storage root or a global category), then re-search"
+      },
+      {
+        "name": "COUNT_OR_VERIFY_FILES",
+        "preconditions": "Filtered/searched view",
+        "steps": [
+          "Scroll to ensure all matching items visible",
+          "Count visible items",
+          "Provide numeric answer or Yes/No based on presence"
+        ],
+        "success_signal": "Answer matches displayed contents",
+        "fallback": "If list extends, scroll up and down to capture all entries"
+      },
+      {
+        "name": "REMOVE_SEARCH_HISTORY_ENTRY",
+        "preconditions": "Search view open",
+        "steps": [
+          "Open search view from any scope",
+          "Locate desired query in recent search history",
+          "Tap the 'x' next to the entry to remove it"
+        ],
+        "success_signal": "Entry no longer in history when search reopened",
+        "fallback": ""
+      }
+    ],
+    "dead_ends": [
+      {
+        "state": "category_view",
+        "failed_action": "Open three-dot menu seeking 'New folder'",
+        "note": "Aggregated category views (Audio/Images/Videos/Documents) do not expose 'New folder'. Must navigate to internal storage or a real subdirectory."
+      },
+      {
+        "state": "downloads_folder",
+        "failed_action": "Tap filter chip expecting global scope",
+        "note": "Filter chips on Downloads only filter Downloads contents, not device-wide. Use hamburger menu to reach global category."
+      },
+      {
+        "state": "search_results",
+        "failed_action": "Search within a specific empty folder",
+        "note": "Search scope is restricted to current folder (e.g., 'No matches in Downloads'). Back out and search from a broader scope."
+      },
+      {
+        "state": "home_long_press_menu",
+        "failed_action": "Swipe up too slowly / from wrong area",
+        "note": "Triggers wallpaper/widgets menu instead of app drawer; press Back and retry with a clear bottom-up swipe."
+      },
+      {
+        "state": "launcher_not_responding_dialog",
+        "failed_action": "Repeated swipes during launcher hang",
+        "note": "Causes 'Pixel Launcher isn't responding' dialog; select Wait or Close app to recover."
+      },
+      {
+        "state": "search_view",
+        "failed_action": "Type before search field has focus",
+        "note": "Text input may not register; tap the search bar first to ensure focus before typing."
+      }
+    ]
+  },
+  "layer2": {
+    "categories": [
+      {
+        "name": "NAVIGATE_TO",
+        "precondition": "Application launched or accessible from launcher; target location identifiable in navigation hierarchy",
+        "abstract_steps": [
+          "Launch the app via launcher or app drawer if not in foreground",
+          "Open primary navigation (side drawer/menu) if target is outside default landing",
+          "Select the target top-level section or storage root",
+          "Drill into subfolders by tapping their entries",
+          "Confirm location via header/breadcrumb"
+        ],
+        "failure_modes": [
+          "Tapping a filter chip instead of switching the actual scope",
+          "Selecting a similarly named adjacent item",
+          "Confusing aggregated category views with physical directories"
+        ],
+        "verification_checklist": [
+          "Header/title matches target location",
+          "Breadcrumb path reflects expected hierarchy",
+          "Available actions match expected directory type"
+        ]
+      },
+      {
+        "name": "ADD_ENTRY",
+        "precondition": "Inside a writable container/directory that supports creation",
+        "abstract_steps": [
+          "Open overflow/options menu in the container",
+          "Choose 'create new' action",
+          "Enter the requested name in the prompted input",
+          "Confirm creation"
+        ],
+        "failure_modes": [
+          "Attempting creation inside a read-only or aggregated/virtual view",
+          "Submitting without focusing the input field",
+          "Naming collisions or invalid characters"
+        ],
+        "verification_checklist": [
+          "New entry visible in the current listing",
+          "Name matches the requested string exactly",
+          "Entry is located in the correct parent container"
+        ]
+      },
+      {
+        "name": "FILTER_ENTRIES",
+        "precondition": "Listing view with available filter controls",
+        "abstract_steps": [
+          "Identify filter chips or controls",
+          "Toggle one or more filters relevant to the request",
+          "Confirm each selected filter is highlighted/active",
+          "Observe result list updates"
+        ],
+        "failure_modes": [
+          "Applying filter within a narrow scope when a global scope was intended",
+          "Forgetting to combine multiple filters when required",
+          "Misinterpreting empty results as task failure when filter was correctly applied"
+        ],
+        "verification_checklist": [
+          "All requested filters show active/selected state",
+          "Scope indicator matches intended location",
+          "Result count consistent with filter combination"
+        ]
+      },
+      {
+        "name": "SORT_ENTRIES",
+        "precondition": "Listing view with sort controls available via menu",
+        "abstract_steps": [
+          "Open overflow/options menu",
+          "Choose sort action",
+          "Select desired sort criterion and order"
+        ],
+        "failure_modes": [
+          "Selecting a similar but incorrect criterion (e.g., wrong direction)",
+          "Sort controls unavailable in aggregated views"
+        ],
+        "verification_checklist": [
+          "Reopening sort shows the chosen option marked",
+          "Order of visible items matches the criterion"
+        ]
+      },
+      {
+        "name": "CHANGE_VIEW_LAYOUT",
+        "precondition": "Listing view with a layout toggle",
+        "abstract_steps": [
+          "Locate the layout toggle control",
+          "Tap to switch between list and grid",
+          "Observe item arrangement change"
+        ],
+        "failure_modes": [
+          "Misreading icon semantics (icon often depicts the OPPOSITE layout)",
+          "Repeated toggling that returns to the original layout"
+        ],
+        "verification_checklist": [
+          "Item arrangement matches target layout",
+          "Toggle icon now depicts the alternate layout"
+        ]
+      },
+      {
+        "name": "TOGGLE_SETTING",
+        "precondition": "Container with a binary view/option in its menu",
+        "abstract_steps": [
+          "Open overflow menu",
+          "Tap the option to flip its state"
+        ],
+        "failure_modes": [
+          "Option not present in current scope/view"
+        ],
+        "verification_checklist": [
+          "Reopening menu shows the inverted label or checked state"
+        ]
+      },
+      {
+        "name": "SEARCH_QUERY",
+        "precondition": "App provides a search affordance reachable from current scope",
+        "abstract_steps": [
+          "Activate search control",
+          "Ensure input field is focused",
+          "Type the query",
+          "Optionally apply type/category filters",
+          "Submit or rely on live search"
+        ],
+        "failure_modes": [
+          "Searching within a narrow scope when target may be elsewhere",
+          "Typing before focus is set causing lost input",
+          "Treating empty result set as conclusive without broadening scope"
+        ],
+        "verification_checklist": [
+          "Query string visible in search bar",
+          "Active filters match request",
+          "Scope indicator reflects intended breadth"
+        ]
+      },
+      {
+        "name": "QUERY_INFO",
+        "precondition": "Information is discoverable via navigation, filter, or search",
+        "abstract_steps": [
+          "Navigate to the most relevant scope",
+          "Apply any filters needed to isolate the subset",
+          "Scroll fully to enumerate or inspect items",
+          "Derive the answer (count, presence, name, recency)"
+        ],
+        "failure_modes": [
+          "Counting only the visible portion without scrolling",
+          "Confusing aggregated vs physical directory contents",
+          "Misreading truncated names in grid view"
+        ],
+        "verification_checklist": [
+          "All matching items have been viewed",
+          "Layout chosen allows reading full names if needed",
+          "Final answer format matches request (number, yes/no, name)"
+        ]
+      },
+      {
+        "name": "DELETE_ENTRY",
+        "precondition": "An identifiable entry exists in current scope and a removal control is available",
+        "abstract_steps": [
+          "Locate the target entry in the listing or history",
+          "Activate the per-item delete/remove control",
+          "Confirm removal if prompted"
+        ],
+        "failure_modes": [
+          "Misidentifying a similarly named entry",
+          "Removal control hidden by keyboard or off-screen"
+        ],
+        "verification_checklist": [
+          "Entry no longer present after refresh",
+          "No unintended entries were removed"
+        ]
+      },
+      {
+        "name": "RECOVER_FROM_LAUNCHER_ISSUES",
+        "precondition": "Unexpected system dialog or wrong app launched",
+        "abstract_steps": [
+          "Dismiss popups via Back or Wait/Close",
+          "Return to home via Home button",
+          "Re-initiate the intended navigation"
+        ],
+        "failure_modes": [
+          "Repeating the same failing gesture without recovery",
+          "Accidentally launching unrelated apps from a customization menu"
+        ],
+        "verification_checklist": [
+          "Home screen or app drawer is reachable",
+          "Target app launches and reaches expected landing state"
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "built_at": "2025-01-17T00:00:00Z",
+    "n_episodes": 76,
+    "n_successful": 76,
+    "n_episodes_input": 76,
+    "synthesizer_model": "claude-opus-4-7",
+    "synthesizer_temperature": 0.3
+  }
+}

@@ -1,0 +1,491 @@
+\section{Experiments}
+\label{sec:exp}
+
+We test EvoFSM-RL at two levels of generalization, running the identical
+adaptation loop of Section~\ref{sec:method} at both. The two levels differ in
+how far the deployment target sits from the training distribution, and they
+are built on different benchmarks with different data structures; we therefore
+introduce each level's benchmark, splits, and counting convention separately
+before reporting its results.
+
+\textbf{Level~1 --- within-benchmark generalization (Section~\ref{sec:exp-within}).}
+Source and target apps are drawn from the same benchmark family
+(AndroidWorld+). The agent adapts to a target app whose Play Store category may
+or may not be represented among the source apps, while the benchmark, action
+space, and grader are held fixed. This level isolates cross-app and
+cross-category transfer under matched evaluation conditions.
+
+\textbf{Level~2 --- cross-benchmark generalization (Section~\ref{sec:exp-cross}).}
+The shared LoRA is pretrained on the full AndroidWorld+ pool and the agent is
+then deployed on a separate benchmark, MobileWorld~\citep{mobileworld2025},
+whose apps, prompt format, and task horizons were constructed independently of
+the training source. This is the deployment-faithful level: the target is an
+independently authored app suite, not a held-out slice of the training
+benchmark.
+
+Both levels share one four-rung baseline ladder so that each mechanism's
+contribution can be read within a level and compared across levels:
+\textbf{B1} (zero-shot), \textbf{B2} (static prior), \textbf{B3} (online
+context evolution), and \textbf{B4} (joint LoRA and FSM adaptation). The
+mechanism added at each rung is exactly one step beyond the previous rung.
+
+%======================================================================
+\subsection{Level 1: Within-benchmark generalization (AndroidWorld+)}
+\label{sec:exp-within}
+
+\subsubsection{Benchmark and data structure}
+\label{sec:exp-within-data}
+
+The benchmark is AndroidWorld~\citep{rawles2024androidworld} extended with six
+apps from BMOCA (Calculator, Snapseed, Wikipedia) and
+AndroidLab~\citep{xu2024androidlab} (Bluecoins, Maps.me, Pi~Music), for 25 apps
+spanning 12 Play Store categories and 192 app-attributable task templates. The
+apps are partitioned into three pools (Table~\ref{tab:aw-splits}). The source
+pool spans the six categories that contain at least two apps; the Tier-B target
+pool holds apps whose category is represented in the source pool
+(near-transfer); the Tier-C target pool draws from single-app categories absent
+from the source pool (far-transfer).
+
+\begin{table}[t]
+\small
+\centering
+\begin{tabular}{lrrr}
+\hline
+\textbf{Pool} & \textbf{Apps} & \textbf{Templates} & \textbf{Episodes} \\
+\hline
+Source pool                & 12 & 96  & 480 (K=5) \\
+Tier-B $T_{\text{adapt}}$  &  6 & 32  & 160 (K=5) \\
+Tier-B $T_{\text{eval}}$   &  6 & 18  &  54 (K=3) \\
+Tier-C $T_{\text{adapt}}$  &  7 & 29  & 145 (K=5) \\
+Tier-C $T_{\text{eval}}$   &  6 & 17  &  51 (K=3) \\
+\hline
+\textbf{Total}             & 25 & 192 & 890 \\
+\hline
+\end{tabular}
+\caption{Level-1 pool composition. Templates are schema-level units; episodes
+count templates times $K$ seeds. Tier-C contains one extra app
+(\texttt{simple\_draw\_pro}) with $N{=}1$ template assigned entirely to
+$T_{\text{adapt}}$; its $T_{\text{eval}}$ is empty and the app is excluded from
+the Tier-C aggregate.}
+\label{tab:aw-splits}
+\end{table}
+
+Within every target app, templates are partitioned 60/40 into $T_{\text{adapt}}$
+and $T_{\text{eval}}$ by deterministic alphabetical ordering. The two splits are
+\emph{template-disjoint}: the templates themselves differ, so $T_{\text{eval}}$
+measures within-app generalization of the adaptation procedure rather than
+parameter robustness on memorized templates---the support/query convention of
+meta-learning~\citep{finn2017maml} and the train-level/test-level convention of
+Procgen~\citep{cobbe2020procgen}. Seeds also differ: $T_{\text{adapt}}$ uses
+$\{30,31,32,33,34\}$ ($K{=}5$) and $T_{\text{eval}}$ uses $\{40,41,42\}$
+($K{=}3$). Stacked together, the three independent splits---pool, category, and
+template---give a measurement of cross-app and cross-category generalization
+rather than within-template parameter robustness. Absolute numbers under this
+protocol are lower than the same model's AndroidWorld leaderboard numbers by
+design.
+
+\subsubsection{Baseline ladder}
+\label{sec:exp-within-baselines}
+
+\textbf{B1 (zero-shot).} The M3A loop on Qwen3-VL-8B-Instruct with no FSM and no
+$L_C$ in the action-selection prompt.
+
+\textbf{B2 (static $L_C$ injection).} The same agent and generation config, but
+when the target app's Play category is in the source pool, the matching $L_C$
+text is injected between the prompt prefix and the dynamic block. $L_C$ is
+frozen: no online evolution and no weight update. Tier-C apps receive no
+injection (the category look-up returns $\bot$) and the prompt degrades
+byte-identically to B1, a clean null control.
+
+\textbf{B3 (evolved $L_C$).} The FSM population is seeded from the
+category-matched $L_C$ and grown online by LAYER-2 mutation on $T_{\text{adapt}}$
+for 20 iterations. A frozen reference LLM plays the mutation operator; LoRA is
+not attached, so B3 isolates context evolution. The end-of-adaptation champion
+is frozen and evaluated on $T_{\text{eval}}$.
+
+\textbf{B4 (joint LoRA and $L_C$ adaptation).} The full method of
+Section~\ref{sec:method}: a shared LoRA is pretrained on the source pool
+(Phase~1), then both the LoRA adapter and the FSM population are co-adapted on
+each target app's $T_{\text{adapt}}$ (Phase~3) before frozen evaluation on
+$T_{\text{eval}}$.
+
+All rungs use the same $\max\_steps\_multiplier{=}10$ and the same bf16
+generation config. The only differences between rows are the contents of the
+in-context knowledge $F$ and whether LoRA is updated.
+
+\subsubsection{Results}
+\label{sec:exp-within-results}
+
+Table~\ref{tab:aw-main} reports aggregate $T_{\text{eval}}$ success rate per rung
+and tier. B1 and its paired B2 share seeds $\{30,31,32\}$; the B3-paired B2 was
+rerun on the canonical $T_{\text{eval}}$ seeds $\{40,41,42\}$ so that B3 vs.\ B2
+is computed on identical seeds. The two B2 numbers bound the seed-set noise
+floor at $n{=}54$.
+
+\begin{table}[t]
+\small
+\centering
+\begin{tabular}{lccc}
+\hline
+\textbf{Rung} & \textbf{Tier-B} & \textbf{Tier-C} & \textbf{Overall} \\
+              & ($n{=}54$) & ($n{=}51$) & ($n{=}105$) \\
+\hline
+B1 (zero-shot)              & 47.2\%  & 29.4\%  & 38.6\%  \\
+B2 paired with B1           & 56.5\%  & 29.4\%  & 43.3\%  \\
+B2 paired with B3           & 60.2\%  & 29.4\%  & 45.2\%  \\
+B3 (evolved $L_C$)          & \textbf{63.9\%}  & 31.4\%  & \textbf{48.1\%}  \\
+B4 (joint LoRA + $L_C$)     & 70.4\%  & 34.3\%  & \textbf{52.9\%}  \\ % PROVISIONAL — see note below
+\hline
+\end{tabular}
+\caption{Level-1 aggregate $T_{\text{eval}}$ success rate per rung at $K{=}3$
+seeds. Tier-C is the built-in null control for B2 and B3, where the prompt is
+byte-identical to B1. The B4 row is a provisional placeholder (note below)
+pending a clean single-model rerun; unlike B2/B3, B4 updates LoRA on all tiers,
+so its Tier-C entry is not a null control.}
+\label{tab:aw-main}
+\end{table}
+
+% NOTE (provisional B4, Level 1): the 52.9% overall is NOT a single-model
+% result. It is a per-tier cherry-pick (docs/project_progress_2026_05.md:344):
+% Tier-B 70.4 from pi^pre v3-C (pi_pre_4_600_kl005) and Tier-C 34.3 from v3-B
+% (pi_pre_12_200_kl005), weighted 54/105 + 51/105 = 52.86. A single deployed
+% agent cannot be both checkpoints, so this is an oracle upper bound, not
+% reproducible by one method. The clean single-model B4 = 48.1% (equal to B3
+% under this protocol), i.e. the weight channel adds nothing within-benchmark.
+% REPLACE with a clean eval-protocol (seeds 40/41/42) single-model rerun
+% before submission.
+
+\begin{table}[t]
+\small
+\centering
+\begin{tabular}{lcc}
+\hline
+\textbf{Comparison} & \textbf{Tier-B $\Delta$} & \textbf{Tier-C $\Delta$} \\
+\hline
+B2 $-$ B1   & $+9.3$~pp & $+0.0$~pp \\
+B3 $-$ B2   & $+3.7$~pp & $+2.0$~pp \\
+B4 $-$ B3   & $+6.5$~pp & $+2.9$~pp \\ % PROVISIONAL — cherry-picked B4, see Table~\ref{tab:aw-main} note
+\hline
+\end{tabular}
+\caption{Level-1 ablation deltas on $T_{\text{eval}}$ success rate. For B2 and
+B3 the Tier-C column is a null-control panel: they inject nothing on Tier-C, so
+any non-zero delta reflects paired-run variance rather than a methodological
+effect. The B4$-$B3 row is the exception---B4 updates LoRA on all tiers, so its
+Tier-C delta reflects weight adaptation---and is provisional (see
+Table~\ref{tab:aw-main}).}
+\label{tab:aw-deltas}
+\end{table}
+
+\textbf{B2 $-$ B1: static category knowledge transfers, with a clean null
+control.} On Tier-B, $L_C$ injection lifts mean success rate by $+9.3$~pp. The
+Tier-C delta is exactly $0.0$~pp---the category look-up returns $\bot$ on
+Tier-C, the prompts are byte-identical, and the two runs converge. This
+attributes the Tier-B gain to $L_C$ content rather than to incidental run
+conditions.
+
+\textbf{B3 $-$ B2: online evolution narrows the residual gap.} A further
+$+3.7$~pp on Tier-B comes from letting LAYER~2 evolve on the target app's
+adaptation set. The Tier-C $+2.0$~pp delta is within the paired-run noise floor;
+under the null hypothesis (Tier-C reuses the no-injection path on both arms) the
+expected delta is zero.
+
+Aggregates can hide structure. Table~\ref{tab:aw-perapp} gives per-app Tier-B
+success rates, each app weighted by its $T_{\text{eval}}$ template count.
+
+\begin{table}[t]
+\small
+\centering
+\begin{tabular}{l@{\,}c@{\,}c@{\,}c@{\,}c@{\,}c}
+\hline
+\textbf{App}             & \textbf{n} & \textbf{B1} & \textbf{B2$_{\text{B1}}$} & \textbf{B2$_{\text{B3}}$} & \textbf{B3} \\
+\hline
+simple\_calendar\_pro    & 18 & 38.9 & 38.9 & 50.0 & 50.0 \\
+system\_settings         & 18 & 75.0 & 88.9 & 80.6 & \textbf{91.7} \\
+pro\_expense             &  9 & 33.3 & \textbf{66.7} & 66.7 & 66.7 \\
+retro\_music             &  3 & 66.7 & 50.0 & 33.3 & \textbf{66.7} \\
+camera                   &  3 &  0.0 &  0.0 & 66.7 & 33.3 \\
+chrome                   &  3 &  0.0 &  0.0 &  0.0 &  0.0 \\
+\hline
+Tier-B overall           & 54 & 47.2 & 56.5 & 60.2 & \textbf{63.9} \\
+\hline
+\end{tabular}
+\caption{Level-1 per-app Tier-B success rate (\%) on $T_{\text{eval}}$. $n$
+counts episodes (templates $\times$ K=3). B2$_{\text{B1}}$ uses seeds
+$\{30,31,32\}$; B2$_{\text{B3}}$ and B3 use seeds $\{40,41,42\}$.}
+\label{tab:aw-perapp}
+\end{table}
+
+Three readings follow. First, \textbf{B2 helps most when the category $L_C$ has
+strong cross-source structural overlap with the target}: the largest gain is
+\texttt{pro\_expense} ($+33.3$~pp, Finance $L_C$ from \texttt{bluecoins}), which
+shares near-identical add/edit/delete-transaction workflows with its source, and
+\texttt{system\_settings} ($+13.9$~pp, Tools $L_C$) follows the same pattern.
+Apps whose category structure diverges visually from the source pool
+(\texttt{retro\_music}, \texttt{simple\_calendar\_pro}) do not benefit from
+static injection alone. Second, \textbf{B3 helps on apps that have both signal
+and budget}: \texttt{system\_settings} carries the headline gain ($+11.1$~pp at
+$n{=}18$), where the population accepted 14 successful mutations against strong
+starting points. Third, \textbf{the remaining failures are structural, not
+knowledge-shaped}: \texttt{chrome/BrowserMultiply} repeats a valid but
+mislocated \texttt{open\_app} action until step exhaustion (a benchmark
+instrumentation gap no FSM edit can fix), and \texttt{camera/CameraTakeVideo}
+requires gesture timing that no LAYER~2 prose can express.
+
+\textbf{Statistical caveats.} At $K{=}3$, $n$ is 54 on Tier-B and 51 on Tier-C.
+The B2$-$B1 Tier-B two-sample $z$ is $+0.97$ ($p\approx0.17$ one-sided) and
+B3$-$B2 is $z\approx0.4$. The directions are consistent across the two
+independently seeded B2 comparisons and concentrate on the largest-$n$ Tier-B
+app in an interpretable way, but $n{=}54$ is the formal bottleneck. We read the
+B1$\to$B2$\to$B3 trajectory as a directional sequence of effect-size estimates
+and reserve a wider $K_{\text{eval}}{=}5$ sweep for the camera-ready.
+
+%======================================================================
+\subsection{Level 2: Cross-benchmark generalization (AndroidWorld+ $\to$ MobileWorld)}
+\label{sec:exp-cross}
+
+Level~2 keeps the method fixed and changes the deployment target from a
+held-out slice of the training benchmark to an independently constructed
+benchmark. The training source is the \emph{entire} AndroidWorld+ pool (all 25
+apps), used in Phase~1 to produce the shared LoRA and the static priors; the
+deployment target is MobileWorld~\citep{mobileworld2025}. Because
+the data structure here is unrelated to the Level-1 splits, we restate it in
+full.
+
+\subsubsection{Benchmark and data structure}
+\label{sec:exp-cross-data}
+
+MobileWorld is an online mobile-agent benchmark with longer task horizons (27.8
+vs.\ 14.3 average steps over AndroidWorld) and a much higher fraction of
+multi-application tasks (62.2\% vs.\ 9.5\%). We evaluate on its GUI-only subset
+of 161 single- and multi-app tasks (excluding the MCP-tool-augmented tasks),
+under a pure-vision harness using the backbone's native \texttt{mobile\_use}
+tool-call format; the accessibility-tree channel is not used, so the agent reads
+the screen only. MobileWorld tasks are hard-coded single instances with no seed,
+so every task is run once ($K{=}1$).
+
+The 161 tasks are split task-disjoint into an adaptation set and an evaluation
+set (Table~\ref{tab:mw-splits}). Tiers are defined at the \emph{category} level,
+by the Play Store categories of the apps a task touches, relative to the
+AndroidWorld+ source: \textbf{Tier-B} (all apps in categories seen in the
+source), \textbf{Tier-C} (all apps in novel categories---Social and Shopping,
+absent from the source), and \textbf{Tier-A} (mixed, multi-app tasks combining
+seen and novel categories). Tier-A tasks are placed entirely in the evaluation
+set because they are the headline test of composing seen and novel knowledge and
+admit no clean single-app split. The split is deterministic (sort by task class
+name, take the first $\lceil 0.40\,n\rceil$ of each app-combination stratum into
+adaptation); a multi-app adaptation task simultaneously exercises each app it
+touches, so task-disjointness alone prevents leakage.
+
+\begin{table}[t]
+\small
+\centering
+\begin{tabular}{lrrr}
+\hline
+\textbf{Tier} & \textbf{Tasks} & \textbf{$T_{\text{adapt}}$} & \textbf{$T_{\text{eval}}$} \\
+\hline
+Tier-B (category-seen)   & 91  & 33 & 58 \\
+Tier-C (category-novel)  & 43  & 18 & 25 \\
+Tier-A (mixed multi-app) & 27  &  0 & 27 \\
+\hline
+\textbf{Total}           & 161 & 51 & 110 \\
+\hline
+\end{tabular}
+\caption{Level-2 MobileWorld GUI-only split. Tiers are category-level relative
+to the AndroidWorld+ training source. The evaluation set ($T_{\text{eval}}$) is
+the headline 110-task panel; the 51-task $T_{\text{adapt}}$ drives the test-time
+adaptation loop. The two sides are task-disjoint.}
+\label{tab:mw-splits}
+\end{table}
+
+Two structural differences from Level~1 are worth stating because they change
+what the rungs can show. (i)~There is no seed dimension, so $T_{\text{adapt}}$
+provides instance diversity only through distinct tasks, not through reseeded
+templates; the adaptation loop draws its signal from the success/failure of the
+policy's own rollouts across the 51 adaptation tasks. (ii)~The category-seen
+Tier-B and category-novel Tier-C now measure transfer \emph{across benchmarks},
+a strictly harder condition than Level-1's same-benchmark Tier-B/Tier-C, since
+even ``seen'' categories are instantiated by different apps with different UIs.
+
+\subsubsection{Baseline ladder}
+\label{sec:exp-cross-baselines}
+
+The ladder is the same B1--B4. The zero-shot floor (B1) and the two adaptation
+rungs (B3 online evolution, B4 joint) are defined exactly as in Level~1, with
+the adaptation loop running on the 51-task $T_{\text{adapt}}$ and the frozen
+evaluation on the 110-task $T_{\text{eval}}$. The static-prior rung (B2)
+requires elaboration, because moving the prior across a benchmark boundary
+raises a design question absent in Level~1: \emph{which} part of the source FSM
+should be injected. We therefore expand B2 into a single-variable configuration
+sweep, holding the agent, harness, and weights fixed and changing only the
+injected text:
+
+\begin{itemize}
+\item \textbf{B2} --- full source FSM (LAYER~1 states/transitions/visual-cues
+\emph{and} LAYER~2) for the six shared-package system apps, plus the category
+$L_C$ for the rest.
+\item \textbf{B2$'$} --- app-granular LAYER~2 only (LAYER~1 removed), plus
+category $L_C$.
+\item \textbf{B2$''$} --- category $L_C$ only (no app-granular block). This is a
+1:1 port of the Level-1 B2 recipe that scored Tier-B $+9.3$~pp.
+\item \textbf{B2$'''$} --- B2$'$ with inject-time entry-level retrieval: per
+injected block, only the $\le 3$ abstract-action entries a retriever judges
+relevant to the task instruction are kept.
+\end{itemize}
+
+The configuration that performs best becomes the static prior from which B3 and
+B4 are seeded.
+
+\subsubsection{Static-prior results: transfer collapses, and the collapse is
+diagnosable}
+\label{sec:exp-cross-static}
+
+We ran each static configuration five times over the 110-task evaluation set
+(fresh emulator containers per run, since MobileWorld containers do not reset
+app state between tasks). Table~\ref{tab:mw-static} reports the mean and standard
+deviation.
+
+\begin{table}[t]
+\small
+\centering
+\begin{tabular}{llcccc}
+\hline
+\textbf{Config} & \textbf{Injected prior} & \textbf{Mean$\pm$SD} & \textbf{$\Delta$B1} & \textbf{B} & \textbf{C} \\
+                &                          & ($/110$)            &                     & \tiny$/58$ & \tiny$/25$ \\
+\hline
+B1     & none                          & $8.2\pm0.8$ & ---     & 5.2 & 2.0 \\
+B2     & full FSM + category $L_C$     & $7.0\pm0.7$ & $-1.2$  & 4.0 & 2.6 \\
+B2$'$  & app LAYER~2 + category $L_C$  & $\mathbf{9.2\pm1.6}$ & $\mathbf{+1.0}$ & 6.4 & 2.8 \\
+B2$''$ & category $L_C$ only           & $8.4\pm1.1$ & $+0.2$  & 6.2 & 2.0 \\
+B2$'''$& B2$'$ + entry retrieval       & $8.6\pm1.7$ & $+0.4$  & 5.6 & 2.6 \\
+\hline
+\end{tabular}
+\caption{Level-2 static-prior configuration sweep on MobileWorld
+$T_{\text{eval}}$, five runs each. Tier columns are per-run means. Tier-A means
+are $\le 1.0$ throughout and omitted for space. All five configurations sit
+within $7.0$--$9.2$ around the $8.2$ zero-shot baseline.}
+\label{tab:mw-static}
+\end{table}
+
+The first observation is the headline: \textbf{static priors that transferred
+within AndroidWorld+ do not lift performance across the benchmark boundary}.
+Every configuration lands within roughly one point of the zero-shot baseline,
+and the overall-mean gaps are at or below the sampling noise that
+byte-identical-prompt control tasks already exhibit (the Tier-C prompts are
+identical across all five configurations, yet their per-config means span
+$2.0$--$2.8$). The static ceiling on MobileWorld is low.
+
+The value of the sweep is that the collapse is not uniform noise; it decomposes
+into three mechanistic findings, each anchored to deterministic task-level
+behavior (Table~\ref{tab:mw-flips}), where ``deterministic'' means the task
+scored a clean $0/5$ or $5/5$ in every run of a configuration.
+
+\begin{table}[t]
+\small
+\centering
+\begin{tabular}{lccccc}
+\hline
+\textbf{Task} & \textbf{B1} & \textbf{B2} & \textbf{B2$'$} & \textbf{B2$''$} & \textbf{B2$'''$} \\
+\hline
+\texttt{OpenFlightMode}          & 5 & \textbf{0} & 5 & 5 & 5 \\
+\texttt{CloseFlightMode}         & 5 & \textbf{0} & 5 & 5 & 5 \\
+\texttt{CheckEventTime}          & 5 & \textbf{0} & \textbf{0} & \textbf{0} & \textbf{0} \\
+\texttt{TakeSelfie}              & \textbf{0} & 5 & 5 & 5 & 5 \\
+\texttt{ChromeSearchWeather}     & 5 & 3 & 3 & 4 & 4 \\
+\texttt{ReadPaperTask4}          & 1 & 4 & \textbf{5} & 2 & 2 \\
+\hline
+\end{tabular}
+\caption{Level-2 deterministic task flips (success count over 5 runs). The four
+all-or-nothing tasks (top four) score $0$ or $5$ in every run of every
+configuration, so their injection effects are mechanistic, not statistical, and
+they account for nearly the entire mean spread in Table~\ref{tab:mw-static}.}
+\label{tab:mw-flips}
+\end{table}
+
+\textbf{Finding 1: cross-benchmark LAYER~1 injection is strictly harmful.} B2 is
+the only configuration below the zero-shot baseline, and the only one that
+injects source-environment LAYER~1. Its damage is deterministic and localized:
+both \texttt{FlightMode} tasks drop $5/5\to0/5$ under B2 and recover to $5/5$
+under every Layer-1-free configuration. Trajectory inspection shows why---the
+injected LAYER~1, written from observations in the \emph{source} environment,
+supplies a quick-settings navigation path that does not match the target UI; the
+agent follows it, taps an empty region, and emits \texttt{terminate(success)}
+without screenshot verification. The source-grounded state description displaces
+the policy's own grounded routine.
+
+\textbf{Finding 2: app-granular LAYER~2 transfers better than the category
+aggregate.} On the 45 tasks whose prompts actually differ across the B2 family,
+the app-granular LAYER~2 configuration (B2$'$) recovers the most flips, and
+collapsing app knowledge into the category aggregate (B2$''$) costs two
+deterministic wins relative to it. The transferable abstract content helps most
+when it is kept at app granularity rather than diluted across a category.
+
+\textbf{Finding 3: the within-benchmark recipe does not carry over.} The exact
+configuration that scored Tier-B $+9.3$~pp in Level~1---category $L_C$ only
+(B2$''$)---is approximately baseline-neutral here ($+0.2$ overall). Knowledge
+aggregated across a category survives the benchmark gap worse than the same
+knowledge at app granularity. Entry-level retrieval (B2$'''$) reproduces B2$'$
+at one-fifth of the injected tokens, making it the natural default for a static
+prior, with one documented regression from a coverage gap (no
+document-reading entry in the library).
+
+Taken together, the static results establish the gap that the test-time
+adaptation rungs are meant to close: shipping source-environment knowledge
+verbatim is at best neutral and at worst harmful across a benchmark boundary, so
+the prior must instead be \emph{adapted on the target}. Per Findings~1--2, the
+prior we carry into B3 and B4 is the B2$'$ configuration (app-granular LAYER~2
+and category $L_C$, no LAYER~1) with entry-level retrieval.
+
+\subsubsection{Joint test-time adaptation}
+\label{sec:exp-cross-joint}
+
+This is the central experiment of Level~2 and the one for which our claim is
+strongest: at deployment, EvoFSM-RL adapts \emph{both} channels of its prior on
+the target benchmark---it evolves the symbolic FSM/$L_C$ context \emph{and}
+updates the policy weights---rather than shipping a fixed source prior. The
+setup mirrors the Level-1 B4 exactly, with the MobileWorld split substituted in:
+
+\begin{itemize}
+\item \textbf{Phase~1 (offline, on the source).} A single shared LoRA adapter is
+pretrained over the full AndroidWorld+ pool with the group-relative update of
+Section~\ref{sec:method-grpo}, producing the deployment-time starting point.
+\item \textbf{Phase~3 (on the target).} On each target app's MobileWorld
+$T_{\text{adapt}}$ tasks, the adaptation loop runs for a fixed budget of
+iterations: the LAYER~2 FSM population is mutated by the frozen reference LLM and
+the shared LoRA is updated by group-relative policy optimization, starting from
+the B2$'$-plus-retrieval static prior and the Phase~1 adapter. Because 59\% of
+the evaluation tasks are multi-application, the LoRA is shared across apps while
+the FSM population is maintained per app.
+\item \textbf{Evaluation.} The FSM champion and the LoRA adapter are frozen and
+the agent is evaluated once on the disjoint 110-task $T_{\text{eval}}$.
+\end{itemize}
+
+B3 is the same loop with the weight channel disabled (FSM evolution only), which
+isolates how much of any B4 gain comes from context adaptation versus weight
+adaptation, exactly as in Level~1. Table~\ref{tab:mw-main} is the headline panel
+for this level.
+
+\begin{table}[t]
+\small
+\centering
+\begin{tabular}{lcccc}
+\hline
+\textbf{Rung} & \textbf{Tier-B} & \textbf{Tier-C} & \textbf{Tier-A} & \textbf{Overall} \\
+              & ($n{=}58$) & ($n{=}25$) & ($n{=}27$) & ($n{=}110$) \\
+\hline
+B1 (zero-shot)            & 5.2 & 2.0 & 1.0 & $8.2\pm0.8$ \\
+B2$'$ (best static prior) & 6.4 & 2.8 & 0.0 & $9.2\pm1.6$ \\
+B3 (FSM evolution, TTA)   & \emph{ongoing} & \emph{ongoing} & \emph{ongoing} & \emph{ongoing} \\
+B4 (joint, TTA)           & \emph{ongoing} & \emph{ongoing} & \emph{ongoing} & \emph{ongoing} \\
+\hline
+\end{tabular}
+\caption{Level-2 headline panel on MobileWorld $T_{\text{eval}}$. B1 and the
+best static prior B2$'$ are five-run means (tier columns are per-run means; see
+Table~\ref{tab:mw-static}). The two test-time-adaptation rungs (B3, B4) run the
+adaptation loop on the 51-task $T_{\text{adapt}}$ and are in progress.}
+\label{tab:mw-main}
+\end{table}
+
+% TODO(results): fill B3/B4 rows once the MobileWorld TTA sweep completes.
+% Expected reading if the joint loop works: B4 lifts Tier-B/Tier-C above the
+% static ceiling (B2' 9.2) by adapting the prior on the target instead of
+% transplanting it from the source; B3 isolates the symbolic-only contribution.

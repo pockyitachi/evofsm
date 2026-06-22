@@ -1,0 +1,183 @@
+{
+  "category": "Communication",
+  "layer2": {
+    "categories": [
+      {
+        "name": "ADD_ENTRY",
+        "precondition": "User is in a list-style screen of the relevant data domain (e.g., conversations, contacts, keywords) and has permission/default-app prerequisites satisfied",
+        "abstract_steps": [
+          "From the list screen, invoke the primary 'create' affordance (floating action button or '+' icon)",
+          "Provide the required identifying input (recipient, name, keyword) via input field",
+          "Confirm/commit the input (checkmark or OK)",
+          "If a follow-up form appears, fill remaining required fields",
+          "Press the explicit Save/confirm control"
+        ],
+        "failure_modes": [
+          "Tapping a similar icon that opens a different mode (e.g., add-participant vs add-contact)",
+          "Typing while the input field is not focused, so text is dropped",
+          "Forgetting to press the final Save/checkmark, leaving changes unpersisted",
+          "Dismissing required permission/default-handler prompts and being kicked out of the app"
+        ],
+        "verification_checklist": [
+          "New entry visibly appears in the list or relevant screen",
+          "Confirmation toast or visual cue is shown",
+          "Returning to the list and re-opening shows the entry persisted"
+        ]
+      },
+      {
+        "name": "DELETE_ENTRY",
+        "precondition": "Target item exists and is visible (or reachable via search/scroll) in a list or detail view",
+        "abstract_steps": [
+          "Locate the target item (scroll or search)",
+          "Enter selection or detail mode (long-press for list items, open detail for single items)",
+          "Invoke the delete affordance (trash icon or overflow -> Delete)",
+          "Confirm the destructive action in the confirmation dialog"
+        ],
+        "failure_modes": [
+          "Confirmation dialog dismissed accidentally, no actual deletion",
+          "Selecting the wrong item due to similar names/numbers",
+          "Confusing delete-thread with delete-message-content",
+          "Repeating confirm taps because UI state did not refresh"
+        ],
+        "verification_checklist": [
+          "Item no longer appears in the list",
+          "Empty-state text or updated count is shown",
+          "No success toast indicates pending action; re-check to ensure removal"
+        ]
+      },
+      {
+        "name": "EDIT_ENTRY",
+        "precondition": "User can navigate to detail/edit screen of the target entity",
+        "abstract_steps": [
+          "Open the entity detail view",
+          "Enter edit mode via a pencil/edit affordance",
+          "Tap each field to focus, then type the new value",
+          "Scroll to reveal fields hidden by the keyboard",
+          "Tap the Save control"
+        ],
+        "failure_modes": [
+          "Editing a similarly-named entity by mistake",
+          "Keyboard obscuring fields, leading to no input",
+          "Leaving without saving",
+          "Field unfocused at moment of typing, so input is lost"
+        ],
+        "verification_checklist": [
+          "Detail view shows updated values",
+          "Confirmation toast appears",
+          "Re-entering edit mode shows persisted values"
+        ]
+      },
+      {
+        "name": "QUERY_INFO",
+        "precondition": "Target information exists somewhere in the app's screens",
+        "abstract_steps": [
+          "Navigate to the most likely container screen (list / detail / about / settings)",
+          "Use search or scroll to locate the data",
+          "Read the value verbatim from the UI",
+          "Return the value in the required format"
+        ],
+        "failure_modes": [
+          "Reading truncated preview text instead of the full content",
+          "Assuming a value from the list when the detail differs",
+          "Searching with overly strict formatting (e.g., punctuation) and getting no results",
+          "Looking in the wrong menu (overflow vs info icon vs gear)"
+        ],
+        "verification_checklist": [
+          "Value matches the literal text shown on screen",
+          "Format matches what was requested (e.g., HH:MM, full string, comma-separated list)",
+          "If multiple matches exist, the correct contextual one was chosen"
+        ]
+      },
+      {
+        "name": "NAVIGATE_TO",
+        "precondition": "User knows the destination screen exists within the app",
+        "abstract_steps": [
+          "From the current screen, identify the likely entry point (top-bar icon, menu item, settings row)",
+          "Tap it; if the resulting screen is wrong, back out and try the next candidate",
+          "Iterate through known entry points (info icon, gear, overflow) systematically"
+        ],
+        "failure_modes": [
+          "Confusing icons with similar appearance",
+          "Getting trapped in modal dialogs (permissions, defaults) that close the app on cancel",
+          "Mis-tapping on adjacent UI elements"
+        ],
+        "verification_checklist": [
+          "Target screen's distinguishing visual cues are present",
+          "Back navigation returns to a known prior screen"
+        ]
+      },
+      {
+        "name": "COMPOSE_AND_SEND_MESSAGE",
+        "precondition": "Messaging surface available and recipient identifiable",
+        "abstract_steps": [
+          "Open or create the target conversation by recipient identifier",
+          "Focus the message input field",
+          "Enter the message text",
+          "Trigger the send control",
+          "Verify the sent indicator (bubble + delivery mark) appears"
+        ],
+        "failure_modes": [
+          "Sending in the wrong thread because of a similar number",
+          "Hitting send before text is committed",
+          "Permissions/default-handler prompt blocking the send",
+          "Typing into a different focused field (e.g., recipient instead of body)"
+        ],
+        "verification_checklist": [
+          "Outgoing bubble with exact text appears in the thread",
+          "Delivery/sent indicator shown",
+          "Recipient header matches target"
+        ]
+      },
+      {
+        "name": "CONFIGURE_PREFERENCE",
+        "precondition": "User can reach the settings/preferences area of the app",
+        "abstract_steps": [
+          "Open the settings screen",
+          "Locate the section containing the preference",
+          "Open the picker or toggle for the preference",
+          "Select or input the desired value",
+          "Confirm/save if required by the screen"
+        ],
+        "failure_modes": [
+          "Mistaking an adjacent option (e.g., icon color vs theme)",
+          "Forgetting to press the final save control",
+          "Triggering a warning dialog and not understanding it"
+        ],
+        "verification_checklist": [
+          "Preference row reflects the new value",
+          "Visual effect (color, language) is applied across the UI",
+          "Re-entering settings confirms persistence"
+        ]
+      },
+      {
+        "name": "HANDLE_PERMISSION_OR_DEFAULT_HANDLER_PROMPT",
+        "precondition": "App requires a system role or permission that has not yet been granted",
+        "abstract_steps": [
+          "Read the dialog and identify the required role/permission",
+          "Select the correct option (often the target app's own entry)",
+          "Press the affirmative confirm button",
+          "Wait for app's main UI to load"
+        ],
+        "failure_modes": [
+          "Pressing cancel/back and getting bounced out of the app",
+          "Selecting the wrong app in a chooser",
+          "Repeatedly toggling the role and creating loops"
+        ],
+        "verification_checklist": [
+          "Dialog dismisses and app's main UI is visible",
+          "Subsequent actions that depend on the role succeed"
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "source": "exclude_system_passthrough",
+    "apps": [
+      "simple_sms_messenger"
+    ],
+    "excluded": [
+      "chrome",
+      "contacts"
+    ]
+  }
+}

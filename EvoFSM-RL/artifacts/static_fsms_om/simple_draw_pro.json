@@ -1,0 +1,667 @@
+{
+  "version": "0.1.0",
+  "app": "simple_draw_pro",
+  "layer1": {
+    "app": "simple_draw_pro",
+    "category": "Art & Design",
+    "states": [
+      {
+        "id": "home_screen",
+        "description": "Android device home screen",
+        "visual_cues": [
+          "app icons dock",
+          "Gmail/Photos/YouTube shortcuts"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "app_drawer",
+        "description": "Android app drawer listing installed apps",
+        "visual_cues": [
+          "alphabetical grid of app icons",
+          "search bar at top"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "canvas_main",
+        "description": "Simple Draw Pro main drawing canvas",
+        "visual_cues": [
+          "blank/colored canvas area",
+          "top toolbar with save/trash/share/menu icons",
+          "secondary toolbar with paint bucket/eraser/pen",
+          "color square indicator",
+          "thickness slider at bottom"
+        ],
+        "resource_hints": [
+          "save",
+          "trash",
+          "share",
+          "color_picker"
+        ]
+      },
+      {
+        "id": "overflow_menu",
+        "description": "Three-dot dropdown menu",
+        "visual_cues": [
+          "dropdown list with Open file, Change background color, Print, Settings, About"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "save_as_dialog",
+        "description": "App's internal Save as dialog",
+        "visual_cues": [
+          "Filename input field with default image_<timestamp>",
+          "radio buttons .png/.svg/.jpg",
+          "Cancel/OK buttons"
+        ],
+        "resource_hints": [
+          "filename",
+          "png",
+          "svg",
+          "jpg"
+        ]
+      },
+      {
+        "id": "system_file_picker",
+        "description": "Android system file picker for save destination",
+        "visual_cues": [
+          "folder breadcrumbs at top",
+          "list/grid of folders",
+          "filename input at bottom",
+          "blue SAVE button",
+          "hamburger menu, new folder icon, view toggle, three-dot menu"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "file_picker_drawer",
+        "description": "Navigation drawer in system file picker",
+        "visual_cues": [
+          "list of storage locations like Downloads, SDCARD, device storage name"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "new_folder_dialog",
+        "description": "Dialog for naming a new folder",
+        "visual_cues": [
+          "Folder name input field",
+          "OK/Cancel buttons"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "sort_by_menu",
+        "description": "Sort options bottom sheet in file picker",
+        "visual_cues": [
+          "radio list: File name, Modified (newest/oldest), Size, Type"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "color_picker_dialog",
+        "description": "Color picker for brush/background color",
+        "visual_cues": [
+          "color gradient",
+          "hue slider",
+          "hex input field",
+          "preset color circles",
+          "current/new color preview",
+          "OK/Cancel"
+        ],
+        "resource_hints": [
+          "hex"
+        ]
+      },
+      {
+        "id": "background_color_dialog",
+        "description": "Change background color dialog from menu",
+        "visual_cues": [
+          "hex code input with # prefix",
+          "color palette and presets"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "share_sheet",
+        "description": "Android system share sheet",
+        "visual_cues": [
+          "preview thumbnail",
+          "Nearby button",
+          "app icons list"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "nearby_share_sheet",
+        "description": "Turn on Nearby Share bottom sheet",
+        "visual_cues": [
+          "Device name",
+          "Device visibility",
+          "Turn on button"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "nearby_visibility_screen",
+        "description": "Device visibility configuration for Nearby Share",
+        "visual_cues": [
+          "Everyone/Contacts/Hidden toggle",
+          "Save button"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "print_preview",
+        "description": "Android print preview / print spooler",
+        "visual_cues": [
+          "Select a printer dropdown",
+          "Copies, Paper size, Color, Orientation fields",
+          "PDF button"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "messages_app",
+        "description": "External Messages app (target of share)",
+        "visual_cues": [
+          "new conversation/recipient field"
+        ],
+        "resource_hints": []
+      }
+    ],
+    "transitions": [
+      {
+        "from_state": "home_screen",
+        "to_state": "app_drawer",
+        "action": "swipe_up",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "app_drawer",
+        "to_state": "canvas_main",
+        "action": "click(Draw_icon)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "canvas_main",
+        "to_state": "save_as_dialog",
+        "action": "click(save_icon)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "canvas_main",
+        "to_state": "overflow_menu",
+        "action": "click(three_dot_menu)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "canvas_main",
+        "to_state": "color_picker_dialog",
+        "action": "click(color_square)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "canvas_main",
+        "to_state": "share_sheet",
+        "action": "click(share_icon)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "canvas_main",
+        "to_state": "canvas_main",
+        "action": "click(trash_icon)",
+        "precondition": "",
+        "postcondition": "canvas cleared"
+      },
+      {
+        "from_state": "canvas_main",
+        "to_state": "canvas_main",
+        "action": "click(paint_bucket) then click(canvas)",
+        "precondition": "",
+        "postcondition": "canvas filled with current color"
+      },
+      {
+        "from_state": "overflow_menu",
+        "to_state": "background_color_dialog",
+        "action": "click(Change background color)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "overflow_menu",
+        "to_state": "print_preview",
+        "action": "click(Print)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "save_as_dialog",
+        "to_state": "system_file_picker",
+        "action": "click(OK)",
+        "precondition": "filename and format set",
+        "postcondition": ""
+      },
+      {
+        "from_state": "save_as_dialog",
+        "to_state": "canvas_main",
+        "action": "click(Cancel)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "system_file_picker",
+        "to_state": "file_picker_drawer",
+        "action": "click(hamburger_menu)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "system_file_picker",
+        "to_state": "new_folder_dialog",
+        "action": "click(new_folder_icon)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "system_file_picker",
+        "to_state": "sort_by_menu",
+        "action": "click(three_dot) -> Sort by",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "system_file_picker",
+        "to_state": "system_file_picker",
+        "action": "click(view_toggle)",
+        "precondition": "",
+        "postcondition": "list/grid toggled"
+      },
+      {
+        "from_state": "system_file_picker",
+        "to_state": "canvas_main",
+        "action": "click(SAVE)",
+        "precondition": "filename set",
+        "postcondition": "file saved"
+      },
+      {
+        "from_state": "file_picker_drawer",
+        "to_state": "system_file_picker",
+        "action": "click(storage_root)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "new_folder_dialog",
+        "to_state": "system_file_picker",
+        "action": "type_name then OK",
+        "precondition": "",
+        "postcondition": "navigated into new folder"
+      },
+      {
+        "from_state": "sort_by_menu",
+        "to_state": "system_file_picker",
+        "action": "click(sort_option)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "color_picker_dialog",
+        "to_state": "canvas_main",
+        "action": "click(OK)",
+        "precondition": "",
+        "postcondition": "color applied"
+      },
+      {
+        "from_state": "background_color_dialog",
+        "to_state": "canvas_main",
+        "action": "type_hex then OK",
+        "precondition": "",
+        "postcondition": "background color applied"
+      },
+      {
+        "from_state": "share_sheet",
+        "to_state": "messages_app",
+        "action": "click(Messages)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "share_sheet",
+        "to_state": "nearby_share_sheet",
+        "action": "click(Nearby)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "nearby_share_sheet",
+        "to_state": "nearby_visibility_screen",
+        "action": "click(Device visibility)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "nearby_visibility_screen",
+        "to_state": "nearby_share_sheet",
+        "action": "select option then Save",
+        "precondition": "",
+        "postcondition": ""
+      }
+    ],
+    "strategies": [
+      {
+        "name": "SAVE_DRAWING_WITH_NAME_FORMAT",
+        "preconditions": "On canvas_main with drawing ready",
+        "steps": [
+          "click save icon (floppy disk) in top toolbar",
+          "in save_as_dialog select desired format radio (.png/.svg/.jpg)",
+          "clear default filename via long_press field -> Select all, or long_press backspace",
+          "type desired filename",
+          "click OK",
+          "in system_file_picker navigate to target folder (use hamburger -> storage root if needed)",
+          "click SAVE (bottom-right)"
+        ],
+        "success_signal": "Returns to canvas_main; optional toast 'File saved successfully'",
+        "fallback": "If filename appended instead of replaced, long_press field and pick Select all, then type"
+      },
+      {
+        "name": "CREATE_NEW_FOLDER_AND_SAVE",
+        "preconditions": "In system_file_picker at parent directory",
+        "steps": [
+          "click new folder icon (top-right)",
+          "type folder name in new_folder_dialog and confirm",
+          "verify breadcrumb shows new folder",
+          "click SAVE"
+        ],
+        "success_signal": "Save dialog closes, returns to canvas_main",
+        "fallback": "If wrong parent, use hamburger or breadcrumb to navigate up"
+      },
+      {
+        "name": "CHANGE_VIEW_OR_SORT_IN_PICKER",
+        "preconditions": "In system_file_picker",
+        "steps": [
+          "click view toggle icon to switch list/grid",
+          "click three-dot menu -> Sort by...",
+          "select desired sort option from bottom sheet"
+        ],
+        "success_signal": "View layout changes / sort order applied",
+        "fallback": ""
+      },
+      {
+        "name": "FILL_CANVAS_WITH_COLOR",
+        "preconditions": "On canvas_main",
+        "steps": [
+          "optionally click color square and pick/enter hex in color_picker_dialog, then OK",
+          "click paint bucket icon to activate fill tool",
+          "tap anywhere on canvas to flood fill"
+        ],
+        "success_signal": "Canvas area shows selected color",
+        "fallback": "If eraser was chosen by mistake, re-click paint bucket"
+      },
+      {
+        "name": "SET_HEX_COLOR",
+        "preconditions": "In color_picker_dialog or background_color_dialog",
+        "steps": [
+          "long_press hex input to select existing text",
+          "type new 6-digit hex code (e.g., 00FF00)",
+          "click OK"
+        ],
+        "success_signal": "Preview swatch shows the new color; current color square updates",
+        "fallback": "If only partial clearing, click at end of field then backspace remaining chars"
+      },
+      {
+        "name": "SHARE_VIA_MESSAGES_OR_NEARBY",
+        "preconditions": "On canvas_main",
+        "steps": [
+          "click share icon in top toolbar",
+          "in share_sheet select Messages or Nearby",
+          "for Messages: start new chat, type recipient, send",
+          "for Nearby: configure Device visibility (Everyone) then Turn on"
+        ],
+        "success_signal": "Recipient field populated/message sent or 'Looking for nearby devices' shown",
+        "fallback": "Set Messages as default SMS app if prompted"
+      },
+      {
+        "name": "PRINT_OR_SAVE_AS_PDF",
+        "preconditions": "On canvas_main",
+        "steps": [
+          "click three-dot menu -> Print",
+          "tap 'Select a printer' and choose 'Save as PDF'",
+          "configure Paper size, Orientation, Color, Copies",
+          "tap PDF/print button, then SAVE in file picker"
+        ],
+        "success_signal": "Returns to canvas after PDF saved",
+        "fallback": "If settings greyed out, ensure a printer (or Save as PDF) is selected first"
+      },
+      {
+        "name": "CLEAR_CANVAS_AND_SET_TOOL",
+        "preconditions": "On canvas_main",
+        "steps": [
+          "click trash icon to clear",
+          "click desired tool (pen/eraser/paint bucket)",
+          "adjust thickness via bottom slider (tap end for min/max)"
+        ],
+        "success_signal": "Canvas blank, tool icon highlighted, slider at desired position",
+        "fallback": "If swiping the slider draws on canvas, tap the slider track endpoint instead"
+      }
+    ],
+    "dead_ends": [
+      {
+        "state": "save_as_dialog",
+        "failed_action": "type new filename without clearing default",
+        "note": "Typed text gets appended to default; must long_press field and Select all or use long_press backspace first"
+      },
+      {
+        "state": "save_as_dialog",
+        "failed_action": "repeated single backspace with cursor at start of field",
+        "note": "Backspace does nothing when cursor is at position 0; click at end of text first"
+      },
+      {
+        "state": "print_preview",
+        "failed_action": "change copies/color/orientation before selecting a printer",
+        "note": "Fields are disabled until a printer (e.g., Save as PDF) is chosen"
+      },
+      {
+        "state": "canvas_main",
+        "failed_action": "swipe across thickness slider region",
+        "note": "Swipe may register as a drawing stroke on canvas; tap slider endpoint instead"
+      },
+      {
+        "state": "share_sheet",
+        "failed_action": "tap Messages without setting it as default SMS app",
+        "note": "System dialog blocks until Messages is selected and Set as default confirmed"
+      },
+      {
+        "state": "app_drawer",
+        "failed_action": "search for 'Simple Draw Pro' literally",
+        "note": "App icon is labeled 'Draw'; searching the full name may not match"
+      }
+    ]
+  },
+  "layer2": {
+    "categories": [
+      {
+        "name": "EXPORT_ARTIFACT_WITH_NAME_AND_FORMAT",
+        "precondition": "Editor open with content ready to export",
+        "abstract_steps": [
+          "Invoke export/save action from primary toolbar",
+          "Select desired output format in export dialog",
+          "Clear default filename (select-all or long-press delete)",
+          "Type target filename",
+          "Confirm dialog to advance to destination picker",
+          "Navigate to target destination",
+          "Confirm final save"
+        ],
+        "failure_modes": [
+          "Typing appends to default name instead of replacing it",
+          "Backspace ineffective when cursor at start of field",
+          "Confirming too early before destination/format are correct"
+        ],
+        "verification_checklist": [
+          "Filename field shows exact requested name",
+          "Format/extension matches request",
+          "Destination path matches request",
+          "Editor returns to main view or success toast appears"
+        ]
+      },
+      {
+        "name": "CREATE_CONTAINER_IN_PICKER",
+        "precondition": "Inside a system file/folder picker at parent location",
+        "abstract_steps": [
+          "Invoke create-new-container action",
+          "Type container name",
+          "Confirm to create and auto-enter container",
+          "Verify breadcrumb shows the new container"
+        ],
+        "failure_modes": [
+          "Creating container at wrong parent path",
+          "Confirming save before entering the new container"
+        ],
+        "verification_checklist": [
+          "Breadcrumb path reflects intended nesting",
+          "Container is the active save location before final confirmation"
+        ]
+      },
+      {
+        "name": "CONFIGURE_VIEW_OR_SORT",
+        "precondition": "Inside a list/grid presenting items with view controls",
+        "abstract_steps": [
+          "Toggle view layout via dedicated icon if needed",
+          "Open overflow menu and choose sort option",
+          "Select desired sort criterion"
+        ],
+        "failure_modes": [
+          "Confusing view-toggle icon with sort/menu"
+        ],
+        "verification_checklist": [
+          "Layout matches requested mode",
+          "Order reflects chosen sort key"
+        ]
+      },
+      {
+        "name": "APPLY_COLOR_BY_HEX",
+        "precondition": "Color picker dialog open",
+        "abstract_steps": [
+          "Focus hex input field",
+          "Select-all existing hex text",
+          "Type the 6-digit hex code",
+          "Confirm to apply"
+        ],
+        "failure_modes": [
+          "Partial clearing leaves residual characters",
+          "Cursor mid-string causes corrupt hex",
+          "Auto-suggest replaces characters during typing"
+        ],
+        "verification_checklist": [
+          "Preview swatch matches expected color",
+          "Hex field shows exact requested code"
+        ]
+      },
+      {
+        "name": "APPLY_TOOL_AND_PARAMETER",
+        "precondition": "Editor with tool palette and parameter slider visible",
+        "abstract_steps": [
+          "Tap desired tool icon to activate it",
+          "Adjust parameter slider by tapping at desired position (avoid swiping across canvas area)",
+          "Apply tool to content area"
+        ],
+        "failure_modes": [
+          "Swiping slider triggers drawing strokes",
+          "Wrong tool remains active after color/format changes"
+        ],
+        "verification_checklist": [
+          "Tool icon is highlighted as active",
+          "Slider thumb sits at intended position",
+          "Effect on content matches expectation"
+        ]
+      },
+      {
+        "name": "SHARE_TO_EXTERNAL_APP",
+        "precondition": "Editor with content; system share entry point available",
+        "abstract_steps": [
+          "Invoke share from primary toolbar",
+          "Pick target app from system share sheet",
+          "Handle any default-app or permission prompts",
+          "Provide recipient/destination in target app",
+          "Confirm send"
+        ],
+        "failure_modes": [
+          "Target app requires being set as default before use",
+          "Picking wrong icon in share sheet",
+          "Network/MMS limitations prevent delivery"
+        ],
+        "verification_checklist": [
+          "Target app shows attached content",
+          "Recipient field correctly populated",
+          "Send action invoked"
+        ]
+      },
+      {
+        "name": "PRINT_OR_EXPORT_PDF",
+        "precondition": "Editor with print entry in overflow menu",
+        "abstract_steps": [
+          "Open overflow menu and choose print",
+          "Select a printer destination (real or virtual PDF)",
+          "Adjust paper size, orientation, color, copies",
+          "Trigger print/save action",
+          "Confirm destination in file picker"
+        ],
+        "failure_modes": [
+          "Print settings disabled until printer selected",
+          "Virtual PDF printer caps copies to 1"
+        ],
+        "verification_checklist": [
+          "All requested print parameters are reflected in preview",
+          "Output file or job is produced"
+        ]
+      },
+      {
+        "name": "QUERY_INFO_FROM_DIALOG",
+        "precondition": "Need to read a static value from a UI element",
+        "abstract_steps": [
+          "Navigate to the relevant dialog/screen",
+          "Read the displayed value(s)",
+          "Return answer without modifying state"
+        ],
+        "failure_modes": [
+          "Modifying state unnecessarily and triggering side effects"
+        ],
+        "verification_checklist": [
+          "Answer captured verbatim from UI"
+        ]
+      },
+      {
+        "name": "LAUNCH_APP_FROM_LAUNCHER",
+        "precondition": "On device home screen",
+        "abstract_steps": [
+          "Open app drawer via swipe-up",
+          "Locate app by icon (label may differ from full product name)",
+          "Tap icon to launch"
+        ],
+        "failure_modes": [
+          "Missing app because actual label differs from product name",
+          "Accidentally activating search bar"
+        ],
+        "verification_checklist": [
+          "App's main screen is shown"
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "built_at": "2025-01-15T00:00:00Z",
+    "n_episodes": 42,
+    "n_successful": 42,
+    "n_episodes_input": 42,
+    "synthesizer_model": "claude-opus-4-7",
+    "synthesizer_temperature": 0.3
+  }
+}

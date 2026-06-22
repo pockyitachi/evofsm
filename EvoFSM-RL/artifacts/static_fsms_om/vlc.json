@@ -1,0 +1,878 @@
+{
+  "version": "0.1.0",
+  "app": "vlc",
+  "layer1": {
+    "app": "vlc",
+    "category": "Video Players & Editors",
+    "states": [
+      {
+        "id": "home_screen",
+        "description": "Android device home screen",
+        "visual_cues": [
+          "app icons in dock",
+          "Google search bar",
+          "wallpaper"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "app_drawer",
+        "description": "Android app drawer showing installed apps alphabetically",
+        "visual_cues": [
+          "grid of app icons",
+          "alphabetical order"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "video_tab",
+        "description": "Main Video library tab",
+        "visual_cues": [
+          "Video icon highlighted in bottom nav",
+          "search/sort/menu icons top right",
+          "may show 'No media files found'"
+        ],
+        "resource_hints": [
+          "Video",
+          "search",
+          "sort"
+        ]
+      },
+      {
+        "id": "audio_tab",
+        "description": "Audio library with sub-tabs",
+        "visual_cues": [
+          "Audio icon highlighted",
+          "ARTISTS/ALBUMS/TRACKS/GENRES sub-tabs at top"
+        ],
+        "resource_hints": [
+          "Audio",
+          "ARTISTS",
+          "ALBUMS",
+          "TRACKS",
+          "GENRES"
+        ]
+      },
+      {
+        "id": "browse_tab",
+        "description": "Browse tab with Favorites, Storages, Local Network sections",
+        "visual_cues": [
+          "Favorites section",
+          "Storages section with Internal memory",
+          "Local Network section"
+        ],
+        "resource_hints": [
+          "Favorites",
+          "Storages",
+          "Internal memory",
+          "SDCARD",
+          "Local Network"
+        ]
+      },
+      {
+        "id": "playlists_tab",
+        "description": "Playlists tab",
+        "visual_cues": [
+          "Playlists icon highlighted",
+          "list of playlists or 'No media files found'"
+        ],
+        "resource_hints": [
+          "Playlists"
+        ]
+      },
+      {
+        "id": "more_tab",
+        "description": "More tab with Settings, About, and Streams buttons",
+        "visual_cues": [
+          "SETTINGS button",
+          "ABOUT button",
+          "Streams section with 'New stream'"
+        ],
+        "resource_hints": [
+          "SETTINGS",
+          "ABOUT",
+          "Streams",
+          "New stream"
+        ]
+      },
+      {
+        "id": "settings_main",
+        "description": "Main Settings screen",
+        "visual_cues": [
+          "Media library section",
+          "Video section",
+          "History section",
+          "Extra settings (Interface/Video/Audio/Advanced)"
+        ],
+        "resource_hints": [
+          "Auto rescan",
+          "Hardware Acceleration",
+          "Video screen orientation",
+          "Background/PiP mode",
+          "Playback history"
+        ]
+      },
+      {
+        "id": "settings_interface",
+        "description": "Interface sub-settings",
+        "visual_cues": [
+          "DayNight mode option",
+          "interface preferences"
+        ],
+        "resource_hints": [
+          "DayNight mode"
+        ]
+      },
+      {
+        "id": "settings_advanced",
+        "description": "Advanced settings sub-screen",
+        "visual_cues": [
+          "Clear playback history",
+          "Clear media database",
+          "Clear app data",
+          "Developer options"
+        ],
+        "resource_hints": [
+          "Clear playback history"
+        ]
+      },
+      {
+        "id": "about_screen",
+        "description": "About page for the app",
+        "visual_cues": [
+          "app logo",
+          "version number box (e.g. 3.5.4)",
+          "links: Official website, Source code, Libraries, Authors"
+        ],
+        "resource_hints": [
+          "VLC for Android",
+          "Source code",
+          "Libraries",
+          "Authors"
+        ]
+      },
+      {
+        "id": "about_version_popup",
+        "description": "Detailed build info popup shown after tapping version",
+        "visual_cues": [
+          "Revision hash",
+          "libvlc version",
+          "Compiled by"
+        ],
+        "resource_hints": [
+          "Revision",
+          "libvlc",
+          "Compiled by"
+        ]
+      },
+      {
+        "id": "internal_memory_dir",
+        "description": "Internal memory directory listing",
+        "visual_cues": [
+          "folder list: Alarms, Android, Audiobooks, DCIM, Documents, Download, Movies, Music, Notifications, Pictures, Podcasts, Ringtones, etc.",
+          "breadcrumb 'Browser > Internal memory'"
+        ],
+        "resource_hints": [
+          "Internal memory"
+        ]
+      },
+      {
+        "id": "folder_view",
+        "description": "Generic folder contents view",
+        "visual_cues": [
+          "breadcrumb path",
+          "list/grid of files and subfolders",
+          "floating orange play FAB bottom-right"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "folder_context_menu",
+        "description": "Bottom sheet for a folder",
+        "visual_cues": [
+          "Play",
+          "Append",
+          "Add/Remove from favorites",
+          "Delete",
+          "Scan this folder",
+          "Add this folder and subfolders"
+        ],
+        "resource_hints": [
+          "Add to favorites",
+          "Remove from favorites",
+          "Scan this folder",
+          "Add this folder and subfolders"
+        ]
+      },
+      {
+        "id": "add_to_playlist_dialog",
+        "description": "Dialog to add items to a new or existing playlist",
+        "visual_cues": [
+          "Playlist name input field",
+          "Add to existing playlist list"
+        ],
+        "resource_hints": [
+          "Playlist name",
+          "Add to new playlist",
+          "Add to existing playlist"
+        ]
+      },
+      {
+        "id": "sort_menu",
+        "description": "Sort dropdown menu",
+        "visual_cues": [
+          "options: Name, File name, Length, Date, Recently added, Media number",
+          "arrows indicating asc/desc"
+        ],
+        "resource_hints": [
+          "Name",
+          "Length",
+          "Recently added",
+          "Media number"
+        ]
+      },
+      {
+        "id": "overflow_menu",
+        "description": "Three-dot overflow menu",
+        "visual_cues": [
+          "options like Display in list, Refresh, Show hidden files, Add a server favorite"
+        ],
+        "resource_hints": [
+          "Display in list",
+          "Refresh",
+          "Show hidden files",
+          "Add a server favorite"
+        ]
+      },
+      {
+        "id": "search_view",
+        "description": "Search input with keyboard",
+        "visual_cues": [
+          "search bar 'Search in current list'",
+          "keyboard",
+          "SEARCH IN ALL MEDIA LIBRARY button below"
+        ],
+        "resource_hints": [
+          "Search in current list",
+          "SEARCH IN ALL MEDIA LIBRARY"
+        ]
+      },
+      {
+        "id": "add_server_dialog",
+        "description": "Add a server favorite dialog",
+        "visual_cues": [
+          "protocol dropdown (FTP/SMB/etc.)",
+          "Network share name or IP address field",
+          "OK button"
+        ],
+        "resource_hints": [
+          "Add a server favorite",
+          "Network share name"
+        ]
+      },
+      {
+        "id": "new_stream_screen",
+        "description": "New stream input screen",
+        "visual_cues": [
+          "URL input field"
+        ],
+        "resource_hints": [
+          "New stream"
+        ]
+      },
+      {
+        "id": "permission_dialog",
+        "description": "System or in-app permission prompt",
+        "visual_cues": [
+          "Notification permission text",
+          "OK / Don't allow / Allow buttons"
+        ],
+        "resource_hints": [
+          "Notification permission"
+        ]
+      },
+      {
+        "id": "medialibrary_prefs",
+        "description": "Select directories to include for media library scan",
+        "visual_cues": [
+          "checkboxes next to storage and folder entries"
+        ],
+        "resource_hints": [
+          "Select directories to include"
+        ]
+      }
+    ],
+    "transitions": [
+      {
+        "from_state": "home_screen",
+        "to_state": "app_drawer",
+        "action": "swipe_up_from_bottom",
+        "precondition": "app icon not on home",
+        "postcondition": "app drawer visible"
+      },
+      {
+        "from_state": "home_screen",
+        "to_state": "video_tab",
+        "action": "click(vlc_icon)",
+        "precondition": "icon visible in dock",
+        "postcondition": "app launched"
+      },
+      {
+        "from_state": "app_drawer",
+        "to_state": "video_tab",
+        "action": "click(vlc_icon)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "video_tab",
+        "to_state": "audio_tab",
+        "action": "click(bottom_nav_audio)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "video_tab",
+        "to_state": "browse_tab",
+        "action": "click(bottom_nav_browse)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "video_tab",
+        "to_state": "playlists_tab",
+        "action": "click(bottom_nav_playlists)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "video_tab",
+        "to_state": "more_tab",
+        "action": "click(bottom_nav_more)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "more_tab",
+        "to_state": "settings_main",
+        "action": "click(SETTINGS)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "more_tab",
+        "to_state": "about_screen",
+        "action": "click(ABOUT)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "more_tab",
+        "to_state": "new_stream_screen",
+        "action": "click(New stream)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "about_screen",
+        "to_state": "about_version_popup",
+        "action": "click(version_number_box)",
+        "precondition": "",
+        "postcondition": "popup with revision/libvlc"
+      },
+      {
+        "from_state": "settings_main",
+        "to_state": "settings_interface",
+        "action": "click(Interface)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "settings_main",
+        "to_state": "settings_advanced",
+        "action": "click(Advanced)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "browse_tab",
+        "to_state": "internal_memory_dir",
+        "action": "click(Internal memory)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "internal_memory_dir",
+        "to_state": "folder_view",
+        "action": "click(folder_name)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "internal_memory_dir",
+        "to_state": "folder_context_menu",
+        "action": "click(three_dot_on_folder_row)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "browse_tab",
+        "to_state": "folder_context_menu",
+        "action": "click(three_dot_on_favorite_card)",
+        "precondition": "",
+        "postcondition": "limited menu for favorites"
+      },
+      {
+        "from_state": "folder_context_menu",
+        "to_state": "add_to_playlist_dialog",
+        "action": "click(Add this folder and subfolders)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "folder_context_menu",
+        "to_state": "browse_tab",
+        "action": "click(Add to favorites | Remove from favorites)",
+        "precondition": "",
+        "postcondition": "favorites updated"
+      },
+      {
+        "from_state": "folder_context_menu",
+        "to_state": "internal_memory_dir",
+        "action": "click(Scan this folder)",
+        "precondition": "",
+        "postcondition": "toast: added to scanned directories"
+      },
+      {
+        "from_state": "video_tab",
+        "to_state": "search_view",
+        "action": "click(search_icon)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "audio_tab",
+        "to_state": "search_view",
+        "action": "click(search_icon)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "search_view",
+        "to_state": "search_view",
+        "action": "type(query) | click(SEARCH IN ALL MEDIA LIBRARY)",
+        "precondition": "",
+        "postcondition": "results updated"
+      },
+      {
+        "from_state": "video_tab",
+        "to_state": "sort_menu",
+        "action": "click(sort_icon)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "audio_tab",
+        "to_state": "sort_menu",
+        "action": "click(sort_icon)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "playlists_tab",
+        "to_state": "sort_menu",
+        "action": "click(sort_icon)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "video_tab",
+        "to_state": "overflow_menu",
+        "action": "click(three_dot_top_right)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "playlists_tab",
+        "to_state": "overflow_menu",
+        "action": "click(three_dot_top_right)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "browse_tab",
+        "to_state": "overflow_menu",
+        "action": "click(three_dot_top_right)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "overflow_menu",
+        "to_state": "add_server_dialog",
+        "action": "click(Add a server favorite)",
+        "precondition": "in Browse tab",
+        "postcondition": ""
+      },
+      {
+        "from_state": "add_server_dialog",
+        "to_state": "browse_tab",
+        "action": "fill_protocol/ip + click(OK)",
+        "precondition": "",
+        "postcondition": "server appears in Favorites"
+      }
+    ],
+    "strategies": [
+      {
+        "name": "CREATE_PLAYLIST_FROM_FOLDER",
+        "preconditions": "App open on any tab",
+        "steps": [
+          "Tap Browse tab",
+          "Tap Internal memory under Storages",
+          "Locate target folder; tap three-dot menu on its row",
+          "Tap 'Add this folder and subfolders'",
+          "In 'Add to new playlist' dialog, tap the Playlist name field",
+          "Type the desired playlist name",
+          "Confirm (enter on keyboard) to create and populate playlist"
+        ],
+        "success_signal": "Dialog closes returning to directory listing; playlist later appears in Playlists tab or under 'Add to existing playlist'",
+        "fallback": "If field doesn't accept input, tap the field again before typing; if already created empty, tap its entry under 'Add to existing playlist'"
+      },
+      {
+        "name": "ADD_FOLDER_TO_FAVORITES",
+        "preconditions": "Browse tab visible",
+        "steps": [
+          "Tap Internal memory",
+          "Locate target folder",
+          "Tap three-dot menu icon precisely on that row",
+          "Tap 'Add to favorites'"
+        ],
+        "success_signal": "Re-opening the menu shows 'Remove from favorites'; folder appears under Favorites in Browse",
+        "fallback": "If wrong folder's menu opened, Back and retry with adjusted Y coordinate"
+      },
+      {
+        "name": "SORT_LIST",
+        "preconditions": "On a list view (Video/Audio sub-tab/Playlists)",
+        "steps": [
+          "Tap the sort icon top-right",
+          "Select desired criterion (Name/Length/Date/Recently added)",
+          "Optionally re-open sort menu and tap criterion again to toggle asc/desc"
+        ],
+        "success_signal": "Sort menu shows arrow ▲/▼ next to chosen field; list reorders",
+        "fallback": "If criterion missing, switch to the appropriate sub-tab (e.g. TRACKS for Length)"
+      },
+      {
+        "name": "SEARCH_GLOBAL",
+        "preconditions": "Any media tab",
+        "steps": [
+          "Tap search icon",
+          "Type query",
+          "Tap 'SEARCH IN ALL MEDIA LIBRARY' to broaden scope"
+        ],
+        "success_signal": "Results or 'NO MEDIA FOUND' displayed across all categories",
+        "fallback": "Use 'x' to clear; press back arrow to exit search"
+      },
+      {
+        "name": "OPEN_ABOUT_FOR_VERSION",
+        "preconditions": "App open",
+        "steps": [
+          "Tap More tab in bottom nav",
+          "Tap ABOUT button",
+          "Read version from grey box; tap version box for revision/libvlc/Compiled by details"
+        ],
+        "success_signal": "Version popup with Revision, libvlc, Compiled by fields appears",
+        "fallback": "Don't search Settings for About; it's only on the More tab"
+      },
+      {
+        "name": "CHANGE_SETTING",
+        "preconditions": "App open",
+        "steps": [
+          "Tap More tab",
+          "Tap SETTINGS",
+          "Scroll to find the target setting (use sub-categories Interface/Video/Advanced if not on main page)",
+          "Tap the entry and select desired value or toggle checkbox"
+        ],
+        "success_signal": "Setting subtitle reflects new value or checkbox state changes",
+        "fallback": "Use system Back to return up if entered wrong sub-menu"
+      },
+      {
+        "name": "CLEAR_PLAYBACK_HISTORY",
+        "preconditions": "Settings open",
+        "steps": [
+          "Scroll/tap Advanced under Extra settings",
+          "Tap 'Clear playback history'",
+          "Confirm via 'CLEAR HISTORY' button"
+        ],
+        "success_signal": "Confirmation dialog dismissed; toast or silent completion",
+        "fallback": "Note: 'Playback history' checkbox in main Settings only toggles saving, it does NOT clear"
+      },
+      {
+        "name": "SCAN_FOLDER",
+        "preconditions": "Browse tab → Internal memory",
+        "steps": [
+          "Tap three-dot menu on the folder row",
+          "Tap 'Scan this folder'"
+        ],
+        "success_signal": "Toast: '<Folder> added to your scanned directories'",
+        "fallback": ""
+      },
+      {
+        "name": "ADD_NETWORK_SERVER_FAVORITE",
+        "preconditions": "Browse tab",
+        "steps": [
+          "Tap top-right three-dot overflow",
+          "Tap 'Add a server favorite'",
+          "Open protocol dropdown and choose SMB/FTP/etc.",
+          "Tap 'Network share name (or IP address)' field and type the address",
+          "Dismiss keyboard if it blocks OK",
+          "Tap OK"
+        ],
+        "success_signal": "Server appears in Favorites section of Browse",
+        "fallback": ""
+      },
+      {
+        "name": "CHANGE_VIEW_LAYOUT",
+        "preconditions": "On a list with overflow menu",
+        "steps": [
+          "Tap three-dot top-right overflow",
+          "Tap 'Display in list' or 'Display in grid' toggle"
+        ],
+        "success_signal": "List layout switches",
+        "fallback": "Do not confuse the sort icon with the overflow menu"
+      },
+      {
+        "name": "TOGGLE_SHOW_HIDDEN_FILES",
+        "preconditions": "Inside a folder",
+        "steps": [
+          "Tap three-dot overflow",
+          "Tap 'Show hidden files' to toggle"
+        ],
+        "success_signal": "Checkbox becomes checked; hidden entries visible",
+        "fallback": ""
+      },
+      {
+        "name": "PLAY_ALL_IN_FOLDER",
+        "preconditions": "Inside a folder with media",
+        "steps": [
+          "Tap the orange floating play FAB bottom-right"
+        ],
+        "success_signal": "Playback starts",
+        "fallback": "Ensure not in search view first; press back if so"
+      }
+    ],
+    "dead_ends": [
+      {
+        "state": "browse_tab",
+        "failed_action": "open context menu on Favorites card to add to playlist",
+        "note": "Favorites cards only expose 'Remove from favorites'. Must access folder via Storages → Internal memory for full options."
+      },
+      {
+        "state": "settings_main",
+        "failed_action": "tap 'Playback history' checkbox to clear history",
+        "note": "This checkbox only enables/disables saving. The clear action lives in Settings → Advanced → 'Clear playback history'."
+      },
+      {
+        "state": "settings_main",
+        "failed_action": "search for About in Settings",
+        "note": "There is no About entry inside Settings. It is on the More tab next to SETTINGS."
+      },
+      {
+        "state": "audio_tab",
+        "failed_action": "sort by Length on ARTISTS sub-tab",
+        "note": "Length sort is only available on TRACKS sub-tab."
+      },
+      {
+        "state": "add_to_playlist_dialog",
+        "failed_action": "type text without first focusing the input",
+        "note": "Must tap the 'Playlist name' field explicitly to bring up keyboard before typing."
+      },
+      {
+        "state": "internal_memory_dir",
+        "failed_action": "tap three-dot icon at slightly wrong Y",
+        "note": "Adjacent folder's menu opens. Press Back and retry with corrected coordinates."
+      },
+      {
+        "state": "app_drawer",
+        "failed_action": "tap presumed VLC icon without verifying",
+        "note": "Adjacent apps (OpenTracks, OsmAnd) have orange icons too; verify the traffic-cone shape before tapping."
+      }
+    ]
+  },
+  "layer2": {
+    "categories": [
+      {
+        "name": "NAVIGATE_TO",
+        "precondition": "App launched and on any primary screen",
+        "abstract_steps": [
+          "Identify the target screen's parent category (main library / file browser / settings / about)",
+          "Use the primary bottom navigation to switch to that category",
+          "Drill down via lists, sub-tabs, or directory entries to reach the target"
+        ],
+        "failure_modes": [
+          "Tapping a similar-looking icon for the wrong app/tab",
+          "Mistaking a sort/filter icon for the overflow menu",
+          "Believing target exists in a section where it doesn't"
+        ],
+        "verification_checklist": [
+          "Breadcrumb or active tab indicator matches the target",
+          "Expected section headers or content visible"
+        ]
+      },
+      {
+        "name": "ADD_ENTRY",
+        "precondition": "On a list/browser where new entries can be created (playlist, favorite, server, stream)",
+        "abstract_steps": [
+          "Trigger the 'add' action from an overflow menu or per-row context menu",
+          "Select sub-type if applicable (protocol, target list)",
+          "Focus the input field by tapping it",
+          "Type the required text",
+          "Dismiss keyboard if it covers the confirm button",
+          "Confirm via OK / enter / list selection"
+        ],
+        "failure_modes": [
+          "Typing before the input is focused",
+          "Confirm button hidden behind keyboard",
+          "Using a favorites-style entry that lacks the add option"
+        ],
+        "verification_checklist": [
+          "Dialog dismisses without error",
+          "New entry visible in its containing list",
+          "Re-opening source context menu shows 'Remove' instead of 'Add'"
+        ]
+      },
+      {
+        "name": "DELETE_ENTRY",
+        "precondition": "Entry exists in a managed list (favorite, playlist, history)",
+        "abstract_steps": [
+          "Open the entry's context menu via three-dot / long-press",
+          "Choose the remove/clear action",
+          "Confirm in any subsequent dialog"
+        ],
+        "failure_modes": [
+          "Confusing a toggle (enable/disable saving) with an actual clear/delete",
+          "Operating on the wrong row due to imprecise tap"
+        ],
+        "verification_checklist": [
+          "Entry no longer appears in list",
+          "Confirmation toast or dialog dismissal"
+        ]
+      },
+      {
+        "name": "EDIT_ENTRY",
+        "precondition": "Target setting or item exists",
+        "abstract_steps": [
+          "Navigate to the settings/preferences area",
+          "Locate the specific entry (scroll or use sub-categories)",
+          "Tap to open its selection dialog or toggle its checkbox",
+          "Choose the desired value"
+        ],
+        "failure_modes": [
+          "Setting located in a sub-category rather than main settings",
+          "Dependent setting being greyed out until parent is enabled",
+          "Accidentally toggling instead of opening details"
+        ],
+        "verification_checklist": [
+          "Subtitle/value reflects the new choice",
+          "Checkbox state matches intent"
+        ]
+      },
+      {
+        "name": "QUERY_INFO",
+        "precondition": "App provides the requested info in a visible UI area",
+        "abstract_steps": [
+          "Navigate to the most likely informational area (About, properties, folder listing)",
+          "Scroll if necessary",
+          "Tap on aggregated values (e.g. version label) if a details popup is expected",
+          "Read the value and report it"
+        ],
+        "failure_modes": [
+          "Searching settings for info that's only on an About page",
+          "Reporting a count without scrolling through full list",
+          "Missing horizontally-scrollable items"
+        ],
+        "verification_checklist": [
+          "Information matches exact format requested",
+          "All scrollable content checked",
+          "Answer derived from currently visible UI state"
+        ]
+      },
+      {
+        "name": "SEARCH",
+        "precondition": "On a list view supporting search",
+        "abstract_steps": [
+          "Activate the search affordance",
+          "Type the query string",
+          "If scoped, broaden to global/all results via the provided button",
+          "Inspect results or empty-state message"
+        ],
+        "failure_modes": [
+          "Forgetting to broaden scope when query targets the whole library",
+          "Searching in the wrong sub-tab"
+        ],
+        "verification_checklist": [
+          "Query string visible in the search bar",
+          "Results list or 'no results' message displayed"
+        ]
+      },
+      {
+        "name": "SORT_OR_FILTER",
+        "precondition": "On a list view",
+        "abstract_steps": [
+          "Open sort/filter menu",
+          "Choose desired criterion",
+          "Re-open menu to verify arrow direction; tap again to toggle order if needed"
+        ],
+        "failure_modes": [
+          "Desired criterion unavailable on current sub-tab",
+          "Confusing display-layout overflow with sort menu"
+        ],
+        "verification_checklist": [
+          "Selected criterion highlighted with arrow",
+          "List visibly reorders if items present"
+        ]
+      },
+      {
+        "name": "TRIGGER_ACTION",
+        "precondition": "Inside a container offering bulk actions (play all, scan, refresh)",
+        "abstract_steps": [
+          "Locate the appropriate action affordance (FAB, overflow item, context menu)",
+          "Invoke it",
+          "Confirm any subsequent prompt"
+        ],
+        "failure_modes": [
+          "Action affordance hidden in a different mode (e.g. search view)",
+          "Invoking action on empty container produces no visible feedback"
+        ],
+        "verification_checklist": [
+          "Toast/dialog or state change confirms action",
+          "For playback: media player view opens or audio starts"
+        ]
+      },
+      {
+        "name": "LAUNCH_APP",
+        "precondition": "Device on home screen or app drawer",
+        "abstract_steps": [
+          "If icon not on home, open app drawer",
+          "Scroll alphabetically to the target letter",
+          "Tap the correct icon, verifying its distinctive logo",
+          "Dismiss any first-run permission dialogs"
+        ],
+        "failure_modes": [
+          "Tapping a different app with a similarly colored icon",
+          "Permission dialog blocking subsequent interactions"
+        ],
+        "verification_checklist": [
+          "App's main screen visible",
+          "Bottom navigation/tabs of the intended app present"
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "built_at": "2025-01-30T00:00:00Z",
+    "n_episodes": 72,
+    "n_successful": 72,
+    "n_episodes_input": 72,
+    "synthesizer_model": "claude-opus-4-7",
+    "synthesizer_temperature": 0.3
+  }
+}

@@ -1,61 +1,46 @@
 # EvoFSM-RL
 
-Test-time-adaptive GUI agent that combines per-app FSM evolution with policy-level RL/LoRA fine-tuning, evaluated on `android_world_plus`.
+Test-time-adaptive mobile GUI agent: deployed to an unseen app, it adapts on a
+small budget by **jointly** evolving a two-layer FSM prior (symbolic) and
+fine-tuning a LoRA adapter (sub-symbolic). Built on `android_world_plus` — it
+imports the benchmark's task registry, evaluators, and emulator harness, so treat
+the parent repo as the runtime and keep everything project-specific under
+`EvoFSM-RL/`.
 
-This subproject lives inside the `android_world_plus` fork because it imports the benchmark's task registry, evaluators, and emulator harness directly. Treat the parent repo as the runtime environment; everything project-specific (design docs, tickets, splits, code) goes under `EvoFSM-RL/`.
+## What's where
 
----
+Every folder has its own `README.md` (what it is); code/doc folders also have a
+`CLAUDE.md` (working context). Top level:
 
-## Layout
-
-```
-EvoFSM-RL/
-├── README.md                    ← this file
-├── CLAUDE.md                    ← project context for Claude (terminology, conventions, status)
-├── docs/                        ← design memos
-│   ├── taxonomy.md                 — Play-Store-category-based app taxonomy
-│   ├── app_task_inventory.md       — per-app/per-task source-of-truth inventory (194 tasks / 25 apps)
-│   ├── splits_protocol.md          — T_adapt vs T_eval definitions
-│   └── citations.md                — citations supporting the split protocol
-├── plan/                        ← roadmap
-│   ├── project_plan.md             — overall project plan
-│   ├── linear_tickets.md           — Linear ticket breakdown (Epics, Stories, Tasks)
-│   └── algorithm_design.md         — EvoFSM algorithm design memo
-├── presentations/               ← stakeholder-facing slides (.docx)
-│   ├── algorithm_design_zh.docx
-│   └── project_plan_zh.docx
-├── configs/                     ← machine-readable configuration
-│   ├── splits.yaml                 — K=1 baseline split (apps + templates)
-│   └── multi_seed_config.yaml      — K=5 / K=3 multi-seed overlay
-└── evofsm_rl/                   ← Python package (code goes here)
-    └── __init__.py
-```
-
----
+| Folder | What |
+|---|---|
+| `evofsm_rl/` | Core package — agent, env harness, two-layer FSM, model/LoRA, GRPO |
+| `scripts/` | Entry-point CLIs — FSM synthesis, B1–B4 eval/sweep, Phase-1 pretraining |
+| `tests/` | Unit tests (pytest-style, also runnable as plain scripts) |
+| `configs/` | `splits.yaml` (source of truth) + seeds + model spec |
+| `docs/` | `design/` (dataset, algorithm) · `results/` (B1–B4 reports) · `plan/` |
+| `paper_draft/` | The paper, one `.tex` per section (no `main.tex`) |
+| `artifacts/` | Static FSM / `L_C` knowledge layer (versioned) |
+| `archive/` | Abandoned routes (PPO+PRM, RFT), trajectories zipped |
+| `apks/` · `docker/` · `presentations/` · `traces/` | App APKs · emulator image · slide exports · run outputs (gitignored) |
 
 ## Key concepts
 
-- **Source pool** (12 apps / 96 templates) → Phase 1 multi-source pretraining of per-app L1 FSMs and per-category `L_C` library.
-- **Tier-B** (6 apps / 50 templates) → near-transfer: target apps whose Play Store category IS represented in the source pool.
-- **Tier-C** (7 apps / 46 templates) → far-transfer: target apps in 6 Play Store categories absent from the source pool.
-- **`T_adapt` / `T_eval`** → within each target app, templates are partitioned (template-disjoint) into an adaptation set and an evaluation set. TTA loop runs on `T_adapt`; frozen-checkpoint eval runs on `T_eval`. See `docs/splits_protocol.md`.
+- **Source pool** (12 apps) → Phase-1 pretraining of per-app L1 FSMs + per-category `L_C`.
+- **Tier-B** (near-transfer) / **Tier-C** (far-transfer) → target apps whose Play category is / isn't represented in the source pool.
+- **`T_adapt` / `T_eval`** → template-disjoint adaptation vs frozen evaluation within each target app.
 
-Total: **25 active primary-task apps / 194 task templates** (192 app-attributable + 2 generic). All counts grep-verified against the registry as of 2026-04-14 — see `docs/app_task_inventory.md`.
+Full inventory and split protocol: `docs/design/dataset.md`. Method:
+`docs/design/algorithm.md`.
 
----
+## Setup & run
 
-## Status (2026-04-15)
+The canonical environment, server/AVD bootstrap, and gotchas live in `CLAUDE.md`.
+Quick check:
 
-- ✅ **Epic 0 — Benchmark Design & Project Setup — COMPLETE.**
-  - 0.1 — `evofsm_rl/taxonomy.py` + `configs/task_categories.csv` + `docs/taxonomy.md`
-  - 0.2 — `evofsm_rl/splits.py` (loader over `configs/splits.yaml`)
-  - 0.3 — Template-disjoint T_adapt/T_eval baked into `splits.yaml`; loader + tests
-  - 12/12 unit tests passing (`tests/test_taxonomy_splits.py`)
-- ⏳ Epic 1 — Infrastructure — next up
-
-### Quick start
 ```bash
-cd EvoFSM-RL/
-PYTHONPATH=. python3 tests/test_taxonomy_splits.py        # run sanity tests
-PYTHONPATH=. python3 -m scripts.generate_task_categories_csv   # regenerate CSV
+cd /shared/linqiang/evofsm_project
+source .venv/bin/activate
+PYTHONPATH=android_world_plus:EvoFSM-RL \
+  python -c "from evofsm_rl.model import resolve_device; print(resolve_device())"   # -> cuda
 ```

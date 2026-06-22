@@ -1,0 +1,592 @@
+{
+  "category": "Tools",
+  "layer2": {
+    "categories": [
+      {
+        "name": "LAUNCH_APP",
+        "precondition": "Device launcher surface or application list visible; target application available",
+        "abstract_steps": [
+          "Invoke system-level application launch by its registered identifier (confirming any launch prompt if presented)",
+          "Wait for main view to render",
+          "Verify landing screen matches expected main state"
+        ],
+        "failure_modes": [
+          "Application not installed",
+          "Launcher blocks external intent",
+          "Landing on a different startup view (tutorial, permission prompt)"
+        ],
+        "verification_checklist": [
+          "Main workspace visible",
+          "Expected primary input/output areas present",
+          "No modal overlay blocking interaction"
+        ]
+      },
+      {
+        "name": "NAVIGATE_TO",
+        "precondition": "Agent is somewhere in the app or OS (home, drawer, or another page); target location identifiable in navigation hierarchy",
+        "abstract_steps": [
+          "Launch the app via launcher or app drawer if not in foreground",
+          "Determine target section based on instruction keyword",
+          "Identify bottom or top navigation control to target section, or open primary navigation (side drawer/menu) if target is outside default landing",
+          "Tap target tab/menu item; if hidden, open overflow/options menu first",
+          "Drill down through hierarchical menu or subfolders, scrolling when target row not visible",
+          "Use search affordance when present to bypass long lists",
+          "Confirm location via header/breadcrumb"
+        ],
+        "failure_modes": [
+          "Wrong tab tapped due to similar icons",
+          "Overflow menu auto-dismissed",
+          "Tapping a filter chip instead of switching the actual scope",
+          "Selecting a similarly named adjacent item",
+          "Confusing aggregated category views with physical directories",
+          "Misclick on adjacent menu row",
+          "Target section requires scrolling and is missed",
+          "Wrong sibling section opened (e.g., similar names)",
+          "Quick-settings entry partially expanded so shortcut not visible"
+        ],
+        "verification_checklist": [
+          "Target section's distinctive UI visible",
+          "Active tab indicator on target",
+          "Header/title matches target location",
+          "Breadcrumb path reflects expected hierarchy",
+          "Available actions match expected directory type",
+          "Expected child controls are visible",
+          "Back navigation returns to the correct parent"
+        ]
+      },
+      {
+        "name": "ADD_ENTRY",
+        "precondition": "Inside a writable container/list/directory that supports creation, with an add affordance available",
+        "abstract_steps": [
+          "Navigate to the relevant section/tab or container",
+          "Open overflow/options menu if creation requires it",
+          "Invoke the add affordance (e.g., FAB, '+' button, 'create new')",
+          "Open the creation form or input prompt",
+          "Provide identifying input (search/type) or fill all required fields",
+          "Reveal hidden required fields by dismissing keyboard/scrolling",
+          "Submit/confirm query if results don't auto-populate",
+          "Select the desired item from results, or submit via Save/confirm",
+          "Handle validation errors (e.g., add missing required field)"
+        ],
+        "failure_modes": [
+          "Add affordance triggers wrong context due to current tab",
+          "Search results fail to populate until field is refocused",
+          "Offline state limits available items",
+          "Item already exists but task asks for new instance",
+          "Attempting creation inside a read-only or aggregated/virtual view",
+          "Submitting without focusing the input field",
+          "Naming collisions or invalid characters",
+          "Save remains disabled due to hidden mandatory fields",
+          "Validation rejects a specific value (must substitute)",
+          "Form resets due to navigation error"
+        ],
+        "verification_checklist": [
+          "New entry visible in the list after returning",
+          "Identifying attributes match input",
+          "No duplicate created if uniqueness expected",
+          "Name matches the requested string exactly",
+          "Entry is located in the correct parent container",
+          "No error toast",
+          "Re-open entry to confirm fields persisted"
+        ]
+      },
+      {
+        "name": "CREATE_TIMED_ENTRY",
+        "precondition": "On section supporting creation of time-based items",
+        "abstract_steps": [
+          "Open creation flow",
+          "Switch input mode to most precise (e.g., keypad over dial)",
+          "Enter primary value (e.g., hour)",
+          "Shift focus to next field and enter secondary value",
+          "Confirm time",
+          "Configure recurrence/days",
+          "Add label via dialog",
+          "Configure auxiliary options (sound, vibration)"
+        ],
+        "failure_modes": [
+          "Confirming dialog before all fields entered",
+          "Recurrence days mis-toggled (off when expected on)",
+          "Label dialog dismissed before OK",
+          "24h vs 12h confusion"
+        ],
+        "verification_checklist": [
+          "Created card shows correct time",
+          "Repeat days highlighted as intended",
+          "Label text matches",
+          "Entry is enabled/active"
+        ]
+      },
+      {
+        "name": "EDIT_ENTRY",
+        "precondition": "Target entry exists in a list, or editable text field is accessible (may require focusing field)",
+        "abstract_steps": [
+          "Locate target by its identifier",
+          "Expand or open its detail view",
+          "Tap the field to focus and bring up keyboard",
+          "Select existing text if needed (long-press) and overwrite",
+          "Type the new value",
+          "Modify each requested attribute",
+          "Confirm each modification via OK/Save/Done dialog"
+        ],
+        "failure_modes": [
+          "Toggling an already-on option turns it off",
+          "Editing wrong entry due to similar identifiers",
+          "Forgetting to confirm a sub-dialog",
+          "Keyboard hides Save button preventing tap",
+          "Field still considered empty due to focus issue",
+          "Save remains disabled because other required fields not yet filled"
+        ],
+        "verification_checklist": [
+          "All requested fields show new values",
+          "Unchanged fields untouched",
+          "Entry remains enabled",
+          "Field displays the new value",
+          "Save button becomes enabled",
+          "Parent screen subtext updates"
+        ]
+      },
+      {
+        "name": "DELETE_ENTRY",
+        "precondition": "An identifiable entry exists in current scope and a removal/delete/forget/uninstall/clear affordance is available",
+        "abstract_steps": [
+          "Locate the target entry in the listing or history",
+          "Open detail/expanded view of target",
+          "Activate the per-item delete/remove/destructive action",
+          "Confirm if prompted in any warning dialog"
+        ],
+        "failure_modes": [
+          "Confusing delete with disable/toggle",
+          "Deleting wrong item",
+          "Misidentifying a similarly named entry",
+          "Removal control hidden by keyboard or off-screen",
+          "Confirmation dialog dismissed instead of confirmed",
+          "Action button hidden until scrolling",
+          "System protection prevents deletion (e.g., system app)"
+        ],
+        "verification_checklist": [
+          "Entry no longer in list",
+          "Confirmation toast or empty state shown",
+          "No unintended entries were removed",
+          "Sizes / counts reset to zero where applicable"
+        ]
+      },
+      {
+        "name": "QUERY_INFO",
+        "precondition": "Information is discoverable via navigation, filter, or search on some screen",
+        "abstract_steps": [
+          "Navigate to the most relevant scope or screen displaying the requested info",
+          "Apply any filters needed to isolate the subset",
+          "Scroll fully to enumerate or inspect items",
+          "Visually parse the relevant fields and read the value associated with the requested label",
+          "When multiple values needed, navigate or scroll to gather all",
+          "Derive the answer (count, presence, name, recency) and format per requested format"
+        ],
+        "failure_modes": [
+          "Reading info from collapsed card without expanding",
+          "Confusing similar entries",
+          "Reporting unrelated value",
+          "Counting only the visible portion without scrolling",
+          "Confusing aggregated vs physical directory contents",
+          "Misreading truncated names in grid view",
+          "Misreading a similarly named field",
+          "Required value not yet populated (e.g., recently charged)",
+          "Hidden under system filter / requires 'Show system'"
+        ],
+        "verification_checklist": [
+          "Source screen actually contains the field",
+          "Format exactly matches requested",
+          "All matching items have been viewed",
+          "Layout chosen allows reading full names if needed",
+          "Final answer format matches request (number, yes/no, name)",
+          "Value matches the on-screen label exactly",
+          "Units included when requested",
+          "All requested datapoints reported"
+        ]
+      },
+      {
+        "name": "FILTER_ENTRIES",
+        "precondition": "Listing view with available filter controls",
+        "abstract_steps": [
+          "Identify filter chips or controls",
+          "Toggle one or more filters relevant to the request",
+          "Confirm each selected filter is highlighted/active",
+          "Observe result list updates"
+        ],
+        "failure_modes": [
+          "Applying filter within a narrow scope when a global scope was intended",
+          "Forgetting to combine multiple filters when required",
+          "Misinterpreting empty results as task failure when filter was correctly applied"
+        ],
+        "verification_checklist": [
+          "All requested filters show active/selected state",
+          "Scope indicator matches intended location",
+          "Result count consistent with filter combination"
+        ]
+      },
+      {
+        "name": "SORT_ENTRIES",
+        "precondition": "Listing view with sort controls available via menu",
+        "abstract_steps": [
+          "Open overflow/options menu",
+          "Choose sort action",
+          "Select desired sort criterion and order"
+        ],
+        "failure_modes": [
+          "Selecting a similar but incorrect criterion (e.g., wrong direction)",
+          "Sort controls unavailable in aggregated views"
+        ],
+        "verification_checklist": [
+          "Reopening sort shows the chosen option marked",
+          "Order of visible items matches the criterion"
+        ]
+      },
+      {
+        "name": "CHANGE_VIEW_LAYOUT",
+        "precondition": "Listing view with a layout toggle",
+        "abstract_steps": [
+          "Locate the layout toggle control",
+          "Tap to switch between list and grid",
+          "Observe item arrangement change"
+        ],
+        "failure_modes": [
+          "Misreading icon semantics (icon often depicts the OPPOSITE layout)",
+          "Repeated toggling that returns to the original layout"
+        ],
+        "verification_checklist": [
+          "Item arrangement matches target layout",
+          "Toggle icon now depicts the alternate layout"
+        ]
+      },
+      {
+        "name": "SEARCH_QUERY",
+        "precondition": "App provides a search affordance reachable from current scope",
+        "abstract_steps": [
+          "Activate search control",
+          "Ensure input field is focused",
+          "Type the query",
+          "Optionally apply type/category filters",
+          "Submit or rely on live search"
+        ],
+        "failure_modes": [
+          "Searching within a narrow scope when target may be elsewhere",
+          "Typing before focus is set causing lost input",
+          "Treating empty result set as conclusive without broadening scope"
+        ],
+        "verification_checklist": [
+          "Query string visible in search bar",
+          "Active filters match request",
+          "Scope indicator reflects intended breadth"
+        ]
+      },
+      {
+        "name": "TOGGLE_SETTING",
+        "precondition": "On a settings page or container that contains the toggle for the target feature",
+        "abstract_steps": [
+          "Open overflow menu if needed",
+          "Locate the row containing the toggle (scroll if needed)",
+          "Observe current state of the toggle",
+          "Tap the toggle (or the row label as a larger hit target) to flip its state",
+          "Confirm any modal dialog if prompted"
+        ],
+        "failure_modes": [
+          "Option not present in current scope/view",
+          "Tap misses small toggle hit area",
+          "Visual state lags so user retoggles back",
+          "Confirmation dialog dismissed accidentally",
+          "Setting depends on another precondition (e.g., parent toggle off)"
+        ],
+        "verification_checklist": [
+          "Reopening menu shows the inverted label or checked state",
+          "Toggle visual indicates desired state",
+          "Subtext under setting reflects change",
+          "Re-entering screen still shows new state"
+        ]
+      },
+      {
+        "name": "SELECT_OPTION_FROM_LIST",
+        "precondition": "A radio/checkbox chooser dialog or screen is visible",
+        "abstract_steps": [
+          "Scan options to find one matching instruction",
+          "Tap the option's radio/checkbox",
+          "Confirm with Save/OK if dialog provides such button"
+        ],
+        "failure_modes": [
+          "Selecting nearest visible option instead of exact match",
+          "Forgetting to confirm with Save/OK causing no persistence",
+          "Option disabled because of an unmet precondition"
+        ],
+        "verification_checklist": [
+          "Chosen option shows selected indicator",
+          "Parent row subtext reflects new choice"
+        ]
+      },
+      {
+        "name": "CONFIGURE_SETTING",
+        "precondition": "App has a settings area",
+        "abstract_steps": [
+          "Open overflow menu",
+          "Enter Settings",
+          "Locate target setting",
+          "Select desired value from chooser",
+          "Verify value reflected"
+        ],
+        "failure_modes": [
+          "Setting located in section-specific menu not global settings",
+          "Picking the wrong value due to similar labels"
+        ],
+        "verification_checklist": [
+          "Setting row shows new selected value",
+          "Effect visible where applicable"
+        ]
+      },
+      {
+        "name": "CONFIGURE_PER_ITEM",
+        "precondition": "There is a per-item settings page accessible from a list (e.g., per-app)",
+        "abstract_steps": [
+          "Open the list of items",
+          "Use search or scroll to find the target",
+          "Open its detail page",
+          "Apply changes via TOGGLE_SETTING, SELECT_OPTION_FROM_LIST, or EDIT_ENTRY"
+        ],
+        "failure_modes": [
+          "Wrong item opened due to similar names",
+          "Target item filtered out (system app hidden)",
+          "Item not in 'Recently opened' shortcut list"
+        ],
+        "verification_checklist": [
+          "Detail page header matches the target item",
+          "Modified value persists after navigating away and back"
+        ]
+      },
+      {
+        "name": "MULTI_STEP_WIZARD",
+        "precondition": "Feature requires guided setup",
+        "abstract_steps": [
+          "Trigger 'Get started' or equivalent",
+          "Complete each step's required input",
+          "Advance with Next",
+          "Finish with Done/Save"
+        ],
+        "failure_modes": [
+          "Skipping a sub-field before advancing",
+          "Default values left when task requires changes"
+        ],
+        "verification_checklist": [
+          "Final summary shows requested values",
+          "Wizard intro no longer appears upon revisit"
+        ]
+      },
+      {
+        "name": "RUN_TRANSIENT_OPERATION",
+        "precondition": "On screen with a controllable timed/measured activity",
+        "abstract_steps": [
+          "Configure duration/parameters",
+          "Start operation",
+          "Optionally record intermediate events (laps)",
+          "Stop or pause",
+          "Reset to clear if needed"
+        ],
+        "failure_modes": [
+          "Pausing when meaning to record an event",
+          "Resetting before recording all needed events",
+          "Starting before configuration complete"
+        ],
+        "verification_checklist": [
+          "Active state indicator visible",
+          "Recorded events listed",
+          "Final state matches request (running/paused/reset)"
+        ]
+      },
+      {
+        "name": "INPUT_LINEAR_EXPRESSION",
+        "precondition": "Main input surface active and empty or reset",
+        "abstract_steps": [
+          "Input first operand elements sequentially",
+          "Insert connector between operands",
+          "Input subsequent operand elements",
+          "Repeat until full expression entered",
+          "Optionally trigger evaluation/confirmation"
+        ],
+        "failure_modes": [
+          "Missing connector causes adjacent operand elements to merge unintentionally into a single token",
+          "Premature resetting of partial entry",
+          "Misreading auto-evaluated intermediate output as final state"
+        ],
+        "verification_checklist": [
+          "Expression matches intended sequence",
+          "No additional or omitted elements in the entered sequence",
+          "Result (if evaluated) matches expected value within tolerance"
+        ]
+      },
+      {
+        "name": "APPLY_UNARY_OPERATION",
+        "precondition": "Main input surface active; target operation available (possibly after revealing hidden controls)",
+        "abstract_steps": [
+          "If operation control not visible, toggle advanced/secondary panel",
+          "Apply operation before or after operand depending on its fixity (prefix vs postfix)",
+          "Enter operand if prefix style required",
+          "Confirm/evaluate if needed"
+        ],
+        "failure_modes": [
+          "Using incorrect fixity for the chosen operator (e.g., placing operator after operand when prefix position is required, or vice versa)",
+          "Substituting a different operation than the one intended (selecting a related but distinct function)",
+          "Not revealing hidden control panel before attempting to locate the control"
+        ],
+        "verification_checklist": [
+          "Expression displays the correct operator element",
+          "Result consistent with the intended operation semantics"
+        ]
+      },
+      {
+        "name": "APPLY_COMPOUND_FORMULA",
+        "precondition": "Main input surface active; all required operators/operands known",
+        "abstract_steps": [
+          "Plan full element sequence in advance",
+          "Use grouping markers around denominators or nested sub-expressions as needed to preserve intended structure of the formula",
+          "Enter elements strictly in left-to-right order",
+          "Close any opened grouping markers in matching nesting order to finalize the structure",
+          "Evaluate"
+        ],
+        "failure_modes": [
+          "Operator precedence errors caused by omitting appropriate grouping markers around sub-expressions",
+          "Forgetting to close an opened grouping marker before evaluation of the expression",
+          "Applying an exponent-like operator without grouping a composite exponent sub-expression, causing only part of it to be raised"
+        ],
+        "verification_checklist": [
+          "All grouping markers are balanced and correctly scoped to their intended sub-expressions within the formula",
+          "Result matches the expected correct answer",
+          "Expression visible in display matches planned sequence exactly"
+        ]
+      },
+      {
+        "name": "REVEAL_HIDDEN_CONTROL",
+        "precondition": "A required control is not visible in default layout",
+        "abstract_steps": [
+          "Identify a toggle that exposes additional controls",
+          "Activate the toggle",
+          "Locate and use the previously hidden control",
+          "Optionally return the panel to its compact state"
+        ],
+        "failure_modes": [
+          "Confusing an overflow/more-options menu with a feature-expansion toggle that swaps the displayed control set",
+          "Assuming control does not exist and declaring task infeasible",
+          "Getting stuck in sub-menu without ability to return"
+        ],
+        "verification_checklist": [
+          "Target control becomes visible and interactive",
+          "Primary workspace still reachable afterward"
+        ]
+      },
+      {
+        "name": "RESET_INPUT",
+        "precondition": "Input surface contains unwanted or incorrect content",
+        "abstract_steps": [
+          "Invoke the full-reset control that empties the entire input surface",
+          "Verify input surface is empty or at initial value",
+          "Begin fresh entry"
+        ],
+        "failure_modes": [
+          "Using partial-delete (removing a lone element) when a full reset was intended",
+          "Repeatedly performing a full reset without addressing the underlying conceptual error",
+          "Resetting after each element, preventing multi-element entry"
+        ],
+        "verification_checklist": [
+          "Input surface shows empty/initial state",
+          "Subsequent actions build expression from scratch"
+        ]
+      },
+      {
+        "name": "VERIFY_OUTPUT",
+        "precondition": "An operation has been evaluated",
+        "abstract_steps": [
+          "Read result field",
+          "Compare against expected value or symbolic form",
+          "Decide success or retry"
+        ],
+        "failure_modes": [
+          "Misinterpreting an auto-preview intermediate value as the final committed result",
+          "Stopping at an unexpected partial value and declaring completion prematurely without full evaluation",
+          "Not noticing mode or unit differences affecting interpretation"
+        ],
+        "verification_checklist": [
+          "Result is well-formed and finite",
+          "Value matches expected within appropriate precision",
+          "Mode/units appropriate for the problem"
+        ]
+      },
+      {
+        "name": "NAVIGATE_MENU",
+        "precondition": "Secondary menu or overlay opened",
+        "abstract_steps": [
+          "Scan menu for relevant item",
+          "Select it or dismiss if irrelevant",
+          "Return to main workspace via back/dismiss action"
+        ],
+        "failure_modes": [
+          "Treating the menu as a source of unrelated features",
+          "Leaving a modal overlay open and blocking further input"
+        ],
+        "verification_checklist": [
+          "Returned to main workspace",
+          "No lingering overlay or modal surface"
+        ]
+      },
+      {
+        "name": "SUBMIT_FEEDBACK_OR_REPORT",
+        "precondition": "App provides a feedback/report form via overflow menu",
+        "abstract_steps": [
+          "Open overflow/options menu",
+          "Choose feedback/report option",
+          "Grant any required permission via dialog",
+          "Enter required text",
+          "Dismiss keyboard to access attachment options",
+          "Toggle attachment checkboxes per requirements",
+          "Optionally edit attached media with provided tools",
+          "Submit via send action"
+        ],
+        "failure_modes": [
+          "Submitting before attachment toggles configured",
+          "Permission dialog blocking progress",
+          "Editor tutorial overlay blocking tool selection"
+        ],
+        "verification_checklist": [
+          "Returns to prior screen indicating send",
+          "All attachment checkboxes match requested state",
+          "Text body matches request"
+        ]
+      },
+      {
+        "name": "RECOVER_FROM_WRONG_SCREEN",
+        "precondition": "Agent has navigated to an unintended screen, app, or encountered an unexpected system dialog",
+        "abstract_steps": [
+          "Dismiss popups via Back or Wait/Close",
+          "Use Back button to step out of unintended screen",
+          "If too deep or wrong app entirely, press Home to reset",
+          "Re-execute the intended navigation strategy"
+        ],
+        "failure_modes": [
+          "Repeating the same failing gesture without recovery",
+          "Accidentally launching unrelated apps from a customization menu",
+          "Back navigation skips too far",
+          "Repeated misclicks on the same wrong row",
+          "Confusing similar app names"
+        ],
+        "verification_checklist": [
+          "Home screen or app drawer is reachable",
+          "Target app launches and reaches expected landing state",
+          "Reach the intended screen as confirmed by header",
+          "Original task progress not lost (re-verify prior state)"
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "source": "static_seed_25app",
+    "apps": [
+      "calculator",
+      "clock",
+      "files",
+      "system_settings"
+    ]
+  }
+}

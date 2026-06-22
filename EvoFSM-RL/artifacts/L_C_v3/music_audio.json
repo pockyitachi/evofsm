@@ -1,0 +1,336 @@
+{
+  "category": "Music & Audio",
+  "layer2": {
+    "categories": [
+      {
+        "name": "CONFIGURE_SETTINGS",
+        "precondition": "Target app is installed and reachable; configuration screen or settings menu accessible",
+        "abstract_steps": [
+          "Launch app from launcher or app drawer",
+          "Dismiss any first-run/onboarding screens",
+          "Navigate to the settings/preferences area",
+          "Navigate to the relevant sub-page if needed",
+          "For each requested parameter: locate its section and select the desired option, toggling switches as needed",
+          "Grant any system permission triggered",
+          "Confirm/apply the changes via the explicit apply/save control",
+          "Verify on the resulting screen that selections are reflected"
+        ],
+        "failure_modes": [
+          "Applying before all parameters are set, exiting the settings page prematurely",
+          "Selecting a value that hides dependent options (mutually exclusive choices)",
+          "Mis-tapping a dropdown that auto-dismisses without recording a selection",
+          "Confusing similar-looking app icons during launch",
+          "Assuming feature lives in settings when it lives elsewhere (e.g., contextual menu)",
+          "Permission denial leaves the toggle in inconsistent state"
+        ],
+        "verification_checklist": [
+          "Each requested parameter shows the selected state (checkmark/highlight)",
+          "Toggle visibly active (highlighted/colored)",
+          "Any summary/status line on main UI reflects the new values",
+          "Returning to the settings screen still shows the chosen values",
+          "Permission dialog dismissed positively"
+        ]
+      },
+      {
+        "name": "QUERY_INFO",
+        "precondition": "Information is exposed somewhere in the app's UI (info icons, help dialogs, summary lines, list or detail views)",
+        "abstract_steps": [
+          "Navigate to the screen or entity (list -> item, or search) that contains the desired information",
+          "Open details view if metadata required",
+          "If hidden, tap the contextual help/info affordance next to the relevant field",
+          "Optionally apply a sort/filter to expose the required ordering",
+          "Read the dialog, status text, or requested field(s) directly from the UI",
+          "Return the exact phrasing/value as the answer"
+        ],
+        "failure_modes": [
+          "Reading default values instead of values for the requested configuration",
+          "Closing the info dialog before extracting the value",
+          "Confusing 'recommended' marker with currently selected value",
+          "Fabricating data when the target isn't in the library",
+          "Reading without ensuring correct sort direction",
+          "Confusing counts across different sections (mixing up item-type totals)",
+          "Tapping item plays it instead of showing info; must use context menu",
+          "Information requires scrolling or expanding",
+          "Empty-state messages mistaken for data"
+        ],
+        "verification_checklist": [
+          "Value is read while the relevant configuration is active",
+          "Answer matches text on screen verbatim where requested",
+          "Value is visible on-screen at time of answer",
+          "Sort/filter state matches the question's requirements",
+          "If item cannot be found after a bounded search, declare infeasible",
+          "Field label matches request",
+          "Value extracted verbatim with units"
+        ]
+      },
+      {
+        "name": "ADD_ENTRY",
+        "precondition": "App is on its main creation surface or container view that can hold the new entry; storage permission granted; system supports creation flow",
+        "abstract_steps": [
+          "Reach the main creation screen or list screen where new items are created",
+          "Locate the primary add/create control (FAB, + icon, overflow menu option, or 'New X' button)",
+          "Trigger the primary create/record action to open a creation dialog/form",
+          "Provide any required input (name/text, duration, content)",
+          "Stop/finish the creation if it is a recording flow",
+          "Optionally associate with existing item during creation",
+          "If prompted, supply a name and confirm save via the positive dialog button"
+        ],
+        "failure_modes": [
+          "Save dialog absent because an option to prompt-for-name is disabled",
+          "Default name used instead of requested name because dialog dismissed",
+          "Creation aborted before save",
+          "Clicking the add control on the wrong tab/section",
+          "Confirming with empty or invalid name",
+          "Dismissing the dialog instead of confirming",
+          "Creation entry hidden under overflow menu rather than FAB",
+          "Confirmation button hidden by on-screen keyboard",
+          "Empty name field prevents creation"
+        ],
+        "verification_checklist": [
+          "New entry appears in the entry list with the desired name",
+          "Entry metadata reflects the configured parameters",
+          "Item name matches input exactly",
+          "No error toast/dialog remained",
+          "Toast or banner confirming creation"
+        ]
+      },
+      {
+        "name": "DELETE_ENTRY",
+        "precondition": "Entry list is non-empty and visible; target item exists; delete action available in context menu",
+        "abstract_steps": [
+          "Open the list of entries",
+          "Select/expand the target entry or open per-item action menu",
+          "Tap the delete/remove control",
+          "Grant any required system permission",
+          "Confirm deletion if prompted"
+        ],
+        "failure_modes": [
+          "Deleting wrong entry due to mis-tap",
+          "Toast confirmation missed; assumes failure",
+          "Missing system permission blocks deletion",
+          "Stale view continues to show item until refreshed"
+        ],
+        "verification_checklist": [
+          "Target entry no longer in list after refresh",
+          "Confirmation toast/snackbar observed",
+          "Permission flow completed"
+        ]
+      },
+      {
+        "name": "NAVIGATE_TO",
+        "precondition": "Target screen exists and is reachable from current screen via main navigation, tabs, drawer, or quick tiles",
+        "abstract_steps": [
+          "Identify primary navigation affordance (bottom bar, top tabs, drawer, icon, or menu item)",
+          "Identify the section name relevant to the task (distinguishing between the different item-type sections available in the app)",
+          "Tap the icon/label for target section; if blocked by onboarding, dismiss first",
+          "Wait for the list content to load",
+          "Confirm arrival via expected visual cue (header text or highlighted nav indicator)"
+        ],
+        "failure_modes": [
+          "Icon confusable with another app or function",
+          "Search/filter expected but not present in current app",
+          "Back button leaves the app instead of going up one level",
+          "Mistaking text labels for clickable affordances when only icons respond",
+          "Adjacent icons on cramped bars cause misclicks",
+          "Wrong app opened from launcher due to imprecise icon tap",
+          "Acting on the wrong tab's content",
+          "Assuming an item exists in a section it doesn't belong to"
+        ],
+        "verification_checklist": [
+          "Expected title/labels visible on destination",
+          "Expected primary action available",
+          "Active tab indicator highlights the chosen section",
+          "Header/count matches expected section (e.g., 'N <ItemType>')",
+          "Expected content type visible (list, grid, etc.)"
+        ]
+      },
+      {
+        "name": "RESET_TO_DEFAULTS",
+        "precondition": "On settings screen exposing a reset/restore control",
+        "abstract_steps": [
+          "Locate the reset control",
+          "Tap reset",
+          "Verify defaults are restored"
+        ],
+        "failure_modes": [
+          "Reset tapped before reading required current values",
+          "Reset doesn't affect cross-screen settings"
+        ],
+        "verification_checklist": [
+          "All visible options show default selections",
+          "Summary text matches default configuration"
+        ]
+      },
+      {
+        "name": "SEARCH_FOR_ITEM",
+        "precondition": "A search affordance is visible on a list screen; filter chips/tabs may be present",
+        "abstract_steps": [
+          "Open the search interface",
+          "Type a concise query (a single attribute, not multiple attributes concatenated)",
+          "Apply category filter via chip/tab if available",
+          "Inspect results, including empty-state; if none, try a broader/alternate term once",
+          "If still empty, conclude the item is absent"
+        ],
+        "failure_modes": [
+          "Appending new text to existing query (producing garbage like 'QueryQuery')",
+          "Retrying the same query repeatedly",
+          "Treating empty results as transient and looping",
+          "Clearing query also resets context unexpectedly",
+          "Filter chip not visibly active; misread as off",
+          "Pluralization or case-sensitivity not matching expected entries"
+        ],
+        "verification_checklist": [
+          "Query field shows the intended text only",
+          "Active filter chip highlighted",
+          "Either a result row appears or an explicit 'No results' message is shown",
+          "Result count matches expectation",
+          "Bounded retry count respected before declaring infeasible"
+        ]
+      },
+      {
+        "name": "SORT_LIST",
+        "precondition": "On a list screen that exposes a sort control",
+        "abstract_steps": [
+          "Open the ordering configuration dialog via its icon",
+          "Select the desired attribute",
+          "Explicitly toggle the ordering direction to the required state",
+          "Dismiss dialog and verify order"
+        ],
+        "failure_modes": [
+          "Selecting only the attribute without setting direction",
+          "Using the wrong list's sort dialog (attributes differ across sections)",
+          "Declaring success without visually confirming the new order"
+        ],
+        "verification_checklist": [
+          "Dialog shows target attribute marked",
+          "Direction toggle reflects target direction",
+          "Top-most items in list match expected ordering"
+        ]
+      },
+      {
+        "name": "OPEN_CONTAINER",
+        "precondition": "A container item is listed",
+        "abstract_steps": [
+          "Tap the container row",
+          "Verify detail view loads",
+          "Check whether the container is empty before further actions"
+        ],
+        "failure_modes": [
+          "Attempting interaction on an empty container",
+          "Treating an empty-container message as a transient error"
+        ],
+        "verification_checklist": [
+          "Detail view title matches selected container",
+          "If empty, an explicit empty-state message is present; declare infeasible for content-dependent goals"
+        ]
+      },
+      {
+        "name": "PLAY_MEDIA",
+        "precondition": "Target media item is visible in a list or detail view; media library accessible",
+        "abstract_steps": [
+          "Locate the target row via browse or search",
+          "Tap to start playback, use the row's play control, or tap a 'Play all' action",
+          "Confirm playback UI (now-playing bar / mini-player / full-screen player) appears with the title and playing indicator"
+        ],
+        "failure_modes": [
+          "Target not in local library (infeasible)",
+          "Tapping a container instead of a playable item",
+          "Tapping unplayable item shows error toast",
+          "Wrong artist/album variant selected due to multiple matches"
+        ],
+        "verification_checklist": [
+          "Now-playing indicator reflects correct item identity",
+          "Mini-player shows expected title",
+          "Pause icon visible (i.e., playing state)",
+          "Playback controls (pause/seek) are operable"
+        ]
+      },
+      {
+        "name": "ADD_TO_COLLECTION",
+        "precondition": "Target item identified; collection (queue/playlist/favorites) accessible",
+        "abstract_steps": [
+          "Open per-item action menu (three-dot or long-press)",
+          "Choose append/insert action (e.g., add to queue, play next, add to playlist)",
+          "If choosing playlist, pick existing or create new in dialog"
+        ],
+        "failure_modes": [
+          "Tapping item directly triggers playback instead of opening menu",
+          "Selecting the wrong adjacent item's menu due to imprecise tap",
+          "Choosing 'Add to queue' when 'Play next' is required (or vice versa)"
+        ],
+        "verification_checklist": [
+          "Toast confirming addition",
+          "Collection size or contents reflect the addition",
+          "Currently playing track not interrupted unexpectedly"
+        ]
+      },
+      {
+        "name": "EDIT_ENTRY",
+        "precondition": "Target entry has an edit affordance (pencil icon, edit option in menu)",
+        "abstract_steps": [
+          "Open the editor for the entry",
+          "Focus target field",
+          "Clear existing content if necessary (long-press + Select all)",
+          "Enter new value",
+          "Dismiss keyboard if it hides save action",
+          "Save changes",
+          "Grant any file/system permission required"
+        ],
+        "failure_modes": [
+          "Typing appends to existing text instead of replacing",
+          "Save button hidden behind keyboard or below scroll",
+          "Permission interrupts save and requires retry",
+          "Read-only details dialog mistaken for editor"
+        ],
+        "verification_checklist": [
+          "Edited field shows new value after returning",
+          "Persistent across navigation away and back",
+          "No error toast"
+        ]
+      },
+      {
+        "name": "CONFIGURE_PLAYBACK_OPTIONS",
+        "precondition": "Active playback session",
+        "abstract_steps": [
+          "Expand the full-screen player from the mini-player",
+          "Toggle the desired option (repeat mode, shuffle, favorite)",
+          "Open auxiliary dialogs (sleep timer) and confirm"
+        ],
+        "failure_modes": [
+          "Repeat icon requires multiple taps to reach 'Repeat One' mode",
+          "Confusing 'Add to queue' (append) with 'Play next' (insert)"
+        ],
+        "verification_checklist": [
+          "Icon state reflects desired mode (filled heart, '1' on repeat, highlighted shuffle)",
+          "Timer dialog closed after Start"
+        ]
+      },
+      {
+        "name": "RECOVER_FROM_WRONG_APP",
+        "precondition": "Wrong app opened from launcher or accidental navigation",
+        "abstract_steps": [
+          "Press Home to return to launcher",
+          "Re-open app drawer",
+          "Scroll precisely to target alphabetical position",
+          "Verify app name label before tapping icon"
+        ],
+        "failure_modes": [
+          "Repeated mis-taps if icons are clustered or look similar",
+          "Long-press gesture instead of swipe opening wallpaper menu"
+        ],
+        "verification_checklist": [
+          "Splash screen shows correct branding",
+          "Expected home screen of the target app appears"
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "source": "static_seed_25app",
+    "apps": [
+      "audio_recorder",
+      "pi_music",
+      "retro_music"
+    ]
+  }
+}

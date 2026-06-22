@@ -1,0 +1,233 @@
+{
+  "category": "Finance",
+  "layer2": {
+    "categories": [
+      {
+        "name": "CREATE_ENTRY",
+        "precondition": "App launched and on a list/dashboard view that exposes a creation affordance (e.g. floating action button or equivalent primary create control); target app is installed and reachable from the launcher",
+        "abstract_steps": [
+          "Launch the target app from launcher/app list",
+          "Navigate to the list view where new items are created",
+          "Trigger the create affordance (primary create control, commonly a floating + button) and wait for the entry form to appear",
+          "If a type toggle is present, choose the correct type (e.g. one of the mutually exclusive categories offered)",
+          "Set required fields in order: title/name, amount/value, date (via date picker if needed), classification (category/label), note/description",
+          "Adjust date/time via pickers if specified",
+          "When modifying a pre-filled field, clear existing text (select-all then remove, or use backspace) before typing",
+          "Confirm/save via the primary save action",
+          "Return to a list/summary view and verify the new item appears with the correct values"
+        ],
+        "failure_modes": [
+          "Repeated taps on create button without detecting whether the entry form actually opened",
+          "Typing into a field without clearing pre-existing text, leading to concatenated values",
+          "Tapping the wrong sub-area of a row and opening a secondary dialog instead of the entry form",
+          "Declaring task complete based on an unrelated pre-existing entry",
+          "Required numeric field left blank causing validation error",
+          "Wrong app launched due to ambiguous icon/name",
+          "Picker dialog closed without confirming, losing the selection"
+        ],
+        "verification_checklist": [
+          "Entry form was observed (not just list) before entering data",
+          "All target fields show the intended final values before saving",
+          "Post-save list contains a new entry with matching amount/date/type/note",
+          "Displayed values match requested name/amount/category/date/time/note",
+          "Aggregate totals updated accordingly"
+        ]
+      },
+      {
+        "name": "MODIFY_ENTRY",
+        "precondition": "Target entry exists in the app's data store and is visible in a list; its detail form is accessible via tapping the row",
+        "abstract_steps": [
+          "Locate target item by date/amount/category via list/search",
+          "Open its detail form by tapping the text/amount region of the row (avoid icon/label area that may open a picker)",
+          "Enter edit mode",
+          "Clear existing field content before typing (select-all or long-press backspace) and replace each target field (amount, date, type, note, label, classification)",
+          "Use the date picker for date changes and confirm with the positive action",
+          "Save with the primary confirm/update action",
+          "Verify the row now shows the updated values in list and detail view"
+        ],
+        "failure_modes": [
+          "Opening an unrelated modal (icon/label picker) instead of the detail form",
+          "Appending text to a field instead of replacing it",
+          "Saving without toggling type when required",
+          "Claiming success without confirming updated values in the list",
+          "Cursor positioned at start so backspace does nothing",
+          "Picker confirms inadvertently dismissed, leaving old value",
+          "Selecting wrong category chip due to default selection"
+        ],
+        "verification_checklist": [
+          "Each modified field reflects the new value in the form before save",
+          "After save, list shows updated values and correct sign/type",
+          "Updated values reflected in detail view",
+          "Aggregate totals or summaries reflect the change when applicable",
+          "No residual original text remains"
+        ]
+      },
+      {
+        "name": "REMOVE_ENTRY",
+        "precondition": "Target item exists, is identifiable and visible, and its detail form or context menu offers a removal action",
+        "abstract_steps": [
+          "Locate the entry in a list (may require expanding/scrolling)",
+          "Open the target item's detail form or expose row actions/context menu",
+          "Invoke the destructive/removal action from the available controls (e.g. a trash/discard control)",
+          "Confirm removal if prompted via the positive/accept action",
+          "Verify removal from the list"
+        ],
+        "failure_modes": [
+          "Long-pressing invokes a different action (e.g. icon or label selection) rather than the intended removal flow",
+          "Dismissing confirmation prematurely or accidentally",
+          "Removing the wrong row due to duplicates or similar names/dates",
+          "Mistaking 'MORE' or similar buttons for delete"
+        ],
+        "verification_checklist": [
+          "Target row no longer appears in list",
+          "Aggregate totals updated accordingly",
+          "Detail view for that entry is no longer accessible"
+        ]
+      },
+      {
+        "name": "QUERY_INFO",
+        "precondition": "App is launched, information is recorded, and the requested summary or list view is reachable",
+        "abstract_steps": [
+          "Open the app and go to the view that surfaces the requested datum (dashboard summary for totals, list view for counts/categories, statistics, or item detail)",
+          "If summary view lacks precise data, open the item detail or edit view to see absolute values",
+          "Read the already-displayed value for the target date/category verbatim",
+          "Respond with an answer action containing the value in the requested format",
+          "Mark the task complete"
+        ],
+        "failure_modes": [
+          "Miscounting due to including summary/header rows",
+          "Reporting a pre-existing value when the task was to create a new one",
+          "Answering before scrolling to ensure all relevant rows are seen",
+          "Reading relative date label ('Today'/'Yesterday') instead of absolute date",
+          "Value partially occluded by floating buttons",
+          "Filtering by wrong date range"
+        ],
+        "verification_checklist": [
+          "Answered value matches what is visible for the specified date/category",
+          "Counted only actual item rows, excluding headers/totals",
+          "Values match the targeted entry/period",
+          "Currency/units included when relevant",
+          "Output formatted as user requested"
+        ]
+      },
+      {
+        "name": "NAVIGATE_TO",
+        "precondition": "App is launched and target screen is reachable through known menu structure",
+        "abstract_steps": [
+          "Identify the top-level tab or drawer entry matching the target section",
+          "Open the main navigation drawer/menu",
+          "Tap the tab/drawer item / select the named destination",
+          "Confirm the expected section header/content is visible via headers/visual cues"
+        ],
+        "failure_modes": [
+          "Clicking a header icon that opens an auxiliary configuration view instead of the intended section",
+          "Not waiting for the view to load before interacting",
+          "Looping into the wrong menu (e.g., Settings) searching for a feature located elsewhere",
+          "Accidentally triggering long-press menus on the launcher"
+        ],
+        "verification_checklist": [
+          "Target section's characteristic UI is visible",
+          "Correct tab/drawer item is highlighted",
+          "Header/title of destination screen matches expectation",
+          "Expected widgets present"
+        ]
+      },
+      {
+        "name": "PICK_DATE_FROM_PICKER",
+        "precondition": "A date picker dialog is open",
+        "abstract_steps": [
+          "Use month navigation arrows to reach the target month/year",
+          "Tap the target day in the grid",
+          "Confirm with the positive/accept button"
+        ],
+        "failure_modes": [
+          "Tapping the dismiss/negative button instead of the positive/accept button",
+          "Selecting the wrong day due to misreading the grid"
+        ],
+        "verification_checklist": [
+          "Form's date field shows the selected date"
+        ]
+      },
+      {
+        "name": "CREATE_LABEL_OR_CATEGORY",
+        "precondition": "A label/category selection dialog is open",
+        "abstract_steps": [
+          "If the desired value isn't in the list, tap the new-value input field",
+          "Type the new label text",
+          "Confirm with the positive/accept button to create and apply it"
+        ],
+        "failure_modes": [
+          "Typing in the wrong field and creating duplicates",
+          "Confirming before the text is entered"
+        ],
+        "verification_checklist": [
+          "Form shows the new label applied to the entry"
+        ]
+      },
+      {
+        "name": "EXPORT_BACKUP",
+        "precondition": "App provides a backup/export feature",
+        "abstract_steps": [
+          "Navigate to the backup/export section via the main menu",
+          "Trigger the export action",
+          "Confirm filename in the export dialog",
+          "Choose save location in the system file picker and confirm",
+          "Verify a new entry appears in backup history"
+        ],
+        "failure_modes": [
+          "Dismissing system file picker before saving",
+          "Choosing import instead of export"
+        ],
+        "verification_checklist": [
+          "Backup history shows a new timestamped entry",
+          "Saved file exists at chosen location"
+        ]
+      },
+      {
+        "name": "SET_DATE_TIME",
+        "precondition": "An editable date/time field exists",
+        "abstract_steps": [
+          "Open the date or time picker via the dedicated icon",
+          "If a graphical clock/calendar is imprecise, switch to numeric/text input mode",
+          "Enter hour, minute, AM/PM (and year/month/day) explicitly",
+          "Confirm the dialog to apply",
+          "Re-open header to verify the displayed timestamp"
+        ],
+        "failure_modes": [
+          "Imprecise taps on clock face selecting adjacent values",
+          "AM/PM toggle unresponsive on clock-face mode",
+          "Dialog dismissed without confirming"
+        ],
+        "verification_checklist": [
+          "Header on edit/entry screen shows requested date/time",
+          "Saved entry shows the requested date/time after commit"
+        ]
+      },
+      {
+        "name": "TOGGLE_FEATURE",
+        "precondition": "Feature toggle exists somewhere in the UI",
+        "abstract_steps": [
+          "Look first on the screen where the feature is used (in-context toggles)",
+          "If absent, check the settings/preferences screen",
+          "Tap the toggle and confirm it visually indicates active state",
+          "Proceed with the dependent action"
+        ],
+        "failure_modes": [
+          "Searching only in settings when the toggle is contextual",
+          "Mis-identifying the toggle icon"
+        ],
+        "verification_checklist": [
+          "Toggle shows active/highlighted visual state",
+          "Subsequent action behaves according to enabled mode"
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "source": "static_seed_25app",
+    "apps": [
+      "bluecoins",
+      "pro_expense"
+    ]
+  }
+}

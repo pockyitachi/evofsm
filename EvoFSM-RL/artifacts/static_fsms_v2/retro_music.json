@@ -1,0 +1,1250 @@
+{
+  "version": "0.1.0",
+  "app": "retro_music",
+  "layer1": {
+    "app": "retro_music",
+    "category": "Music & Audio",
+    "states": [
+      {
+        "id": "home_screen",
+        "description": "Android device home screen",
+        "visual_cues": [
+          "default app icons (Gmail, Photos, YouTube)",
+          "bottom dock",
+          "wallpaper"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "app_drawer",
+        "description": "Device app drawer with alphabetical app grid",
+        "visual_cues": [
+          "grid of installed apps",
+          "search bar at top",
+          "alphabetical order"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "for_you_tab",
+        "description": "Retro Music main For You dashboard",
+        "visual_cues": [
+          "Welcome, <name> header",
+          "profile avatar top-left",
+          "search icon top-left",
+          "settings gear top-right",
+          "quick-access tiles: History, Last added, Most played, Shuffle",
+          "Suggestions section with refresh icon",
+          "bottom navigation: For you, Songs, Albums, Artists, Playlists"
+        ],
+        "resource_hints": [
+          "For you",
+          "History",
+          "Last added",
+          "Most played",
+          "Shuffle",
+          "Suggestions"
+        ]
+      },
+      {
+        "id": "songs_tab",
+        "description": "List of all songs in the library",
+        "visual_cues": [
+          "scrollable list of songs",
+          "three-dot menu per song",
+          "shuffle FAB bottom-right",
+          "overflow menu top-right"
+        ],
+        "resource_hints": [
+          "Songs"
+        ]
+      },
+      {
+        "id": "albums_tab",
+        "description": "Grid of albums",
+        "visual_cues": [
+          "album cover grid",
+          "album title and artist below"
+        ],
+        "resource_hints": [
+          "Albums"
+        ]
+      },
+      {
+        "id": "artists_tab",
+        "description": "List of artists",
+        "visual_cues": [
+          "artist list",
+          "search icon"
+        ],
+        "resource_hints": [
+          "Artists"
+        ]
+      },
+      {
+        "id": "playlists_tab",
+        "description": "List of user playlists",
+        "visual_cues": [
+          "playlist list or empty state",
+          "'You have no playlists' message when empty",
+          "three-dot overflow menu top-right"
+        ],
+        "resource_hints": [
+          "Playlists",
+          "You have no playlists"
+        ]
+      },
+      {
+        "id": "search_screen",
+        "description": "Global search interface",
+        "visual_cues": [
+          "search text field at top",
+          "filter chips: Songs, Artists, Albums, Album artist",
+          "results sectioned by category",
+          "back arrow top-left",
+          "clear (x) icon"
+        ],
+        "resource_hints": [
+          "Songs",
+          "Artists",
+          "Albums",
+          "Album artist"
+        ]
+      },
+      {
+        "id": "history_view",
+        "description": "Playback history view",
+        "visual_cues": [
+          "History title",
+          "list of recently played songs or 'You have no songs' empty state"
+        ],
+        "resource_hints": [
+          "History",
+          "You have no songs"
+        ]
+      },
+      {
+        "id": "last_added_view",
+        "description": "Recently added songs list",
+        "visual_cues": [
+          "Last added title",
+          "list of songs with artist subtitle",
+          "three-dot menu per song"
+        ],
+        "resource_hints": [
+          "Last added"
+        ]
+      },
+      {
+        "id": "artist_page",
+        "description": "Specific artist detail page",
+        "visual_cues": [
+          "artist name",
+          "stats line: X Album • Y Song • duration",
+          "Play all and Shuffle buttons",
+          "Album section",
+          "Song section",
+          "overflow menu top-right"
+        ],
+        "resource_hints": [
+          "Play all",
+          "Shuffle"
+        ]
+      },
+      {
+        "id": "album_detail",
+        "description": "Album detail page with tracklist",
+        "visual_cues": [
+          "album cover",
+          "album title and artist",
+          "duration shown",
+          "song list",
+          "edit pencil icon top-right"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "song_context_menu",
+        "description": "Bottom/popup menu of actions for a single song",
+        "visual_cues": [
+          "options: Play next, Add to playing queue, Add to playlist, Share, Tag editor, Details, Set as ringtone, Delete from device"
+        ],
+        "resource_hints": [
+          "Play next",
+          "Add to playing queue",
+          "Add to playlist",
+          "Tag editor",
+          "Details",
+          "Set as ringtone",
+          "Delete from device"
+        ]
+      },
+      {
+        "id": "artist_context_menu",
+        "description": "Context menu for artist actions",
+        "visual_cues": [
+          "Play next",
+          "Add to playing queue",
+          "Add to playlist"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "add_to_playlist_dialog",
+        "description": "Dialog to select an existing playlist or create new",
+        "visual_cues": [
+          "'New playlist' option",
+          "list of existing playlists"
+        ],
+        "resource_hints": [
+          "New playlist"
+        ]
+      },
+      {
+        "id": "new_playlist_dialog",
+        "description": "Dialog to enter new playlist name",
+        "visual_cues": [
+          "Playlist name text field",
+          "Cancel and Create buttons"
+        ],
+        "resource_hints": [
+          "Playlist name",
+          "Create",
+          "Cancel"
+        ]
+      },
+      {
+        "id": "mini_player",
+        "description": "Persistent mini-player at bottom of screen",
+        "visual_cues": [
+          "song title and artist",
+          "play/pause icon"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "now_playing",
+        "description": "Full-screen now playing view",
+        "visual_cues": [
+          "album art",
+          "song title and artist",
+          "playback progress bar",
+          "controls: repeat, prev, play/pause, next, shuffle",
+          "bottom utility icons: sleep timer (moon), lyrics, favorite (heart), queue, overflow"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "lyrics_view",
+        "description": "Lyrics display screen for current song",
+        "visual_cues": [
+          "lyrics text or 'No lyrics found' message",
+          "edit pencil FAB bottom-right",
+          "overflow menu bottom-right"
+        ],
+        "resource_hints": [
+          "No lyrics found"
+        ]
+      },
+      {
+        "id": "edit_lyrics_dialog",
+        "description": "Dialog to paste/enter lyrics",
+        "visual_cues": [
+          "Paste Lyrics Here text field",
+          "CANCEL and SAVE buttons"
+        ],
+        "resource_hints": [
+          "Paste Lyrics Here",
+          "SAVE",
+          "CANCEL"
+        ]
+      },
+      {
+        "id": "tag_editor",
+        "description": "Tag editor for song or album metadata",
+        "visual_cues": [
+          "fields: Song, Album, Album artist, Artist, Composer, Genre, Year, Track, Disc Number, Lyrics",
+          "Save floating button or top-right action"
+        ],
+        "resource_hints": [
+          "Tag editor",
+          "Album",
+          "Album artist",
+          "Genre",
+          "Year",
+          "Lyrics"
+        ]
+      },
+      {
+        "id": "song_details_dialog",
+        "description": "Read-only details popup for a song",
+        "visual_cues": [
+          "fields: File path, File name, Size, Last Modified, Format, Length, Bitrate, Sampling rate",
+          "OK button"
+        ],
+        "resource_hints": [
+          "Size",
+          "Format",
+          "Bitrate",
+          "Sampling rate"
+        ]
+      },
+      {
+        "id": "now_playing_queue",
+        "description": "Queue list of upcoming tracks",
+        "visual_cues": [
+          "Now playing queue title",
+          "list of upcoming tracks"
+        ],
+        "resource_hints": [
+          "Now playing queue"
+        ]
+      },
+      {
+        "id": "sleep_timer_dialog",
+        "description": "Sleep timer setup dialog",
+        "visual_cues": [
+          "minutes slider (default 30 min)",
+          "Finish last song checkbox",
+          "Start button"
+        ],
+        "resource_hints": [
+          "Finish last song",
+          "Start"
+        ]
+      },
+      {
+        "id": "settings_main",
+        "description": "Main settings page",
+        "visual_cues": [
+          "categories: Look and feel, Now playing, Audio, Personalize, Images, Notification, Other, Backup & Restore, About"
+        ],
+        "resource_hints": [
+          "Look and feel",
+          "Audio",
+          "Other",
+          "Now playing"
+        ]
+      },
+      {
+        "id": "settings_audio",
+        "description": "Audio settings sub-page",
+        "visual_cues": [
+          "toggles: Fade audio, Always play, Crossfade, Gapless playback, Auto-play, Bluetooth playback",
+          "Equalizer entry"
+        ],
+        "resource_hints": [
+          "Auto-play",
+          "Bluetooth playback",
+          "Equalizer"
+        ]
+      },
+      {
+        "id": "settings_look_feel",
+        "description": "Look and feel sub-page",
+        "visual_cues": [
+          "App theme entry",
+          "Theme and Colors sections"
+        ],
+        "resource_hints": [
+          "App theme",
+          "Clearly White",
+          "Kinda Dark",
+          "Follow system"
+        ]
+      },
+      {
+        "id": "settings_other",
+        "description": "Other settings sub-page",
+        "visual_cues": [
+          "Blacklist",
+          "Whitelist music",
+          "Filter song duration",
+          "Pause on zero",
+          "Keep the screen on"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "profile_edit",
+        "description": "User profile editing screen",
+        "visual_cues": [
+          "Profile title",
+          "Name text field",
+          "save FAB with floppy disk icon"
+        ],
+        "resource_hints": [
+          "Name",
+          "Profile"
+        ]
+      },
+      {
+        "id": "playlists_overflow_menu",
+        "description": "Overflow menu on playlists tab",
+        "visual_cues": [
+          "Grid size",
+          "Sort order",
+          "New playlist",
+          "Import playlist",
+          "Settings"
+        ],
+        "resource_hints": [
+          "New playlist"
+        ]
+      },
+      {
+        "id": "sort_order_dialog",
+        "description": "Sort order selector dialog",
+        "visual_cues": [
+          "options: Default, Ascending, Descending, Artist, Album, etc."
+        ],
+        "resource_hints": [
+          "Sort order"
+        ]
+      },
+      {
+        "id": "permission_dialog",
+        "description": "System permission dialog (modify audio file, modify system settings, nearby devices)",
+        "visual_cues": [
+          "Allow/Deny or OK buttons"
+        ],
+        "resource_hints": [
+          "Allow",
+          "Deny"
+        ]
+      }
+    ],
+    "transitions": [
+      {
+        "from_state": "home_screen",
+        "to_state": "app_drawer",
+        "action": "swipe_up_from_bottom",
+        "precondition": "",
+        "postcondition": "app drawer visible"
+      },
+      {
+        "from_state": "app_drawer",
+        "to_state": "app_drawer",
+        "action": "swipe_up_to_scroll",
+        "precondition": "target app not visible",
+        "postcondition": ""
+      },
+      {
+        "from_state": "app_drawer",
+        "to_state": "for_you_tab",
+        "action": "click(Retro Music icon)",
+        "precondition": "",
+        "postcondition": "app launched on For You tab"
+      },
+      {
+        "from_state": "for_you_tab",
+        "to_state": "songs_tab",
+        "action": "click(bottom_nav_songs)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "for_you_tab",
+        "to_state": "albums_tab",
+        "action": "click(bottom_nav_albums)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "for_you_tab",
+        "to_state": "artists_tab",
+        "action": "click(bottom_nav_artists)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "for_you_tab",
+        "to_state": "playlists_tab",
+        "action": "click(bottom_nav_playlists)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "for_you_tab",
+        "to_state": "search_screen",
+        "action": "click(search_icon)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "for_you_tab",
+        "to_state": "settings_main",
+        "action": "click(gear_icon)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "for_you_tab",
+        "to_state": "history_view",
+        "action": "click(History tile)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "for_you_tab",
+        "to_state": "last_added_view",
+        "action": "click(Last added tile)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "for_you_tab",
+        "to_state": "now_playing",
+        "action": "click(Shuffle tile)",
+        "precondition": "",
+        "postcondition": "playback begins"
+      },
+      {
+        "from_state": "for_you_tab",
+        "to_state": "profile_edit",
+        "action": "click(profile_avatar)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "search_screen",
+        "to_state": "search_screen",
+        "action": "type(query)",
+        "precondition": "",
+        "postcondition": "results filtered"
+      },
+      {
+        "from_state": "search_screen",
+        "to_state": "search_screen",
+        "action": "click(filter_chip)",
+        "precondition": "",
+        "postcondition": "category filtered"
+      },
+      {
+        "from_state": "search_screen",
+        "to_state": "artist_page",
+        "action": "click(artist_result)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "search_screen",
+        "to_state": "album_detail",
+        "action": "click(album_result)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "search_screen",
+        "to_state": "song_context_menu",
+        "action": "click(song_three_dot)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "search_screen",
+        "to_state": "mini_player",
+        "action": "click(song_result)",
+        "precondition": "",
+        "postcondition": "song queued/playing"
+      },
+      {
+        "from_state": "songs_tab",
+        "to_state": "song_context_menu",
+        "action": "click(three_dot_next_to_song)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "songs_tab",
+        "to_state": "now_playing",
+        "action": "click(shuffle_fab)",
+        "precondition": "",
+        "postcondition": "shuffle plays library"
+      },
+      {
+        "from_state": "songs_tab",
+        "to_state": "sort_order_dialog",
+        "action": "click(overflow_menu) -> Sort order",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "albums_tab",
+        "to_state": "album_detail",
+        "action": "click(album_cover)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "album_detail",
+        "to_state": "tag_editor",
+        "action": "click(edit_pencil)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "album_detail",
+        "to_state": "mini_player",
+        "action": "click(Play all) or click(song)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "artists_tab",
+        "to_state": "search_screen",
+        "action": "click(search_icon)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "artist_page",
+        "to_state": "artist_context_menu",
+        "action": "click(three_dot_top_right)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "artist_page",
+        "to_state": "album_detail",
+        "action": "click(album_cover)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "artist_context_menu",
+        "to_state": "artist_page",
+        "action": "click(Add to playing queue)",
+        "precondition": "",
+        "postcondition": "tracks appended"
+      },
+      {
+        "from_state": "song_context_menu",
+        "to_state": "add_to_playlist_dialog",
+        "action": "click(Add to playlist)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "song_context_menu",
+        "to_state": "now_playing_queue",
+        "action": "click(Add to playing queue) or click(Play next)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "song_context_menu",
+        "to_state": "tag_editor",
+        "action": "click(Tag editor)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "song_context_menu",
+        "to_state": "song_details_dialog",
+        "action": "click(Details)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "song_context_menu",
+        "to_state": "permission_dialog",
+        "action": "click(Set as ringtone) or click(Delete from device)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "add_to_playlist_dialog",
+        "to_state": "new_playlist_dialog",
+        "action": "click(New playlist)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "add_to_playlist_dialog",
+        "to_state": "songs_tab",
+        "action": "click(existing_playlist)",
+        "precondition": "",
+        "postcondition": "song added"
+      },
+      {
+        "from_state": "new_playlist_dialog",
+        "to_state": "songs_tab",
+        "action": "type(name) -> click(Create)",
+        "precondition": "",
+        "postcondition": "playlist created + song added"
+      },
+      {
+        "from_state": "playlists_tab",
+        "to_state": "playlists_overflow_menu",
+        "action": "click(three_dot_top_right)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "playlists_overflow_menu",
+        "to_state": "new_playlist_dialog",
+        "action": "click(New playlist)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "mini_player",
+        "to_state": "now_playing",
+        "action": "click(mini_player)",
+        "precondition": "song playing",
+        "postcondition": ""
+      },
+      {
+        "from_state": "now_playing",
+        "to_state": "lyrics_view",
+        "action": "click(lyrics_icon)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "now_playing",
+        "to_state": "sleep_timer_dialog",
+        "action": "click(moon_icon)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "now_playing",
+        "to_state": "now_playing_queue",
+        "action": "click(queue_icon)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "now_playing",
+        "to_state": "now_playing",
+        "action": "click(favorite_heart) or click(shuffle) or click(repeat)",
+        "precondition": "",
+        "postcondition": "toggle state"
+      },
+      {
+        "from_state": "lyrics_view",
+        "to_state": "edit_lyrics_dialog",
+        "action": "click(pencil_fab)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "edit_lyrics_dialog",
+        "to_state": "permission_dialog",
+        "action": "type(text) -> click(SAVE)",
+        "precondition": "first time saving",
+        "postcondition": ""
+      },
+      {
+        "from_state": "permission_dialog",
+        "to_state": "lyrics_view",
+        "action": "click(Allow)",
+        "precondition": "",
+        "postcondition": "save completed"
+      },
+      {
+        "from_state": "tag_editor",
+        "to_state": "permission_dialog",
+        "action": "click(Save)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "sleep_timer_dialog",
+        "to_state": "now_playing",
+        "action": "toggle(Finish last song) -> click(Start)",
+        "precondition": "",
+        "postcondition": "timer active"
+      },
+      {
+        "from_state": "settings_main",
+        "to_state": "settings_audio",
+        "action": "click(Audio)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "settings_main",
+        "to_state": "settings_look_feel",
+        "action": "click(Look and feel)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "settings_main",
+        "to_state": "settings_other",
+        "action": "click(Other)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "settings_audio",
+        "to_state": "permission_dialog",
+        "action": "toggle(Bluetooth playback)",
+        "precondition": "first enable",
+        "postcondition": ""
+      },
+      {
+        "from_state": "profile_edit",
+        "to_state": "for_you_tab",
+        "action": "type(name) -> click(save_fab)",
+        "precondition": "",
+        "postcondition": "name updated"
+      }
+    ],
+    "strategies": [
+      {
+        "name": "SET_SLEEP_TIMER",
+        "preconditions": "App launched; a song is playing or shuffle started",
+        "steps": [
+          "Start playback (Shuffle on For You, or play any song)",
+          "Click mini_player to open now_playing",
+          "Click moon (sleep timer) icon at bottom",
+          "Adjust slider to desired minutes (default 30)",
+          "Toggle 'Finish last song' checkbox if requested",
+          "Click Start"
+        ],
+        "success_signal": "Sleep timer dialog closes and returns to now_playing",
+        "fallback": "If sleep timer not found in settings, ensure now_playing is open via mini-player"
+      },
+      {
+        "name": "CREATE_PLAYLIST_AND_ADD_SONGS",
+        "preconditions": "App launched on any tab",
+        "steps": [
+          "Navigate to Songs tab or use search to find first target song",
+          "Click three-dot menu next to song -> Add to playlist",
+          "Click 'New playlist' in dialog",
+          "Tap Playlist name field, type the playlist name",
+          "Click Create (first song is added automatically)",
+          "For each remaining song: locate it, click three-dot -> Add to playlist -> select the newly created playlist"
+        ],
+        "success_signal": "Toast 'Added N song(s) to <name>' appears",
+        "fallback": "If playlist tab is empty, can also create via Playlists tab overflow menu -> New playlist"
+      },
+      {
+        "name": "ADD_TO_PLAYING_QUEUE",
+        "preconditions": "A song is already playing",
+        "steps": [
+          "Use search or browse to locate target song/artist",
+          "Click three-dot menu -> 'Add to playing queue' to append, or 'Play next' to insert next"
+        ],
+        "success_signal": "Toast 'Added N title to the playing queue'",
+        "fallback": "If tapping song directly, it starts immediate playback instead of queuing"
+      },
+      {
+        "name": "PLAY_SONG_FROM_LIST",
+        "preconditions": "App launched",
+        "steps": [
+          "Navigate to relevant list (Last added, Songs, album, search results)",
+          "Scroll to find song",
+          "Click song row to start playback"
+        ],
+        "success_signal": "Mini player at bottom shows song title with pause icon",
+        "fallback": "If 'Couldn't play this song' toast appears, the song may be unplayable; use three-dot menu for other actions"
+      },
+      {
+        "name": "QUERY_SONG_DETAILS",
+        "preconditions": "Target song located in any list",
+        "steps": [
+          "Click three-dot menu next to song",
+          "Click 'Details' option",
+          "Read fields: Size, Format, Bitrate, Sampling rate, Length",
+          "Close with OK"
+        ],
+        "success_signal": "Details dialog displays metadata",
+        "fallback": ""
+      },
+      {
+        "name": "EDIT_TAG_METADATA",
+        "preconditions": "Target song or album located",
+        "steps": [
+          "Open album detail and click pencil icon, OR three-dot menu on song -> Tag editor",
+          "Tap target field (e.g. Album, Lyrics)",
+          "Use Select all if existing text must be replaced",
+          "Type new value",
+          "Scroll to find Save button (may be hidden below keyboard)",
+          "Click Save",
+          "Click Allow on permission dialog to modify audio file"
+        ],
+        "success_signal": "Progress message 'Scanned X of Y files' or returns to previous screen",
+        "fallback": "If save action triggers permission dialog and doesn't persist, repeat save after granting permission"
+      },
+      {
+        "name": "ADD_LYRICS_MANUALLY",
+        "preconditions": "A song is playing",
+        "steps": [
+          "Open now_playing from mini-player",
+          "Click lyrics icon at bottom",
+          "Click pencil FAB to open Edit Lyrics dialog",
+          "Type lyrics in Paste Lyrics Here field",
+          "Click SAVE",
+          "Click Allow on permission to modify audio file",
+          "If 'No lyrics found' still shown, repeat edit/save once after permission granted"
+        ],
+        "success_signal": "Lyrics view displays the entered text",
+        "fallback": "Alternative path: song three-dot -> Tag editor -> Lyrics field"
+      },
+      {
+        "name": "SEARCH_AND_FILTER",
+        "preconditions": "App launched",
+        "steps": [
+          "Click search icon top-left",
+          "Type query in search field",
+          "Click filter chip (Songs, Artists, Albums, or Album artist)",
+          "Inspect or count results"
+        ],
+        "success_signal": "Results appear under selected category, or 'No results' shown",
+        "fallback": "Clearing the field with X clears the entire query; re-type to switch filters"
+      },
+      {
+        "name": "SET_AS_RINGTONE",
+        "preconditions": "Target song located",
+        "steps": [
+          "Click three-dot menu next to song",
+          "Click 'Set as ringtone'",
+          "Click OK on 'Allow modify audio settings' prompt",
+          "Toggle 'Allow modifying system settings' if redirected to system settings",
+          "Press Back to return to app",
+          "Repeat Set as ringtone after permission granted"
+        ],
+        "success_signal": "Returns to song list with no error toast",
+        "fallback": "First attempt may be interrupted by permission flow; second attempt completes it"
+      },
+      {
+        "name": "DELETE_SONG_FROM_DEVICE",
+        "preconditions": "Target song located",
+        "steps": [
+          "Click three-dot menu next to song",
+          "Click 'Delete from device'",
+          "Click Allow on permission dialog"
+        ],
+        "success_signal": "Song no longer present in songs list",
+        "fallback": ""
+      },
+      {
+        "name": "CHANGE_APP_THEME",
+        "preconditions": "App launched",
+        "steps": [
+          "Click gear icon top-right on For You",
+          "Click 'Look and feel'",
+          "Click 'App theme'",
+          "Select theme option (Clearly White / Kinda Dark / Follow system)"
+        ],
+        "success_signal": "App theme updates and dialog closes",
+        "fallback": ""
+      },
+      {
+        "name": "EDIT_PROFILE_NAME",
+        "preconditions": "On For You tab",
+        "steps": [
+          "Click profile avatar icon (not text) to open Profile screen",
+          "Click Name text field",
+          "Long press text and Select all (since type appends to existing text)",
+          "Type new name",
+          "Click save FAB (floppy icon)"
+        ],
+        "success_signal": "Returns to For You with 'Welcome, <new name>' visible",
+        "fallback": "If typing appends to existing text, use long-press -> Select all -> type to overwrite"
+      },
+      {
+        "name": "ENABLE_AUTO_RESUME_AUDIO",
+        "preconditions": "App launched",
+        "steps": [
+          "Open Settings via gear icon",
+          "Tap 'Audio'",
+          "Toggle 'Auto-play' on for headphones",
+          "Toggle 'Bluetooth playback' on",
+          "Click Allow on nearby devices permission dialog"
+        ],
+        "success_signal": "Both toggles appear active (blue)",
+        "fallback": ""
+      },
+      {
+        "name": "COUNT_LIST_ITEMS",
+        "preconditions": "Navigate to specific list (Playlists, History, Artists results)",
+        "steps": [
+          "Open relevant tab/section",
+          "If empty state visible, answer 0",
+          "Otherwise count visible entries (may need scrolling)"
+        ],
+        "success_signal": "Number reported",
+        "fallback": ""
+      }
+    ],
+    "dead_ends": [
+      {
+        "state": "settings_audio",
+        "failed_action": "search for sleep timer in audio settings",
+        "note": "Sleep timer is NOT in Settings; it's accessible only via the moon icon on the now_playing screen"
+      },
+      {
+        "state": "settings_other",
+        "failed_action": "search for sleep timer in Other settings",
+        "note": "Sleep timer is not in any settings sub-page"
+      },
+      {
+        "state": "lyrics_view",
+        "failed_action": "click overflow menu -> Details to edit lyrics",
+        "note": "Details dialog is read-only; must use pencil FAB or song's Tag editor"
+      },
+      {
+        "state": "edit_lyrics_dialog",
+        "failed_action": "save without permission",
+        "note": "First save triggers system permission dialog; lyrics not persisted until permission granted and save re-attempted"
+      },
+      {
+        "state": "search_screen",
+        "failed_action": "click song result expecting context menu",
+        "note": "Tapping song row starts playback; must tap three-dot icon for queue/playlist options"
+      },
+      {
+        "state": "for_you_tab",
+        "failed_action": "click 'User Name' text to edit profile",
+        "note": "Text is not interactive for editing; must click the circular profile avatar icon next to it"
+      },
+      {
+        "state": "profile_edit",
+        "failed_action": "type new name directly",
+        "note": "Type action appends to existing text rather than replacing; must long-press and Select all first"
+      },
+      {
+        "state": "app_drawer",
+        "failed_action": "imprecise tap on app icon",
+        "note": "Adjacent apps (OpenTracks, Markor, Joplin, Photos) frequently opened by mistake; verify by app name label"
+      },
+      {
+        "state": "home_screen",
+        "failed_action": "swipe up gesture too low or with long-press timing",
+        "note": "Can trigger home screen wallpaper/widgets menu instead of app drawer"
+      },
+      {
+        "state": "search_screen",
+        "failed_action": "click X clear icon expecting filter reset",
+        "note": "X clears the entire query, not the filter; requires re-typing search term"
+      }
+    ]
+  },
+  "layer2": {
+    "categories": [
+      {
+        "name": "NAVIGATE_TO",
+        "precondition": "App launched on some screen; target section reachable via main navigation, tabs, or quick tiles",
+        "abstract_steps": [
+          "Identify primary navigation affordance (bottom bar, top tabs, drawer)",
+          "Tap the icon/label for target section",
+          "Verify destination by header text or highlighted nav indicator"
+        ],
+        "failure_modes": [
+          "Mistaking text labels for clickable affordances when only icons respond",
+          "Adjacent icons on cramped bars cause misclicks",
+          "Wrong app opened from launcher due to imprecise icon tap"
+        ],
+        "verification_checklist": [
+          "Header/title matches target",
+          "Active tab indicator highlights the chosen section",
+          "Expected content type visible (list, grid, etc.)"
+        ]
+      },
+      {
+        "name": "ADD_ENTRY",
+        "precondition": "On a container view that can hold the new entry; system supports creation flow",
+        "abstract_steps": [
+          "Open creation entry point (FAB, overflow menu option, or 'New X' button)",
+          "Provide required fields (name/text) in dialog",
+          "Confirm creation via Create/Save button",
+          "Optionally associate with existing item during creation"
+        ],
+        "failure_modes": [
+          "Creation entry hidden under overflow menu rather than FAB",
+          "Confirmation button hidden by on-screen keyboard",
+          "Empty name field prevents creation"
+        ],
+        "verification_checklist": [
+          "Toast or banner confirming creation",
+          "New entry appears in the container list",
+          "No error dialog shown"
+        ]
+      },
+      {
+        "name": "ADD_TO_COLLECTION",
+        "precondition": "Target item identified; collection (queue/playlist/favorites) accessible",
+        "abstract_steps": [
+          "Open per-item action menu (three-dot or long-press)",
+          "Choose append/insert action (e.g., add to queue, play next, add to playlist)",
+          "If choosing playlist, pick existing or create new in dialog"
+        ],
+        "failure_modes": [
+          "Tapping item directly triggers playback instead of opening menu",
+          "Selecting the wrong adjacent item's menu due to imprecise tap",
+          "Choosing 'Add to queue' when 'Play next' is required (or vice versa)"
+        ],
+        "verification_checklist": [
+          "Toast confirming addition",
+          "Collection size or contents reflect the addition",
+          "Currently playing track not interrupted unexpectedly"
+        ]
+      },
+      {
+        "name": "DELETE_ENTRY",
+        "precondition": "Target item exists; delete action available in context menu",
+        "abstract_steps": [
+          "Open per-item action menu",
+          "Choose delete/remove option",
+          "Grant any required system permission",
+          "Confirm removal in any subsequent dialog"
+        ],
+        "failure_modes": [
+          "Missing system permission blocks deletion",
+          "Stale view continues to show item until refreshed"
+        ],
+        "verification_checklist": [
+          "Item no longer present in source list after refresh",
+          "Permission flow completed"
+        ]
+      },
+      {
+        "name": "EDIT_ENTRY",
+        "precondition": "Target entry has an edit affordance (pencil icon, edit option in menu)",
+        "abstract_steps": [
+          "Open the editor for the entry",
+          "Focus target field",
+          "Clear existing content if necessary (long-press + Select all)",
+          "Enter new value",
+          "Dismiss keyboard if it hides save action",
+          "Save changes",
+          "Grant any file/system permission required"
+        ],
+        "failure_modes": [
+          "Typing appends to existing text instead of replacing",
+          "Save button hidden behind keyboard or below scroll",
+          "Permission interrupts save and requires retry",
+          "Read-only details dialog mistaken for editor"
+        ],
+        "verification_checklist": [
+          "Edited field shows new value after returning",
+          "Persistent across navigation away and back",
+          "No error toast"
+        ]
+      },
+      {
+        "name": "QUERY_INFO",
+        "precondition": "Information visible on a specific detail screen or dialog",
+        "abstract_steps": [
+          "Navigate to entity (list -> item, or search)",
+          "Open details view if metadata required",
+          "Read requested fields",
+          "Report exact value as required"
+        ],
+        "failure_modes": [
+          "Tapping item plays it instead of showing info; must use context menu",
+          "Information requires scrolling or expanding",
+          "Empty-state messages mistaken for data"
+        ],
+        "verification_checklist": [
+          "Field label matches request",
+          "Value extracted verbatim with units"
+        ]
+      },
+      {
+        "name": "SEARCH_AND_FILTER",
+        "precondition": "Search affordance available; filter chips/tabs present",
+        "abstract_steps": [
+          "Open search entry",
+          "Type query string",
+          "Apply category filter via chip/tab",
+          "Inspect or count results, including empty-state"
+        ],
+        "failure_modes": [
+          "Clearing query also resets context unexpectedly",
+          "Filter chip not visibly active; misread as off",
+          "Pluralization or case-sensitivity not matching expected entries"
+        ],
+        "verification_checklist": [
+          "Query string visible in search field",
+          "Active filter chip highlighted",
+          "Result count matches expectation, or 'No results' explicitly shown"
+        ]
+      },
+      {
+        "name": "TOGGLE_SETTING",
+        "precondition": "Settings page reachable",
+        "abstract_steps": [
+          "Open settings menu",
+          "Navigate to the relevant sub-page",
+          "Toggle the switch or select the desired option",
+          "Grant any system permission triggered"
+        ],
+        "failure_modes": [
+          "Assuming feature lives in settings when it lives elsewhere (e.g., contextual menu)",
+          "Permission denial leaves the toggle in inconsistent state"
+        ],
+        "verification_checklist": [
+          "Toggle visibly active (highlighted/colored)",
+          "Permission dialog dismissed positively"
+        ]
+      },
+      {
+        "name": "PLAY_MEDIA",
+        "precondition": "Media library accessible; target item discoverable",
+        "abstract_steps": [
+          "Locate the item via browse or search",
+          "Tap the item to begin playback, or tap a 'Play all' action",
+          "Verify mini-player or full-screen player shows the title with playing indicator"
+        ],
+        "failure_modes": [
+          "Tapping unplayable item shows error toast",
+          "Wrong artist/album variant selected due to multiple matches"
+        ],
+        "verification_checklist": [
+          "Mini-player shows expected title",
+          "Pause icon visible (i.e., playing state)"
+        ]
+      },
+      {
+        "name": "CONFIGURE_PLAYBACK_OPTIONS",
+        "precondition": "Active playback session",
+        "abstract_steps": [
+          "Expand the full-screen player from the mini-player",
+          "Toggle the desired option (repeat mode, shuffle, favorite)",
+          "Open auxiliary dialogs (sleep timer) and confirm"
+        ],
+        "failure_modes": [
+          "Repeat icon requires multiple taps to reach 'Repeat One' mode",
+          "Confusing 'Add to queue' (append) with 'Play next' (insert)"
+        ],
+        "verification_checklist": [
+          "Icon state reflects desired mode (filled heart, '1' on repeat, highlighted shuffle)",
+          "Timer dialog closed after Start"
+        ]
+      },
+      {
+        "name": "RECOVER_FROM_WRONG_APP",
+        "precondition": "Wrong app opened from launcher or accidental navigation",
+        "abstract_steps": [
+          "Press Home to return to launcher",
+          "Re-open app drawer",
+          "Scroll precisely to target alphabetical position",
+          "Verify app name label before tapping icon"
+        ],
+        "failure_modes": [
+          "Repeated mis-taps if icons are clustered or look similar",
+          "Long-press gesture instead of swipe opening wallpaper menu"
+        ],
+        "verification_checklist": [
+          "Splash screen shows correct branding",
+          "Expected home screen of the target app appears"
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "built_at": "2025-01-30T00:00:00Z",
+    "n_episodes": 78,
+    "n_successful": 78,
+    "n_episodes_input": 78,
+    "synthesizer_model": "claude-opus-4-7",
+    "synthesizer_temperature": 0.3
+  }
+}

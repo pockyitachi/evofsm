@@ -1,0 +1,247 @@
+{
+  "category": "Health & Fitness",
+  "layer2": {
+    "categories": [
+      {
+        "name": "NAVIGATE_TO_APP",
+        "precondition": "Device is on home screen or another app; target app may not be on home screen",
+        "abstract_steps": [
+          "Open the app launcher/drawer",
+          "Scroll alphabetically to locate the target app",
+          "Tap the app icon",
+          "Advance through any first-run onboarding screens by tapping the primary forward control"
+        ],
+        "failure_modes": [
+          "Confusing onboarding with empty state and giving up early",
+          "Pressing system Back on an onboarding screen and exiting the app",
+          "Tapping the wrong adjacent icon in the drawer"
+        ],
+        "verification_checklist": [
+          "Main content list/dashboard of the app is visible",
+          "Onboarding text is no longer displayed"
+        ]
+      },
+      {
+        "name": "QUERY_INFO",
+        "precondition": "Target entity (record/item) exists in a list within the app",
+        "abstract_steps": [
+          "Reach the list of entities",
+          "Scroll to locate the named entity",
+          "Open the entity detail view",
+          "Read the requested field(s) including units",
+          "Return the value(s) verbatim"
+        ],
+        "failure_modes": [
+          "Reading from a summary row when full precision/units only appear in detail view",
+          "Confusing similarly named entities",
+          "Stopping at a tab that does not contain the requested metric"
+        ],
+        "verification_checklist": [
+          "Entity name on detail screen matches the requested one",
+          "Reported value(s) include correct units",
+          "If comparison, both items were checked before answering"
+        ]
+      },
+      {
+        "name": "COMPARE_ENTRIES",
+        "precondition": "Two named entities exist in the list",
+        "abstract_steps": [
+          "Open first entity, record metric, navigate back",
+          "Open second entity, record metric",
+          "Compute comparison or difference",
+          "Answer with the chosen entity and/or numeric result"
+        ],
+        "failure_modes": [
+          "Forgetting to convert units when mixed (e.g., feet vs miles)",
+          "Reading wrong metric label",
+          "Picking the wrong direction (greater vs lesser)"
+        ],
+        "verification_checklist": [
+          "Both metrics use the same unit",
+          "Answer matches the requested polarity (longer/higher/shorter)"
+        ]
+      },
+      {
+        "name": "EDIT_ENTRY",
+        "precondition": "Editable entity exists and is reachable from a list",
+        "abstract_steps": [
+          "Open entity detail",
+          "Open the contextual actions menu",
+          "Choose Edit",
+          "Tap target text field; existing text is typically auto-selected, so typing overwrites it",
+          "Modify additional fields if requested",
+          "Tap Save"
+        ],
+        "failure_modes": [
+          "Tapping save before all required fields are set",
+          "Editing wrong field due to mislocation",
+          "Failing to dismiss the keyboard, causing Save to be off-screen"
+        ],
+        "verification_checklist": [
+          "Detail header reflects new values after saving",
+          "List row shows updated values when navigating back"
+        ]
+      },
+      {
+        "name": "DELETE_ENTRY",
+        "precondition": "Entity exists in list",
+        "abstract_steps": [
+          "Open entity detail",
+          "Open contextual menu",
+          "Choose Delete",
+          "Confirm in the confirmation dialog"
+        ],
+        "failure_modes": [
+          "Dismissing the confirmation dialog by tapping outside",
+          "Deleting the wrong entity due to duplicate names"
+        ],
+        "verification_checklist": [
+          "List no longer contains the deleted entity",
+          "No error toast appeared"
+        ]
+      },
+      {
+        "name": "TOGGLE_SETTING",
+        "precondition": "Settings menu is reachable",
+        "abstract_steps": [
+          "Open overflow menu in app top bar",
+          "Open Settings",
+          "Navigate to the relevant settings subpage",
+          "Toggle switches or select desired option in dialog"
+        ],
+        "failure_modes": [
+          "Toggling a similarly named option",
+          "Not realizing some toggles are already in the desired state",
+          "Leaving extra toggles enabled when instruction implies exclusivity"
+        ],
+        "verification_checklist": [
+          "Each requested toggle is in the correct state",
+          "Any radio choice displays the desired value in its summary row"
+        ]
+      },
+      {
+        "name": "SELECT_FORMAT_OR_OPTION",
+        "precondition": "An action triggers a chooser/radio dialog",
+        "abstract_steps": [
+          "Trigger the action",
+          "Select the required radio in the dialog",
+          "Confirm with OK"
+        ],
+        "failure_modes": [
+          "Tapping Cancel after selecting",
+          "Assuming a default selection without verifying"
+        ],
+        "verification_checklist": [
+          "After confirm, the corresponding settings row or subsequent action reflects the chosen option"
+        ]
+      },
+      {
+        "name": "START_OR_RESUME_RECORDING",
+        "precondition": "On list or detail of an existing record",
+        "abstract_steps": [
+          "For new: tap the primary record floating action button",
+          "For resume: open detail -> contextual menu -> Resume"
+        ],
+        "failure_modes": [
+          "Trying to resume from list directly without opening detail",
+          "Starting a new recording when resume was requested"
+        ],
+        "verification_checklist": [
+          "Active recording screen with stop control is visible",
+          "Live timer is incrementing"
+        ]
+      },
+      {
+        "name": "ADD_SUB_ITEM_DURING_PARENT_ACTIVITY",
+        "precondition": "Parent activity (e.g., recording) is currently active",
+        "abstract_steps": [
+          "Ensure parent activity is running",
+          "Open the add sub-item control in the active activity UI",
+          "Fill required fields or accept defaults",
+          "Confirm/save"
+        ],
+        "failure_modes": [
+          "Attempting to add the sub-item while parent is not active",
+          "Cancelling instead of confirming"
+        ],
+        "verification_checklist": [
+          "Returned to parent activity screen",
+          "Sub-item appears in associated list if available"
+        ]
+      },
+      {
+        "name": "EXPORT_OR_SHARE",
+        "precondition": "Entity detail screen with share action",
+        "abstract_steps": [
+          "Tap share/export action",
+          "If a format chooser appears, select the requested format and confirm",
+          "Pick the target app in the system share sheet"
+        ],
+        "failure_modes": [
+          "No external handler installed leading to 'no apps' message; this may still satisfy in-app completion",
+          "Choosing a different format than requested"
+        ],
+        "verification_checklist": [
+          "System share sheet displayed correct file/format, or chosen target completed import"
+        ]
+      },
+      {
+        "name": "IMPORT_VIA_SHARE_BACK",
+        "precondition": "Entity can be shared as a file and the same app accepts imports",
+        "abstract_steps": [
+          "Initiate share from the entity",
+          "Choose the same app as the share target",
+          "Wait for import completion dialog and read its status (count, errors)"
+        ],
+        "failure_modes": [
+          "Closing dialog before reading values",
+          "Selecting a different target app"
+        ],
+        "verification_checklist": [
+          "Completion dialog shown",
+          "Error/success counts captured"
+        ]
+      },
+      {
+        "name": "SEARCH_WITHIN_LIST",
+        "precondition": "List screen exposes a search affordance",
+        "abstract_steps": [
+          "Open the list",
+          "Tap search icon",
+          "Type query",
+          "Inspect filtered results"
+        ],
+        "failure_modes": [
+          "Empty results misinterpreted as failure when list itself is empty",
+          "Typing in wrong field"
+        ],
+        "verification_checklist": [
+          "Search query echoed in field",
+          "Result list reflects query"
+        ]
+      },
+      {
+        "name": "SWITCH_VIEW_TAB",
+        "precondition": "Detail screen with tabbed views",
+        "abstract_steps": [
+          "Open entity detail",
+          "Tap target tab in the top tab bar"
+        ],
+        "failure_modes": [
+          "Selecting an adjacent tab",
+          "Mistaking bottom toolbar icons for tabs"
+        ],
+        "verification_checklist": [
+          "Selected tab is highlighted",
+          "Content matches expected axis/metric"
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "source": "static_seed_25app",
+    "apps": [
+      "opentracks"
+    ]
+  }
+}

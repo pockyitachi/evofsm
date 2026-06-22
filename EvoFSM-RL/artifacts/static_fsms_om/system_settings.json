@@ -1,0 +1,1354 @@
+{
+  "version": "0.1.0",
+  "app": "system_settings",
+  "layer1": {
+    "app": "system_settings",
+    "category": "Tools",
+    "states": [
+      {
+        "id": "home_screen",
+        "description": "Android home screen with app shortcuts and dock",
+        "visual_cues": [
+          "Dock with Phone/Messages/Chrome",
+          "App shortcuts in grid",
+          "Wallpaper background"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "app_drawer",
+        "description": "Alphabetical list/grid of all installed applications",
+        "visual_cues": [
+          "Alphabetical app grid",
+          "Search bar at top",
+          "Scrollable list"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "quick_settings",
+        "description": "Notification shade with quick settings tiles",
+        "visual_cues": [
+          "Brightness slider",
+          "Quick tiles (Internet, Bluetooth, Flashlight, DND)",
+          "Settings gear icon at bottom"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "home_long_press_menu",
+        "description": "Context menu shown on home screen long-press",
+        "visual_cues": [
+          "Wallpaper & style option",
+          "Widgets option",
+          "Home settings option"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "home_settings",
+        "description": "Launcher home screen settings",
+        "visual_cues": [
+          "Notification dots toggle",
+          "Add app icons to home screen toggle",
+          "Allow home screen rotation toggle",
+          "Suggestions submenu"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "settings_main",
+        "description": "Top-level Settings menu",
+        "visual_cues": [
+          "Network & internet",
+          "Connected devices",
+          "Apps",
+          "Notifications",
+          "Battery",
+          "Storage",
+          "Sound & vibration",
+          "Digital Wellbeing"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "network_internet",
+        "description": "Network & internet settings page",
+        "visual_cues": [
+          "Internet",
+          "Calls & SMS",
+          "SIMs",
+          "Airplane mode",
+          "Hotspot & tethering",
+          "Data Saver",
+          "VPN",
+          "Private DNS",
+          "Adaptive connectivity"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "internet_wifi_list",
+        "description": "Wi-Fi networks list",
+        "visual_cues": [
+          "Wi-Fi toggle",
+          "Network entries with gear icons",
+          "Saved networks link"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "wifi_network_details",
+        "description": "Detailed view of a specific Wi-Fi network",
+        "visual_cues": [
+          "Forget button",
+          "Network details (Signal strength, Frequency, Security)",
+          "Auto-connect toggle",
+          "Network usage option"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "saved_networks",
+        "description": "List of saved Wi-Fi networks",
+        "visual_cues": [
+          "List of saved networks"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "vpn_list",
+        "description": "VPN profiles list",
+        "visual_cues": [
+          "No VPNs added message or list of VPN entries",
+          "Plus (+) icon top-right"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "vpn_edit_profile",
+        "description": "Add/Edit VPN profile dialog",
+        "visual_cues": [
+          "Name field",
+          "Type dropdown",
+          "Server address field",
+          "Username/Password fields",
+          "IPSec identifier field",
+          "Save/Cancel buttons"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "private_dns_dialog",
+        "description": "Select Private DNS Mode dialog",
+        "visual_cues": [
+          "Off radio",
+          "Automatic radio",
+          "Private DNS provider hostname radio + text field",
+          "Save button"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "hotspot_settings",
+        "description": "Wi-Fi hotspot configuration page",
+        "visual_cues": [
+          "Hotspot name",
+          "Security",
+          "Hotspot password"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "connected_devices",
+        "description": "Connected devices settings",
+        "visual_cues": [
+          "Connection preferences",
+          "Saved devices"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "connection_preferences",
+        "description": "Bluetooth/Cast/Nearby Share connection preferences",
+        "visual_cues": [
+          "Bluetooth",
+          "Cast",
+          "Printing",
+          "Nearby Share",
+          "Android Auto"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "nearby_share_settings",
+        "description": "Nearby Share configuration",
+        "visual_cues": [
+          "Use Nearby Share toggle",
+          "Device visibility option",
+          "Show notification toggle"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "apps_main",
+        "description": "Apps settings main page",
+        "visual_cues": [
+          "Recently opened apps",
+          "See all N apps",
+          "Default apps",
+          "Screen time",
+          "Unused apps",
+          "Special app access"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "all_apps_list",
+        "description": "Full alphabetical list of installed apps",
+        "visual_cues": [
+          "Alphabetical app entries",
+          "Search icon top-right",
+          "Three-dot menu (Show system option)"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "app_info",
+        "description": "App info page for a specific app",
+        "visual_cues": [
+          "Open/Uninstall/Force stop buttons",
+          "Notifications",
+          "Permissions",
+          "Storage & cache",
+          "Mobile data & Wi-Fi",
+          "App battery usage"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "app_notifications",
+        "description": "Per-app notification settings",
+        "visual_cues": [
+          "All notifications toggle",
+          "Notification categories",
+          "Allow notification dot toggle"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "app_permissions",
+        "description": "Per-app permissions list",
+        "visual_cues": [
+          "Allowed / Not allowed sections",
+          "Permission entries"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "permission_detail",
+        "description": "Detail view for a specific permission (e.g., Location, Contacts)",
+        "visual_cues": [
+          "Allow / Ask every time / Don't allow radios"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "app_storage",
+        "description": "Storage page for a specific app",
+        "visual_cues": [
+          "Clear storage / Clear cache buttons",
+          "Space used breakdown (App size, User data, Cache, Total)"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "app_battery_usage",
+        "description": "Battery usage profile for a specific app",
+        "visual_cues": [
+          "Unrestricted / Optimized / Restricted radios"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "default_apps",
+        "description": "Default apps configuration page",
+        "visual_cues": [
+          "Browser app",
+          "Phone app",
+          "SMS app",
+          "Home app"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "special_app_access",
+        "description": "Special app access settings",
+        "visual_cues": [
+          "All files access",
+          "Device admin apps",
+          "Device & app notifications"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "battery_main",
+        "description": "Battery settings page",
+        "visual_cues": [
+          "Battery percentage display",
+          "Battery usage",
+          "Battery Saver",
+          "Adaptive preferences",
+          "Battery percentage toggle"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "battery_usage",
+        "description": "Battery usage graph and breakdown",
+        "visual_cues": [
+          "Usage graph",
+          "Apps usage list",
+          "May say 'data will be available...' when freshly charged"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "battery_saver",
+        "description": "Battery Saver settings",
+        "visual_cues": [
+          "Use Battery Saver toggle",
+          "Set a schedule",
+          "Turn off when charged toggle"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "battery_saver_schedule",
+        "description": "Battery Saver schedule selection",
+        "visual_cues": [
+          "No schedule / Based on your routine / Based on percentage radios"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "adaptive_preferences",
+        "description": "Adaptive battery & other preferences",
+        "visual_cues": [
+          "Adaptive Battery toggle"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "storage_main",
+        "description": "Storage overview page",
+        "visual_cues": [
+          "Used percentage gauge",
+          "Categories: System, Apps, Audio, Videos, Images, Trash",
+          "Free up space card"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "storage_category",
+        "description": "Storage category drilldown (e.g., Audio, Apps)",
+        "visual_cues": [
+          "Filter chips (Large files)",
+          "List/grid of items"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "sound_vibration",
+        "description": "Sound & vibration settings",
+        "visual_cues": [
+          "Volume sliders",
+          "Do Not Disturb entry"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "dnd_main",
+        "description": "Do Not Disturb main settings",
+        "visual_cues": [
+          "What can interrupt section: People, Apps, Alarms & other interruptions",
+          "Schedules",
+          "Display options for hidden notifications"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "dnd_people",
+        "description": "DND People interruptions",
+        "visual_cues": [
+          "Messages entry",
+          "Calls entry"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "dnd_calls",
+        "description": "DND call interruption choices",
+        "visual_cues": [
+          "Starred contacts / Contacts / Anyone / None radios",
+          "Allow repeat callers toggle"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "dnd_messages",
+        "description": "DND message interruption choices",
+        "visual_cues": [
+          "Starred contacts / Priority conversations / None radios"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "dnd_alarms_other",
+        "description": "DND alarms & other interruptions toggles",
+        "visual_cues": [
+          "Alarms / Media sounds / Touch sounds / Reminders / Calendar events toggles"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "dnd_schedules",
+        "description": "DND schedules list",
+        "visual_cues": [
+          "Sleeping / Event entries with toggles"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "digital_wellbeing",
+        "description": "Digital Wellbeing main page",
+        "visual_cues": [
+          "Screen time donut chart",
+          "Dashboard entry"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "dw_dashboard",
+        "description": "Digital Wellbeing dashboard with per-app usage",
+        "visual_cues": [
+          "Screen time/Notifications received/Times opened dropdown",
+          "App list with hourglass icons"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "app_timer_dialog",
+        "description": "Set app timer dialog",
+        "visual_cues": [
+          "Hour/minute time pickers",
+          "OK / Cancel buttons"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "privacy_settings",
+        "description": "Privacy settings page",
+        "visual_cues": [
+          "Notifications on lock screen entry"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "lock_screen_notifications_dialog",
+        "description": "Lock screen notification visibility chooser",
+        "visual_cues": [
+          "Show all / Hide sensitive / Don't show notifications radios"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "phone_app_blocked_numbers",
+        "description": "Blocked numbers list in the Phone app",
+        "visual_cues": [
+          "Add a number entry",
+          "List of blocked numbers"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "contacts_create",
+        "description": "Contacts create-contact form",
+        "visual_cues": [
+          "First name, Last name, Phone fields",
+          "Save button top-right"
+        ],
+        "resource_hints": []
+      }
+    ],
+    "transitions": [
+      {
+        "from_state": "home_screen",
+        "to_state": "app_drawer",
+        "action": "swipe_up_from_bottom",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "home_screen",
+        "to_state": "quick_settings",
+        "action": "swipe_down_from_top",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "home_screen",
+        "to_state": "home_long_press_menu",
+        "action": "long_press_empty_area",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "home_long_press_menu",
+        "to_state": "home_settings",
+        "action": "click(Home settings)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "app_drawer",
+        "to_state": "settings_main",
+        "action": "click(Settings icon)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "quick_settings",
+        "to_state": "settings_main",
+        "action": "click(gear icon)",
+        "precondition": "fully expanded",
+        "postcondition": ""
+      },
+      {
+        "from_state": "settings_main",
+        "to_state": "network_internet",
+        "action": "click(Network & internet)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "network_internet",
+        "to_state": "internet_wifi_list",
+        "action": "click(Internet)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "internet_wifi_list",
+        "to_state": "wifi_network_details",
+        "action": "click(gear next to network)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "internet_wifi_list",
+        "to_state": "saved_networks",
+        "action": "click(Saved networks)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "saved_networks",
+        "to_state": "wifi_network_details",
+        "action": "click(network entry)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "network_internet",
+        "to_state": "vpn_list",
+        "action": "click(VPN)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "vpn_list",
+        "to_state": "vpn_edit_profile",
+        "action": "click(+)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "vpn_edit_profile",
+        "to_state": "vpn_list",
+        "action": "click(Save)",
+        "precondition": "all required fields filled",
+        "postcondition": "new profile listed"
+      },
+      {
+        "from_state": "network_internet",
+        "to_state": "private_dns_dialog",
+        "action": "click(Private DNS)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "private_dns_dialog",
+        "to_state": "network_internet",
+        "action": "click(Save)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "network_internet",
+        "to_state": "hotspot_settings",
+        "action": "click(Hotspot & tethering) -> click(Wi-Fi hotspot)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "settings_main",
+        "to_state": "connected_devices",
+        "action": "click(Connected devices)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "connected_devices",
+        "to_state": "connection_preferences",
+        "action": "click(Connection preferences)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "connection_preferences",
+        "to_state": "nearby_share_settings",
+        "action": "click(Nearby Share)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "settings_main",
+        "to_state": "apps_main",
+        "action": "click(Apps)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "apps_main",
+        "to_state": "all_apps_list",
+        "action": "click(See all N apps)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "all_apps_list",
+        "to_state": "app_info",
+        "action": "click(app entry)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "app_info",
+        "to_state": "app_notifications",
+        "action": "click(Notifications)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "app_info",
+        "to_state": "app_permissions",
+        "action": "click(Permissions)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "app_permissions",
+        "to_state": "permission_detail",
+        "action": "click(specific permission)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "app_info",
+        "to_state": "app_storage",
+        "action": "click(Storage & cache)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "app_info",
+        "to_state": "app_battery_usage",
+        "action": "click(App battery usage)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "apps_main",
+        "to_state": "default_apps",
+        "action": "click(Default apps)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "apps_main",
+        "to_state": "special_app_access",
+        "action": "click(Special app access)",
+        "precondition": "scrolled down",
+        "postcondition": ""
+      },
+      {
+        "from_state": "settings_main",
+        "to_state": "battery_main",
+        "action": "click(Battery)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "battery_main",
+        "to_state": "battery_usage",
+        "action": "click(Battery usage)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "battery_main",
+        "to_state": "battery_saver",
+        "action": "click(Battery Saver)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "battery_saver",
+        "to_state": "battery_saver_schedule",
+        "action": "click(Set a schedule)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "battery_main",
+        "to_state": "adaptive_preferences",
+        "action": "click(Adaptive preferences)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "settings_main",
+        "to_state": "storage_main",
+        "action": "click(Storage)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "storage_main",
+        "to_state": "storage_category",
+        "action": "click(category)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "settings_main",
+        "to_state": "sound_vibration",
+        "action": "click(Sound & vibration)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "sound_vibration",
+        "to_state": "dnd_main",
+        "action": "click(Do Not Disturb)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "dnd_main",
+        "to_state": "dnd_people",
+        "action": "click(People)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "dnd_people",
+        "to_state": "dnd_calls",
+        "action": "click(Calls)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "dnd_people",
+        "to_state": "dnd_messages",
+        "action": "click(Messages)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "dnd_main",
+        "to_state": "dnd_alarms_other",
+        "action": "click(Alarms & other interruptions)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "dnd_main",
+        "to_state": "dnd_schedules",
+        "action": "click(Schedules)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "settings_main",
+        "to_state": "digital_wellbeing",
+        "action": "click(Digital Wellbeing & parental controls)",
+        "precondition": "scrolled down",
+        "postcondition": ""
+      },
+      {
+        "from_state": "digital_wellbeing",
+        "to_state": "dw_dashboard",
+        "action": "click(Dashboard)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "dw_dashboard",
+        "to_state": "app_timer_dialog",
+        "action": "click(hourglass icon next to app)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "settings_main",
+        "to_state": "privacy_settings",
+        "action": "click(Privacy)",
+        "precondition": "scrolled down",
+        "postcondition": ""
+      },
+      {
+        "from_state": "privacy_settings",
+        "to_state": "lock_screen_notifications_dialog",
+        "action": "click(Notifications on lock screen)",
+        "precondition": "",
+        "postcondition": ""
+      }
+    ],
+    "strategies": [
+      {
+        "name": "OPEN_SETTINGS_FROM_HOME",
+        "preconditions": "home_screen",
+        "steps": [
+          "swipe up to open app drawer",
+          "if Settings not visible, swipe up to scroll alphabetically",
+          "tap Settings icon",
+          "alternative: swipe down from top twice to fully expand Quick Settings then tap gear icon"
+        ],
+        "success_signal": "Settings main menu is displayed",
+        "fallback": "If wrong app launched, press Home and retry"
+      },
+      {
+        "name": "TOGGLE_BATTERY_PERCENTAGE",
+        "preconditions": "settings_main",
+        "steps": [
+          "click(Battery)",
+          "find Battery percentage row",
+          "tap toggle to enable"
+        ],
+        "success_signal": "Battery percentage visible in status bar",
+        "fallback": ""
+      },
+      {
+        "name": "ENABLE_BATTERY_SAVER",
+        "preconditions": "settings_main",
+        "steps": [
+          "click(Battery)",
+          "click(Battery Saver)",
+          "tap Use Battery Saver toggle",
+          "confirm Turn on if prompted",
+          "optionally disable 'Turn off when charged' if device charging"
+        ],
+        "success_signal": "Toggle in ON state and system UI changes (dark theme/red battery icon)",
+        "fallback": ""
+      },
+      {
+        "name": "CONFIGURE_BATTERY_SAVER_SCHEDULE",
+        "preconditions": "battery_saver",
+        "steps": [
+          "click(Set a schedule)",
+          "select 'Based on your routine' or other option",
+          "click OK on info dialog if shown"
+        ],
+        "success_signal": "Selected schedule radio shows as active",
+        "fallback": ""
+      },
+      {
+        "name": "ADD_VPN_PROFILE",
+        "preconditions": "settings_main",
+        "steps": [
+          "click(Network & internet) -> click(VPN)",
+          "click(+) to open Edit VPN profile",
+          "tap Name, type name",
+          "tap Server address, type address",
+          "scroll down (dismiss keyboard if needed) to reveal Username/Password",
+          "fill Username, Password, and IPSec identifier if Save remains disabled",
+          "tap Save"
+        ],
+        "success_signal": "New profile appears in VPN list",
+        "fallback": "If Save grayed, fill IPSec identifier or other hidden required fields"
+      },
+      {
+        "name": "MODIFY_WIFI_NETWORK_DETAILS",
+        "preconditions": "settings_main",
+        "steps": [
+          "click(Network & internet) -> click(Internet)",
+          "ensure Wi-Fi toggle is ON, wait for scan if needed",
+          "tap gear icon next to target network (or open Saved networks then network)",
+          "toggle Auto-connect / change Network usage / tap Forget as needed"
+        ],
+        "success_signal": "Network details reflect changes; network removed from saved list if forgotten",
+        "fallback": ""
+      },
+      {
+        "name": "SET_PRIVATE_DNS",
+        "preconditions": "network_internet",
+        "steps": [
+          "click(Private DNS)",
+          "select desired mode (Off / Automatic / Private DNS provider hostname)",
+          "type hostname if applicable",
+          "click Save"
+        ],
+        "success_signal": "Private DNS row shows new mode/hostname",
+        "fallback": ""
+      },
+      {
+        "name": "CHANGE_HOTSPOT_NAME",
+        "preconditions": "network_internet",
+        "steps": [
+          "click(Hotspot & tethering) -> click(Wi-Fi hotspot)",
+          "click(Hotspot name)",
+          "long-press existing text to select, type new name",
+          "click OK"
+        ],
+        "success_signal": "Hotspot name field shows new value",
+        "fallback": ""
+      },
+      {
+        "name": "CONFIGURE_NEARBY_SHARE",
+        "preconditions": "settings_main",
+        "steps": [
+          "click(Connected devices) -> click(Connection preferences)",
+          "click(Nearby Share)",
+          "toggle Use Nearby Share",
+          "click(Device visibility) -> select Everyone/Contacts/Hidden"
+        ],
+        "success_signal": "Toggle ON and visibility selection highlighted",
+        "fallback": ""
+      },
+      {
+        "name": "CHANGE_APP_BATTERY_USAGE_PROFILE",
+        "preconditions": "settings_main",
+        "steps": [
+          "click(Apps) -> click(See all N apps)",
+          "search or scroll to find target app",
+          "click(target app) -> click(App battery usage)",
+          "select Unrestricted/Optimized/Restricted"
+        ],
+        "success_signal": "Selected radio active",
+        "fallback": "Use search to avoid scrolling errors"
+      },
+      {
+        "name": "CLEAR_APP_STORAGE_OR_CACHE",
+        "preconditions": "app_info",
+        "steps": [
+          "click(Storage & cache)",
+          "click(Clear storage) or click(Clear cache)",
+          "confirm Delete on dialog if shown"
+        ],
+        "success_signal": "Cache/storage value shows 0 B; buttons become disabled",
+        "fallback": ""
+      },
+      {
+        "name": "UNINSTALL_APP_VIA_INFO",
+        "preconditions": "app_info",
+        "steps": [
+          "click(Uninstall)",
+          "confirm OK on dialog"
+        ],
+        "success_signal": "App icon removed from drawer",
+        "fallback": ""
+      },
+      {
+        "name": "TOGGLE_APP_NOTIFICATION_DOT",
+        "preconditions": "app_info",
+        "steps": [
+          "click(Notifications)",
+          "scroll if needed to find Allow notification dot",
+          "tap toggle"
+        ],
+        "success_signal": "Toggle state flips (gray when off)",
+        "fallback": "If tap on toggle fails, tap label area instead"
+      },
+      {
+        "name": "REVOKE_APP_PERMISSION",
+        "preconditions": "app_info",
+        "steps": [
+          "click(Permissions)",
+          "click(target permission under Allowed)",
+          "select 'Don't allow'",
+          "confirm 'Don't allow anyway' if warning appears"
+        ],
+        "success_signal": "Permission appears under Not allowed",
+        "fallback": ""
+      },
+      {
+        "name": "CHANGE_DEFAULT_APP",
+        "preconditions": "apps_main",
+        "steps": [
+          "click(Default apps)",
+          "click target category (Browser/SMS/Phone/Home)",
+          "tap desired app radio"
+        ],
+        "success_signal": "Radio selected and parent row reflects new default",
+        "fallback": ""
+      },
+      {
+        "name": "CONFIGURE_DND_INTERRUPTIONS",
+        "preconditions": "settings_main",
+        "steps": [
+          "click(Sound & vibration) -> click(Do Not Disturb)",
+          "click(People) to set Messages and Calls allowances",
+          "click(Alarms & other interruptions) to toggle Alarms/Media/Touch sounds/Reminders/Calendar events",
+          "for Apps section, drill in to revoke per-app interruptions"
+        ],
+        "success_signal": "DND subsections reflect required state (e.g., 'No one can interrupt', 'Alarms and media can interrupt')",
+        "fallback": ""
+      },
+      {
+        "name": "SET_DND_HIDDEN_NOTIFICATIONS_DISPLAY",
+        "preconditions": "dnd_main",
+        "steps": [
+          "scroll to Display options for hidden notifications",
+          "tap entry, choose desired option"
+        ],
+        "success_signal": "Selected option highlighted",
+        "fallback": "Re-tap if first tap doesn't register at bottom of screen"
+      },
+      {
+        "name": "SET_APP_DAILY_TIMER",
+        "preconditions": "settings_main",
+        "steps": [
+          "scroll down, click(Digital Wellbeing & parental controls)",
+          "click(Dashboard)",
+          "scroll to target app",
+          "tap hourglass icon next to app",
+          "tap hour/min picker fields, type values",
+          "click OK"
+        ],
+        "success_signal": "Toast 'App timer set for X' and hourglass shows duration",
+        "fallback": ""
+      },
+      {
+        "name": "QUERY_SCREEN_TIME",
+        "preconditions": "digital_wellbeing",
+        "steps": [
+          "view summary on Digital Wellbeing main",
+          "click(Dashboard) for per-app breakdown",
+          "scroll to target app(s)",
+          "optionally change dropdown to 'Times opened'"
+        ],
+        "success_signal": "Required values are visible to answer",
+        "fallback": ""
+      },
+      {
+        "name": "BLOCK_NUMBER_IN_PHONE_APP",
+        "preconditions": "phone_app",
+        "steps": [
+          "open three-dot menu -> Settings",
+          "click(Blocked numbers)",
+          "click(Add a number)",
+          "type phone number",
+          "click(Block)"
+        ],
+        "success_signal": "Number appears in blocked list",
+        "fallback": "If input field empty after dialog reopen, tap field to focus then retype"
+      },
+      {
+        "name": "CREATE_CONTACT",
+        "preconditions": "contacts_app",
+        "steps": [
+          "tap + (Create new contact)",
+          "fill First name, Last name, Phone",
+          "tap Save",
+          "optionally tap star icon to favorite"
+        ],
+        "success_signal": "Contact appears in list with star if favorited",
+        "fallback": "If number rejected (e.g., emergency number), substitute placeholder number"
+      },
+      {
+        "name": "QUERY_APP_STORAGE_USAGE",
+        "preconditions": "settings_main",
+        "steps": [
+          "click(Apps) -> click(See all N apps) or use search",
+          "open target app",
+          "click(Storage & cache)",
+          "read User data / Cache / Total"
+        ],
+        "success_signal": "Numeric values visible to report",
+        "fallback": "For system apps, in All apps use three-dot menu -> Show system"
+      },
+      {
+        "name": "FORGET_WIFI_NETWORK",
+        "preconditions": "settings_main",
+        "steps": [
+          "Network & internet -> Internet -> Saved networks",
+          "tap target network",
+          "verify Security if conditional",
+          "tap Forget"
+        ],
+        "success_signal": "Network removed from Saved networks list",
+        "fallback": ""
+      },
+      {
+        "name": "CONFIGURE_HOME_SETTINGS",
+        "preconditions": "home_screen",
+        "steps": [
+          "long-press empty area of home screen",
+          "tap Home settings",
+          "toggle Notification dots / Add app icons / Allow rotation",
+          "tap Suggestions submenu and disable 'Suggestions on Home screen'"
+        ],
+        "success_signal": "Toggles persist as expected (re-enter to verify)",
+        "fallback": "Decline 'Get app suggestions' prompt with 'No thanks'"
+      }
+    ],
+    "dead_ends": [
+      {
+        "state": "battery_usage",
+        "failed_action": "tap specific 2-hour time slot on chart",
+        "note": "Data unavailable shortly after full charge; chart shows placeholder. Cannot select sub-period."
+      },
+      {
+        "state": "vpn_edit_profile",
+        "failed_action": "click Save while button disabled",
+        "note": "Required fields (Username, Password, IPSec identifier) hidden under keyboard; must fill all to enable Save"
+      },
+      {
+        "state": "contacts_create",
+        "failed_action": "save contact with emergency phone number (e.g., 911)",
+        "note": "System blocks saving emergency numbers; use placeholder digits"
+      },
+      {
+        "state": "app_notifications",
+        "failed_action": "tap notification toggle precisely",
+        "note": "Toggle hit-target small; repeated taps may not register. Tap row label instead"
+      },
+      {
+        "state": "app_drawer",
+        "failed_action": "horizontal swipe to next page",
+        "note": "App drawer scrolls vertically, not paginated horizontally"
+      },
+      {
+        "state": "all_apps_list",
+        "failed_action": "search for system app like 'Android System Intelligence'",
+        "note": "System apps hidden by default; must enable 'Show system' from three-dot menu"
+      },
+      {
+        "state": "quick_settings",
+        "failed_action": "click gear from partially expanded shade",
+        "note": "Settings gear only visible after second swipe down to fully expand"
+      },
+      {
+        "state": "internet_wifi_list",
+        "failed_action": "open network details immediately after enabling Wi-Fi",
+        "note": "Need to wait for scan to complete before networks appear"
+      },
+      {
+        "state": "all_apps_list",
+        "failed_action": "tap top app expecting target app",
+        "note": "Easy to misclick adjacent alphabetical entries (e.g., AndroidWorld vs Android Auto)"
+      }
+    ]
+  },
+  "layer2": {
+    "categories": [
+      {
+        "name": "NAVIGATE_TO",
+        "precondition": "Agent is somewhere in the OS (home, drawer, or another settings page)",
+        "abstract_steps": [
+          "Determine target settings section based on instruction keyword",
+          "Reach top-level settings (via app drawer or quick-settings gear)",
+          "Drill down through hierarchical menu, scrolling when target row not visible",
+          "Use search affordance when present to bypass long lists",
+          "Verify arrival by reading screen header"
+        ],
+        "failure_modes": [
+          "Misclick on adjacent menu row",
+          "Target section requires scrolling and is missed",
+          "Wrong sibling section opened (e.g., similar names)",
+          "Quick-settings entry partially expanded so shortcut not visible"
+        ],
+        "verification_checklist": [
+          "Header text matches target section",
+          "Expected child controls are visible",
+          "Back navigation returns to the correct parent"
+        ]
+      },
+      {
+        "name": "TOGGLE_SETTING",
+        "precondition": "On a settings page that contains the toggle for the target feature",
+        "abstract_steps": [
+          "Locate the row containing the toggle (scroll if needed)",
+          "Observe current state of the toggle",
+          "Tap the toggle (or the row label as a larger hit target)",
+          "Confirm any modal dialog if prompted"
+        ],
+        "failure_modes": [
+          "Tap misses small toggle hit area",
+          "Visual state lags so user retoggles back",
+          "Confirmation dialog dismissed accidentally",
+          "Setting depends on another precondition (e.g., parent toggle off)"
+        ],
+        "verification_checklist": [
+          "Toggle visual indicates desired state",
+          "Subtext under setting reflects change",
+          "Re-entering screen still shows new state"
+        ]
+      },
+      {
+        "name": "SELECT_OPTION_FROM_LIST",
+        "precondition": "A radio/checkbox chooser dialog or screen is visible",
+        "abstract_steps": [
+          "Scan options to find one matching instruction",
+          "Tap the option's radio/checkbox",
+          "Confirm with Save/OK if dialog provides such button"
+        ],
+        "failure_modes": [
+          "Selecting nearest visible option instead of exact match",
+          "Forgetting to confirm with Save/OK causing no persistence",
+          "Option disabled because of an unmet precondition"
+        ],
+        "verification_checklist": [
+          "Chosen option shows selected indicator",
+          "Parent row subtext reflects new choice"
+        ]
+      },
+      {
+        "name": "EDIT_ENTRY",
+        "precondition": "Editable text field is accessible (may require focusing field)",
+        "abstract_steps": [
+          "Tap the field to focus and bring up keyboard",
+          "Select existing text if needed (long-press) and overwrite",
+          "Type the new value",
+          "Confirm via OK/Save/Done"
+        ],
+        "failure_modes": [
+          "Keyboard hides Save button preventing tap",
+          "Field still considered empty due to focus issue",
+          "Save remains disabled because other required fields not yet filled"
+        ],
+        "verification_checklist": [
+          "Field displays the new value",
+          "Save button becomes enabled",
+          "Parent screen subtext updates"
+        ]
+      },
+      {
+        "name": "ADD_ENTRY",
+        "precondition": "On a list screen with affordance to add a new item (+ button or 'Add' entry)",
+        "abstract_steps": [
+          "Tap the add affordance to open the creation form",
+          "Fill all required fields",
+          "Reveal hidden required fields by dismissing keyboard/scrolling",
+          "Submit via Save",
+          "Handle validation errors (e.g., add missing required field)"
+        ],
+        "failure_modes": [
+          "Save remains disabled due to hidden mandatory fields",
+          "Validation rejects a specific value (must substitute)",
+          "Form resets due to navigation error"
+        ],
+        "verification_checklist": [
+          "New entry visible in list after save",
+          "No error toast",
+          "Re-open entry to confirm fields persisted"
+        ]
+      },
+      {
+        "name": "DELETE_ENTRY",
+        "precondition": "Detail view of the item contains a delete/forget/uninstall/clear affordance",
+        "abstract_steps": [
+          "Open the entry's detail page",
+          "Tap the destructive action button",
+          "Confirm in any warning dialog"
+        ],
+        "failure_modes": [
+          "Confirmation dialog dismissed instead of confirmed",
+          "Action button hidden until scrolling",
+          "System protection prevents deletion (e.g., system app)"
+        ],
+        "verification_checklist": [
+          "Item no longer appears in parent list",
+          "Sizes / counts reset to zero where applicable"
+        ]
+      },
+      {
+        "name": "QUERY_INFO",
+        "precondition": "Required value resides on some detail page within Settings",
+        "abstract_steps": [
+          "Navigate to the relevant settings section",
+          "Read the visible value associated with the requested label",
+          "When multiple values needed, navigate or scroll to gather all",
+          "Combine and format the answer per instruction"
+        ],
+        "failure_modes": [
+          "Misreading a similarly named field",
+          "Required value not yet populated (e.g., recently charged)",
+          "Hidden under system filter / requires 'Show system'"
+        ],
+        "verification_checklist": [
+          "Value matches the on-screen label exactly",
+          "Units included when requested",
+          "All requested datapoints reported"
+        ]
+      },
+      {
+        "name": "CONFIGURE_PER_ITEM",
+        "precondition": "There is a per-item settings page accessible from a list (e.g., per-app)",
+        "abstract_steps": [
+          "Open the list of items",
+          "Use search or scroll to find the target",
+          "Open its detail page",
+          "Apply changes via TOGGLE_SETTING, SELECT_OPTION_FROM_LIST, or EDIT_ENTRY"
+        ],
+        "failure_modes": [
+          "Wrong item opened due to similar names",
+          "Target item filtered out (system app hidden)",
+          "Item not in 'Recently opened' shortcut list"
+        ],
+        "verification_checklist": [
+          "Detail page header matches the target item",
+          "Modified value persists after navigating away and back"
+        ]
+      },
+      {
+        "name": "RECOVER_FROM_WRONG_SCREEN",
+        "precondition": "Agent has navigated to an unintended screen or app",
+        "abstract_steps": [
+          "Use Back button to step out of unintended screen",
+          "If too deep or wrong app entirely, press Home to reset",
+          "Re-execute the intended navigation strategy"
+        ],
+        "failure_modes": [
+          "Back navigation skips too far",
+          "Repeated misclicks on the same wrong row",
+          "Confusing similar app names"
+        ],
+        "verification_checklist": [
+          "Reach the intended screen as confirmed by header",
+          "Original task progress not lost (re-verify prior state)"
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "built_at": "2025-01-31T00:00:00Z",
+    "n_episodes": 73,
+    "n_successful": 73,
+    "n_episodes_input": 73,
+    "synthesizer_model": "claude-opus-4-7",
+    "synthesizer_temperature": 0.3
+  }
+}

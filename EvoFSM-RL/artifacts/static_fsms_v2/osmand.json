@@ -1,0 +1,1292 @@
+{
+  "version": "0.1.0",
+  "app": "osmand",
+  "layer1": {
+    "app": "osmand",
+    "category": "Maps & Navigation",
+    "states": [
+      {
+        "id": "home_screen",
+        "description": "Android device home screen",
+        "visual_cues": [
+          "app icons (Gmail, Photos, YouTube)",
+          "bottom dock",
+          "Google search bar"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "app_drawer",
+        "description": "Android app drawer with installed apps",
+        "visual_cues": [
+          "alphabetical grid of app icons"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "splash_screen",
+        "description": "OsmAnd loading splash screen",
+        "visual_cues": [
+          "orange map pin logo",
+          "white background",
+          "'powered by OpenStreetMap data' text"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "map_main",
+        "description": "Main map view of OsmAnd",
+        "visual_cues": [
+          "map area",
+          "menu hamburger bottom-left",
+          "search icon top-left",
+          "globe/configure icon top-left",
+          "my location crosshair bottom-right",
+          "directions diamond icon bottom-left"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "main_menu_drawer",
+        "description": "Side menu drawer",
+        "visual_cues": [
+          "profile selector at top",
+          "list: Map markers, My Places, Search, Navigation, Configure map, Configure screen, Download maps, Travel guides (Beta), Plugins, Settings"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "configure_map",
+        "description": "Configure map screen",
+        "visual_cues": [
+          "Show section with toggles (Favorites, POI overlay, Point Labels, Transport, Tracks, Map markers, Map source)",
+          "Map rendering section with Map style"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "show_poi_overlay_dialog",
+        "description": "POI overlay category selection dialog",
+        "visual_cues": [
+          "list of POI categories (Accommodation, Cafe and restaurant, Charging station, Finance, Healthcare, Nautical, Tourism, etc.)",
+          "checkmark button bottom-left",
+          "OK button bottom-right"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "transport_settings",
+        "description": "Transport sub-screen with route type toggles",
+        "visual_cues": [
+          "Transport master toggle",
+          "Routes section (Subway, Bus, Trolleybus, Tram, Train, etc.)"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "map_style_dialog",
+        "description": "Map style selection dialog",
+        "visual_cues": [
+          "radio buttons (OsmAnd, Desert, LightRS, Nautical, Offroad)",
+          "Apply button"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "search_view",
+        "description": "Search interface with tabs",
+        "visual_cues": [
+          "search bar 'Type to search all'",
+          "tabs: HISTORY, CATEGORIES, ADDRESS",
+          "keyboard"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "search_categories",
+        "description": "Categories tab of search",
+        "visual_cues": [
+          "list of POI categories"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "search_address",
+        "description": "Address tab of search",
+        "visual_cues": [
+          "options: FIRST SPECIFY CITY/TOWN/LOCALITY, POSTCODE SEARCH, COORDINATES SEARCH"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "search_results",
+        "description": "Search results with extend radius",
+        "visual_cues": [
+          "'Could not find anything: X mi'",
+          "INCREASE SEARCH RADIUS button",
+          "SHOW ON MAP option",
+          "result list items"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "coordinate_search",
+        "description": "Coordinates search input",
+        "visual_cues": [
+          "Latitude field",
+          "Longitude field",
+          "numeric keyboard"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "location_details_panel",
+        "description": "Bottom panel with location info after selection",
+        "visual_cues": [
+          "place name",
+          "DETAILS button",
+          "NAVIGATION button",
+          "Share button"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "navigation_setup",
+        "description": "Route planning screen",
+        "visual_cues": [
+          "transport mode icons (car, bicycle, pedestrian, public transport)",
+          "From field (My Position)",
+          "To field (Set destination)",
+          "Settings gear icon",
+          "voice prompt button",
+          "Home/Work shortcuts",
+          "Use elevation button"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "speed_camera_dialog",
+        "description": "Speed camera POI's warning dialog",
+        "visual_cues": [
+          "dialog text about speed cameras legality",
+          "Uninstall button",
+          "Keep active button"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "set_destination_sheet",
+        "description": "Bottom sheet to pick destination method",
+        "visual_cues": [
+          "Search, Address, Select on map, Favorites, Markers options"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "select_on_map",
+        "description": "Map view to pick a point",
+        "visual_cues": [
+          "map with crosshair",
+          "long-press to drop pin"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "settings_main",
+        "description": "Main Settings screen",
+        "visual_cues": [
+          "OsmAnd settings (Effective for the entire app)",
+          "OsmAnd Cloud",
+          "Purchases",
+          "Selected profile",
+          "App profiles list"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "purchases_screen",
+        "description": "Purchases screen",
+        "visual_cues": [
+          "'You don't have any purchases'",
+          "Explore OsmAnd Plans / Learn more button"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "plans_comparison",
+        "description": "Subscription feature comparison list",
+        "visual_cues": [
+          "features list with Maps+ (orange +) and OsmAnd Pro (purple flag) icons"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "feature_detail",
+        "description": "Specific subscription feature detail page",
+        "visual_cues": [
+          "feature title",
+          "description text",
+          "plan icons"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "profile_select_list",
+        "description": "Profile dropdown/list selector",
+        "visual_cues": [
+          "Browse map, Driving, Cycling, Walking, Public transport, etc."
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "configure_profile",
+        "description": "Profile configuration menu for chosen profile",
+        "visual_cues": [
+          "General settings, Navigation settings, Configure map, Configure screen, Profile appearance, Plugin settings"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "configure_screen",
+        "description": "Configure screen (widgets) for a profile",
+        "visual_cues": [
+          "Widgets section (Left/Right/Top/Bottom panel counts)",
+          "Buttons (Compass, 3D mode, Distance by tap, Quick action)"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "panel_widget_picker",
+        "description": "Add widget from a panel selection",
+        "visual_cues": [
+          "Available widgets list",
+          "Add button"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "navigation_settings",
+        "description": "Navigation settings within profile",
+        "visual_cues": [
+          "Sound, Avoid roads, Voice prompts toggle, Show along the route"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "avoid_roads",
+        "description": "Avoid roads selection",
+        "visual_cues": [
+          "No toll roads, No unpaved roads, No border crossings toggles",
+          "Apply button"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "general_settings",
+        "description": "Profile general settings",
+        "visual_cues": [
+          "App theme",
+          "Display position",
+          "Driving region",
+          "Unit of speed",
+          "Units & formats"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "driving_region_dialog",
+        "description": "Driving region selection dialog",
+        "visual_cues": [
+          "Automatic, United States, Europe, etc.",
+          "Cancel button"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "change_setting_apply_dialog",
+        "description": "Dialog to apply setting scope",
+        "visual_cues": [
+          "Apply to all profiles, Apply only to '<profile>', Discard change"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "profile_appearance",
+        "description": "Profile appearance (color/icon)",
+        "visual_cues": [
+          "color swatches",
+          "+ to add custom color",
+          "color picker with hue slider",
+          "Apply/Save buttons"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "my_places",
+        "description": "My Places screen with tabs",
+        "visual_cues": [
+          "FAVORITES tab",
+          "TRACKS tab",
+          "overflow menu top-right"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "tracks_tab",
+        "description": "Tracks tab inside My Places",
+        "visual_cues": [
+          "'You don't have track files'",
+          "Import button",
+          "search/filter icons"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "tracks_overflow",
+        "description": "Tracks overflow menu",
+        "visual_cues": [
+          "Select, Add new folder, Add smart folder, Import"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "smart_folder_filter",
+        "description": "Smart folder filter configuration",
+        "visual_cues": [
+          "filter criteria list (Duration, Length, Other, Visible on map)",
+          "SHOW button"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "plugins_list",
+        "description": "Plugins list screen",
+        "visual_cues": [
+          "plugins list: Wikipedia, Online maps, Trip recording, Topography, Weather, Nautical map view, Parking position, Audio/video notes",
+          "3-dot menu per plugin"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "plugin_detail",
+        "description": "Individual plugin detail page",
+        "visual_cues": [
+          "title",
+          "ON/OFF button"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "plugin_enable_popup",
+        "description": "Plugin enable confirmation dialog",
+        "visual_cues": [
+          "'New plugin added'",
+          "OK button"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "travel_guides",
+        "description": "Travel guides (Beta) home",
+        "visual_cues": [
+          "'Welcome to the open beta' card with Close",
+          "search bar 'Search for country, city, or province'",
+          "Explore tab, Bookmarked articles tab"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "weather_settings",
+        "description": "Weather plugin settings under profile",
+        "visual_cues": [
+          "Online cache MB",
+          "Offline cache MB",
+          "data section"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "share_location_sheet",
+        "description": "Share location options sheet",
+        "visual_cues": [
+          "Send, Copy, Copy address, Copy POI name, Copy coordinates"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "location_permission_dialog",
+        "description": "System location permission dialog",
+        "visual_cues": [
+          "Precise/Approximate options",
+          "While using the app, Only this time, Don't allow"
+        ],
+        "resource_hints": []
+      },
+      {
+        "id": "wrong_app",
+        "description": "Accidentally opened wrong app (OpenTracks, Markor, Recipes, VLC)",
+        "visual_cues": [
+          "unfamiliar app content"
+        ],
+        "resource_hints": []
+      }
+    ],
+    "transitions": [
+      {
+        "from_state": "home_screen",
+        "to_state": "app_drawer",
+        "action": "swipe_up_from_bottom",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "app_drawer",
+        "to_state": "splash_screen",
+        "action": "click(osmand_icon)",
+        "precondition": "OsmAnd icon visible",
+        "postcondition": ""
+      },
+      {
+        "from_state": "app_drawer",
+        "to_state": "wrong_app",
+        "action": "click(similar_icon)",
+        "precondition": "OpenTracks icon mistaken for OsmAnd",
+        "postcondition": ""
+      },
+      {
+        "from_state": "wrong_app",
+        "to_state": "home_screen",
+        "action": "system_button(Home)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "splash_screen",
+        "to_state": "map_main",
+        "action": "wait(3-5s)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "map_main",
+        "to_state": "main_menu_drawer",
+        "action": "click(hamburger_menu_bottom_left)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "map_main",
+        "to_state": "configure_map",
+        "action": "click(globe_top_left)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "map_main",
+        "to_state": "search_view",
+        "action": "click(search_icon_top_left)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "map_main",
+        "to_state": "navigation_setup",
+        "action": "click(directions_button_bottom_left)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "map_main",
+        "to_state": "location_permission_dialog",
+        "action": "click(my_location_button)",
+        "precondition": "first time",
+        "postcondition": ""
+      },
+      {
+        "from_state": "location_permission_dialog",
+        "to_state": "map_main",
+        "action": "click('While using the app')",
+        "precondition": "",
+        "postcondition": "map centers on user"
+      },
+      {
+        "from_state": "main_menu_drawer",
+        "to_state": "configure_map",
+        "action": "click('Configure map')",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "main_menu_drawer",
+        "to_state": "my_places",
+        "action": "click('My Places')",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "main_menu_drawer",
+        "to_state": "settings_main",
+        "action": "click('Settings')",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "main_menu_drawer",
+        "to_state": "plugins_list",
+        "action": "click('Plugins')",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "main_menu_drawer",
+        "to_state": "travel_guides",
+        "action": "click('Travel guides (Beta)')",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "main_menu_drawer",
+        "to_state": "configure_profile",
+        "action": "click('Configure profile')",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "main_menu_drawer",
+        "to_state": "configure_screen",
+        "action": "click('Configure screen')",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "main_menu_drawer",
+        "to_state": "profile_select_list",
+        "action": "click(profile_dropdown_top)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "profile_select_list",
+        "to_state": "main_menu_drawer",
+        "action": "click(profile_name)",
+        "precondition": "",
+        "postcondition": "active profile changed"
+      },
+      {
+        "from_state": "configure_map",
+        "to_state": "show_poi_overlay_dialog",
+        "action": "click('POI overlay...')",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "configure_map",
+        "to_state": "transport_settings",
+        "action": "click('Transport')",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "configure_map",
+        "to_state": "map_style_dialog",
+        "action": "click('Map style')",
+        "precondition": "scrolled to Map rendering",
+        "postcondition": ""
+      },
+      {
+        "from_state": "show_poi_overlay_dialog",
+        "to_state": "configure_map",
+        "action": "click(category) or click(OK)",
+        "precondition": "",
+        "postcondition": "POI overlay set"
+      },
+      {
+        "from_state": "transport_settings",
+        "to_state": "configure_map",
+        "action": "click(back)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "map_style_dialog",
+        "to_state": "configure_map",
+        "action": "click('Apply')",
+        "precondition": "style selected",
+        "postcondition": "map style changed"
+      },
+      {
+        "from_state": "search_view",
+        "to_state": "search_categories",
+        "action": "click('CATEGORIES')",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "search_view",
+        "to_state": "search_address",
+        "action": "click('ADDRESS')",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "search_address",
+        "to_state": "coordinate_search",
+        "action": "click('COORDINATES SEARCH')",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "search_view",
+        "to_state": "search_results",
+        "action": "type(query)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "search_results",
+        "to_state": "search_results",
+        "action": "click('INCREASE SEARCH RADIUS')",
+        "precondition": "no results",
+        "postcondition": "wider radius"
+      },
+      {
+        "from_state": "search_results",
+        "to_state": "location_details_panel",
+        "action": "click(result_item) or click('SHOW ON MAP')",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "coordinate_search",
+        "to_state": "location_details_panel",
+        "action": "fill_lat_lon + click(result)",
+        "precondition": "valid coords",
+        "postcondition": ""
+      },
+      {
+        "from_state": "location_details_panel",
+        "to_state": "navigation_setup",
+        "action": "click('NAVIGATION')",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "location_details_panel",
+        "to_state": "share_location_sheet",
+        "action": "click('Share')",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "share_location_sheet",
+        "to_state": "map_main",
+        "action": "click('Copy' or 'Copy coordinates')",
+        "precondition": "",
+        "postcondition": "copied to clipboard"
+      },
+      {
+        "from_state": "navigation_setup",
+        "to_state": "speed_camera_dialog",
+        "action": "auto_show",
+        "precondition": "first time",
+        "postcondition": ""
+      },
+      {
+        "from_state": "speed_camera_dialog",
+        "to_state": "navigation_setup",
+        "action": "click('Keep active')",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "navigation_setup",
+        "to_state": "set_destination_sheet",
+        "action": "click('Set destination' field)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "set_destination_sheet",
+        "to_state": "select_on_map",
+        "action": "click('Select on map')",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "set_destination_sheet",
+        "to_state": "search_view",
+        "action": "click('Search')",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "select_on_map",
+        "to_state": "location_details_panel",
+        "action": "long_press(map_point)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "navigation_setup",
+        "to_state": "navigation_settings",
+        "action": "click(settings_gear)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "navigation_settings",
+        "to_state": "avoid_roads",
+        "action": "click('Avoid roads...')",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "avoid_roads",
+        "to_state": "navigation_settings",
+        "action": "toggle + click('Apply')",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "settings_main",
+        "to_state": "purchases_screen",
+        "action": "click('Purchases')",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "purchases_screen",
+        "to_state": "plans_comparison",
+        "action": "click('Learn more')",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "plans_comparison",
+        "to_state": "feature_detail",
+        "action": "click(feature_row)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "settings_main",
+        "to_state": "configure_profile",
+        "action": "click(profile_in_App_profiles)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "configure_profile",
+        "to_state": "general_settings",
+        "action": "click('General settings')",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "configure_profile",
+        "to_state": "configure_screen",
+        "action": "click('Configure screen')",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "configure_profile",
+        "to_state": "profile_appearance",
+        "action": "click('Profile appearance')",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "configure_profile",
+        "to_state": "weather_settings",
+        "action": "click('Weather') under Plugin settings",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "general_settings",
+        "to_state": "driving_region_dialog",
+        "action": "click('Driving region')",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "driving_region_dialog",
+        "to_state": "change_setting_apply_dialog",
+        "action": "click(region)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "change_setting_apply_dialog",
+        "to_state": "general_settings",
+        "action": "click('Apply to all profiles')",
+        "precondition": "",
+        "postcondition": "applied globally"
+      },
+      {
+        "from_state": "configure_screen",
+        "to_state": "panel_widget_picker",
+        "action": "click(panel)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "panel_widget_picker",
+        "to_state": "configure_screen",
+        "action": "select widget + click('Add')",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "my_places",
+        "to_state": "tracks_tab",
+        "action": "click('TRACKS')",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "tracks_tab",
+        "to_state": "tracks_overflow",
+        "action": "click(3_dot_top_right)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "tracks_overflow",
+        "to_state": "smart_folder_filter",
+        "action": "click('Add smart folder') + name + Save + Edit filter",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "plugins_list",
+        "to_state": "plugin_detail",
+        "action": "click(plugin_row)",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "plugins_list",
+        "to_state": "plugin_enable_popup",
+        "action": "click(3_dot) + click('Enable')",
+        "precondition": "",
+        "postcondition": ""
+      },
+      {
+        "from_state": "plugin_enable_popup",
+        "to_state": "plugins_list",
+        "action": "click('OK')",
+        "precondition": "",
+        "postcondition": "plugin enabled"
+      },
+      {
+        "from_state": "plugin_detail",
+        "to_state": "plugin_detail",
+        "action": "click(OFF toggle)",
+        "precondition": "",
+        "postcondition": "ON"
+      },
+      {
+        "from_state": "travel_guides",
+        "to_state": "travel_guides",
+        "action": "click('Close') on beta card",
+        "precondition": "card showing",
+        "postcondition": ""
+      }
+    ],
+    "strategies": [
+      {
+        "name": "ENABLE_MAP_LAYER_OR_OVERLAY",
+        "preconditions": "map_main",
+        "steps": [
+          "click hamburger menu (bottom-left)",
+          "click 'Configure map'",
+          "toggle desired item under Show section, OR click 'POI overlay...' to choose category/categories",
+          "for multi-category POI: use custom filter checkmark icon, check categories, click OK",
+          "for Transport sub-types: tap row to enter Transport sub-screen and enable specific routes"
+        ],
+        "success_signal": "toggle is blue/ON and subtitle reflects chosen category",
+        "fallback": "if a sub-screen opens unexpectedly, use back arrow and tap the toggle area instead of the row text"
+      },
+      {
+        "name": "SEARCH_AND_SHOW_ON_MAP",
+        "preconditions": "map_main",
+        "steps": [
+          "click search icon (top-left)",
+          "type query OR pick CATEGORIES/ADDRESS tab",
+          "if 'Could not find anything: X mi' shown, click 'INCREASE SEARCH RADIUS' repeatedly",
+          "click on the result row or 'SHOW ON MAP'"
+        ],
+        "success_signal": "map centers on result with details panel at bottom",
+        "fallback": "use ADDRESS > FIRST SPECIFY CITY/TOWN/LOCALITY for structured search"
+      },
+      {
+        "name": "PLAN_ROUTE",
+        "preconditions": "map_main",
+        "steps": [
+          "click directions diamond icon (bottom-left)",
+          "dismiss Speed camera dialog with 'Keep active' if shown",
+          "select transport mode icon at top (car/bicycle/pedestrian)",
+          "set From and To via Search/Select on map/Home/Work",
+          "optionally enable 'Use elevation'",
+          "click 'NAVIGATION' or 'Start'"
+        ],
+        "success_signal": "route distance shown in top right, route line on map",
+        "fallback": "if app shows 'You have already set a destination', click 'Replace the destination'"
+      },
+      {
+        "name": "CENTER_ON_MY_LOCATION",
+        "preconditions": "map_main",
+        "steps": [
+          "click crosshair button (bottom-right)",
+          "grant 'While using the app' with Precise selected if prompted",
+          "click crosshair again if needed"
+        ],
+        "success_signal": "blue dot centered and crosshair button highlighted blue",
+        "fallback": ""
+      },
+      {
+        "name": "ENABLE_PLUGIN",
+        "preconditions": "main_menu_drawer",
+        "steps": [
+          "click 'Plugins'",
+          "tap row to open plugin detail and toggle OFF->ON, OR tap 3-dot menu and click 'Enable'",
+          "confirm 'OK' on new plugin dialog"
+        ],
+        "success_signal": "plugin icon turns orange in plugin list",
+        "fallback": ""
+      },
+      {
+        "name": "CHANGE_MAP_STYLE",
+        "preconditions": "configure_map",
+        "steps": [
+          "scroll down to Map rendering section",
+          "click 'Map style'",
+          "select style (e.g., Nautical, Offroad)",
+          "click 'Apply'"
+        ],
+        "success_signal": "Map style subtitle reflects new style",
+        "fallback": ""
+      },
+      {
+        "name": "SWITCH_PROFILE",
+        "preconditions": "main_menu_drawer",
+        "steps": [
+          "tap profile dropdown at top of drawer",
+          "select desired profile (Walking, Driving, Cycling)"
+        ],
+        "success_signal": "profile name updates at top of menu",
+        "fallback": "alternative: Settings > App profiles > select profile"
+      },
+      {
+        "name": "CONFIGURE_WIDGET_FOR_PROFILE",
+        "preconditions": "main_menu_drawer with target profile active",
+        "steps": [
+          "click 'Configure screen'",
+          "tap panel (Left/Right/Top/Bottom)",
+          "scroll Available widgets, select desired widget",
+          "click 'Add'"
+        ],
+        "success_signal": "widget appears in chosen panel's active list",
+        "fallback": ""
+      },
+      {
+        "name": "QUERY_SUBSCRIPTION_FEATURE",
+        "preconditions": "main_menu_drawer",
+        "steps": [
+          "click 'Settings'",
+          "click 'Purchases'",
+          "click 'Learn more' under Explore OsmAnd Plans",
+          "scroll to feature row to see Maps+ orange + and OsmAnd Pro purple flag icons",
+          "tap row to read full feature description"
+        ],
+        "success_signal": "feature description page displayed",
+        "fallback": ""
+      },
+      {
+        "name": "SET_DRIVING_REGION_GLOBALLY",
+        "preconditions": "settings_main",
+        "steps": [
+          "tap a profile under App profiles (e.g., Driving)",
+          "click 'General settings'",
+          "click 'Driving region'",
+          "select region (e.g., United States)",
+          "in 'Change setting' dialog click 'Apply to all profiles'"
+        ],
+        "success_signal": "Driving region subtitle shows chosen region",
+        "fallback": ""
+      },
+      {
+        "name": "FIND_BY_COORDINATES",
+        "preconditions": "search_view",
+        "steps": [
+          "tap ADDRESS tab",
+          "tap COORDINATES SEARCH",
+          "tap Latitude, clear with X, type value",
+          "tap Longitude, clear with X, type value",
+          "tap matching result"
+        ],
+        "success_signal": "map centers on pin at requested coordinates",
+        "fallback": "ensure to clear default 0.00000 before typing to avoid 'Invalid coordinates'"
+      },
+      {
+        "name": "COPY_LOCATION",
+        "preconditions": "map_main centered on point",
+        "steps": [
+          "long-press the point (or current location dot)",
+          "in details panel tap 'Share'",
+          "tap 'Copy' or 'Copy coordinates'"
+        ],
+        "success_signal": "toast confirms copied to clipboard",
+        "fallback": ""
+      },
+      {
+        "name": "FILTER_TRACKS_VISIBLE_ON_MAP",
+        "preconditions": "my_places",
+        "steps": [
+          "click TRACKS tab",
+          "tap 3-dot menu > 'Add smart folder'",
+          "name folder and SAVE",
+          "tap 'Edit filter'",
+          "expand 'Other' category, scroll and check 'Visible on map'",
+          "tap SHOW"
+        ],
+        "success_signal": "smart folder shows 'Filter: 1'",
+        "fallback": ""
+      },
+      {
+        "name": "OPEN_OSMAND_APP",
+        "preconditions": "home_screen",
+        "steps": [
+          "swipe up to open app drawer",
+          "scroll down to letter O",
+          "tap OsmAnd icon (orange circle with white map pin) — NOT the OpenTracks orange arrow icon",
+          "wait ~5s for splash to clear"
+        ],
+        "success_signal": "main map view appears",
+        "fallback": "if wrong app opens, press Home and retry; consider Google search bar to type 'OsmAnd'"
+      }
+    ],
+    "dead_ends": [
+      {
+        "state": "app_drawer",
+        "failed_action": "click on OpenTracks icon thinking it's OsmAnd",
+        "note": "OpenTracks has orange arrow icon resembling OsmAnd; verify the label 'OsmAnd' and orange circle with white map pin before tapping"
+      },
+      {
+        "state": "home_screen",
+        "failed_action": "click 'green tree' icon assumed to be OsmAnd",
+        "note": "Green tree icon is actually Broccoli/Recipes app on some setups"
+      },
+      {
+        "state": "tracks_tab",
+        "failed_action": "looking for 'uncheck all' bulk action when no tracks exist",
+        "note": "If 'You don't have track files' is shown, no bulk uncheck UI is reachable; treat as success vacuously"
+      },
+      {
+        "state": "search_results",
+        "failed_action": "repeatedly tapping result that does not advance",
+        "note": "Sometimes selecting a search result becomes unresponsive after dismissing a dialog; recover by going Home and relaunching the app"
+      },
+      {
+        "state": "configure_map",
+        "failed_action": "tapping the row of POI overlay vs the toggle",
+        "note": "Tapping the row opens dialog; tapping just the toggle enables/disables. Be aware of difference"
+      },
+      {
+        "state": "coordinate_search",
+        "failed_action": "typing coordinates without clearing default 0.00000",
+        "note": "Triggers 'Invalid coordinates'; always tap X to clear before typing"
+      },
+      {
+        "state": "navigation_setup",
+        "failed_action": "pressing in-app back arrow when screen unresponsive",
+        "note": "Sometimes UI freezes; use system Home and relaunch app to recover"
+      }
+    ]
+  },
+  "layer2": {
+    "categories": [
+      {
+        "name": "TOGGLE_DISPLAY_OPTION",
+        "precondition": "App is open at its main content view",
+        "abstract_steps": [
+          "Open the main settings or configuration menu",
+          "Navigate to the section that controls visible layers/overlays",
+          "Locate the desired option and toggle its switch ON",
+          "If a category/subtype picker opens, select required item(s) and confirm"
+        ],
+        "failure_modes": [
+          "Tapping the row opens a sub-screen instead of toggling",
+          "Selecting one item replaces another (single-select instead of multi-select)",
+          "Toggle reverts because no concrete selection was confirmed"
+        ],
+        "verification_checklist": [
+          "Toggle visually shows the ON state",
+          "Subtitle under the option reflects the chosen value",
+          "Returning to main view shows the new elements rendered"
+        ]
+      },
+      {
+        "name": "QUERY_INFO",
+        "precondition": "App is open and information section is reachable",
+        "abstract_steps": [
+          "Open the main menu and navigate to the relevant information area",
+          "Drill down into the specific item or comparison view",
+          "Read the value or compare indicators",
+          "Report the answer in the required format"
+        ],
+        "failure_modes": [
+          "Looking in the wrong submenu (e.g., display settings instead of account/billing)",
+          "Misreading icons that distinguish tiers/categories"
+        ],
+        "verification_checklist": [
+          "The visible text matches the queried entity",
+          "Indicators next to the entity have been correctly mapped to labels"
+        ]
+      },
+      {
+        "name": "SEARCH_AND_VIEW",
+        "precondition": "App is open at main content view",
+        "abstract_steps": [
+          "Open the search interface",
+          "Choose the appropriate search mode (free text / category / address / coordinates)",
+          "Enter the query or pick the category",
+          "Expand search scope if no results returned",
+          "Select a result to view it"
+        ],
+        "failure_modes": [
+          "Default scope is too narrow and yields no results",
+          "Result row tap appears unresponsive when an overlay just dismissed",
+          "Auto-formatted numeric fields cause invalid input"
+        ],
+        "verification_checklist": [
+          "Result is highlighted on the main view",
+          "Detail panel shows the expected item name",
+          "For coordinates: pin sits at requested numeric position"
+        ]
+      },
+      {
+        "name": "NAVIGATE_TO",
+        "precondition": "App is open at main content view",
+        "abstract_steps": [
+          "Open the routing/navigation entry point",
+          "Dismiss any first-time legal/warning dialogs",
+          "Choose the transport/profile mode",
+          "Set origin and destination via search, map selection, or shortcuts",
+          "Apply route optimization options if requested",
+          "Initiate route calculation"
+        ],
+        "failure_modes": [
+          "Previously cached destination triggers a confirm-replace dialog",
+          "Wrong transport mode left selected",
+          "Mistaking an unrelated bottom-sheet action for the start button"
+        ],
+        "verification_checklist": [
+          "Selected transport mode highlighted",
+          "From/To fields reflect intended endpoints",
+          "Calculated distance/route is shown"
+        ]
+      },
+      {
+        "name": "EDIT_ENTRY_SETTING",
+        "precondition": "Settings hierarchy is reachable",
+        "abstract_steps": [
+          "Open settings",
+          "Select the profile or scope the change should apply to",
+          "Drill to the specific category (general/units/region/appearance/widgets)",
+          "Change the value or toggle",
+          "Confirm scope (this profile vs all profiles) and save"
+        ],
+        "failure_modes": [
+          "Setting only applies to current profile when global was intended",
+          "Forgetting to confirm a selection dialog so change is not persisted",
+          "Editing the wrong profile because active profile was different"
+        ],
+        "verification_checklist": [
+          "Subtitle of the setting reflects the new value",
+          "If applicable, the change persists after navigating back"
+        ]
+      },
+      {
+        "name": "ENABLE_FEATURE_MODULE",
+        "precondition": "Module/plugin manager is reachable",
+        "abstract_steps": [
+          "Open the module/plugin list",
+          "Locate the desired module",
+          "Activate it via toggle or context menu 'Enable'",
+          "Acknowledge confirmation dialogs"
+        ],
+        "failure_modes": [
+          "Tapping description area opens detail instead of toggling",
+          "Confirmation dialog left undismissed causing apparent no-op"
+        ],
+        "verification_checklist": [
+          "Module indicator switches to active color/state",
+          "Any added profile/feature becomes available"
+        ]
+      },
+      {
+        "name": "COPY_OR_SHARE_CONTENT",
+        "precondition": "Target content/point is selected",
+        "abstract_steps": [
+          "Open the share menu for the selected item",
+          "Pick a copy/share variant that matches the request",
+          "Verify clipboard/share completion notice"
+        ],
+        "failure_modes": [
+          "Picking a copy variant that excludes required fields",
+          "Failing to long-press to surface the share menu"
+        ],
+        "verification_checklist": [
+          "Toast or system message confirms the action",
+          "Receiving target contains the expected data"
+        ]
+      },
+      {
+        "name": "LAUNCH_APP",
+        "precondition": "Device is at home screen",
+        "abstract_steps": [
+          "Open the app drawer or use global search",
+          "Disambiguate icons that look similar to other apps",
+          "Tap the correct icon",
+          "Wait through splash screen until main UI is interactive"
+        ],
+        "failure_modes": [
+          "Confusing similarly colored/styled icons of other apps",
+          "Interacting before app finishes loading"
+        ],
+        "verification_checklist": [
+          "Main UI of the target app is visible and responsive"
+        ]
+      },
+      {
+        "name": "COUNT_OR_INSPECT_LIST",
+        "precondition": "List/tab containing the items is reachable",
+        "abstract_steps": [
+          "Navigate to the list/tab",
+          "Scroll to view all items if necessary",
+          "Count items or read the requested attribute",
+          "Return the value"
+        ],
+        "failure_modes": [
+          "Reporting before the list fully loads",
+          "Missing items because of pagination or hidden categories"
+        ],
+        "verification_checklist": [
+          "Reported count matches visible entries",
+          "Empty state correctly reported as 0/None"
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "built_at": "2025-01-23T00:00:00Z",
+    "n_episodes": 58,
+    "n_successful": 58,
+    "n_episodes_input": 58,
+    "synthesizer_model": "claude-opus-4-7",
+    "synthesizer_temperature": 0.3
+  }
+}

@@ -1,0 +1,293 @@
+{
+  "category": "Maps & Navigation",
+  "layer2": {
+    "categories": [
+      {
+        "name": "SET_SAVED_PLACE",
+        "precondition": "App is open at a state exposing a 'Saved place' shortcut (e.g., Home/Work)",
+        "abstract_steps": [
+          "Open the saved-place editor for the target slot",
+          "Enter a query identifying the desired location",
+          "Select a matching result from suggestions or the map",
+          "Confirm to persist the saved place"
+        ],
+        "failure_modes": [
+          "Offline data set lacks the target POI",
+          "Query is too generic or misspelled",
+          "User exits editor before confirming, losing changes",
+          "Search returns history entries that are not real POIs"
+        ],
+        "verification_checklist": [
+          "After confirmation, the saved slot displays the chosen location name",
+          "Re-opening the slot shows the new address",
+          "Map shows a pin/icon for the saved place"
+        ]
+      },
+      {
+        "name": "COMPUTE_ROUTE",
+        "precondition": "App is open with route/directions feature accessible",
+        "abstract_steps": [
+          "Open route planner / navigation entry point",
+          "Dismiss any first-time legal/warning dialogs",
+          "Choose travel mode (drive/walk/transit/bike) if applicable",
+          "Set origin (current location or specific place)",
+          "Set destination via search, map tap, or shortcut",
+          "Apply route optimization options if requested",
+          "Initiate route calculation and read distance/time"
+        ],
+        "failure_modes": [
+          "Origin or destination cannot be found in available data",
+          "Selected travel mode unsupported in region/offline",
+          "Connectivity required but unavailable",
+          "Promotional banner obscures route inputs and agent loops scrolling",
+          "Previously cached destination triggers a confirm-replace dialog",
+          "Wrong transport mode left selected",
+          "Mistaking an unrelated bottom-sheet action for the start button"
+        ],
+        "verification_checklist": [
+          "Both endpoints visible in route panel",
+          "A route line is drawn on the map",
+          "Numeric distance and ETA are displayed",
+          "Travel mode indicator matches the intended mode",
+          "Selected transport mode highlighted",
+          "From/To fields reflect intended endpoints"
+        ]
+      },
+      {
+        "name": "QUERY_NEAREST_POI",
+        "precondition": "App is open with search functionality and current/user location available",
+        "abstract_steps": [
+          "Open search",
+          "Enter category keyword or tap category chip",
+          "Allow app to return ranked list by proximity",
+          "Pick top/nearest result"
+        ],
+        "failure_modes": [
+          "Map data offline and lacks POI category",
+          "Search term overly specific or misspelled",
+          "No internet for online POI lookups",
+          "User location not set, so distances cannot be ranked"
+        ],
+        "verification_checklist": [
+          "Results list shows at least one POI with distance",
+          "Nearest entry is highlighted or top of list",
+          "Selecting it reveals its details and map pin"
+        ]
+      },
+      {
+        "name": "RECOVER_FROM_EMPTY_SEARCH",
+        "precondition": "A search has returned an empty result",
+        "abstract_steps": [
+          "Clear the query field",
+          "Try a broader/simpler term or canonical name",
+          "If still empty, try a synonym or related category",
+          "If repeated failures, abandon and mark task infeasible"
+        ],
+        "failure_modes": [
+          "Repeatedly re-issuing the same query",
+          "Concatenating new text onto leftover text in field",
+          "Mistaking offline-data limitation for a typo"
+        ],
+        "verification_checklist": [
+          "Field is empty before retry",
+          "Each retry uses a meaningfully different term",
+          "Loop is bounded (e.g., max 3 retries) before declaring infeasible"
+        ]
+      },
+      {
+        "name": "DISMISS_OVERLAY",
+        "precondition": "A modal overlay or settings panel is blocking the main view",
+        "abstract_steps": [
+          "Use system back/navigate-back gesture",
+          "If back fails, look for explicit close affordance",
+          "Avoid tapping internal toggles thinking they dismiss the overlay"
+        ],
+        "failure_modes": [
+          "Tapping header items toggles internal state instead of closing",
+          "Repeatedly clicking same element with no effect",
+          "Confusing overlay with main screen"
+        ],
+        "verification_checklist": [
+          "Main map/content visible again",
+          "Overlay-specific widgets no longer present",
+          "Subsequent actions on main view succeed"
+        ]
+      },
+      {
+        "name": "HANDLE_OFFLINE_STATE",
+        "precondition": "App reports no internet and required feature needs online data",
+        "abstract_steps": [
+          "Attempt one retry of network action",
+          "If still offline, exit app or check device network settings",
+          "If device cannot be brought online, declare task infeasible"
+        ],
+        "failure_modes": [
+          "Looping on Retry without network change",
+          "Navigating to device settings but not toggling connectivity",
+          "Assuming offline maps cover online-only POIs"
+        ],
+        "verification_checklist": [
+          "Connectivity indicator shows online",
+          "Previously failing search/route now returns data",
+          "No 'No internet connection' banner visible"
+        ]
+      },
+      {
+        "name": "TOGGLE_DISPLAY_OPTION",
+        "precondition": "App is open at its main content view",
+        "abstract_steps": [
+          "Open the main settings or configuration menu",
+          "Navigate to the section that controls visible layers/overlays",
+          "Locate the desired option and toggle its switch ON",
+          "If a category/subtype picker opens, select required item(s) and confirm"
+        ],
+        "failure_modes": [
+          "Tapping the row opens a sub-screen instead of toggling",
+          "Selecting one item replaces another (single-select instead of multi-select)",
+          "Toggle reverts because no concrete selection was confirmed"
+        ],
+        "verification_checklist": [
+          "Toggle visually shows the ON state",
+          "Subtitle under the option reflects the chosen value",
+          "Returning to main view shows the new elements rendered"
+        ]
+      },
+      {
+        "name": "QUERY_INFO",
+        "precondition": "App is open and information section is reachable",
+        "abstract_steps": [
+          "Open the main menu and navigate to the relevant information area",
+          "Drill down into the specific item or comparison view",
+          "Read the value or compare indicators",
+          "Report the answer in the required format"
+        ],
+        "failure_modes": [
+          "Looking in the wrong submenu (e.g., display settings instead of account/billing)",
+          "Misreading icons that distinguish tiers/categories"
+        ],
+        "verification_checklist": [
+          "The visible text matches the queried entity",
+          "Indicators next to the entity have been correctly mapped to labels"
+        ]
+      },
+      {
+        "name": "SEARCH_AND_VIEW",
+        "precondition": "App is open at main content view",
+        "abstract_steps": [
+          "Open the search interface",
+          "Choose the appropriate search mode (free text / category / address / coordinates)",
+          "Enter the query or pick the category",
+          "Expand search scope if no results returned",
+          "Select a result to view it"
+        ],
+        "failure_modes": [
+          "Default scope is too narrow and yields no results",
+          "Result row tap appears unresponsive when an overlay just dismissed",
+          "Auto-formatted numeric fields cause invalid input"
+        ],
+        "verification_checklist": [
+          "Result is highlighted on the main view",
+          "Detail panel shows the expected item name",
+          "For coordinates: pin sits at requested numeric position"
+        ]
+      },
+      {
+        "name": "EDIT_ENTRY_SETTING",
+        "precondition": "Settings hierarchy is reachable",
+        "abstract_steps": [
+          "Open settings",
+          "Select the profile or scope the change should apply to",
+          "Drill to the specific category (general/units/region/appearance/widgets)",
+          "Change the value or toggle",
+          "Confirm scope (this profile vs all profiles) and save"
+        ],
+        "failure_modes": [
+          "Setting only applies to current profile when global was intended",
+          "Forgetting to confirm a selection dialog so change is not persisted",
+          "Editing the wrong profile because active profile was different"
+        ],
+        "verification_checklist": [
+          "Subtitle of the setting reflects the new value",
+          "If applicable, the change persists after navigating back"
+        ]
+      },
+      {
+        "name": "ENABLE_FEATURE_MODULE",
+        "precondition": "Module/plugin manager is reachable",
+        "abstract_steps": [
+          "Open the module/plugin list",
+          "Locate the desired module",
+          "Activate it via toggle or context menu 'Enable'",
+          "Acknowledge confirmation dialogs"
+        ],
+        "failure_modes": [
+          "Tapping description area opens detail instead of toggling",
+          "Confirmation dialog left undismissed causing apparent no-op"
+        ],
+        "verification_checklist": [
+          "Module indicator switches to active color/state",
+          "Any added profile/feature becomes available"
+        ]
+      },
+      {
+        "name": "COPY_OR_SHARE_CONTENT",
+        "precondition": "Target content/point is selected",
+        "abstract_steps": [
+          "Open the share menu for the selected item",
+          "Pick a copy/share variant that matches the request",
+          "Verify clipboard/share completion notice"
+        ],
+        "failure_modes": [
+          "Picking a copy variant that excludes required fields",
+          "Failing to long-press to surface the share menu"
+        ],
+        "verification_checklist": [
+          "Toast or system message confirms the action",
+          "Receiving target contains the expected data"
+        ]
+      },
+      {
+        "name": "LAUNCH_APP",
+        "precondition": "Device is at home screen",
+        "abstract_steps": [
+          "Open the app drawer or use global search",
+          "Disambiguate icons that look similar to other apps",
+          "Tap the correct icon",
+          "Wait through splash screen until main UI is interactive"
+        ],
+        "failure_modes": [
+          "Confusing similarly colored/styled icons of other apps",
+          "Interacting before app finishes loading"
+        ],
+        "verification_checklist": [
+          "Main UI of the target app is visible and responsive"
+        ]
+      },
+      {
+        "name": "COUNT_OR_INSPECT_LIST",
+        "precondition": "List/tab containing the items is reachable",
+        "abstract_steps": [
+          "Navigate to the list/tab",
+          "Scroll to view all items if necessary",
+          "Count items or read the requested attribute",
+          "Return the value"
+        ],
+        "failure_modes": [
+          "Reporting before the list fully loads",
+          "Missing items because of pagination or hidden categories"
+        ],
+        "verification_checklist": [
+          "Reported count matches visible entries",
+          "Empty state correctly reported as 0/None"
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "source": "static_seed_25app",
+    "apps": [
+      "maps_me",
+      "osmand"
+    ]
+  }
+}

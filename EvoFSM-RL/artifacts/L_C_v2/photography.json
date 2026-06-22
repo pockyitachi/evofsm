@@ -1,0 +1,261 @@
+{
+  "category": "Photography",
+  "layer2": {
+    "categories": [
+      {
+        "name": "LAUNCH_APP",
+        "precondition": "Device idle on a top-level launcher surface; target app may not be on home screen",
+        "abstract_steps": [
+          "Invoke a direct app-launch mechanism referencing the target application by its user-visible label",
+          "Look for app icon on home screen",
+          "If absent, open the all-apps drawer (swipe up) or access the full app list",
+          "Tap the correct app icon (avoid lookalike shortcuts from widgets)",
+          "Wait for any splash/initialization screen",
+          "Verify the expected app landing screen is shown"
+        ],
+        "failure_modes": [
+          "Direct launch no-ops silently when target cannot be resolved",
+          "A different application with a similar name is launched instead",
+          "Tapping a search-widget icon that opens a different app",
+          "Triggering long-press home menu instead of swipe",
+          "Acting before app finishes loading",
+          "Repeated retries without changing strategy"
+        ],
+        "verification_checklist": [
+          "Landing screen of target application visible",
+          "Main UI of target app is visible",
+          "Expected primary controls / characteristic UI elements are present"
+        ]
+      },
+      {
+        "name": "CAPTURE_MEDIA",
+        "precondition": "Capture surface (viewfinder) is ready",
+        "abstract_steps": [
+          "Ensure correct mode (photo vs video) via mode selector",
+          "Apply optional pre-capture settings (zoom, timer, grid, lens switch)",
+          "Trigger primary capture control",
+          "For timed/long captures, wait the required duration",
+          "Stop/finalize capture if applicable"
+        ],
+        "failure_modes": [
+          "Capturing in the wrong mode",
+          "Tap on capture control not registering; retry needed",
+          "Stopping recording prematurely or too late"
+        ],
+        "verification_checklist": [
+          "Thumbnail of new media appears",
+          "Capture control returns to idle state",
+          "Recording timer reaches required duration before stop"
+        ]
+      },
+      {
+        "name": "TOGGLE_SETTING",
+        "precondition": "Inside the target application; quick options or settings menu reachable",
+        "abstract_steps": [
+          "Reveal the overflow/options menu from the top-level UI",
+          "Navigate to the configuration area",
+          "Locate the toggle/cycle control for the desired feature",
+          "Tap to enable/cycle to desired state",
+          "Close menu and verify on the main UI"
+        ],
+        "failure_modes": [
+          "Overflow menu missed",
+          "Misreading slashed icon as enabled",
+          "Cycling past the desired state",
+          "Toggling the wrong icon",
+          "Toggle already in desired state and action has no visible effect",
+          "Control hidden behind a subsection"
+        ],
+        "verification_checklist": [
+          "Toggle visually reflects desired state (on/off indicator)",
+          "Visible indicator (label/value/overlay) reflects new state",
+          "Behavior changes as expected on the main surface",
+          "Associated UI updates (e.g., theme changes)"
+        ]
+      },
+      {
+        "name": "SELECT_FROM_OPTION_LIST",
+        "precondition": "Settings page with selectable list entries or a configuration row that presents a single-choice dialog",
+        "abstract_steps": [
+          "Navigate to the relevant settings submenu / configuration area",
+          "Open the specific entry / configuration row to reveal a list of choices",
+          "Select the desired value (e.g., highest/lowest target option)",
+          "Confirm and return; repeat for related entries",
+          "Dismiss dialog if needed"
+        ],
+        "failure_modes": [
+          "Opening the wrong entry (e.g., video vs photo)",
+          "Misidentifying the maximum/minimum option",
+          "Wrong option clicked",
+          "Dialog closes without selection if tap misses",
+          "Dialog dismissed without confirming selection",
+          "Row not scrolled into view"
+        ],
+        "verification_checklist": [
+          "Each related entry shows the intended value",
+          "Configuration row shows the new selected value",
+          "Dialog closes after selection",
+          "No CANCEL was the final action on the dialog"
+        ]
+      },
+      {
+        "name": "VIEW_LAST_ITEM",
+        "precondition": "At least one item exists in the app's media list",
+        "abstract_steps": [
+          "Use the gallery/last-item shortcut from the capture surface",
+          "Confirm the most recent item is displayed"
+        ],
+        "failure_modes": [
+          "Opening the wrong gallery (system vs in-app)",
+          "Tapping when no item exists yet"
+        ],
+        "verification_checklist": [
+          "Item preview, action bar (share/edit/delete), and metadata access are visible"
+        ]
+      },
+      {
+        "name": "QUERY_METADATA",
+        "precondition": "Item is open in a viewer",
+        "abstract_steps": [
+          "Open the overflow/more options menu",
+          "Select the details/info action",
+          "Read required fields from the dialog"
+        ],
+        "failure_modes": [
+          "Tapping in immersive view hides UI controls",
+          "Menu closing before selection registers",
+          "Returning wrong field value"
+        ],
+        "verification_checklist": [
+          "Required field is present and value is read verbatim",
+          "Units/format match the question"
+        ]
+      },
+      {
+        "name": "DELETE_ENTRY",
+        "precondition": "Item is open in a viewer",
+        "abstract_steps": [
+          "Tap the delete/trash control",
+          "Confirm if prompted",
+          "Verify removal indicator"
+        ],
+        "failure_modes": [
+          "Deleting the wrong item if list wasn't sorted by recency",
+          "Missing confirmation step"
+        ],
+        "verification_checklist": [
+          "Snackbar/toast indicating deletion",
+          "Returning to capture surface or list without the item"
+        ]
+      },
+      {
+        "name": "EDIT_ENTRY_VIA_CHOOSER",
+        "precondition": "Item open in viewer with an edit action",
+        "abstract_steps": [
+          "Trigger edit action",
+          "From the app chooser, pick the requested editor",
+          "Confirm with one-time use (avoid setting default unless asked)"
+        ],
+        "failure_modes": [
+          "Choosing 'Always' inadvertently",
+          "Selecting a different editor than requested"
+        ],
+        "verification_checklist": [
+          "Target editor's UI loads with the item"
+        ]
+      },
+      {
+        "name": "NAVIGATE_TO_SUBSECTION",
+        "precondition": "Inside the app with a known menu structure",
+        "abstract_steps": [
+          "Open the main/overflow menu",
+          "Drill into the targeted submenu",
+          "Verify the section title"
+        ],
+        "failure_modes": [
+          "Menu tap not registering",
+          "Mistaking a tooltip target for the menu"
+        ],
+        "verification_checklist": [
+          "Header text of subsection matches the goal"
+        ]
+      },
+      {
+        "name": "RECOVER_FROM_WRONG_APP",
+        "precondition": "Unintended app launched",
+        "abstract_steps": [
+          "Close the wrong app via X/back/Home",
+          "Re-enter the app drawer instead of widgets",
+          "Launch the correct app icon"
+        ],
+        "failure_modes": [
+          "Repeatedly clicking the same wrong shortcut",
+          "Launcher becoming unresponsive after rapid actions"
+        ],
+        "verification_checklist": [
+          "Target app's main UI is now visible"
+        ]
+      },
+      {
+        "name": "SELECT_CONTENT_ITEM",
+        "precondition": "Application requires selecting a piece of external content (e.g., a file/photo) to proceed",
+        "abstract_steps": [
+          "Trigger the content picker from the application",
+          "Browse available items or switch source",
+          "Choose a candidate item",
+          "Wait for the application to load it"
+        ],
+        "failure_modes": [
+          "Item cannot be loaded (corrupted/unsupported)",
+          "No items available in current source",
+          "Permission not granted to access storage"
+        ],
+        "verification_checklist": [
+          "Editor/consumer view of the selected item is presented",
+          "No error dialog present"
+        ]
+      },
+      {
+        "name": "RECOVER_FROM_BLOCKING_DIALOG",
+        "precondition": "A modal dialog (error or info) is blocking interaction",
+        "abstract_steps": [
+          "Dismiss the modal via its affirmative/close button",
+          "Reassess state",
+          "Take an alternative path instead of repeating the exact action"
+        ],
+        "failure_modes": [
+          "Looping: dismissing and immediately retrying the same failing action",
+          "Mistaking modal buttons for other controls"
+        ],
+        "verification_checklist": [
+          "Modal no longer present",
+          "Underlying screen interactive again"
+        ]
+      },
+      {
+        "name": "ABANDON_TASK_WHEN_BLOCKED",
+        "precondition": "Repeated alternative attempts fail due to environment-level issue",
+        "abstract_steps": [
+          "Detect a repeating failure signature",
+          "Try at least one alternative source/option",
+          "If still failing, mark task infeasible rather than loop"
+        ],
+        "failure_modes": [
+          "Endless retry loops consuming steps",
+          "False positive marking feasible tasks infeasible too early"
+        ],
+        "verification_checklist": [
+          "At least one distinct alternative tried",
+          "Clear evidence the blocker is environmental, not a UI navigation mistake"
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "source": "static_seed_25app",
+    "apps": [
+      "camera",
+      "snapseed"
+    ]
+  }
+}

@@ -1,0 +1,152 @@
+\section{Related Work}
+\label{sec:related}
+
+\subsection{Vision-language GUI agents}
+
+A series of recent systems has shown that multimodal foundation models can be
+turned into capable GUI agents. SeeClick~\citep{cheng2024seeclick} introduced
+grounding-aware pretraining for screen elements, enabling agents to localize a
+referent on a phone screen with high precision. CogAgent~\citep{hong2024cogagent}
+scaled a GUI-specialized vision-language model to high-resolution support,
+recognizing tiny page elements that earlier models missed.
+AppAgent~\citep{yang2023appagent} demonstrated an exploration-then-deployment
+workflow in which the agent records UI-element documentation during an offline
+phase and retrieves it at run time. The agent loop we use is M3A, introduced
+together with AndroidWorld, which interleaves an action-selection step and a
+summary step so the agent keeps a textual memory across long horizons. These
+works establish that vision-language models can reach competitive success rates
+on standard benchmarks, but they do not address the deployment-time problem of
+adapting to an unseen app's idiosyncrasies on a small compute budget.
+
+\subsection{Benchmarks and generalization for mobile GUI agents}
+
+AndroidWorld~\citep{rawles2024androidworld} is the canonical online benchmark we
+build on, providing programmatic tasks with reward signals derived from the
+device state. AndroidControl~\citep{li2024androidcontrol} contributes 15K
+demonstrations across 833 apps to study data scale, AndroidLab~\citep{xu2024androidlab}
+adds a reproducible benchmark and the BMOCA-style additions we reuse, and Android
+in the Wild~\citep{rawles2023aitw} provides a large-scale device-control dataset.
+MobileWorld~\citep{mobileworld2025} pushes complexity further with longer
+horizons (27.8 vs.\ 14.3 average steps over AndroidWorld), a much higher fraction
+of multi-application tasks (62.2\% vs.\ 9.5\%), and agent--user and MCP-augmented
+categories.
+
+The shared limitation of most of these benchmarks is their default evaluation
+protocol: training and test tasks usually share the same template family, and
+held-out conditions, when present, are defined at the parameter or seed level
+rather than at the app or category level. The exception most relevant to us is
+AndroidWorld-Generalization~\citep{gu2026generalization}, which formalizes the
+problem as a contextual MDP and explicitly separates zero-shot generalization to
+unseen task \emph{instances}, \emph{templates}, and \emph{applications}, showing
+that app-level transfer is by far the hardest regime. The within-benchmark level
+of our evaluation is built on this benchmark---we refer to it as
+AndroidWorld+---and extends its instance/template/app regimes with category-level
+near/far transfer tiers. We further add a cross-benchmark level that uses
+MobileWorld as an independently authored deployment target, so that the test apps
+are not a held-out split of the training benchmark but a separately constructed
+app suite.
+
+\subsection{Structured state representations for mobile agents}
+
+A separate line of work uses finite-state machines to represent the
+screen-to-screen navigation structure of mobile apps.
+Agent-SAMA~\citep{guo2025agentsama} models app execution as an FSM whose states
+are UI screens and whose transitions are user actions, and builds a multi-agent
+system around this FSM for planning, execution verification, and error recovery.
+There, the FSM acts as a lightweight, model-agnostic memory layer constructed
+online to track where the agent is and to detect deviations from expected
+post-conditions. Our use of an FSM is different. The two-layer FSM in EvoFSM-RL
+is the agent's \emph{in-context knowledge}, not its execution-time state tracker;
+its lower layer corresponds to the app-specific navigation structure that
+Agent-SAMA's FSM also captures, but its upper layer encodes category-generic
+workflow archetypes, failure modes, and verification checklists that have no
+analog in Agent-SAMA's formulation. The upper layer is what we mutate online
+during adaptation and what transfers across apps within a category. The two are
+therefore complementary: an execution-time state tracker could in principle plug
+in as a lower-layer module within our framework.
+
+\subsection{Training paradigms for GUI agents}
+
+Two paradigms dominate the recent literature. The first relies on large-scale
+synthesized data and supervised fine-tuning. OpenMobile~\citep{openmobile2026}
+synthesizes 2.8K task instructions and 34K action steps across 20 Android apps
+and trains by SFT to reach 64.7\% on AndroidWorld, and the authors report that
+adding step-level or trajectory-level RL on top yields no consistent improvement
+over SFT alone---a finding that holds in a large-data, in-distribution regime. We
+target the complementary regime where large-scale synthesis is infeasible at
+deployment time and the model must adapt online on a small sample. The second
+paradigm uses online RL to fine-tune the policy on the benchmark task
+distribution. MobileRL~\citep{mobilerl2025} pushes online agentic RL to
+state-of-the-art success (80.2\% on AndroidWorld) with a difficulty-adaptive
+GRPO variant, but its setup places parameter-randomized training tasks against
+canonical test tasks drawn from the same templates, isolating distributional
+augmentation rather than cross-app generalization.
+
+Most directly related to us, \citet{gu2026generalization} pair an open-source
+GRPO-based RL system with the generalization benchmark above and report that,
+while online RL substantially improves performance on unseen instances, its gains
+on unseen \emph{applications} are small; as a preliminary step they show that
+few-shot adaptation at test time helps on unseen apps and flag it as a direction
+for future work. Our work develops that observation into a full test-time
+adaptation method: rather than only training a stronger policy offline, we
+co-adapt a structured in-context prior and the policy weights on the target app's
+small adaptation set, and we evaluate the result under both within- and
+cross-benchmark generalization.
+
+\subsection{Test-time adaptation and meta-learning}
+
+Test-time adaptation has a long line of work in vision~\citep{sun2020ttt,wang2021tent}
+arguing that a model should update itself online on the distribution it is asked
+to predict, often via self-supervised objectives or entropy minimization. These
+methods assume an unsupervised stream of test data and target image
+classification; they do not directly apply to multi-step agentic settings where
+reward is sparse and trajectories are long, but they motivate the
+deployment-time adaptation framing we adopt---a framing that the agentic
+preliminary result of~\citet{gu2026generalization} shows is promising for unseen
+apps specifically. Closer in form is the meta-learning literature on adapting
+from a few labeled examples per task~\citep{finn2017maml}, whose support/query
+partition we adopt as our $T_{\text{adapt}}$/$T_{\text{eval}}$ split, and the
+generalization-in-RL literature~\citep{cobbe2020procgen}, which argues for
+explicit train/test level separation rather than parameter randomization---an
+argument we extend to the cross-app, cross-category, and cross-benchmark levels.
+
+\subsection{Joint context and weight optimization}
+
+The most direct algorithmic precursor of our adaptation loop is
+E-SPL~\citep{zhang2026espl}, which jointly evolves a free-text system prompt by
+structured mutation under a frozen reference LLM while simultaneously updating
+model weights via group-relative policy optimization. E-SPL operates in the
+single-turn reasoning setting (math, agentic web search) where rollouts are cheap
+and rewards are densely defined. We port the joint paradigm to the multi-step,
+visual, expensive-rollout GUI agent setting, with three concrete changes: the
+free-text prompt becomes a structured two-layer FSM with a linter that enforces
+transferability of the upper layer; the within-prompt advantage baseline becomes
+a within-(FSM, task) baseline suited to far fewer rollouts per cell; and the same
+joint loop runs at both source-pool pretraining and target-app deployment, with
+the category-level abstract library $L_C$ mediating between them.
+
+\subsection{Foundation models and parameter-efficient fine-tuning}
+
+We use Qwen3-VL~\citep{qwen3vl2025} as our vision-language backbone, fine-tuning
+only via LoRA adapters~\citep{hu2021lora} on the attention projections. LoRA has
+become standard for sample-efficient adaptation of large pretrained models and
+fits our deployment-time compute budget. Our weight update is group-relative
+policy optimization~\citep{shao2024deepseekmath}, modified only in the group key
+(within-(FSM, task) rather than within-prompt) to match our setting, and we use
+TrueSkill~\citep{herbrich2007trueskill} as the rating system that drives
+population selection during in-context evolution.
+
+\subsection{Summary of differentiation}
+
+Three axes summarize where this paper sits. First, on \textbf{problem}: we take
+the unseen-application regime that~\citet{gu2026generalization} identify as the
+hardest and the test-time adaptation they flag as preliminary, and turn it into a
+full method---rather than treating generalization as a property to be measured by
+a better offline-trained policy. Second, on \textbf{mechanism}: we co-adapt
+structured in-context knowledge (an FSM) and policy weights (LoRA) as two
+channels of one deployment-time loop, rather than treating context as a fixed
+prompt or weights as the only learnable component. Third, on \textbf{evaluation}:
+we measure generalization at multiple levels---pool, category, and template
+within a benchmark, and a category-level near/far tiering across two
+benchmarks---extending the instance/template/app regimes of prior generalization
+benchmarks with category and cross-benchmark axes.
