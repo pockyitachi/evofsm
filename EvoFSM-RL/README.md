@@ -53,20 +53,41 @@ The **same loop** runs at source-pool pretraining and at target-app
 deployment, which makes "test-time adaptation" a well-defined operation rather
 than an ad-hoc fine-tune.
 
+## 🗂 Dataset & splits
+
+AndroidWorld extended with 6 BMOCA/AndroidLab apps → **25 apps, 12 Play-Store
+categories**. Apps split into a source pool and two target tiers, and within each
+target app the templates split again — **three independent disjoint levels**,
+stacked for an honest generalization measurement:
+
+**(1) Pool** — source vs. target apps:
+
+| Pool | Apps | Templates | Role |
+|---|--:|--:|---|
+| **Source pool** | 12 | 96 | Phase-1 pretraining — per-app L1 FSMs + per-category `L_C` |
+| **Tier-B** (near-transfer) | 6 | 50 | target apps whose Play category **is** in the source pool |
+| **Tier-C** (far-transfer) | 7 | 46 | target apps in categories **absent** from the source pool |
+
+**(2) Category** — Tier-B vs. Tier-C is itself a near- vs. far-transfer split.
+Tier-C doubles as a built-in **null control**: no category `L_C` exists to
+inject, so the prompt degrades byte-identically to zero-shot.
+
+**(3) Template** — within every target app, templates are partitioned
+**template-disjoint** into `T_adapt` (60%, K=5 seeds {30–34}) and `T_eval` (40%,
+K=3 seeds {40–42}). The loop adapts on `T_adapt`; the frozen headline number is
+`T_eval` — measuring generalization *of the adaptation procedure*, not template
+memorization.
+
+Stacked, the three levels measure cross-app, cross-category, and within-app
+generalization. Source of truth: [`configs/splits.yaml`](configs/splits.yaml);
+full inventory in `docs/design/dataset.md`.
+
 ## 📊 Results on AndroidWorld+
 
-**Benchmark.** AndroidWorld extended with 6 BMOCA/AndroidLab apps → **25 apps,
-12 Play-Store categories**. Three *independent* disjoint splits stacked together
-give an honest generalization measurement (absolute numbers are lower than
-leaderboard by design):
+The ablation ladder runs on `T_eval` (K=3 seeds); absolute numbers are lower than
+the AndroidWorld leaderboard by design.
 
-| Split | Measures |
-|---|---|
-| source pool ↔ target apps | cross-app transfer |
-| near-transfer (Tier-B) ↔ far-transfer (Tier-C) | cross-category transfer |
-| `T_adapt` ↔ `T_eval` templates | within-app generalization (not template memorization) |
-
-**Ablation ladder** — each rung adds exactly one mechanism (`T_eval`, K=3 seeds):
+**Ablation ladder** — each rung adds exactly one mechanism:
 
 | Arm | Mechanism added | Tier-B | Tier-C | Overall |
 |---|---|:--:|:--:|:--:|

@@ -1,0 +1,10 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Run logs & eval transcripts under artifacts/ (large, regenerable).
+# Durable products (guidance *.json, task_goals.json, strongest_variant.txt)
+# and folder README/CLAUDE stay tracked.
+artifacts/*.log
+artifacts/*_eval_logs/

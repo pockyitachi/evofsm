@@ -1,0 +1,1732 @@
+{
+ "meta": {
+  "mode": "b3-lesson",
+  "run_dir": "/shared/linqiang/evofsm_project/SkyRL-AndroidWorld/skyrl-agent/tmp_training/mw_b3_lesson_r1",
+  "lc_dir": "EvoFSM-RL/artifacts/L_C_v2",
+  "validated_lessons": 0,
+  "stats": {
+   "with_prior": 118,
+   "with_lessons": 105,
+   "empty": 56
+  }
+ },
+ "tasks": {
+  "AcceptMeetingTask": {
+   "split": "adapt",
+   "tier": "B",
+   "apps": [
+    "Mail"
+   ],
+   "text": "# Task-specific lessons (from earlier attempts on this app)\nTreat these as HINTS, not rules. How to use them:\n- Always decide your next action from the CURRENT screenshot first.\n- Use a lesson ONLY if it clearly fits this task AND the screen you see now;\n  if it does not fit, IGNORE it completely.\n- 'avoid' lists past mistakes not to repeat; 'do' is a rough plan to adapt to\n  the real UI, never a script to follow blindly.\n- Never let a lesson override what the screenshot plainly shows.\n\nWhen accept a meeting invitation:\n  avoid: All attempts assumed the task was a free-text reply and typed an invented body ('I'll be there at 10:00 AM...'); the goal was to ACCEPT the meeting. Use the meeting invite's Accept action instead of composing arbitrary reply text.\n\nWhen reply to cancel a meeting:\n  avoid: All attempts typed an invented/paraphrased body and were marked 'Wrong body'; don't guess wording—read the email's actual requested cancellation message and reply with the exact text the task specifies.\n",
+   "n_lessons": 2,
+   "chars": 1011
+  },
+  "AdjustBrightnessMaximumTask": {
+   "split": "adapt",
+   "tier": "B",
+   "apps": [
+    "Settings"
+   ],
+   "text": "# Task-specific lessons (from earlier attempts on this app)\nTreat these as HINTS, not rules. How to use them:\n- Always decide your next action from the CURRENT screenshot first.\n- Use a lesson ONLY if it clearly fits this task AND the screen you see now;\n  if it does not fit, IGNORE it completely.\n- 'avoid' lists past mistakes not to repeat; 'do' is a rough plan to adapt to\n  the real UI, never a script to follow blindly.\n- Never let a lesson override what the screenshot plainly shows.\n\nWhen set brightness to maximum:\n  do: open Settings -> scroll to Display -> tap Display -> tap Brightness level -> swipe slider fully left-to-right to 100%\n  avoid: Tapping a point near the right end of the slider lands at ~98% (235/255), not true maximum; instead swipe the slider all the way to the far right to reach 100%.\n\nWhen set screen brightness to minimum:\n  do: open Settings -> scroll down -> tap Display -> tap Brightness level -> drag slider fully left (or tap left edge) -> terminate\n",
+   "n_lessons": 2,
+   "chars": 990
+  },
+  "AdjustBrightnessMinimumTask": {
+   "split": "adapt",
+   "tier": "B",
+   "apps": [
+    "Settings"
+   ],
+   "text": "# Task-specific lessons (from earlier attempts on this app)\nTreat these as HINTS, not rules. How to use them:\n- Always decide your next action from the CURRENT screenshot first.\n- Use a lesson ONLY if it clearly fits this task AND the screen you see now;\n  if it does not fit, IGNORE it completely.\n- 'avoid' lists past mistakes not to repeat; 'do' is a rough plan to adapt to\n  the real UI, never a script to follow blindly.\n- Never let a lesson override what the screenshot plainly shows.\n\nWhen set screen brightness to minimum:\n  do: open Settings -> scroll down -> tap Display -> tap Brightness level -> drag slider fully left (or tap left edge) -> terminate\n\nWhen set brightness to maximum:\n  do: open Settings -> scroll to Display -> tap Display -> tap Brightness level -> swipe slider fully left-to-right to 100%\n  avoid: Tapping a point near the right end of the slider lands at ~98% (235/255), not true maximum; instead swipe the slider all the way to the far right to reach 100%.\n",
+   "n_lessons": 2,
+   "chars": 990
+  },
+  "BidFileRenameAskUserTask": {
+   "split": "adapt",
+   "tier": "B",
+   "apps": [
+    "Files"
+   ],
+   "text": "# Task-specific lessons (from earlier attempts on this app)\nTreat these as HINTS, not rules. How to use them:\n- Always decide your next action from the CURRENT screenshot first.\n- Use a lesson ONLY if it clearly fits this task AND the screen you see now;\n  if it does not fit, IGNORE it completely.\n- 'avoid' lists past mistakes not to repeat; 'do' is a rough plan to adapt to\n  the real UI, never a script to follow blindly.\n- Never let a lesson override what the screenshot plainly shows.\n\nWhen rename files by prefix sequentially:\n  avoid: All attempts wasted every step fiddling with sort options and never reached renaming; skip pre-sorting and instead long-press each bid_ file -> open rename/overflow -> enter the new sequential name -> confirm, repeating for each file.\n\nWhen rename files by prefix:\n  avoid: Tapping a file just opens an 'Open with' dialog; instead long-press the file to select it, then use the overflow menu's Rename, and when typing the new name don't re-add the extension already present.\n",
+   "n_lessons": 2,
+   "chars": 1018
+  },
+  "BidFileRenameTask": {
+   "split": "adapt",
+   "tier": "B",
+   "apps": [
+    "Files"
+   ],
+   "text": "# Task-specific lessons (from earlier attempts on this app)\nTreat these as HINTS, not rules. How to use them:\n- Always decide your next action from the CURRENT screenshot first.\n- Use a lesson ONLY if it clearly fits this task AND the screen you see now;\n  if it does not fit, IGNORE it completely.\n- 'avoid' lists past mistakes not to repeat; 'do' is a rough plan to adapt to\n  the real UI, never a script to follow blindly.\n- Never let a lesson override what the screenshot plainly shows.\n\nWhen rename files by prefix sequentially:\n  avoid: All attempts wasted every step fiddling with sort options and never reached renaming; skip pre-sorting and instead long-press each bid_ file -> open rename/overflow -> enter the new sequential name -> confirm, repeating for each file.\n\nWhen rename files by prefix:\n  avoid: Tapping a file just opens an 'Open with' dialog; instead long-press the file to select it, then use the overflow menu's Rename, and when typing the new name don't re-add the extension already present.\n",
+   "n_lessons": 2,
+   "chars": 1018
+  },
+  "CVEmailAskUserTask": {
+   "split": "adapt",
+   "tier": "B",
+   "apps": [
+    "Files",
+    "Mail"
+   ],
+   "text": "",
+   "n_lessons": 0,
+   "chars": 0
+  },
+  "CVEmailTask": {
+   "split": "adapt",
+   "tier": "B",
+   "apps": [
+    "Files",
+    "Mail"
+   ],
+   "text": "",
+   "n_lessons": 0,
+   "chars": 0
+  },
+  "CancelMeetingTask": {
+   "split": "adapt",
+   "tier": "B",
+   "apps": [
+    "Mail"
+   ],
+   "text": "# Task-specific lessons (from earlier attempts on this app)\nTreat these as HINTS, not rules. How to use them:\n- Always decide your next action from the CURRENT screenshot first.\n- Use a lesson ONLY if it clearly fits this task AND the screen you see now;\n  if it does not fit, IGNORE it completely.\n- 'avoid' lists past mistakes not to repeat; 'do' is a rough plan to adapt to\n  the real UI, never a script to follow blindly.\n- Never let a lesson override what the screenshot plainly shows.\n\nWhen reply to cancel a meeting:\n  avoid: All attempts typed an invented/paraphrased body and were marked 'Wrong body'; don't guess wording—read the email's actual requested cancellation message and reply with the exact text the task specifies.\n\nWhen accept a meeting invitation:\n  avoid: All attempts assumed the task was a free-text reply and typed an invented body ('I'll be there at 10:00 AM...'); the goal was to ACCEPT the meeting. Use the meeting invite's Accept action instead of composing arbitrary reply text.\n",
+   "n_lessons": 2,
+   "chars": 1011
+  },
+  "CheckCandidateAskUserTask1": {
+   "split": "adapt",
+   "tier": "B",
+   "apps": [
+    "Files",
+    "Messages"
+   ],
+   "text": "",
+   "n_lessons": 0,
+   "chars": 0
+  },
+  "CheckConferenceAndSendSmsTask1": {
+   "split": "adapt",
+   "tier": "B",
+   "apps": [
+    "Calendar",
+    "Messages"
+   ],
+   "text": "# Task-specific lessons (from earlier attempts on this app)\nTreat these as HINTS, not rules. How to use them:\n- Always decide your next action from the CURRENT screenshot first.\n- Use a lesson ONLY if it clearly fits this task AND the screen you see now;\n  if it does not fit, IGNORE it completely.\n- 'avoid' lists past mistakes not to repeat; 'do' is a rough plan to adapt to\n  the real UI, never a script to follow blindly.\n- Never let a lesson override what the screenshot plainly shows.\n\nWhen send SMS with conference dates:\n  avoid: Agents selected wrong contacts and assumed success without verifying the message was sent to the correct recipient (+14058298746) and that dates were confirmed from the calendar event; verify exact contact/number and source the actual dates from the conference before composing, then confirm the sent message appears in the thread.\n\nWhen check event then send SMS with dates:\n  avoid: Agents assumed the recipient/number and date format without verifying the exact contact (+14058298746) and required message content from the calendar event; always confirm the correct phone number and exact date values/format before sending, and verify the message actually sent to the right number.\n",
+   "n_lessons": 2,
+   "chars": 1223
+  },
+  "CheckConferenceAndSendSmsTask2": {
+   "split": "adapt",
+   "tier": "B",
+   "apps": [
+    "Calendar",
+    "Messages"
+   ],
+   "text": "# Task-specific lessons (from earlier attempts on this app)\nTreat these as HINTS, not rules. How to use them:\n- Always decide your next action from the CURRENT screenshot first.\n- Use a lesson ONLY if it clearly fits this task AND the screen you see now;\n  if it does not fit, IGNORE it completely.\n- 'avoid' lists past mistakes not to repeat; 'do' is a rough plan to adapt to\n  the real UI, never a script to follow blindly.\n- Never let a lesson override what the screenshot plainly shows.\n\nWhen send SMS with conference dates:\n  avoid: Agents selected wrong contacts and assumed success without verifying the message was sent to the correct recipient (+14058298746) and that dates were confirmed from the calendar event; verify exact contact/number and source the actual dates from the conference before composing, then confirm the sent message appears in the thread.\n\nWhen check event then send SMS with dates:\n  avoid: Agents assumed the recipient/number and date format without verifying the exact contact (+14058298746) and required message content from the calendar event; always confirm the correct phone number and exact date values/format before sending, and verify the message actually sent to the right number.\n",
+   "n_lessons": 2,
+   "chars": 1223
+  },
+  "CheckConferenceDurationTask": {
+   "split": "adapt",
+   "tier": "B",
+   "apps": [
+    "Calendar"
+   ],
+   "text": "# Task-specific lessons (from earlier attempts on this app)\nTreat these as HINTS, not rules. How to use them:\n- Always decide your next action from the CURRENT screenshot first.\n- Use a lesson ONLY if it clearly fits this task AND the screen you see now;\n  if it does not fit, IGNORE it completely.\n- 'avoid' lists past mistakes not to repeat; 'do' is a rough plan to adapt to\n  the real UI, never a script to follow blindly.\n- Never let a lesson override what the screenshot plainly shows.\n\nWhen send SMS with conference dates:\n  avoid: Agents selected wrong contacts and assumed success without verifying the message was sent to the correct recipient (+14058298746) and that dates were confirmed from the calendar event; verify exact contact/number and source the actual dates from the conference before composing, then confirm the sent message appears in the thread.\n\nWhen count event duration in month:\n  avoid: Agents counted only visible event titles (2 days) instead of accounting for multi-day conference events spanning the full date range; open each conference event to read its start/end dates and sum the actual days covered.\n",
+   "n_lessons": 2,
+   "chars": 1138
+  },
+  "CheckConferenceLocationTask": {
+   "split": "adapt",
+   "tier": "B",
+   "apps": [
+    "Maps",
+    "Messages"
+   ],
+   "text": "# Task-specific lessons (from earlier attempts on this app)\nTreat these as HINTS, not rules. How to use them:\n- Always decide your next action from the CURRENT screenshot first.\n- Use a lesson ONLY if it clearly fits this task AND the screen you see now;\n  if it does not fit, IGNORE it completely.\n- 'avoid' lists past mistakes not to repeat; 'do' is a rough plan to adapt to\n  the real UI, never a script to follow blindly.\n- Never let a lesson override what the screenshot plainly shows.\n\nWhen text conference hotel address to contact:\n  avoid: Attempts never completed the send: they used inconsistent/invalid action names (type vs input_text), got stuck in input-method dialogs, and aborted before typing the message and tapping send. After entering recipient number, reliably tap message field, input the address text, then tap the send button to finish.\n",
+   "n_lessons": 1,
+   "chars": 861
+  },
+  "CheckDepartTimeTask": {
+   "split": "adapt",
+   "tier": "B",
+   "apps": [
+    "Mail",
+    "Messages"
+   ],
+   "text": "# Task-specific lessons (from earlier attempts on this app)\nTreat these as HINTS, not rules. How to use them:\n- Always decide your next action from the CURRENT screenshot first.\n- Use a lesson ONLY if it clearly fits this task AND the screen you see now;\n  if it does not fit, IGNORE it completely.\n- 'avoid' lists past mistakes not to repeat; 'do' is a rough plan to adapt to\n  the real UI, never a script to follow blindly.\n- Never let a lesson override what the screenshot plainly shows.\n\nWhen text a contact a departure time:\n  avoid: Searching by name (and then phone number) in the wrong/empty field and never composing the message; instead start a new chat, enter the recipient's phone number to create the conversation, type the departure-time content, and send.\n",
+   "n_lessons": 1,
+   "chars": 771
+  },
+  "CheckDistanceAskUserTask1": {
+   "split": "adapt",
+   "tier": "B",
+   "apps": [
+    "Maps"
+   ],
+   "text": "# Task-specific lessons (from earlier attempts on this app)\nTreat these as HINTS, not rules. How to use them:\n- Always decide your next action from the CURRENT screenshot first.\n- Use a lesson ONLY if it clearly fits this task AND the screen you see now;\n  if it does not fit, IGNORE it completely.\n- 'avoid' lists past mistakes not to repeat; 'do' is a rough plan to adapt to\n  the real UI, never a script to follow blindly.\n- Never let a lesson override what the screenshot plainly shows.\n\nWhen find driving distance between two places:\n  avoid: All attempts invented or guessed the destination ('my hometown', 'Shanghai', 'xxx') instead of asking the user for the unknown hometown; when a required location is unspecified, ask the user before proceeding rather than fabricating it.\n",
+   "n_lessons": 1,
+   "chars": 785
+  },
+  "CheckDistanceAskUserTask2": {
+   "split": "adapt",
+   "tier": "B",
+   "apps": [
+    "Maps"
+   ],
+   "text": "# Task-specific lessons (from earlier attempts on this app)\nTreat these as HINTS, not rules. How to use them:\n- Always decide your next action from the CURRENT screenshot first.\n- Use a lesson ONLY if it clearly fits this task AND the screen you see now;\n  if it does not fit, IGNORE it completely.\n- 'avoid' lists past mistakes not to repeat; 'do' is a rough plan to adapt to\n  the real UI, never a script to follow blindly.\n- Never let a lesson override what the screenshot plainly shows.\n\nWhen find driving distance between two places:\n  avoid: All attempts invented or guessed the destination ('my hometown', 'Shanghai', 'xxx') instead of asking the user for the unknown hometown; when a required location is unspecified, ask the user before proceeding rather than fabricating it.\n",
+   "n_lessons": 1,
+   "chars": 785
+  },
+  "CheckGithubInfoTask": {
+   "split": "adapt",
+   "tier": "B",
+   "apps": [
+    "Chrome",
+    "Mail"
+   ],
+   "text": "# Task-specific lessons (from earlier attempts on this app)\nTreat these as HINTS, not rules. How to use them:\n- Always decide your next action from the CURRENT screenshot first.\n- Use a lesson ONLY if it clearly fits this task AND the screen you see now;\n  if it does not fit, IGNORE it completely.\n- 'avoid' lists past mistakes not to repeat; 'do' is a rough plan to adapt to\n  the real UI, never a script to follow blindly.\n- Never let a lesson override what the screenshot plainly shows.\n\nWhen email github repo stats:\n  avoid: Agents wasted turns blindly scrolling the GitHub page back-and-forth for stars/contributors, or hallucinated 'no repositories'; instead read stats from the top of the rendered repo page in one pass, then actually compose AND send the email rather than stopping after typing fields.\n",
+   "n_lessons": 1,
+   "chars": 813
+  },
+  "CheckInterviewTimesTask": {
+   "split": "adapt",
+   "tier": "B",
+   "apps": [
+    "Calendar",
+    "Mail"
+   ],
+   "text": "# Task-specific lessons (from earlier attempts on this app)\nTreat these as HINTS, not rules. How to use them:\n- Always decide your next action from the CURRENT screenshot first.\n- Use a lesson ONLY if it clearly fits this task AND the screen you see now;\n  if it does not fit, IGNORE it completely.\n- 'avoid' lists past mistakes not to repeat; 'do' is a rough plan to adapt to\n  the real UI, never a script to follow blindly.\n- Never let a lesson override what the screenshot plainly shows.\n\nWhen add interview events to calendar:\n  avoid: Agents created events from a single email or with wrong/guessed times without verifying ALL interview emails for the month; gather every relevant email and confirm each exact date/time/duration before creating events to avoid incorrect calendar entries.\n\nWhen check event then send SMS with dates:\n  avoid: Agents assumed the recipient/number and date format without verifying the exact contact (+14058298746) and required message content from the calendar event; always confirm the correct phone number and exact date values/format before sending, and verify the message actually sent to the right number.\n",
+   "n_lessons": 2,
+   "chars": 1147
+  },
+  "CheckInvoiceTask1": {
+   "split": "adapt",
+   "tier": "B",
+   "apps": [
+    "Docreader",
+    "Files"
+   ],
+   "text": "# Task-specific lessons (from earlier attempts on this app)\nTreat these as HINTS, not rules. How to use them:\n- Always decide your next action from the CURRENT screenshot first.\n- Use a lesson ONLY if it clearly fits this task AND the screen you see now;\n  if it does not fit, IGNORE it completely.\n- 'avoid' lists past mistakes not to repeat; 'do' is a rough plan to adapt to\n  the real UI, never a script to follow blindly.\n- Never let a lesson override what the screenshot plainly shows.\n\nWhen report invoice hours via SMS:\n  do: read invoice -> open Messages -> search contact name -> tap contact -> tap mobile number -> tap text field -> type result -> tap send -> terminate\n  avoid: Agent hallucinated PDF contents on a blank/loading screen and never actually composed or sent the SMS; verify the file actually rendered before extracting data, and ensure the message is typed and sent before terminating.\n\nWhen calculate invoice late-payment total:\n  do: open Files app -> tap invoice.pdf -> if blank, press Back and re-tap to open -> read actual figures -> compute interest (1.5% * 1.5 months) and add to total -> answer\n  avoid: Failed attempts answered after a blank/unloaded PDF screen using guessed math instead of reading the document; always confirm the PDF content is actually visible (re-open or navigate back) before computing, so the rounding/values are exact.\n",
+   "n_lessons": 2,
+   "chars": 1378
+  },
+  "CheckInvoiceTask3": {
+   "split": "adapt",
+   "tier": "B",
+   "apps": [
+    "Docreader",
+    "Files",
+    "Messages"
+   ],
+   "text": "# Task-specific lessons (from earlier attempts on this app)\nTreat these as HINTS, not rules. How to use them:\n- Always decide your next action from the CURRENT screenshot first.\n- Use a lesson ONLY if it clearly fits this task AND the screen you see now;\n  if it does not fit, IGNORE it completely.\n- 'avoid' lists past mistakes not to repeat; 'do' is a rough plan to adapt to\n  the real UI, never a script to follow blindly.\n- Never let a lesson override what the screenshot plainly shows.\n\nWhen report invoice hours via SMS:\n  do: read invoice -> open Messages -> search contact name -> tap contact -> tap mobile number -> tap text field -> type result -> tap send -> terminate\n  avoid: Agent hallucinated PDF contents on a blank/loading screen and never actually composed or sent the SMS; verify the file actually rendered before extracting data, and ensure the message is typed and sent before terminating.\n\nWhen calculate invoice late-payment total:\n  do: open Files app -> tap invoice.pdf -> if blank, press Back and re-tap to open -> read actual figures -> compute interest (1.5% * 1.5 months) and add to total -> answer\n  avoid: Failed attempts answered after a blank/unloaded PDF screen using guessed math instead of reading the document; always confirm the PDF content is actually visible (re-open or navigate back) before computing, so the rounding/values are exact.\n",
+   "n_lessons": 2,
+   "chars": 1378
+  },
+  "CheckMealEventAskUserTask": {
+   "split": "adapt",
+   "tier": "B",
+   "apps": [
+    "Calendar",
+    "Contacts",
+    "Mail"
+   ],
+   "text": "# Task-specific lessons (from earlier attempts on this app)\nTreat these as HINTS, not rules. How to use them:\n- Always decide your next action from the CURRENT screenshot first.\n- Use a lesson ONLY if it clearly fits this task AND the screen you see now;\n  if it does not fit, IGNORE it completely.\n- 'avoid' lists past mistakes not to repeat; 'do' is a rough plan to adapt to\n  the real UI, never a script to follow blindly.\n- Never let a lesson override what the screenshot plainly shows.\n\nWhen check event then send SMS with dates:\n  avoid: Agents assumed the recipient/number and date format without verifying the exact contact (+14058298746) and required message content from the calendar event; always confirm the correct phone number and exact date values/format before sending, and verify the message actually sent to the right number.\n\nWhen count event duration in month:\n  avoid: Agents counted only visible event titles (2 days) instead of accounting for multi-day conference events spanning the full date range; open each conference event to read its start/end dates and sum the actual days covered.\n",
+   "n_lessons": 2,
+   "chars": 1112
+  },
+  "ChromeSearchBeijingWeatherAskUserTask": {
+   "split": "adapt",
+   "tier": "B",
+   "apps": [
+    "Chrome"
+   ],
+   "text": "# Task-specific lessons (from earlier attempts on this app)\nTreat these as HINTS, not rules. How to use them:\n- Always decide your next action from the CURRENT screenshot first.\n- Use a lesson ONLY if it clearly fits this task AND the screen you see now;\n  if it does not fit, IGNORE it completely.\n- 'avoid' lists past mistakes not to repeat; 'do' is a rough plan to adapt to\n  the real UI, never a script to follow blindly.\n- Never let a lesson override what the screenshot plainly shows.\n\nWhen search weather and report temperature:\n  avoid: Agents used a vague query ('my hometown' instead of the specified city), got stuck re-typing over phantom typos, or gave up on a 'no internet' error without ever submitting the search or returning an integer temperature. Use the exact city from the task, submit the search (press Enter), read the result, and answer the user with the temperature as an integer via the ask-user/answer action.\n",
+   "n_lessons": 1,
+   "chars": 937
+  },
+  "CountFileLinesTask": {
+   "split": "adapt",
+   "tier": "B",
+   "apps": [
+    "Files"
+   ],
+   "text": "# Task-specific lessons (from earlier attempts on this app)\nTreat these as HINTS, not rules. How to use them:\n- Always decide your next action from the CURRENT screenshot first.\n- Use a lesson ONLY if it clearly fits this task AND the screen you see now;\n  if it does not fit, IGNORE it completely.\n- 'avoid' lists past mistakes not to repeat; 'do' is a rough plan to adapt to\n  the real UI, never a script to follow blindly.\n- Never let a lesson override what the screenshot plainly shows.\n\nWhen count lines in a file:\n  avoid: Failed attempts tried to open file_1.txt directly inside the zip archive (which the app forbids) and never extracted it, then looped clicking the same spot; instead extract the archive first, open the extracted file, count lines, and submit the count as an integer answer in the required format.\n",
+   "n_lessons": 1,
+   "chars": 825
+  },
+  "DeleteAllMessagesAskUserTask": {
+   "split": "adapt",
+   "tier": "B",
+   "apps": [
+    "Messages"
+   ],
+   "text": "# Task-specific lessons (from earlier attempts on this app)\nTreat these as HINTS, not rules. How to use them:\n- Always decide your next action from the CURRENT screenshot first.\n- Use a lesson ONLY if it clearly fits this task AND the screen you see now;\n  if it does not fit, IGNORE it completely.\n- 'avoid' lists past mistakes not to repeat; 'do' is a rough plan to adapt to\n  the real UI, never a script to follow blindly.\n- Never let a lesson override what the screenshot plainly shows.\n\nWhen delete all messages:\n  avoid: Agent assumed the app must be opened from the app drawer and blindly swiped on the home screen; first check if the Messages app is already visible or open it directly rather than guessing at a swipe.\n",
+   "n_lessons": 1,
+   "chars": 727
+  },
+  "GoogleMapsAlibabaPhoneContactAskUserTask": {
+   "split": "adapt",
+   "tier": "B",
+   "apps": [
+    "Contacts",
+    "Maps"
+   ],
+   "text": "# Task-specific lessons (from earlier attempts on this app)\nTreat these as HINTS, not rules. How to use them:\n- Always decide your next action from the CURRENT screenshot first.\n- Use a lesson ONLY if it clearly fits this task AND the screen you see now;\n  if it does not fit, IGNORE it completely.\n- 'avoid' lists past mistakes not to repeat; 'do' is a rough plan to adapt to\n  the real UI, never a script to follow blindly.\n- Never let a lesson override what the screenshot plainly shows.\n\nWhen add contact with researched phone number:\n  avoid: Agents never finished the contact: they typed first/last name then stopped without entering the phone number or saving, and never reliably obtained the company number from Maps first. Gather the phone number, fill all required fields, then tap Save before verifying.\n\nWhen email user about scheduled meal:\n  avoid: Agents either looped on open_app for a missing Email app, terminated prematurely without sending, or got lost scrolling the calendar; verify the email app exists and actually compose+send the message before terminating.\n",
+   "n_lessons": 2,
+   "chars": 1083
+  },
+  "GraduationMassEmailTask": {
+   "split": "adapt",
+   "tier": "B",
+   "apps": [
+    "Calendar",
+    "Chrome",
+    "Mail"
+   ],
+   "text": "# Task-specific lessons (from earlier attempts on this app)\nTreat these as HINTS, not rules. How to use them:\n- Always decide your next action from the CURRENT screenshot first.\n- Use a lesson ONLY if it clearly fits this task AND the screen you see now;\n  if it does not fit, IGNORE it completely.\n- 'avoid' lists past mistakes not to repeat; 'do' is a rough plan to adapt to\n  the real UI, never a script to follow blindly.\n- Never let a lesson override what the screenshot plainly shows.\n\nWhen send graduation mass email:\n  avoid: Attempts drifted into unrelated subtasks (calendar event, web research) and hallucinated success/found info; they never completed the core action of composing and sending the email. Stay focused on locating the recipient list and actually composing/sending the email, verify each step from the actual screenshot rather than assuming completion.\n\nWhen email github repo stats:\n  avoid: Agents wasted turns blindly scrolling the GitHub page back-and-forth for stars/contributors, or hallucinated 'no repositories'; instead read stats from the top of the rendered repo page in one pass, then actually compose AND send the email rather than stopping after typing fields.\n",
+   "n_lessons": 2,
+   "chars": 1201
+  },
+  "LocalFileManagementTask2": {
+   "split": "adapt",
+   "tier": "B",
+   "apps": [
+    "Files",
+    "Mail"
+   ],
+   "text": "# Task-specific lessons (from earlier attempts on this app)\nTreat these as HINTS, not rules. How to use them:\n- Always decide your next action from the CURRENT screenshot first.\n- Use a lesson ONLY if it clearly fits this task AND the screen you see now;\n  if it does not fit, IGNORE it completely.\n- 'avoid' lists past mistakes not to repeat; 'do' is a rough plan to adapt to\n  the real UI, never a script to follow blindly.\n- Never let a lesson override what the screenshot plainly shows.\n\nWhen compress and delete old files:\n  avoid: All attempts only scrolled endlessly through the file list without ever selecting, compressing, or deleting the target file. Stop scrolling once the target file is visible, then long-press to select it and perform the compress/delete actions.\n\nWhen email a CV file to recipient:\n  avoid: Agents fired type/share actions blindly without verifying each screen loaded (recipient field focused, share sheet open, email composed), and never tapped Send; after every action, confirm the resulting screen via the screenshot before proceeding, and explicitly tap Send to complete the email.\n",
+   "n_lessons": 2,
+   "chars": 1120
+  },
+  "ReadQwen3PaperTask1": {
+   "split": "adapt",
+   "tier": "B",
+   "apps": [
+    "Docreader",
+    "Files"
+   ],
+   "text": "",
+   "n_lessons": 0,
+   "chars": 0
+  },
+  "SayHelloRoommatesAskUserTask1": {
+   "split": "adapt",
+   "tier": "B",
+   "apps": [
+    "Contacts",
+    "Messages"
+   ],
+   "text": "# Task-specific lessons (from earlier attempts on this app)\nTreat these as HINTS, not rules. How to use them:\n- Always decide your next action from the CURRENT screenshot first.\n- Use a lesson ONLY if it clearly fits this task AND the screen you see now;\n  if it does not fit, IGNORE it completely.\n- 'avoid' lists past mistakes not to repeat; 'do' is a rough plan to adapt to\n  the real UI, never a script to follow blindly.\n- Never let a lesson override what the screenshot plainly shows.\n\nWhen email user about scheduled meal:\n  avoid: Agents either looped on open_app for a missing Email app, terminated prematurely without sending, or got lost scrolling the calendar; verify the email app exists and actually compose+send the message before terminating.\n",
+   "n_lessons": 1,
+   "chars": 759
+  },
+  "SetAlarmTask": {
+   "split": "adapt",
+   "tier": "B",
+   "apps": [
+    "Clock"
+   ],
+   "text": "# Task-specific lessons (from earlier attempts on this app)\nTreat these as HINTS, not rules. How to use them:\n- Always decide your next action from the CURRENT screenshot first.\n- Use a lesson ONLY if it clearly fits this task AND the screen you see now;\n  if it does not fit, IGNORE it completely.\n- 'avoid' lists past mistakes not to repeat; 'do' is a rough plan to adapt to\n  the real UI, never a script to follow blindly.\n- Never let a lesson override what the screenshot plainly shows.\n\nWhen set an alarm:\n  do: open Clock -> tap Alarm tab -> tap + to add alarm -> set hour, minute, AM/PM -> tap OK -> enable weekend day toggles\n  avoid: Attempts tapped the clock face for time but never verified/confirmed the time entry, never set the required weekend days, and often started on the Bedtime tab; always confirm you're on the Alarm tab, finalize time with OK, then explicitly toggle the repeat days and verify the saved alarm.\n\nWhen set an alarm at specific time:\n  avoid: Agent invented its own time (7:00 AM) instead of using the required time, and hallucinated success despite the clock showing wrong values (PM vs AM confusion); read the actual on-screen time/period, set the exact requested time, and verify before terminating.\n",
+   "n_lessons": 2,
+   "chars": 1239
+  },
+  "SetAlarmTaskAskUser1": {
+   "split": "adapt",
+   "tier": "B",
+   "apps": [
+    "Clock"
+   ],
+   "text": "# Task-specific lessons (from earlier attempts on this app)\nTreat these as HINTS, not rules. How to use them:\n- Always decide your next action from the CURRENT screenshot first.\n- Use a lesson ONLY if it clearly fits this task AND the screen you see now;\n  if it does not fit, IGNORE it completely.\n- 'avoid' lists past mistakes not to repeat; 'do' is a rough plan to adapt to\n  the real UI, never a script to follow blindly.\n- Never let a lesson override what the screenshot plainly shows.\n\nWhen set an alarm:\n  do: open Clock -> tap Alarm tab -> tap + to add alarm -> set hour, minute, AM/PM -> tap OK -> enable weekend day toggles\n  avoid: Attempts tapped the clock face for time but never verified/confirmed the time entry, never set the required weekend days, and often started on the Bedtime tab; always confirm you're on the Alarm tab, finalize time with OK, then explicitly toggle the repeat days and verify the saved alarm.\n\nWhen set an alarm at specific time:\n  avoid: Agent invented its own time (7:00 AM) instead of using the required time, and hallucinated success despite the clock showing wrong values (PM vs AM confusion); read the actual on-screen time/period, set the exact requested time, and verify before terminating.\n",
+   "n_lessons": 2,
+   "chars": 1239
+  },
+  "SharePhotosAskUserTask": {
+   "split": "adapt",
+   "tier": "B",
+   "apps": [
+    "Gallery",
+    "Mail"
+   ],
+   "text": "# Task-specific lessons (from earlier attempts on this app)\nTreat these as HINTS, not rules. How to use them:\n- Always decide your next action from the CURRENT screenshot first.\n- Use a lesson ONLY if it clearly fits this task AND the screen you see now;\n  if it does not fit, IGNORE it completely.\n- 'avoid' lists past mistakes not to repeat; 'do' is a rough plan to adapt to\n  the real UI, never a script to follow blindly.\n- Never let a lesson override what the screenshot plainly shows.\n\nWhen email photos to a contact:\n  avoid: The agent invented the recipient's email address (kevin@example.com) instead of using the exact required address (kevin_zhang@example.com). Do not guess emails or other parameters the task should ask the user for; obtain the exact value rather than assuming a default format.\n",
+   "n_lessons": 1,
+   "chars": 809
+  },
+  "TakeSelfieAskUserTask1": {
+   "split": "adapt",
+   "tier": "B",
+   "apps": [
+    "Camera",
+    "Gallery",
+    "Mail"
+   ],
+   "text": "# Task-specific lessons (from earlier attempts on this app)\nTreat these as HINTS, not rules. How to use them:\n- Always decide your next action from the CURRENT screenshot first.\n- Use a lesson ONLY if it clearly fits this task AND the screen you see now;\n  if it does not fit, IGNORE it completely.\n- 'avoid' lists past mistakes not to repeat; 'do' is a rough plan to adapt to\n  the real UI, never a script to follow blindly.\n- Never let a lesson override what the screenshot plainly shows.\n\nWhen take a selfie:\n  avoid: Tapping blindly at screen center for the shutter opened Google Lens instead; verify the front-camera viewfinder is active and locate the actual shutter button before tapping, and never assume a capture succeeded without confirming the new screen state.\n",
+   "n_lessons": 1,
+   "chars": 774
+  },
+  "BuyBlackTennisShoesBrotherAddressAskUserTask": {
+   "split": "adapt",
+   "tier": "C",
+   "apps": [
+    "Taodian"
+   ],
+   "text": "# Task-specific lessons (from earlier attempts on this app)\nTreat these as HINTS, not rules. How to use them:\n- Always decide your next action from the CURRENT screenshot first.\n- Use a lesson ONLY if it clearly fits this task AND the screen you see now;\n  if it does not fit, IGNORE it completely.\n- 'avoid' lists past mistakes not to repeat; 'do' is a rough plan to adapt to\n  the real UI, never a script to follow blindly.\n- Never let a lesson override what the screenshot plainly shows.\n\nWhen buy a boxed product to work address:\n  avoid: Agent selected the wrong product variant (single can instead of a box/一箱) and got stuck repeatedly clicking the same coordinate or wrong action types; verify the product matches the box quantity requirement and confirm each screen state changed before re-issuing an action.\n\nWhen buy a product for someone:\n  avoid: Agent repeated the same action blindly (re-typing query, clicking same search button, scrolling without progress) without verifying each screen's actual state; always read the current screenshot to confirm the prior action landed before re-issuing it, and after typing press search once then inspect results rather than re-typing.\n",
+   "n_lessons": 2,
+   "chars": 1190
+  },
+  "BuySugarFreeColaWorkAddressAskUserTask": {
+   "split": "adapt",
+   "tier": "C",
+   "apps": [
+    "Taodian"
+   ],
+   "text": "# Task-specific lessons (from earlier attempts on this app)\nTreat these as HINTS, not rules. How to use them:\n- Always decide your next action from the CURRENT screenshot first.\n- Use a lesson ONLY if it clearly fits this task AND the screen you see now;\n  if it does not fit, IGNORE it completely.\n- 'avoid' lists past mistakes not to repeat; 'do' is a rough plan to adapt to\n  the real UI, never a script to follow blindly.\n- Never let a lesson override what the screenshot plainly shows.\n\nWhen buy a boxed product to work address:\n  avoid: Agent selected the wrong product variant (single can instead of a box/一箱) and got stuck repeatedly clicking the same coordinate or wrong action types; verify the product matches the box quantity requirement and confirm each screen state changed before re-issuing an action.\n\nWhen buy a product for someone:\n  avoid: Agent repeated the same action blindly (re-typing query, clicking same search button, scrolling without progress) without verifying each screen's actual state; always read the current screenshot to confirm the prior action landed before re-issuing it, and after typing press search once then inspect results rather than re-typing.\n",
+   "n_lessons": 2,
+   "chars": 1190
+  },
+  "CalculateCartPricesByOwnerAskUserTask": {
+   "split": "adapt",
+   "tier": "C",
+   "apps": [
+    "Taodian"
+   ],
+   "text": "# Task-specific lessons (from earlier attempts on this app)\nTreat these as HINTS, not rules. How to use them:\n- Always decide your next action from the CURRENT screenshot first.\n- Use a lesson ONLY if it clearly fits this task AND the screen you see now;\n  if it does not fit, IGNORE it completely.\n- 'avoid' lists past mistakes not to repeat; 'do' is a rough plan to adapt to\n  the real UI, never a script to follow blindly.\n- Never let a lesson override what the screenshot plainly shows.\n\nWhen split cart total between people:\n  avoid: Agents tapped through the cart but never selected items or read/reported actual prices, leaving the interaction cache empty; the task requires asking the user and actually capturing item prices, not just navigating to the cart.\n\nWhen delete cart items:\n  avoid: Agent invented credentials and looped on a failing login (made-up passwords, fabricated 'Agree to Terms' steps). Don't guess login credentials; if a login wall blocks the task, ask the user instead of repeatedly retrying invalid logins.\n",
+   "n_lessons": 2,
+   "chars": 1038
+  },
+  "CartManagementAskUserTask": {
+   "split": "adapt",
+   "tier": "C",
+   "apps": [
+    "Taodian"
+   ],
+   "text": "# Task-specific lessons (from earlier attempts on this app)\nTreat these as HINTS, not rules. How to use them:\n- Always decide your next action from the CURRENT screenshot first.\n- Use a lesson ONLY if it clearly fits this task AND the screen you see now;\n  if it does not fit, IGNORE it completely.\n- 'avoid' lists past mistakes not to repeat; 'do' is a rough plan to adapt to\n  the real UI, never a script to follow blindly.\n- Never let a lesson override what the screenshot plainly shows.\n\nWhen split cart total between people:\n  avoid: Agents tapped through the cart but never selected items or read/reported actual prices, leaving the interaction cache empty; the task requires asking the user and actually capturing item prices, not just navigating to the cart.\n\nWhen delete cart items:\n  avoid: Agent invented credentials and looped on a failing login (made-up passwords, fabricated 'Agree to Terms' steps). Don't guess login credentials; if a login wall blocks the task, ask the user instead of repeatedly retrying invalid logins.\n",
+   "n_lessons": 2,
+   "chars": 1038
+  },
+  "CartManagementTask": {
+   "split": "adapt",
+   "tier": "C",
+   "apps": [
+    "Taodian"
+   ],
+   "text": "# Task-specific lessons (from earlier attempts on this app)\nTreat these as HINTS, not rules. How to use them:\n- Always decide your next action from the CURRENT screenshot first.\n- Use a lesson ONLY if it clearly fits this task AND the screen you see now;\n  if it does not fit, IGNORE it completely.\n- 'avoid' lists past mistakes not to repeat; 'do' is a rough plan to adapt to\n  the real UI, never a script to follow blindly.\n- Never let a lesson override what the screenshot plainly shows.\n\nWhen split cart total between people:\n  avoid: Agents tapped through the cart but never selected items or read/reported actual prices, leaving the interaction cache empty; the task requires asking the user and actually capturing item prices, not just navigating to the cart.\n\nWhen delete cart items:\n  avoid: Agent invented credentials and looped on a failing login (made-up passwords, fabricated 'Agree to Terms' steps). Don't guess login credentials; if a login wall blocks the task, ask the user instead of repeatedly retrying invalid logins.\n",
+   "n_lessons": 2,
+   "chars": 1038
+  },
+  "MastodonAddBookmarkTask": {
+   "split": "adapt",
+   "tier": "C",
+   "apps": [
+    "Mastodon"
+   ],
+   "text": "# Task-specific lessons (from earlier attempts on this app)\nTreat these as HINTS, not rules. How to use them:\n- Always decide your next action from the CURRENT screenshot first.\n- Use a lesson ONLY if it clearly fits this task AND the screen you see now;\n  if it does not fit, IGNORE it completely.\n- 'avoid' lists past mistakes not to repeat; 'do' is a rough plan to adapt to\n  the real UI, never a script to follow blindly.\n- Never let a lesson override what the screenshot plainly shows.\n\nWhen add featured hashtags to profile:\n  avoid: All attempts stopped at 'Edit profile', but featured hashtags are managed in a separate 'Featured hashtags' section (not in the basic edit profile dialog); navigate to the profile's hashtag/featured settings instead of the Edit profile bio screen.\n\nWhen manage bookmarked posts:\n  avoid: Agents blindly guessed at the three-dot menu or profile tab and repeated the same click without verifying the screen changed; instead open the navigation/search menu to find the dedicated Bookmarks list, then act on each post (unbookmark, favorite, boost) and confirm the state changed before repeating.\n",
+   "n_lessons": 2,
+   "chars": 1132
+  },
+  "MastodonAddFeaturedHashtagsTask": {
+   "split": "adapt",
+   "tier": "C",
+   "apps": [
+    "Mastodon"
+   ],
+   "text": "# Task-specific lessons (from earlier attempts on this app)\nTreat these as HINTS, not rules. How to use them:\n- Always decide your next action from the CURRENT screenshot first.\n- Use a lesson ONLY if it clearly fits this task AND the screen you see now;\n  if it does not fit, IGNORE it completely.\n- 'avoid' lists past mistakes not to repeat; 'do' is a rough plan to adapt to\n  the real UI, never a script to follow blindly.\n- Never let a lesson override what the screenshot plainly shows.\n\nWhen add featured hashtags to profile:\n  avoid: All attempts stopped at 'Edit profile', but featured hashtags are managed in a separate 'Featured hashtags' section (not in the basic edit profile dialog); navigate to the profile's hashtag/featured settings instead of the Edit profile bio screen.\n\nWhen favorite toots by hashtag:\n  avoid: Agents favorited only the visible toot or wrong items and terminated prematurely; the task requires conditionally favoriting ALL specific expected toots under the hashtag. Scroll through every result, favorite each unfavorited toot, and verify completion before terminating.\n",
+   "n_lessons": 2,
+   "chars": 1105
+  },
+  "MastodonAdjustTootsTask": {
+   "split": "adapt",
+   "tier": "C",
+   "apps": [
+    "Mastodon"
+   ],
+   "text": "# Task-specific lessons (from earlier attempts on this app)\nTreat these as HINTS, not rules. How to use them:\n- Always decide your next action from the CURRENT screenshot first.\n- Use a lesson ONLY if it clearly fits this task AND the screen you see now;\n  if it does not fit, IGNORE it completely.\n- 'avoid' lists past mistakes not to repeat; 'do' is a rough plan to adapt to\n  the real UI, never a script to follow blindly.\n- Never let a lesson override what the screenshot plainly shows.\n\nWhen favorite tagged toots:\n  avoid: Agents favorited at most one toot then terminated, assuming no more existed; instead scroll through the entire hashtag results list and favorite every matching toot before terminating.\n\nWhen favorite toots by hashtag:\n  avoid: Agents favorited only the visible toot or wrong items and terminated prematurely; the task requires conditionally favoriting ALL specific expected toots under the hashtag. Scroll through every result, favorite each unfavorited toot, and verify completion before terminating.\n",
+   "n_lessons": 2,
+   "chars": 1031
+  },
+  "MastodonChangeLanguageTask": {
+   "split": "adapt",
+   "tier": "C",
+   "apps": [
+    "Mastodon"
+   ],
+   "text": "# Task-specific lessons (from earlier attempts on this app)\nTreat these as HINTS, not rules. How to use them:\n- Always decide your next action from the CURRENT screenshot first.\n- Use a lesson ONLY if it clearly fits this task AND the screen you see now;\n  if it does not fit, IGNORE it completely.\n- 'avoid' lists past mistakes not to repeat; 'do' is a rough plan to adapt to\n  the real UI, never a script to follow blindly.\n- Never let a lesson override what the screenshot plainly shows.\n\nWhen change account posting language:\n  avoid: Agents searched App settings (Display) and account-info pages for a language option that isn't there; the posting language is set when composing a post (language selector in the compose screen) or in publishing/account preferences, not under Display settings.\n",
+   "n_lessons": 1,
+   "chars": 799
+  },
+  "MastodonConditionalFavoTask": {
+   "split": "adapt",
+   "tier": "C",
+   "apps": [
+    "Mastodon"
+   ],
+   "text": "# Task-specific lessons (from earlier attempts on this app)\nTreat these as HINTS, not rules. How to use them:\n- Always decide your next action from the CURRENT screenshot first.\n- Use a lesson ONLY if it clearly fits this task AND the screen you see now;\n  if it does not fit, IGNORE it completely.\n- 'avoid' lists past mistakes not to repeat; 'do' is a rough plan to adapt to\n  the real UI, never a script to follow blindly.\n- Never let a lesson override what the screenshot plainly shows.\n\nWhen favorite tagged toots:\n  avoid: Agents favorited at most one toot then terminated, assuming no more existed; instead scroll through the entire hashtag results list and favorite every matching toot before terminating.\n\nWhen favorite toots by hashtag:\n  avoid: Agents favorited only the visible toot or wrong items and terminated prematurely; the task requires conditionally favoriting ALL specific expected toots under the hashtag. Scroll through every result, favorite each unfavorited toot, and verify completion before terminating.\n",
+   "n_lessons": 2,
+   "chars": 1031
+  },
+  "MastodonCreateListTask": {
+   "split": "adapt",
+   "tier": "C",
+   "apps": [
+    "Mastodon"
+   ],
+   "text": "# Task-specific lessons (from earlier attempts on this app)\nTreat these as HINTS, not rules. How to use them:\n- Always decide your next action from the CURRENT screenshot first.\n- Use a lesson ONLY if it clearly fits this task AND the screen you see now;\n  if it does not fit, IGNORE it completely.\n- 'avoid' lists past mistakes not to repeat; 'do' is a rough plan to adapt to\n  the real UI, never a script to follow blindly.\n- Never let a lesson override what the screenshot plainly shows.\n\nWhen create a list:\n  avoid: Agents searched Profile/Edit-profile and the top three-dot menu, and repeated the same dead-end clicks. Lists in Mastodon live in the left-side navigation/menu drawer (often via the search or main menu tab), not under Profile; stop re-clicking the same icon and open the main menu instead.\n\nWhen export account follows list:\n  avoid: Attempts wandered through app settings menus (Accounts, Behavior) looking for a non-existent in-app export button; the follows export is typically on the account profile via the overflow/menu (or web/data export flow), not in the app's general Settings gear—locate the profile's menu instead of scrolling settings.\n",
+   "n_lessons": 2,
+   "chars": 1170
+  },
+  "MastodonDumpImgAskUserTask": {
+   "split": "adapt",
+   "tier": "C",
+   "apps": [
+    "Mastodon"
+   ],
+   "text": "",
+   "n_lessons": 0,
+   "chars": 0
+  },
+  "MastodonDumpQcodeAskUserTask": {
+   "split": "adapt",
+   "tier": "C",
+   "apps": [
+    "Mastodon"
+   ],
+   "text": "",
+   "n_lessons": 0,
+   "chars": 0
+  },
+  "MastodonExportFollowsTask": {
+   "split": "adapt",
+   "tier": "C",
+   "apps": [
+    "Mastodon"
+   ],
+   "text": "# Task-specific lessons (from earlier attempts on this app)\nTreat these as HINTS, not rules. How to use them:\n- Always decide your next action from the CURRENT screenshot first.\n- Use a lesson ONLY if it clearly fits this task AND the screen you see now;\n  if it does not fit, IGNORE it completely.\n- 'avoid' lists past mistakes not to repeat; 'do' is a rough plan to adapt to\n  the real UI, never a script to follow blindly.\n- Never let a lesson override what the screenshot plainly shows.\n\nWhen export account follows list:\n  avoid: Attempts wandered through app settings menus (Accounts, Behavior) looking for a non-existent in-app export button; the follows export is typically on the account profile via the overflow/menu (or web/data export flow), not in the app's general Settings gear—locate the profile's menu instead of scrolling settings.\n",
+   "n_lessons": 1,
+   "chars": 850
+  },
+  "MastodonFavoriteTootsTask": {
+   "split": "adapt",
+   "tier": "C",
+   "apps": [
+    "Mastodon"
+   ],
+   "text": "# Task-specific lessons (from earlier attempts on this app)\nTreat these as HINTS, not rules. How to use them:\n- Always decide your next action from the CURRENT screenshot first.\n- Use a lesson ONLY if it clearly fits this task AND the screen you see now;\n  if it does not fit, IGNORE it completely.\n- 'avoid' lists past mistakes not to repeat; 'do' is a rough plan to adapt to\n  the real UI, never a script to follow blindly.\n- Never let a lesson override what the screenshot plainly shows.\n\nWhen favorite tagged toots:\n  avoid: Agents favorited at most one toot then terminated, assuming no more existed; instead scroll through the entire hashtag results list and favorite every matching toot before terminating.\n\nWhen favorite toots by hashtag:\n  avoid: Agents favorited only the visible toot or wrong items and terminated prematurely; the task requires conditionally favoriting ALL specific expected toots under the hashtag. Scroll through every result, favorite each unfavorited toot, and verify completion before terminating.\n",
+   "n_lessons": 2,
+   "chars": 1031
+  },
+  "MastodonMallPurchaseCommodityTask": {
+   "split": "adapt",
+   "tier": "C",
+   "apps": [
+    "Mastodon",
+    "Taodian"
+   ],
+   "text": "",
+   "n_lessons": 0,
+   "chars": 0
+  },
+  "MattermostBudgetApprovalPipelineTask": {
+   "split": "adapt",
+   "tier": "C",
+   "apps": [
+    "Mattermost"
+   ],
+   "text": "# Task-specific lessons (from earlier attempts on this app)\nTreat these as HINTS, not rules. How to use them:\n- Always decide your next action from the CURRENT screenshot first.\n- Use a lesson ONLY if it clearly fits this task AND the screen you see now;\n  if it does not fit, IGNORE it completely.\n- 'avoid' lists past mistakes not to repeat; 'do' is a rough plan to adapt to\n  the real UI, never a script to follow blindly.\n- Never let a lesson override what the screenshot plainly shows.\n\nWhen post budget approval summary table:\n  avoid: Attempts burned all steps fumbling login (guessing credentials, repeatedly clicking the same field) and never reached the channel or posted the summary table. Use known/pre-filled credentials, verify login succeeds, then navigate to the channel and actually compose and post the required table with departments and ROI.\n",
+   "n_lessons": 1,
+   "chars": 862
+  },
+  "MattermostCreateChannelTask": {
+   "split": "adapt",
+   "tier": "C",
+   "apps": [
+    "Mattermost"
+   ],
+   "text": "# Task-specific lessons (from earlier attempts on this app)\nTreat these as HINTS, not rules. How to use them:\n- Always decide your next action from the CURRENT screenshot first.\n- Use a lesson ONLY if it clearly fits this task AND the screen you see now;\n  if it does not fit, IGNORE it completely.\n- 'avoid' lists past mistakes not to repeat; 'do' is a rough plan to adapt to\n  the real UI, never a script to follow blindly.\n- Never let a lesson override what the screenshot plainly shows.\n\nWhen create a channel:\n  avoid: Agents invented login credentials (user@example.com / password123) and got stuck retrying failed logins, never reaching channel creation. Do not fabricate credentials; if already logged in or a session exists, skip login and navigate directly to the channel-creation flow.\n",
+   "n_lessons": 1,
+   "chars": 797
+  },
+  "AdjustFontIconMaximumTask": {
+   "split": "eval",
+   "tier": "B",
+   "apps": [
+    "Settings"
+   ],
+   "text": "# Task-specific lessons (from earlier attempts on this app)\nTreat these as HINTS, not rules. How to use them:\n- Always decide your next action from the CURRENT screenshot first.\n- Use a lesson ONLY if it clearly fits this task AND the screen you see now;\n  if it does not fit, IGNORE it completely.\n- 'avoid' lists past mistakes not to repeat; 'do' is a rough plan to adapt to\n  the real UI, never a script to follow blindly.\n- Never let a lesson override what the screenshot plainly shows.\n\nWhen set brightness to maximum:\n  do: open Settings -> scroll to Display -> tap Display -> tap Brightness level -> swipe slider fully left-to-right to 100%\n  avoid: Tapping a point near the right end of the slider lands at ~98% (235/255), not true maximum; instead swipe the slider all the way to the far right to reach 100%.\n",
+   "n_lessons": 1,
+   "chars": 818
+  },
+  "AdjustFontIconMinimumTask": {
+   "split": "eval",
+   "tier": "B",
+   "apps": [
+    "Settings"
+   ],
+   "text": "# Task-specific lessons (from earlier attempts on this app)\nTreat these as HINTS, not rules. How to use them:\n- Always decide your next action from the CURRENT screenshot first.\n- Use a lesson ONLY if it clearly fits this task AND the screen you see now;\n  if it does not fit, IGNORE it completely.\n- 'avoid' lists past mistakes not to repeat; 'do' is a rough plan to adapt to\n  the real UI, never a script to follow blindly.\n- Never let a lesson override what the screenshot plainly shows.\n\nWhen set screen brightness to minimum:\n  do: open Settings -> scroll down -> tap Display -> tap Brightness level -> drag slider fully left (or tap left edge) -> terminate\n",
+   "n_lessons": 1,
+   "chars": 663
+  },
+  "ChangeWallpaperTask": {
+   "split": "eval",
+   "tier": "B",
+   "apps": [
+    "Gallery",
+    "Settings"
+   ],
+   "text": "",
+   "n_lessons": 0,
+   "chars": 0
+  },
+  "CheckCandidateAskUserTask2": {
+   "split": "eval",
+   "tier": "B",
+   "apps": [
+    "Files",
+    "Messages"
+   ],
+   "text": "",
+   "n_lessons": 0,
+   "chars": 0
+  },
+  "CheckDeduplicatedEventsTask": {
+   "split": "eval",
+   "tier": "B",
+   "apps": [
+    "Calendar"
+   ],
+   "text": "# Task-specific lessons (from earlier attempts on this app)\nTreat these as HINTS, not rules. How to use them:\n- Always decide your next action from the CURRENT screenshot first.\n- Use a lesson ONLY if it clearly fits this task AND the screen you see now;\n  if it does not fit, IGNORE it completely.\n- 'avoid' lists past mistakes not to repeat; 'do' is a rough plan to adapt to\n  the real UI, never a script to follow blindly.\n- Never let a lesson override what the screenshot plainly shows.\n\nWhen check event then send SMS with dates:\n  avoid: Agents assumed the recipient/number and date format without verifying the exact contact (+14058298746) and required message content from the calendar event; always confirm the correct phone number and exact date values/format before sending, and verify the message actually sent to the right number.\n\nWhen count event duration in month:\n  avoid: Agents counted only visible event titles (2 days) instead of accounting for multi-day conference events spanning the full date range; open each conference event to read its start/end dates and sum the actual days covered.\n",
+   "n_lessons": 2,
+   "chars": 1112
+  },
+  "CheckEventAndSetAlarmAskUserTask": {
+   "split": "eval",
+   "tier": "B",
+   "apps": [
+    "Calendar",
+    "Clock"
+   ],
+   "text": "# Task-specific lessons (from earlier attempts on this app)\nTreat these as HINTS, not rules. How to use them:\n- Always decide your next action from the CURRENT screenshot first.\n- Use a lesson ONLY if it clearly fits this task AND the screen you see now;\n  if it does not fit, IGNORE it completely.\n- 'avoid' lists past mistakes not to repeat; 'do' is a rough plan to adapt to\n  the real UI, never a script to follow blindly.\n- Never let a lesson override what the screenshot plainly shows.\n\nWhen check event then send SMS with dates:\n  avoid: Agents assumed the recipient/number and date format without verifying the exact contact (+14058298746) and required message content from the calendar event; always confirm the correct phone number and exact date values/format before sending, and verify the message actually sent to the right number.\n\nWhen count event duration in month:\n  avoid: Agents counted only visible event titles (2 days) instead of accounting for multi-day conference events spanning the full date range; open each conference event to read its start/end dates and sum the actual days covered.\n",
+   "n_lessons": 2,
+   "chars": 1112
+  },
+  "CheckEventTimeTask": {
+   "split": "eval",
+   "tier": "B",
+   "apps": [
+    "Clock",
+    "Mail"
+   ],
+   "text": "# Task-specific lessons (from earlier attempts on this app)\nTreat these as HINTS, not rules. How to use them:\n- Always decide your next action from the CURRENT screenshot first.\n- Use a lesson ONLY if it clearly fits this task AND the screen you see now;\n  if it does not fit, IGNORE it completely.\n- 'avoid' lists past mistakes not to repeat; 'do' is a rough plan to adapt to\n  the real UI, never a script to follow blindly.\n- Never let a lesson override what the screenshot plainly shows.\n\nWhen set an alarm at specific time:\n  avoid: Agent invented its own time (7:00 AM) instead of using the required time, and hallucinated success despite the clock showing wrong values (PM vs AM confusion); read the actual on-screen time/period, set the exact requested time, and verify before terminating.\n",
+   "n_lessons": 1,
+   "chars": 797
+  },
+  "CheckInvoiceTask2": {
+   "split": "eval",
+   "tier": "B",
+   "apps": [
+    "Docreader",
+    "Files",
+    "Mail"
+   ],
+   "text": "# Task-specific lessons (from earlier attempts on this app)\nTreat these as HINTS, not rules. How to use them:\n- Always decide your next action from the CURRENT screenshot first.\n- Use a lesson ONLY if it clearly fits this task AND the screen you see now;\n  if it does not fit, IGNORE it completely.\n- 'avoid' lists past mistakes not to repeat; 'do' is a rough plan to adapt to\n  the real UI, never a script to follow blindly.\n- Never let a lesson override what the screenshot plainly shows.\n\nWhen report invoice hours via SMS:\n  do: read invoice -> open Messages -> search contact name -> tap contact -> tap mobile number -> tap text field -> type result -> tap send -> terminate\n  avoid: Agent hallucinated PDF contents on a blank/loading screen and never actually composed or sent the SMS; verify the file actually rendered before extracting data, and ensure the message is typed and sent before terminating.\n\nWhen calculate invoice late-payment total:\n  do: open Files app -> tap invoice.pdf -> if blank, press Back and re-tap to open -> read actual figures -> compute interest (1.5% * 1.5 months) and add to total -> answer\n  avoid: Failed attempts answered after a blank/unloaded PDF screen using guessed math instead of reading the document; always confirm the PDF content is actually visible (re-open or navigate back) before computing, so the rounding/values are exact.\n",
+   "n_lessons": 2,
+   "chars": 1378
+  },
+  "CheckInvoiceTask4AskUser": {
+   "split": "eval",
+   "tier": "B",
+   "apps": [
+    "Docreader",
+    "Files",
+    "Messages"
+   ],
+   "text": "# Task-specific lessons (from earlier attempts on this app)\nTreat these as HINTS, not rules. How to use them:\n- Always decide your next action from the CURRENT screenshot first.\n- Use a lesson ONLY if it clearly fits this task AND the screen you see now;\n  if it does not fit, IGNORE it completely.\n- 'avoid' lists past mistakes not to repeat; 'do' is a rough plan to adapt to\n  the real UI, never a script to follow blindly.\n- Never let a lesson override what the screenshot plainly shows.\n\nWhen report invoice hours via SMS:\n  do: read invoice -> open Messages -> search contact name -> tap contact -> tap mobile number -> tap text field -> type result -> tap send -> terminate\n  avoid: Agent hallucinated PDF contents on a blank/loading screen and never actually composed or sent the SMS; verify the file actually rendered before extracting data, and ensure the message is typed and sent before terminating.\n\nWhen calculate invoice late-payment total:\n  do: open Files app -> tap invoice.pdf -> if blank, press Back and re-tap to open -> read actual figures -> compute interest (1.5% * 1.5 months) and add to total -> answer\n  avoid: Failed attempts answered after a blank/unloaded PDF screen using guessed math instead of reading the document; always confirm the PDF content is actually visible (re-open or navigate back) before computing, so the rounding/values are exact.\n",
+   "n_lessons": 2,
+   "chars": 1378
+  },
+  "CheckMeetingEventAskUserTask": {
+   "split": "eval",
+   "tier": "B",
+   "apps": [
+    "Calendar",
+    "Contacts",
+    "Mail"
+   ],
+   "text": "# Task-specific lessons (from earlier attempts on this app)\nTreat these as HINTS, not rules. How to use them:\n- Always decide your next action from the CURRENT screenshot first.\n- Use a lesson ONLY if it clearly fits this task AND the screen you see now;\n  if it does not fit, IGNORE it completely.\n- 'avoid' lists past mistakes not to repeat; 'do' is a rough plan to adapt to\n  the real UI, never a script to follow blindly.\n- Never let a lesson override what the screenshot plainly shows.\n\nWhen check event then send SMS with dates:\n  avoid: Agents assumed the recipient/number and date format without verifying the exact contact (+14058298746) and required message content from the calendar event; always confirm the correct phone number and exact date values/format before sending, and verify the message actually sent to the right number.\n\nWhen count event duration in month:\n  avoid: Agents counted only visible event titles (2 days) instead of accounting for multi-day conference events spanning the full date range; open each conference event to read its start/end dates and sum the actual days covered.\n",
+   "n_lessons": 2,
+   "chars": 1112
+  },
+  "CheckRegistrationTask": {
+   "split": "eval",
+   "tier": "B",
+   "apps": [
+    "Mail"
+   ],
+   "text": "",
+   "n_lessons": 0,
+   "chars": 0
+  },
+  "CheckSetMeetTimeTask": {
+   "split": "eval",
+   "tier": "B",
+   "apps": [
+    "Calendar",
+    "Mail"
+   ],
+   "text": "# Task-specific lessons (from earlier attempts on this app)\nTreat these as HINTS, not rules. How to use them:\n- Always decide your next action from the CURRENT screenshot first.\n- Use a lesson ONLY if it clearly fits this task AND the screen you see now;\n  if it does not fit, IGNORE it completely.\n- 'avoid' lists past mistakes not to repeat; 'do' is a rough plan to adapt to\n  the real UI, never a script to follow blindly.\n- Never let a lesson override what the screenshot plainly shows.\n\nWhen check event then send SMS with dates:\n  avoid: Agents assumed the recipient/number and date format without verifying the exact contact (+14058298746) and required message content from the calendar event; always confirm the correct phone number and exact date values/format before sending, and verify the message actually sent to the right number.\n\nWhen accept a meeting invitation:\n  avoid: All attempts assumed the task was a free-text reply and typed an invented body ('I'll be there at 10:00 AM...'); the goal was to ACCEPT the meeting. Use the meeting invite's Accept action instead of composing arbitrary reply text.\n",
+   "n_lessons": 2,
+   "chars": 1119
+  },
+  "ChromeSearchBeijingWeatherTask": {
+   "split": "eval",
+   "tier": "B",
+   "apps": [
+    "Chrome"
+   ],
+   "text": "# Task-specific lessons (from earlier attempts on this app)\nTreat these as HINTS, not rules. How to use them:\n- Always decide your next action from the CURRENT screenshot first.\n- Use a lesson ONLY if it clearly fits this task AND the screen you see now;\n  if it does not fit, IGNORE it completely.\n- 'avoid' lists past mistakes not to repeat; 'do' is a rough plan to adapt to\n  the real UI, never a script to follow blindly.\n- Never let a lesson override what the screenshot plainly shows.\n\nWhen search weather and report temperature:\n  avoid: Agents used a vague query ('my hometown' instead of the specified city), got stuck re-typing over phantom typos, or gave up on a 'no internet' error without ever submitting the search or returning an integer temperature. Use the exact city from the task, submit the search (press Enter), read the result, and answer the user with the temperature as an integer via the ask-user/answer action.\n",
+   "n_lessons": 1,
+   "chars": 937
+  },
+  "CloseFlightModeTask": {
+   "split": "eval",
+   "tier": "B",
+   "apps": [
+    "Settings"
+   ],
+   "text": "",
+   "n_lessons": 0,
+   "chars": 0
+  },
+  "DeleteEventAskUserTask": {
+   "split": "eval",
+   "tier": "B",
+   "apps": [
+    "Calendar"
+   ],
+   "text": "# Task-specific lessons (from earlier attempts on this app)\nTreat these as HINTS, not rules. How to use them:\n- Always decide your next action from the CURRENT screenshot first.\n- Use a lesson ONLY if it clearly fits this task AND the screen you see now;\n  if it does not fit, IGNORE it completely.\n- 'avoid' lists past mistakes not to repeat; 'do' is a rough plan to adapt to\n  the real UI, never a script to follow blindly.\n- Never let a lesson override what the screenshot plainly shows.\n\nWhen count event duration in month:\n  avoid: Agents counted only visible event titles (2 days) instead of accounting for multi-day conference events spanning the full date range; open each conference event to read its start/end dates and sum the actual days covered.\n\nWhen add interview events to calendar:\n  avoid: Agents created events from a single email or with wrong/guessed times without verifying ALL interview emails for the month; gather every relevant email and confirm each exact date/time/duration before creating events to avoid incorrect calendar entries.\n",
+   "n_lessons": 2,
+   "chars": 1062
+  },
+  "DeleteMessagesAskUserTask": {
+   "split": "eval",
+   "tier": "B",
+   "apps": [
+    "Messages"
+   ],
+   "text": "# Task-specific lessons (from earlier attempts on this app)\nTreat these as HINTS, not rules. How to use them:\n- Always decide your next action from the CURRENT screenshot first.\n- Use a lesson ONLY if it clearly fits this task AND the screen you see now;\n  if it does not fit, IGNORE it completely.\n- 'avoid' lists past mistakes not to repeat; 'do' is a rough plan to adapt to\n  the real UI, never a script to follow blindly.\n- Never let a lesson override what the screenshot plainly shows.\n\nWhen delete all messages:\n  avoid: Agent assumed the app must be opened from the app drawer and blindly swiped on the home screen; first check if the Messages app is already visible or open it directly rather than guessing at a swipe.\n",
+   "n_lessons": 1,
+   "chars": 727
+  },
+  "DeleteUselessFilesAskUserTask": {
+   "split": "eval",
+   "tier": "B",
+   "apps": [
+    "Files"
+   ],
+   "text": "",
+   "n_lessons": 0,
+   "chars": 0
+  },
+  "DownloadSendReceiptTask": {
+   "split": "eval",
+   "tier": "B",
+   "apps": [
+    "Mail"
+   ],
+   "text": "",
+   "n_lessons": 0,
+   "chars": 0
+  },
+  "GoogleMapsAlibabaPhoneContactTask": {
+   "split": "eval",
+   "tier": "B",
+   "apps": [
+    "Contacts",
+    "Maps"
+   ],
+   "text": "# Task-specific lessons (from earlier attempts on this app)\nTreat these as HINTS, not rules. How to use them:\n- Always decide your next action from the CURRENT screenshot first.\n- Use a lesson ONLY if it clearly fits this task AND the screen you see now;\n  if it does not fit, IGNORE it completely.\n- 'avoid' lists past mistakes not to repeat; 'do' is a rough plan to adapt to\n  the real UI, never a script to follow blindly.\n- Never let a lesson override what the screenshot plainly shows.\n\nWhen add contact with researched phone number:\n  avoid: Agents never finished the contact: they typed first/last name then stopped without entering the phone number or saving, and never reliably obtained the company number from Maps first. Gather the phone number, fill all required fields, then tap Save before verifying.\n",
+   "n_lessons": 1,
+   "chars": 815
+  },
+  "GoogleMapsAlibabaSouthNeighborAskUserTask": {
+   "split": "eval",
+   "tier": "B",
+   "apps": [
+    "Maps"
+   ],
+   "text": "",
+   "n_lessons": 0,
+   "chars": 0
+  },
+  "GoogleMapsAlibabaSouthNeighborTask": {
+   "split": "eval",
+   "tier": "B",
+   "apps": [
+    "Maps"
+   ],
+   "text": "",
+   "n_lessons": 0,
+   "chars": 0
+  },
+  "InvoiceReceiptCopyAskUserTask": {
+   "split": "eval",
+   "tier": "B",
+   "apps": [
+    "Files"
+   ],
+   "text": "# Task-specific lessons (from earlier attempts on this app)\nTreat these as HINTS, not rules. How to use them:\n- Always decide your next action from the CURRENT screenshot first.\n- Use a lesson ONLY if it clearly fits this task AND the screen you see now;\n  if it does not fit, IGNORE it completely.\n- 'avoid' lists past mistakes not to repeat; 'do' is a rough plan to adapt to\n  the real UI, never a script to follow blindly.\n- Never let a lesson override what the screenshot plainly shows.\n\nWhen calculate invoice late-payment total:\n  do: open Files app -> tap invoice.pdf -> if blank, press Back and re-tap to open -> read actual figures -> compute interest (1.5% * 1.5 months) and add to total -> answer\n  avoid: Failed attempts answered after a blank/unloaded PDF screen using guessed math instead of reading the document; always confirm the PDF content is actually visible (re-open or navigate back) before computing, so the rounding/values are exact.\n",
+   "n_lessons": 1,
+   "chars": 958
+  },
+  "InvoiceReceiptCopyTask": {
+   "split": "eval",
+   "tier": "B",
+   "apps": [
+    "Files"
+   ],
+   "text": "# Task-specific lessons (from earlier attempts on this app)\nTreat these as HINTS, not rules. How to use them:\n- Always decide your next action from the CURRENT screenshot first.\n- Use a lesson ONLY if it clearly fits this task AND the screen you see now;\n  if it does not fit, IGNORE it completely.\n- 'avoid' lists past mistakes not to repeat; 'do' is a rough plan to adapt to\n  the real UI, never a script to follow blindly.\n- Never let a lesson override what the screenshot plainly shows.\n\nWhen calculate invoice late-payment total:\n  do: open Files app -> tap invoice.pdf -> if blank, press Back and re-tap to open -> read actual figures -> compute interest (1.5% * 1.5 months) and add to total -> answer\n  avoid: Failed attempts answered after a blank/unloaded PDF screen using guessed math instead of reading the document; always confirm the PDF content is actually visible (re-open or navigate back) before computing, so the rounding/values are exact.\n",
+   "n_lessons": 1,
+   "chars": 958
+  },
+  "OpenFlightModeTask": {
+   "split": "eval",
+   "tier": "B",
+   "apps": [
+    "Settings"
+   ],
+   "text": "",
+   "n_lessons": 0,
+   "chars": 0
+  },
+  "PhotoManagementTask": {
+   "split": "eval",
+   "tier": "B",
+   "apps": [
+    "Calendar",
+    "Gallery"
+   ],
+   "text": "# Task-specific lessons (from earlier attempts on this app)\nTreat these as HINTS, not rules. How to use them:\n- Always decide your next action from the CURRENT screenshot first.\n- Use a lesson ONLY if it clearly fits this task AND the screen you see now;\n  if it does not fit, IGNORE it completely.\n- 'avoid' lists past mistakes not to repeat; 'do' is a rough plan to adapt to\n  the real UI, never a script to follow blindly.\n- Never let a lesson override what the screenshot plainly shows.\n\nWhen email photos to a contact:\n  avoid: The agent invented the recipient's email address (kevin@example.com) instead of using the exact required address (kevin_zhang@example.com). Do not guess emails or other parameters the task should ask the user for; obtain the exact value rather than assuming a default format.\n",
+   "n_lessons": 1,
+   "chars": 809
+  },
+  "ProjectPaperEmailAskUserTask": {
+   "split": "eval",
+   "tier": "B",
+   "apps": [
+    "Files",
+    "Mail"
+   ],
+   "text": "# Task-specific lessons (from earlier attempts on this app)\nTreat these as HINTS, not rules. How to use them:\n- Always decide your next action from the CURRENT screenshot first.\n- Use a lesson ONLY if it clearly fits this task AND the screen you see now;\n  if it does not fit, IGNORE it completely.\n- 'avoid' lists past mistakes not to repeat; 'do' is a rough plan to adapt to\n  the real UI, never a script to follow blindly.\n- Never let a lesson override what the screenshot plainly shows.\n\nWhen email a downloaded resume file:\n  avoid: Agents looped: asking the user/guessing details (recipient email, subject) and repeatedly invoking wrong actions ('type' vs 'input_text'), re-opening files without ever selecting a file, choosing Share->Mail, and completing the send. Instead, multi-select the target file(s), tap Share, pick Mail, fill the known recipient/subject/body, and actually tap Send rather than re-tapping files.\n\nWhen email a CV file to recipient:\n  avoid: Agents fired type/share actions blindly without verifying each screen loaded (recipient field focused, share sheet open, email composed), and never tapped Send; after every action, confirm the resulting screen via the screenshot before proceeding, and explicitly tap Send to complete the email.\n",
+   "n_lessons": 2,
+   "chars": 1267
+  },
+  "ReadQwen3PaperTask2": {
+   "split": "eval",
+   "tier": "B",
+   "apps": [
+    "Docreader",
+    "Files"
+   ],
+   "text": "",
+   "n_lessons": 0,
+   "chars": 0
+  },
+  "ReadQwen3PaperTask3": {
+   "split": "eval",
+   "tier": "B",
+   "apps": [
+    "Docreader",
+    "Files"
+   ],
+   "text": "",
+   "n_lessons": 0,
+   "chars": 0
+  },
+  "ReadQwen3PaperTask4": {
+   "split": "eval",
+   "tier": "B",
+   "apps": [
+    "Docreader",
+    "Files"
+   ],
+   "text": "",
+   "n_lessons": 0,
+   "chars": 0
+  },
+  "ReadQwen3PaperTask5": {
+   "split": "eval",
+   "tier": "B",
+   "apps": [
+    "Docreader",
+    "Files"
+   ],
+   "text": "",
+   "n_lessons": 0,
+   "chars": 0
+  },
+  "ReplyEmailViaSmsAskUserTask": {
+   "split": "eval",
+   "tier": "B",
+   "apps": [
+    "Calendar",
+    "Mail",
+    "Messages"
+   ],
+   "text": "# Task-specific lessons (from earlier attempts on this app)\nTreat these as HINTS, not rules. How to use them:\n- Always decide your next action from the CURRENT screenshot first.\n- Use a lesson ONLY if it clearly fits this task AND the screen you see now;\n  if it does not fit, IGNORE it completely.\n- 'avoid' lists past mistakes not to repeat; 'do' is a rough plan to adapt to\n  the real UI, never a script to follow blindly.\n- Never let a lesson override what the screenshot plainly shows.\n\nWhen send SMS with conference dates:\n  avoid: Agents selected wrong contacts and assumed success without verifying the message was sent to the correct recipient (+14058298746) and that dates were confirmed from the calendar event; verify exact contact/number and source the actual dates from the conference before composing, then confirm the sent message appears in the thread.\n\nWhen check event then send SMS with dates:\n  avoid: Agents assumed the recipient/number and date format without verifying the exact contact (+14058298746) and required message content from the calendar event; always confirm the correct phone number and exact date values/format before sending, and verify the message actually sent to the right number.\n",
+   "n_lessons": 2,
+   "chars": 1223
+  },
+  "RequestCarpoolingTask": {
+   "split": "eval",
+   "tier": "B",
+   "apps": [
+    "Mail",
+    "Messages"
+   ],
+   "text": "",
+   "n_lessons": 0,
+   "chars": 0
+  },
+  "ReviewPaperEmailTask": {
+   "split": "eval",
+   "tier": "B",
+   "apps": [
+    "Files",
+    "Mail"
+   ],
+   "text": "# Task-specific lessons (from earlier attempts on this app)\nTreat these as HINTS, not rules. How to use them:\n- Always decide your next action from the CURRENT screenshot first.\n- Use a lesson ONLY if it clearly fits this task AND the screen you see now;\n  if it does not fit, IGNORE it completely.\n- 'avoid' lists past mistakes not to repeat; 'do' is a rough plan to adapt to\n  the real UI, never a script to follow blindly.\n- Never let a lesson override what the screenshot plainly shows.\n\nWhen email a downloaded resume file:\n  avoid: Agents looped: asking the user/guessing details (recipient email, subject) and repeatedly invoking wrong actions ('type' vs 'input_text'), re-opening files without ever selecting a file, choosing Share->Mail, and completing the send. Instead, multi-select the target file(s), tap Share, pick Mail, fill the known recipient/subject/body, and actually tap Send rather than re-tapping files.\n\nWhen email a CV file to recipient:\n  avoid: Agents fired type/share actions blindly without verifying each screen loaded (recipient field focused, share sheet open, email composed), and never tapped Send; after every action, confirm the resulting screen via the screenshot before proceeding, and explicitly tap Send to complete the email.\n",
+   "n_lessons": 2,
+   "chars": 1267
+  },
+  "SMSManagement": {
+   "split": "eval",
+   "tier": "B",
+   "apps": [
+    "Mail",
+    "Messages"
+   ],
+   "text": "",
+   "n_lessons": 0,
+   "chars": 0
+  },
+  "SayHelloRoommatesAskUserTask2": {
+   "split": "eval",
+   "tier": "B",
+   "apps": [
+    "Contacts",
+    "Messages"
+   ],
+   "text": "# Task-specific lessons (from earlier attempts on this app)\nTreat these as HINTS, not rules. How to use them:\n- Always decide your next action from the CURRENT screenshot first.\n- Use a lesson ONLY if it clearly fits this task AND the screen you see now;\n  if it does not fit, IGNORE it completely.\n- 'avoid' lists past mistakes not to repeat; 'do' is a rough plan to adapt to\n  the real UI, never a script to follow blindly.\n- Never let a lesson override what the screenshot plainly shows.\n\nWhen email user about scheduled meal:\n  avoid: Agents either looped on open_app for a missing Email app, terminated prematurely without sending, or got lost scrolling the calendar; verify the email app exists and actually compose+send the message before terminating.\n",
+   "n_lessons": 1,
+   "chars": 759
+  },
+  "ScheduleCoffeeTimeViaSmsTask": {
+   "split": "eval",
+   "tier": "B",
+   "apps": [
+    "Calendar",
+    "Messages"
+   ],
+   "text": "# Task-specific lessons (from earlier attempts on this app)\nTreat these as HINTS, not rules. How to use them:\n- Always decide your next action from the CURRENT screenshot first.\n- Use a lesson ONLY if it clearly fits this task AND the screen you see now;\n  if it does not fit, IGNORE it completely.\n- 'avoid' lists past mistakes not to repeat; 'do' is a rough plan to adapt to\n  the real UI, never a script to follow blindly.\n- Never let a lesson override what the screenshot plainly shows.\n\nWhen send SMS with conference dates:\n  avoid: Agents selected wrong contacts and assumed success without verifying the message was sent to the correct recipient (+14058298746) and that dates were confirmed from the calendar event; verify exact contact/number and source the actual dates from the conference before composing, then confirm the sent message appears in the thread.\n\nWhen check event then send SMS with dates:\n  avoid: Agents assumed the recipient/number and date format without verifying the exact contact (+14058298746) and required message content from the calendar event; always confirm the correct phone number and exact date values/format before sending, and verify the message actually sent to the right number.\n",
+   "n_lessons": 2,
+   "chars": 1223
+  },
+  "ScheduleLunchViaSmsAskUserTask": {
+   "split": "eval",
+   "tier": "B",
+   "apps": [
+    "Calendar",
+    "Messages"
+   ],
+   "text": "# Task-specific lessons (from earlier attempts on this app)\nTreat these as HINTS, not rules. How to use them:\n- Always decide your next action from the CURRENT screenshot first.\n- Use a lesson ONLY if it clearly fits this task AND the screen you see now;\n  if it does not fit, IGNORE it completely.\n- 'avoid' lists past mistakes not to repeat; 'do' is a rough plan to adapt to\n  the real UI, never a script to follow blindly.\n- Never let a lesson override what the screenshot plainly shows.\n\nWhen send SMS with conference dates:\n  avoid: Agents selected wrong contacts and assumed success without verifying the message was sent to the correct recipient (+14058298746) and that dates were confirmed from the calendar event; verify exact contact/number and source the actual dates from the conference before composing, then confirm the sent message appears in the thread.\n\nWhen check event then send SMS with dates:\n  avoid: Agents assumed the recipient/number and date format without verifying the exact contact (+14058298746) and required message content from the calendar event; always confirm the correct phone number and exact date values/format before sending, and verify the message actually sent to the right number.\n",
+   "n_lessons": 2,
+   "chars": 1223
+  },
+  "ScheduleLunchViaSmsTask": {
+   "split": "eval",
+   "tier": "B",
+   "apps": [
+    "Calendar",
+    "Messages"
+   ],
+   "text": "# Task-specific lessons (from earlier attempts on this app)\nTreat these as HINTS, not rules. How to use them:\n- Always decide your next action from the CURRENT screenshot first.\n- Use a lesson ONLY if it clearly fits this task AND the screen you see now;\n  if it does not fit, IGNORE it completely.\n- 'avoid' lists past mistakes not to repeat; 'do' is a rough plan to adapt to\n  the real UI, never a script to follow blindly.\n- Never let a lesson override what the screenshot plainly shows.\n\nWhen send SMS with conference dates:\n  avoid: Agents selected wrong contacts and assumed success without verifying the message was sent to the correct recipient (+14058298746) and that dates were confirmed from the calendar event; verify exact contact/number and source the actual dates from the conference before composing, then confirm the sent message appears in the thread.\n\nWhen check event then send SMS with dates:\n  avoid: Agents assumed the recipient/number and date format without verifying the exact contact (+14058298746) and required message content from the calendar event; always confirm the correct phone number and exact date values/format before sending, and verify the message actually sent to the right number.\n",
+   "n_lessons": 2,
+   "chars": 1223
+  },
+  "ScheduleOneOneViaSmsAskUserTask": {
+   "split": "eval",
+   "tier": "B",
+   "apps": [
+    "Calendar",
+    "Messages"
+   ],
+   "text": "# Task-specific lessons (from earlier attempts on this app)\nTreat these as HINTS, not rules. How to use them:\n- Always decide your next action from the CURRENT screenshot first.\n- Use a lesson ONLY if it clearly fits this task AND the screen you see now;\n  if it does not fit, IGNORE it completely.\n- 'avoid' lists past mistakes not to repeat; 'do' is a rough plan to adapt to\n  the real UI, never a script to follow blindly.\n- Never let a lesson override what the screenshot plainly shows.\n\nWhen send SMS with conference dates:\n  avoid: Agents selected wrong contacts and assumed success without verifying the message was sent to the correct recipient (+14058298746) and that dates were confirmed from the calendar event; verify exact contact/number and source the actual dates from the conference before composing, then confirm the sent message appears in the thread.\n\nWhen check event then send SMS with dates:\n  avoid: Agents assumed the recipient/number and date format without verifying the exact contact (+14058298746) and required message content from the calendar event; always confirm the correct phone number and exact date values/format before sending, and verify the message actually sent to the right number.\n",
+   "n_lessons": 2,
+   "chars": 1223
+  },
+  "SearchTopInfoAskUserTask": {
+   "split": "eval",
+   "tier": "B",
+   "apps": [
+    "Chrome",
+    "Mail"
+   ],
+   "text": "# Task-specific lessons (from earlier attempts on this app)\nTreat these as HINTS, not rules. How to use them:\n- Always decide your next action from the CURRENT screenshot first.\n- Use a lesson ONLY if it clearly fits this task AND the screen you see now;\n  if it does not fit, IGNORE it completely.\n- 'avoid' lists past mistakes not to repeat; 'do' is a rough plan to adapt to\n  the real UI, never a script to follow blindly.\n- Never let a lesson override what the screenshot plainly shows.\n\nWhen search weather and report temperature:\n  avoid: Agents used a vague query ('my hometown' instead of the specified city), got stuck re-typing over phantom typos, or gave up on a 'no internet' error without ever submitting the search or returning an integer temperature. Use the exact city from the task, submit the search (press Enter), read the result, and answer the user with the temperature as an integer via the ask-user/answer action.\n",
+   "n_lessons": 1,
+   "chars": 937
+  },
+  "SendFormsTask": {
+   "split": "eval",
+   "tier": "B",
+   "apps": [
+    "Mail"
+   ],
+   "text": "",
+   "n_lessons": 0,
+   "chars": 0
+  },
+  "SendInterviewEmailTask": {
+   "split": "eval",
+   "tier": "B",
+   "apps": [
+    "Files",
+    "Mail"
+   ],
+   "text": "# Task-specific lessons (from earlier attempts on this app)\nTreat these as HINTS, not rules. How to use them:\n- Always decide your next action from the CURRENT screenshot first.\n- Use a lesson ONLY if it clearly fits this task AND the screen you see now;\n  if it does not fit, IGNORE it completely.\n- 'avoid' lists past mistakes not to repeat; 'do' is a rough plan to adapt to\n  the real UI, never a script to follow blindly.\n- Never let a lesson override what the screenshot plainly shows.\n\nWhen send SMS to a contact:\n  avoid: Agents fixated on the un-repliable short code 'HIRING-TECH' and kept retrying its blocked send button; instead start a NEW message to the actual phone number (14058298746) and type the correct content there.\n\nWhen email a downloaded resume file:\n  avoid: Agents looped: asking the user/guessing details (recipient email, subject) and repeatedly invoking wrong actions ('type' vs 'input_text'), re-opening files without ever selecting a file, choosing Share->Mail, and completing the send. Instead, multi-select the target file(s), tap Share, pick Mail, fill the known recipient/subject/body, and actually tap Send rather than re-tapping files.\n",
+   "n_lessons": 2,
+   "chars": 1173
+  },
+  "SendInterviewInvitationAskUserTask": {
+   "split": "eval",
+   "tier": "B",
+   "apps": [
+    "Messages"
+   ],
+   "text": "",
+   "n_lessons": 0,
+   "chars": 0
+  },
+  "SendInterviewInvitationTask": {
+   "split": "eval",
+   "tier": "B",
+   "apps": [
+    "Files",
+    "Messages"
+   ],
+   "text": "# Task-specific lessons (from earlier attempts on this app)\nTreat these as HINTS, not rules. How to use them:\n- Always decide your next action from the CURRENT screenshot first.\n- Use a lesson ONLY if it clearly fits this task AND the screen you see now;\n  if it does not fit, IGNORE it completely.\n- 'avoid' lists past mistakes not to repeat; 'do' is a rough plan to adapt to\n  the real UI, never a script to follow blindly.\n- Never let a lesson override what the screenshot plainly shows.\n\nWhen send SMS to a contact:\n  avoid: Agents fixated on the un-repliable short code 'HIRING-TECH' and kept retrying its blocked send button; instead start a NEW message to the actual phone number (14058298746) and type the correct content there.\n",
+   "n_lessons": 1,
+   "chars": 737
+  },
+  "SendInvoiceWithInfoTask": {
+   "split": "eval",
+   "tier": "B",
+   "apps": [
+    "Chrome",
+    "Docreader",
+    "Files",
+    "Mail"
+   ],
+   "text": "# Task-specific lessons (from earlier attempts on this app)\nTreat these as HINTS, not rules. How to use them:\n- Always decide your next action from the CURRENT screenshot first.\n- Use a lesson ONLY if it clearly fits this task AND the screen you see now;\n  if it does not fit, IGNORE it completely.\n- 'avoid' lists past mistakes not to repeat; 'do' is a rough plan to adapt to\n  the real UI, never a script to follow blindly.\n- Never let a lesson override what the screenshot plainly shows.\n\nWhen send graduation mass email:\n  avoid: Attempts drifted into unrelated subtasks (calendar event, web research) and hallucinated success/found info; they never completed the core action of composing and sending the email. Stay focused on locating the recipient list and actually composing/sending the email, verify each step from the actual screenshot rather than assuming completion.\n\nWhen report invoice hours via SMS:\n  do: read invoice -> open Messages -> search contact name -> tap contact -> tap mobile number -> tap text field -> type result -> tap send -> terminate\n  avoid: Agent hallucinated PDF contents on a blank/loading screen and never actually composed or sent the SMS; verify the file actually rendered before extracting data, and ensure the message is typed and sent before terminating.\n",
+   "n_lessons": 2,
+   "chars": 1299
+  },
+  "SendPhoneNumberAskUserTask": {
+   "split": "eval",
+   "tier": "B",
+   "apps": [
+    "Contacts",
+    "Mail"
+   ],
+   "text": "# Task-specific lessons (from earlier attempts on this app)\nTreat these as HINTS, not rules. How to use them:\n- Always decide your next action from the CURRENT screenshot first.\n- Use a lesson ONLY if it clearly fits this task AND the screen you see now;\n  if it does not fit, IGNORE it completely.\n- 'avoid' lists past mistakes not to repeat; 'do' is a rough plan to adapt to\n  the real UI, never a script to follow blindly.\n- Never let a lesson override what the screenshot plainly shows.\n\nWhen add contact with researched phone number:\n  avoid: Agents never finished the contact: they typed first/last name then stopped without entering the phone number or saving, and never reliably obtained the company number from Maps first. Gather the phone number, fill all required fields, then tap Save before verifying.\n\nWhen email user about scheduled meal:\n  avoid: Agents either looped on open_app for a missing Email app, terminated prematurely without sending, or got lost scrolling the calendar; verify the email app exists and actually compose+send the message before terminating.\n",
+   "n_lessons": 2,
+   "chars": 1083
+  },
+  "SendWaiverTask": {
+   "split": "eval",
+   "tier": "B",
+   "apps": [
+    "Mail"
+   ],
+   "text": "",
+   "n_lessons": 0,
+   "chars": 0
+  },
+  "SendZipFilesAskUserTask1": {
+   "split": "eval",
+   "tier": "B",
+   "apps": [
+    "Files",
+    "Mail"
+   ],
+   "text": "# Task-specific lessons (from earlier attempts on this app)\nTreat these as HINTS, not rules. How to use them:\n- Always decide your next action from the CURRENT screenshot first.\n- Use a lesson ONLY if it clearly fits this task AND the screen you see now;\n  if it does not fit, IGNORE it completely.\n- 'avoid' lists past mistakes not to repeat; 'do' is a rough plan to adapt to\n  the real UI, never a script to follow blindly.\n- Never let a lesson override what the screenshot plainly shows.\n\nWhen send SMS to a contact:\n  avoid: Agents fixated on the un-repliable short code 'HIRING-TECH' and kept retrying its blocked send button; instead start a NEW message to the actual phone number (14058298746) and type the correct content there.\n\nWhen compress and delete old files:\n  avoid: All attempts only scrolled endlessly through the file list without ever selecting, compressing, or deleting the target file. Stop scrolling once the target file is visible, then long-press to select it and perform the compress/delete actions.\n",
+   "n_lessons": 2,
+   "chars": 1026
+  },
+  "SendZipFilesAskUserTask2": {
+   "split": "eval",
+   "tier": "B",
+   "apps": [
+    "Files",
+    "Mail"
+   ],
+   "text": "# Task-specific lessons (from earlier attempts on this app)\nTreat these as HINTS, not rules. How to use them:\n- Always decide your next action from the CURRENT screenshot first.\n- Use a lesson ONLY if it clearly fits this task AND the screen you see now;\n  if it does not fit, IGNORE it completely.\n- 'avoid' lists past mistakes not to repeat; 'do' is a rough plan to adapt to\n  the real UI, never a script to follow blindly.\n- Never let a lesson override what the screenshot plainly shows.\n\nWhen send SMS to a contact:\n  avoid: Agents fixated on the un-repliable short code 'HIRING-TECH' and kept retrying its blocked send button; instead start a NEW message to the actual phone number (14058298746) and type the correct content there.\n\nWhen compress and delete old files:\n  avoid: All attempts only scrolled endlessly through the file list without ever selecting, compressing, or deleting the target file. Stop scrolling once the target file is visible, then long-press to select it and perform the compress/delete actions.\n",
+   "n_lessons": 2,
+   "chars": 1026
+  },
+  "SetAlarmTaskAskUser2": {
+   "split": "eval",
+   "tier": "B",
+   "apps": [
+    "Clock"
+   ],
+   "text": "# Task-specific lessons (from earlier attempts on this app)\nTreat these as HINTS, not rules. How to use them:\n- Always decide your next action from the CURRENT screenshot first.\n- Use a lesson ONLY if it clearly fits this task AND the screen you see now;\n  if it does not fit, IGNORE it completely.\n- 'avoid' lists past mistakes not to repeat; 'do' is a rough plan to adapt to\n  the real UI, never a script to follow blindly.\n- Never let a lesson override what the screenshot plainly shows.\n\nWhen set an alarm:\n  do: open Clock -> tap Alarm tab -> tap + to add alarm -> set hour, minute, AM/PM -> tap OK -> enable weekend day toggles\n  avoid: Attempts tapped the clock face for time but never verified/confirmed the time entry, never set the required weekend days, and often started on the Bedtime tab; always confirm you're on the Alarm tab, finalize time with OK, then explicitly toggle the repeat days and verify the saved alarm.\n\nWhen set an alarm at specific time:\n  avoid: Agent invented its own time (7:00 AM) instead of using the required time, and hallucinated success despite the clock showing wrong values (PM vs AM confusion); read the actual on-screen time/period, set the exact requested time, and verify before terminating.\n",
+   "n_lessons": 2,
+   "chars": 1239
+  },
+  "SetAlarmTaskAskUser3": {
+   "split": "eval",
+   "tier": "B",
+   "apps": [
+    "Clock"
+   ],
+   "text": "# Task-specific lessons (from earlier attempts on this app)\nTreat these as HINTS, not rules. How to use them:\n- Always decide your next action from the CURRENT screenshot first.\n- Use a lesson ONLY if it clearly fits this task AND the screen you see now;\n  if it does not fit, IGNORE it completely.\n- 'avoid' lists past mistakes not to repeat; 'do' is a rough plan to adapt to\n  the real UI, never a script to follow blindly.\n- Never let a lesson override what the screenshot plainly shows.\n\nWhen set an alarm:\n  do: open Clock -> tap Alarm tab -> tap + to add alarm -> set hour, minute, AM/PM -> tap OK -> enable weekend day toggles\n  avoid: Attempts tapped the clock face for time but never verified/confirmed the time entry, never set the required weekend days, and often started on the Bedtime tab; always confirm you're on the Alarm tab, finalize time with OK, then explicitly toggle the repeat days and verify the saved alarm.\n\nWhen set an alarm at specific time:\n  avoid: Agent invented its own time (7:00 AM) instead of using the required time, and hallucinated success despite the clock showing wrong values (PM vs AM confusion); read the actual on-screen time/period, set the exact requested time, and verify before terminating.\n",
+   "n_lessons": 2,
+   "chars": 1239
+  },
+  "SharePhotosTask": {
+   "split": "eval",
+   "tier": "B",
+   "apps": [
+    "Gallery",
+    "Mail"
+   ],
+   "text": "# Task-specific lessons (from earlier attempts on this app)\nTreat these as HINTS, not rules. How to use them:\n- Always decide your next action from the CURRENT screenshot first.\n- Use a lesson ONLY if it clearly fits this task AND the screen you see now;\n  if it does not fit, IGNORE it completely.\n- 'avoid' lists past mistakes not to repeat; 'do' is a rough plan to adapt to\n  the real UI, never a script to follow blindly.\n- Never let a lesson override what the screenshot plainly shows.\n\nWhen email photos to a contact:\n  avoid: The agent invented the recipient's email address (kevin@example.com) instead of using the exact required address (kevin_zhang@example.com). Do not guess emails or other parameters the task should ask the user for; obtain the exact value rather than assuming a default format.\n",
+   "n_lessons": 1,
+   "chars": 809
+  },
+  "SuggestPaperTask": {
+   "split": "eval",
+   "tier": "B",
+   "apps": [
+    "Chrome",
+    "Files",
+    "Mail"
+   ],
+   "text": "",
+   "n_lessons": 0,
+   "chars": 0
+  },
+  "SumFileLinesTask": {
+   "split": "eval",
+   "tier": "B",
+   "apps": [
+    "Files"
+   ],
+   "text": "# Task-specific lessons (from earlier attempts on this app)\nTreat these as HINTS, not rules. How to use them:\n- Always decide your next action from the CURRENT screenshot first.\n- Use a lesson ONLY if it clearly fits this task AND the screen you see now;\n  if it does not fit, IGNORE it completely.\n- 'avoid' lists past mistakes not to repeat; 'do' is a rough plan to adapt to\n  the real UI, never a script to follow blindly.\n- Never let a lesson override what the screenshot plainly shows.\n\nWhen count lines in a file:\n  avoid: Failed attempts tried to open file_1.txt directly inside the zip archive (which the app forbids) and never extracted it, then looped clicking the same spot; instead extract the archive first, open the extracted file, count lines, and submit the count as an integer answer in the required format.\n",
+   "n_lessons": 1,
+   "chars": 825
+  },
+  "TakeSelfieAskUserTask2": {
+   "split": "eval",
+   "tier": "B",
+   "apps": [
+    "Camera",
+    "Gallery",
+    "Mail"
+   ],
+   "text": "# Task-specific lessons (from earlier attempts on this app)\nTreat these as HINTS, not rules. How to use them:\n- Always decide your next action from the CURRENT screenshot first.\n- Use a lesson ONLY if it clearly fits this task AND the screen you see now;\n  if it does not fit, IGNORE it completely.\n- 'avoid' lists past mistakes not to repeat; 'do' is a rough plan to adapt to\n  the real UI, never a script to follow blindly.\n- Never let a lesson override what the screenshot plainly shows.\n\nWhen take a selfie:\n  avoid: Tapping blindly at screen center for the shutter opened Google Lens instead; verify the front-camera viewfinder is active and locate the actual shutter button before tapping, and never assume a capture succeeded without confirming the new screen state.\n",
+   "n_lessons": 1,
+   "chars": 774
+  },
+  "TakeSelfieTask": {
+   "split": "eval",
+   "tier": "B",
+   "apps": [
+    "Camera"
+   ],
+   "text": "# Task-specific lessons (from earlier attempts on this app)\nTreat these as HINTS, not rules. How to use them:\n- Always decide your next action from the CURRENT screenshot first.\n- Use a lesson ONLY if it clearly fits this task AND the screen you see now;\n  if it does not fit, IGNORE it completely.\n- 'avoid' lists past mistakes not to repeat; 'do' is a rough plan to adapt to\n  the real UI, never a script to follow blindly.\n- Never let a lesson override what the screenshot plainly shows.\n\nWhen take a selfie:\n  avoid: Tapping blindly at screen center for the shutter opened Google Lens instead; verify the front-camera viewfinder is active and locate the actual shutter button before tapping, and never assume a capture succeeded without confirming the new screen state.\n",
+   "n_lessons": 1,
+   "chars": 774
+  },
+  "TextArrivalTimeTask": {
+   "split": "eval",
+   "tier": "B",
+   "apps": [
+    "Maps",
+    "Messages"
+   ],
+   "text": "# Task-specific lessons (from earlier attempts on this app)\nTreat these as HINTS, not rules. How to use them:\n- Always decide your next action from the CURRENT screenshot first.\n- Use a lesson ONLY if it clearly fits this task AND the screen you see now;\n  if it does not fit, IGNORE it completely.\n- 'avoid' lists past mistakes not to repeat; 'do' is a rough plan to adapt to\n  the real UI, never a script to follow blindly.\n- Never let a lesson override what the screenshot plainly shows.\n\nWhen text a contact a departure time:\n  avoid: Searching by name (and then phone number) in the wrong/empty field and never composing the message; instead start a new chat, enter the recipient's phone number to create the conversation, type the departure-time content, and send.\n\nWhen text conference hotel address to contact:\n  avoid: Attempts never completed the send: they used inconsistent/invalid action names (type vs input_text), got stuck in input-method dialogs, and aborted before typing the message and tapping send. After entering recipient number, reliably tap message field, input the address text, then tap the send button to finish.\n",
+   "n_lessons": 2,
+   "chars": 1141
+  },
+  "ThanksgivingPrepTask": {
+   "split": "eval",
+   "tier": "B",
+   "apps": [
+    "Calendar",
+    "Chrome",
+    "Mail"
+   ],
+   "text": "",
+   "n_lessons": 0,
+   "chars": 0
+  },
+  "CheckCartPriceTask": {
+   "split": "eval",
+   "tier": "C",
+   "apps": [
+    "Taodian"
+   ],
+   "text": "# Task-specific lessons (from earlier attempts on this app)\nTreat these as HINTS, not rules. How to use them:\n- Always decide your next action from the CURRENT screenshot first.\n- Use a lesson ONLY if it clearly fits this task AND the screen you see now;\n  if it does not fit, IGNORE it completely.\n- 'avoid' lists past mistakes not to repeat; 'do' is a rough plan to adapt to\n  the real UI, never a script to follow blindly.\n- Never let a lesson override what the screenshot plainly shows.\n\nWhen split cart total between people:\n  avoid: Agents tapped through the cart but never selected items or read/reported actual prices, leaving the interaction cache empty; the task requires asking the user and actually capturing item prices, not just navigating to the cart.\n\nWhen delete cart items:\n  avoid: Agent invented credentials and looped on a failing login (made-up passwords, fabricated 'Agree to Terms' steps). Don't guess login credentials; if a login wall blocks the task, ask the user instead of repeatedly retrying invalid logins.\n",
+   "n_lessons": 2,
+   "chars": 1038
+  },
+  "CheckPuchasedItem": {
+   "split": "eval",
+   "tier": "C",
+   "apps": [
+    "Taodian"
+   ],
+   "text": "# Task-specific lessons (from earlier attempts on this app)\nTreat these as HINTS, not rules. How to use them:\n- Always decide your next action from the CURRENT screenshot first.\n- Use a lesson ONLY if it clearly fits this task AND the screen you see now;\n  if it does not fit, IGNORE it completely.\n- 'avoid' lists past mistakes not to repeat; 'do' is a rough plan to adapt to\n  the real UI, never a script to follow blindly.\n- Never let a lesson override what the screenshot plainly shows.\n\nWhen delete cart items:\n  avoid: Agent invented credentials and looped on a failing login (made-up passwords, fabricated 'Agree to Terms' steps). Don't guess login credentials; if a login wall blocks the task, ask the user instead of repeatedly retrying invalid logins.\n\nWhen remove items from shopping cart:\n  avoid: Agent got stuck in the login flow, repeatedly clicking the same buttons (verify code, login) at wildly inconsistent/off-screen coordinates and hallucinating success without verifying the screen. Always re-read the current screenshot before each tap, confirm a tap changed the screen, and only proceed to the cart after login is actually confirmed.\n",
+   "n_lessons": 2,
+   "chars": 1158
+  },
+  "DeleteItemsAskUserTask": {
+   "split": "eval",
+   "tier": "C",
+   "apps": [
+    "Taodian"
+   ],
+   "text": "# Task-specific lessons (from earlier attempts on this app)\nTreat these as HINTS, not rules. How to use them:\n- Always decide your next action from the CURRENT screenshot first.\n- Use a lesson ONLY if it clearly fits this task AND the screen you see now;\n  if it does not fit, IGNORE it completely.\n- 'avoid' lists past mistakes not to repeat; 'do' is a rough plan to adapt to\n  the real UI, never a script to follow blindly.\n- Never let a lesson override what the screenshot plainly shows.\n\nWhen delete cart items:\n  avoid: Agent invented credentials and looped on a failing login (made-up passwords, fabricated 'Agree to Terms' steps). Don't guess login credentials; if a login wall blocks the task, ask the user instead of repeatedly retrying invalid logins.\n\nWhen remove items from shopping cart:\n  avoid: Agent got stuck in the login flow, repeatedly clicking the same buttons (verify code, login) at wildly inconsistent/off-screen coordinates and hallucinating success without verifying the screen. Always re-read the current screenshot before each tap, confirm a tap changed the screen, and only proceed to the cart after login is actually confirmed.\n",
+   "n_lessons": 2,
+   "chars": 1158
+  },
+  "ItemCheckoutTask": {
+   "split": "eval",
+   "tier": "C",
+   "apps": [
+    "Taodian"
+   ],
+   "text": "# Task-specific lessons (from earlier attempts on this app)\nTreat these as HINTS, not rules. How to use them:\n- Always decide your next action from the CURRENT screenshot first.\n- Use a lesson ONLY if it clearly fits this task AND the screen you see now;\n  if it does not fit, IGNORE it completely.\n- 'avoid' lists past mistakes not to repeat; 'do' is a rough plan to adapt to\n  the real UI, never a script to follow blindly.\n- Never let a lesson override what the screenshot plainly shows.\n\nWhen delete cart items:\n  avoid: Agent invented credentials and looped on a failing login (made-up passwords, fabricated 'Agree to Terms' steps). Don't guess login credentials; if a login wall blocks the task, ask the user instead of repeatedly retrying invalid logins.\n\nWhen remove items from shopping cart:\n  avoid: Agent got stuck in the login flow, repeatedly clicking the same buttons (verify code, login) at wildly inconsistent/off-screen coordinates and hallucinating success without verifying the screen. Always re-read the current screenshot before each tap, confirm a tap changed the screen, and only proceed to the cart after login is actually confirmed.\n",
+   "n_lessons": 2,
+   "chars": 1158
+  },
+  "MastodonFilterLanguageTask": {
+   "split": "eval",
+   "tier": "C",
+   "apps": [
+    "Mastodon"
+   ],
+   "text": "# Task-specific lessons (from earlier attempts on this app)\nTreat these as HINTS, not rules. How to use them:\n- Always decide your next action from the CURRENT screenshot first.\n- Use a lesson ONLY if it clearly fits this task AND the screen you see now;\n  if it does not fit, IGNORE it completely.\n- 'avoid' lists past mistakes not to repeat; 'do' is a rough plan to adapt to\n  the real UI, never a script to follow blindly.\n- Never let a lesson override what the screenshot plainly shows.\n\nWhen change account posting language:\n  avoid: Agents searched App settings (Display) and account-info pages for a language option that isn't there; the posting language is set when composing a post (language selector in the compose screen) or in publishing/account preferences, not under Display settings.\n",
+   "n_lessons": 1,
+   "chars": 799
+  },
+  "MastodonGetServerInfoTask": {
+   "split": "eval",
+   "tier": "C",
+   "apps": [
+    "Mastodon"
+   ],
+   "text": "",
+   "n_lessons": 0,
+   "chars": 0
+  },
+  "MastodonImportMutedUsersTask": {
+   "split": "eval",
+   "tier": "C",
+   "apps": [
+    "Mastodon"
+   ],
+   "text": "",
+   "n_lessons": 0,
+   "chars": 0
+  },
+  "MastodonMallShareOrderTask": {
+   "split": "eval",
+   "tier": "C",
+   "apps": [
+    "Mastodon",
+    "Taodian"
+   ],
+   "text": "",
+   "n_lessons": 0,
+   "chars": 0
+  },
+  "MastodonManageHashtagsTask": {
+   "split": "eval",
+   "tier": "C",
+   "apps": [
+    "Mastodon"
+   ],
+   "text": "# Task-specific lessons (from earlier attempts on this app)\nTreat these as HINTS, not rules. How to use them:\n- Always decide your next action from the CURRENT screenshot first.\n- Use a lesson ONLY if it clearly fits this task AND the screen you see now;\n  if it does not fit, IGNORE it completely.\n- 'avoid' lists past mistakes not to repeat; 'do' is a rough plan to adapt to\n  the real UI, never a script to follow blindly.\n- Never let a lesson override what the screenshot plainly shows.\n\nWhen add featured hashtags to profile:\n  avoid: All attempts stopped at 'Edit profile', but featured hashtags are managed in a separate 'Featured hashtags' section (not in the basic edit profile dialog); navigate to the profile's hashtag/featured settings instead of the Edit profile bio screen.\n\nWhen favorite toots by hashtag:\n  avoid: Agents favorited only the visible toot or wrong items and terminated prematurely; the task requires conditionally favoriting ALL specific expected toots under the hashtag. Scroll through every result, favorite each unfavorited toot, and verify completion before terminating.\n",
+   "n_lessons": 2,
+   "chars": 1105
+  },
+  "MastodonManageMultiListTask": {
+   "split": "eval",
+   "tier": "C",
+   "apps": [
+    "Mastodon"
+   ],
+   "text": "# Task-specific lessons (from earlier attempts on this app)\nTreat these as HINTS, not rules. How to use them:\n- Always decide your next action from the CURRENT screenshot first.\n- Use a lesson ONLY if it clearly fits this task AND the screen you see now;\n  if it does not fit, IGNORE it completely.\n- 'avoid' lists past mistakes not to repeat; 'do' is a rough plan to adapt to\n  the real UI, never a script to follow blindly.\n- Never let a lesson override what the screenshot plainly shows.\n\nWhen create a list:\n  avoid: Agents searched Profile/Edit-profile and the top three-dot menu, and repeated the same dead-end clicks. Lists in Mastodon live in the left-side navigation/menu drawer (often via the search or main menu tab), not under Profile; stop re-clicking the same icon and open the main menu instead.\n\nWhen manage bookmarked posts:\n  avoid: Agents blindly guessed at the three-dot menu or profile tab and repeated the same click without verifying the screen changed; instead open the navigation/search menu to find the dedicated Bookmarks list, then act on each post (unbookmark, favorite, boost) and confirm the state changed before repeating.\n",
+   "n_lessons": 2,
+   "chars": 1155
+  },
+  "MastodonMattermostPostNoticeTask": {
+   "split": "eval",
+   "tier": "C",
+   "apps": [
+    "Mastodon",
+    "Mattermost"
+   ],
+   "text": "# Task-specific lessons (from earlier attempts on this app)\nTreat these as HINTS, not rules. How to use them:\n- Always decide your next action from the CURRENT screenshot first.\n- Use a lesson ONLY if it clearly fits this task AND the screen you see now;\n  if it does not fit, IGNORE it completely.\n- 'avoid' lists past mistakes not to repeat; 'do' is a rough plan to adapt to\n  the real UI, never a script to follow blindly.\n- Never let a lesson override what the screenshot plainly shows.\n\nWhen manage bookmarked posts:\n  avoid: Agents blindly guessed at the three-dot menu or profile tab and repeated the same click without verifying the screen changed; instead open the navigation/search menu to find the dedicated Bookmarks list, then act on each post (unbookmark, favorite, boost) and confirm the state changed before repeating.\n\nWhen save images from a post:\n  avoid: All attempts only navigated to find the post and never saved any image to the required directory (/sdcard/mastodon_img); they ignored that the task needs files written to a specific target folder. Confirm the output destination exists and actually perform the image save/dump action, don't stop at locating the post.\n",
+   "n_lessons": 2,
+   "chars": 1192
+  },
+  "MastodonNewPostTask": {
+   "split": "eval",
+   "tier": "C",
+   "apps": [
+    "Mastodon"
+   ],
+   "text": "# Task-specific lessons (from earlier attempts on this app)\nTreat these as HINTS, not rules. How to use them:\n- Always decide your next action from the CURRENT screenshot first.\n- Use a lesson ONLY if it clearly fits this task AND the screen you see now;\n  if it does not fit, IGNORE it completely.\n- 'avoid' lists past mistakes not to repeat; 'do' is a rough plan to adapt to\n  the real UI, never a script to follow blindly.\n- Never let a lesson override what the screenshot plainly shows.\n\nWhen manage bookmarked posts:\n  avoid: Agents blindly guessed at the three-dot menu or profile tab and repeated the same click without verifying the screen changed; instead open the navigation/search menu to find the dedicated Bookmarks list, then act on each post (unbookmark, favorite, boost) and confirm the state changed before repeating.\n\nWhen save images from a post:\n  avoid: All attempts only navigated to find the post and never saved any image to the required directory (/sdcard/mastodon_img); they ignored that the task needs files written to a specific target folder. Confirm the output destination exists and actually perform the image save/dump action, don't stop at locating the post.\n",
+   "n_lessons": 2,
+   "chars": 1192
+  },
+  "MastodonOpenAutomatedDeletionTask": {
+   "split": "eval",
+   "tier": "C",
+   "apps": [
+    "Mastodon"
+   ],
+   "text": "",
+   "n_lessons": 0,
+   "chars": 0
+  },
+  "MastodonPinTootsTask": {
+   "split": "eval",
+   "tier": "C",
+   "apps": [
+    "Mastodon"
+   ],
+   "text": "# Task-specific lessons (from earlier attempts on this app)\nTreat these as HINTS, not rules. How to use them:\n- Always decide your next action from the CURRENT screenshot first.\n- Use a lesson ONLY if it clearly fits this task AND the screen you see now;\n  if it does not fit, IGNORE it completely.\n- 'avoid' lists past mistakes not to repeat; 'do' is a rough plan to adapt to\n  the real UI, never a script to follow blindly.\n- Never let a lesson override what the screenshot plainly shows.\n\nWhen favorite tagged toots:\n  avoid: Agents favorited at most one toot then terminated, assuming no more existed; instead scroll through the entire hashtag results list and favorite every matching toot before terminating.\n\nWhen favorite toots by hashtag:\n  avoid: Agents favorited only the visible toot or wrong items and terminated prematurely; the task requires conditionally favoriting ALL specific expected toots under the hashtag. Scroll through every result, favorite each unfavorited toot, and verify completion before terminating.\n",
+   "n_lessons": 2,
+   "chars": 1031
+  },
+  "MastodonRemoveBookmarkTask": {
+   "split": "eval",
+   "tier": "C",
+   "apps": [
+    "Mastodon"
+   ],
+   "text": "# Task-specific lessons (from earlier attempts on this app)\nTreat these as HINTS, not rules. How to use them:\n- Always decide your next action from the CURRENT screenshot first.\n- Use a lesson ONLY if it clearly fits this task AND the screen you see now;\n  if it does not fit, IGNORE it completely.\n- 'avoid' lists past mistakes not to repeat; 'do' is a rough plan to adapt to\n  the real UI, never a script to follow blindly.\n- Never let a lesson override what the screenshot plainly shows.\n\nWhen manage bookmarked posts:\n  avoid: Agents blindly guessed at the three-dot menu or profile tab and repeated the same click without verifying the screen changed; instead open the navigation/search menu to find the dedicated Bookmarks list, then act on each post (unbookmark, favorite, boost) and confirm the state changed before repeating.\n\nWhen bookmark posts with a tag:\n  avoid: Agents confused the bookmark action with the favourite/star icon and bookmarked the wrong (or no) posts. Use the post's overflow (three-dot) menu and select 'Bookmark' explicitly; verify each required post is found before terminating instead of assuming search returned nothing.\n",
+   "n_lessons": 2,
+   "chars": 1156
+  },
+  "MastodonReplyTask": {
+   "split": "eval",
+   "tier": "C",
+   "apps": [
+    "Mastodon"
+   ],
+   "text": "",
+   "n_lessons": 0,
+   "chars": 0
+  },
+  "MastodonReportTask": {
+   "split": "eval",
+   "tier": "C",
+   "apps": [
+    "Mastodon"
+   ],
+   "text": "",
+   "n_lessons": 0,
+   "chars": 0
+  },
+  "MastodonRevisePhotoAltTask": {
+   "split": "eval",
+   "tier": "C",
+   "apps": [
+    "Mastodon"
+   ],
+   "text": "",
+   "n_lessons": 0,
+   "chars": 0
+  },
+  "MastodonRevisePollTask": {
+   "split": "eval",
+   "tier": "C",
+   "apps": [
+    "Mastodon"
+   ],
+   "text": "",
+   "n_lessons": 0,
+   "chars": 0
+  },
+  "MastodonUnfollowTask": {
+   "split": "eval",
+   "tier": "C",
+   "apps": [
+    "Mastodon"
+   ],
+   "text": "",
+   "n_lessons": 0,
+   "chars": 0
+  },
+  "MattermostReplyToMessageTask": {
+   "split": "eval",
+   "tier": "C",
+   "apps": [
+    "Mattermost"
+   ],
+   "text": "",
+   "n_lessons": 0,
+   "chars": 0
+  },
+  "MattermostSendFileTask": {
+   "split": "eval",
+   "tier": "C",
+   "apps": [
+    "Mattermost"
+   ],
+   "text": "",
+   "n_lessons": 0,
+   "chars": 0
+  },
+  "RecentTotalExpenseTask": {
+   "split": "eval",
+   "tier": "C",
+   "apps": [
+    "Taodian"
+   ],
+   "text": "# Task-specific lessons (from earlier attempts on this app)\nTreat these as HINTS, not rules. How to use them:\n- Always decide your next action from the CURRENT screenshot first.\n- Use a lesson ONLY if it clearly fits this task AND the screen you see now;\n  if it does not fit, IGNORE it completely.\n- 'avoid' lists past mistakes not to repeat; 'do' is a rough plan to adapt to\n  the real UI, never a script to follow blindly.\n- Never let a lesson override what the screenshot plainly shows.\n\nWhen split cart total between people:\n  avoid: Agents tapped through the cart but never selected items or read/reported actual prices, leaving the interaction cache empty; the task requires asking the user and actually capturing item prices, not just navigating to the cart.\n",
+   "n_lessons": 1,
+   "chars": 767
+  },
+  "SearchItemAndCheckoutTask": {
+   "split": "eval",
+   "tier": "C",
+   "apps": [
+    "Taodian"
+   ],
+   "text": "# Task-specific lessons (from earlier attempts on this app)\nTreat these as HINTS, not rules. How to use them:\n- Always decide your next action from the CURRENT screenshot first.\n- Use a lesson ONLY if it clearly fits this task AND the screen you see now;\n  if it does not fit, IGNORE it completely.\n- 'avoid' lists past mistakes not to repeat; 'do' is a rough plan to adapt to\n  the real UI, never a script to follow blindly.\n- Never let a lesson override what the screenshot plainly shows.\n\nWhen delete cart items:\n  avoid: Agent invented credentials and looped on a failing login (made-up passwords, fabricated 'Agree to Terms' steps). Don't guess login credentials; if a login wall blocks the task, ask the user instead of repeatedly retrying invalid logins.\n\nWhen remove items from shopping cart:\n  avoid: Agent got stuck in the login flow, repeatedly clicking the same buttons (verify code, login) at wildly inconsistent/off-screen coordinates and hallucinating success without verifying the screen. Always re-read the current screenshot before each tap, confirm a tap changed the screen, and only proceed to the cart after login is actually confirmed.\n",
+   "n_lessons": 2,
+   "chars": 1158
+  },
+  "SearchWhiteSneakersCheckoutAskUserTask": {
+   "split": "eval",
+   "tier": "C",
+   "apps": [
+    "Taodian"
+   ],
+   "text": "",
+   "n_lessons": 0,
+   "chars": 0
+  },
+  "CartInfoNotificationTask": {
+   "split": "eval",
+   "tier": "A",
+   "apps": [
+    "Messages",
+    "Taodian"
+   ],
+   "text": "# Task-specific lessons (from earlier attempts on this app)\nTreat these as HINTS, not rules. How to use them:\n- Always decide your next action from the CURRENT screenshot first.\n- Use a lesson ONLY if it clearly fits this task AND the screen you see now;\n  if it does not fit, IGNORE it completely.\n- 'avoid' lists past mistakes not to repeat; 'do' is a rough plan to adapt to\n  the real UI, never a script to follow blindly.\n- Never let a lesson override what the screenshot plainly shows.\n\nWhen split cart total between people:\n  avoid: Agents tapped through the cart but never selected items or read/reported actual prices, leaving the interaction cache empty; the task requires asking the user and actually capturing item prices, not just navigating to the cart.\n\nWhen delete cart items:\n  avoid: Agent invented credentials and looped on a failing login (made-up passwords, fabricated 'Agree to Terms' steps). Don't guess login credentials; if a login wall blocks the task, ask the user instead of repeatedly retrying invalid logins.\n",
+   "n_lessons": 2,
+   "chars": 1038
+  },
+  "LocalFileManagementTask": {
+   "split": "eval",
+   "tier": "A",
+   "apps": [
+    "Files",
+    "Mattermost"
+   ],
+   "text": "",
+   "n_lessons": 0,
+   "chars": 0
+  },
+  "MastodonCalendarMultiMemosTask": {
+   "split": "eval",
+   "tier": "A",
+   "apps": [
+    "Calendar",
+    "Mastodon"
+   ],
+   "text": "",
+   "n_lessons": 0,
+   "chars": 0
+  },
+  "MastodonChangeHeaderTask": {
+   "split": "eval",
+   "tier": "A",
+   "apps": [
+    "Gallery",
+    "Mastodon"
+   ],
+   "text": "# Task-specific lessons (from earlier attempts on this app)\nTreat these as HINTS, not rules. How to use them:\n- Always decide your next action from the CURRENT screenshot first.\n- Use a lesson ONLY if it clearly fits this task AND the screen you see now;\n  if it does not fit, IGNORE it completely.\n- 'avoid' lists past mistakes not to repeat; 'do' is a rough plan to adapt to\n  the real UI, never a script to follow blindly.\n- Never let a lesson override what the screenshot plainly shows.\n\nWhen change account posting language:\n  avoid: Agents searched App settings (Display) and account-info pages for a language option that isn't there; the posting language is set when composing a post (language selector in the compose screen) or in publishing/account preferences, not under Display settings.\n",
+   "n_lessons": 1,
+   "chars": 799
+  },
+  "MastodonCreateMemoTask": {
+   "split": "eval",
+   "tier": "A",
+   "apps": [
+    "Calendar",
+    "Mastodon"
+   ],
+   "text": "# Task-specific lessons (from earlier attempts on this app)\nTreat these as HINTS, not rules. How to use them:\n- Always decide your next action from the CURRENT screenshot first.\n- Use a lesson ONLY if it clearly fits this task AND the screen you see now;\n  if it does not fit, IGNORE it completely.\n- 'avoid' lists past mistakes not to repeat; 'do' is a rough plan to adapt to\n  the real UI, never a script to follow blindly.\n- Never let a lesson override what the screenshot plainly shows.\n\nWhen create a list:\n  avoid: Agents searched Profile/Edit-profile and the top three-dot menu, and repeated the same dead-end clicks. Lists in Mastodon live in the left-side navigation/menu drawer (often via the search or main menu tab), not under Profile; stop re-clicking the same icon and open the main menu instead.\n",
+   "n_lessons": 1,
+   "chars": 811
+  },
+  "MastodonFollowTask": {
+   "split": "eval",
+   "tier": "A",
+   "apps": [
+    "Contacts",
+    "Mastodon"
+   ],
+   "text": "# Task-specific lessons (from earlier attempts on this app)\nTreat these as HINTS, not rules. How to use them:\n- Always decide your next action from the CURRENT screenshot first.\n- Use a lesson ONLY if it clearly fits this task AND the screen you see now;\n  if it does not fit, IGNORE it completely.\n- 'avoid' lists past mistakes not to repeat; 'do' is a rough plan to adapt to\n  the real UI, never a script to follow blindly.\n- Never let a lesson override what the screenshot plainly shows.\n\nWhen export account follows list:\n  avoid: Attempts wandered through app settings menus (Accounts, Behavior) looking for a non-existent in-app export button; the follows export is typically on the account profile via the overflow/menu (or web/data export flow), not in the app's general Settings gear—locate the profile's menu instead of scrolling settings.\n",
+   "n_lessons": 1,
+   "chars": 850
+  },
+  "MastodonInviteTask": {
+   "split": "eval",
+   "tier": "A",
+   "apps": [
+    "Mastodon",
+    "Messages"
+   ],
+   "text": "",
+   "n_lessons": 0,
+   "chars": 0
+  },
+  "MastodonMultiInviteTask": {
+   "split": "eval",
+   "tier": "A",
+   "apps": [
+    "Mastodon",
+    "Messages"
+   ],
+   "text": "",
+   "n_lessons": 0,
+   "chars": 0
+  },
+  "MastodonNewFilterTask": {
+   "split": "eval",
+   "tier": "A",
+   "apps": [
+    "Files",
+    "Mastodon"
+   ],
+   "text": "",
+   "n_lessons": 0,
+   "chars": 0
+  },
+  "MastodonPostEditedPhotoTask": {
+   "split": "eval",
+   "tier": "A",
+   "apps": [
+    "Gallery",
+    "Mastodon"
+   ],
+   "text": "# Task-specific lessons (from earlier attempts on this app)\nTreat these as HINTS, not rules. How to use them:\n- Always decide your next action from the CURRENT screenshot first.\n- Use a lesson ONLY if it clearly fits this task AND the screen you see now;\n  if it does not fit, IGNORE it completely.\n- 'avoid' lists past mistakes not to repeat; 'do' is a rough plan to adapt to\n  the real UI, never a script to follow blindly.\n- Never let a lesson override what the screenshot plainly shows.\n\nWhen email photos to a contact:\n  avoid: The agent invented the recipient's email address (kevin@example.com) instead of using the exact required address (kevin_zhang@example.com). Do not guess emails or other parameters the task should ask the user for; obtain the exact value rather than assuming a default format.\n\nWhen manage bookmarked posts:\n  avoid: Agents blindly guessed at the three-dot menu or profile tab and repeated the same click without verifying the screen changed; instead open the navigation/search menu to find the dedicated Bookmarks list, then act on each post (unbookmark, favorite, boost) and confirm the state changed before repeating.\n",
+   "n_lessons": 2,
+   "chars": 1153
+  },
+  "MastodonPostPollTask": {
+   "split": "eval",
+   "tier": "A",
+   "apps": [
+    "Chrome",
+    "Mastodon"
+   ],
+   "text": "# Task-specific lessons (from earlier attempts on this app)\nTreat these as HINTS, not rules. How to use them:\n- Always decide your next action from the CURRENT screenshot first.\n- Use a lesson ONLY if it clearly fits this task AND the screen you see now;\n  if it does not fit, IGNORE it completely.\n- 'avoid' lists past mistakes not to repeat; 'do' is a rough plan to adapt to\n  the real UI, never a script to follow blindly.\n- Never let a lesson override what the screenshot plainly shows.\n\nWhen manage bookmarked posts:\n  avoid: Agents blindly guessed at the three-dot menu or profile tab and repeated the same click without verifying the screen changed; instead open the navigation/search menu to find the dedicated Bookmarks list, then act on each post (unbookmark, favorite, boost) and confirm the state changed before repeating.\n\nWhen save images from a post:\n  avoid: All attempts only navigated to find the post and never saved any image to the required directory (/sdcard/mastodon_img); they ignored that the task needs files written to a specific target folder. Confirm the output destination exists and actually perform the image save/dump action, don't stop at locating the post.\n",
+   "n_lessons": 2,
+   "chars": 1192
+  },
+  "MastodonSavePhotosTask": {
+   "split": "eval",
+   "tier": "A",
+   "apps": [
+    "Gallery",
+    "Mastodon"
+   ],
+   "text": "# Task-specific lessons (from earlier attempts on this app)\nTreat these as HINTS, not rules. How to use them:\n- Always decide your next action from the CURRENT screenshot first.\n- Use a lesson ONLY if it clearly fits this task AND the screen you see now;\n  if it does not fit, IGNORE it completely.\n- 'avoid' lists past mistakes not to repeat; 'do' is a rough plan to adapt to\n  the real UI, never a script to follow blindly.\n- Never let a lesson override what the screenshot plainly shows.\n\nWhen email photos to a contact:\n  avoid: The agent invented the recipient's email address (kevin@example.com) instead of using the exact required address (kevin_zhang@example.com). Do not guess emails or other parameters the task should ask the user for; obtain the exact value rather than assuming a default format.\n\nWhen save images from a post:\n  avoid: All attempts only navigated to find the post and never saved any image to the required directory (/sdcard/mastodon_img); they ignored that the task needs files written to a specific target folder. Confirm the output destination exists and actually perform the image save/dump action, don't stop at locating the post.\n",
+   "n_lessons": 2,
+   "chars": 1166
+  },
+  "MastodonServerInfoReportTask": {
+   "split": "eval",
+   "tier": "A",
+   "apps": [
+    "Mail",
+    "Mastodon"
+   ],
+   "text": "",
+   "n_lessons": 0,
+   "chars": 0
+  },
+  "MastodonShareLocationTask": {
+   "split": "eval",
+   "tier": "A",
+   "apps": [
+    "Gallery",
+    "Maps",
+    "Mastodon"
+   ],
+   "text": "",
+   "n_lessons": 0,
+   "chars": 0
+  },
+  "MastodonSharePhotosAskUserTask": {
+   "split": "eval",
+   "tier": "A",
+   "apps": [
+    "Gallery",
+    "Mastodon"
+   ],
+   "text": "# Task-specific lessons (from earlier attempts on this app)\nTreat these as HINTS, not rules. How to use them:\n- Always decide your next action from the CURRENT screenshot first.\n- Use a lesson ONLY if it clearly fits this task AND the screen you see now;\n  if it does not fit, IGNORE it completely.\n- 'avoid' lists past mistakes not to repeat; 'do' is a rough plan to adapt to\n  the real UI, never a script to follow blindly.\n- Never let a lesson override what the screenshot plainly shows.\n\nWhen email photos to a contact:\n  avoid: The agent invented the recipient's email address (kevin@example.com) instead of using the exact required address (kevin_zhang@example.com). Do not guess emails or other parameters the task should ask the user for; obtain the exact value rather than assuming a default format.\n",
+   "n_lessons": 1,
+   "chars": 809
+  },
+  "MastodonUpdateContactsTask": {
+   "split": "eval",
+   "tier": "A",
+   "apps": [
+    "Contacts",
+    "Mastodon"
+   ],
+   "text": "",
+   "n_lessons": 0,
+   "chars": 0
+  },
+  "MattermostCustomerFeedbackAnalysisTask": {
+   "split": "eval",
+   "tier": "A",
+   "apps": [
+    "Calendar",
+    "Mail",
+    "Mattermost"
+   ],
+   "text": "",
+   "n_lessons": 0,
+   "chars": 0
+  },
+  "MattermostDeadlineReconciliationTask": {
+   "split": "eval",
+   "tier": "A",
+   "apps": [
+    "Calendar",
+    "Mail",
+    "Mattermost"
+   ],
+   "text": "",
+   "n_lessons": 0,
+   "chars": 0
+  },
+  "MattermostEmailTask": {
+   "split": "eval",
+   "tier": "A",
+   "apps": [
+    "Mail",
+    "Mattermost"
+   ],
+   "text": "# Task-specific lessons (from earlier attempts on this app)\nTreat these as HINTS, not rules. How to use them:\n- Always decide your next action from the CURRENT screenshot first.\n- Use a lesson ONLY if it clearly fits this task AND the screen you see now;\n  if it does not fit, IGNORE it completely.\n- 'avoid' lists past mistakes not to repeat; 'do' is a rough plan to adapt to\n  the real UI, never a script to follow blindly.\n- Never let a lesson override what the screenshot plainly shows.\n\nWhen email a CV file to recipient:\n  avoid: Agents fired type/share actions blindly without verifying each screen loaded (recipient field focused, share sheet open, email composed), and never tapped Send; after every action, confirm the resulting screen via the screenshot before proceeding, and explicitly tap Send to complete the email.\n",
+   "n_lessons": 1,
+   "chars": 831
+  },
+  "MattermostIncidentEscalationTask": {
+   "split": "eval",
+   "tier": "A",
+   "apps": [
+    "Calendar",
+    "Mail",
+    "Mattermost"
+   ],
+   "text": "",
+   "n_lessons": 0,
+   "chars": 0
+  },
+  "MattermostProjectHandoverTask": {
+   "split": "eval",
+   "tier": "A",
+   "apps": [
+    "Calendar",
+    "Mattermost"
+   ],
+   "text": "",
+   "n_lessons": 0,
+   "chars": 0
+  },
+  "MattermostProjectStatusReportTask": {
+   "split": "eval",
+   "tier": "A",
+   "apps": [
+    "Calendar",
+    "Mail",
+    "Mattermost"
+   ],
+   "text": "",
+   "n_lessons": 0,
+   "chars": 0
+  },
+  "MattermostReadingGroupTask": {
+   "split": "eval",
+   "tier": "A",
+   "apps": [
+    "Chrome",
+    "Mattermost"
+   ],
+   "text": "",
+   "n_lessons": 0,
+   "chars": 0
+  },
+  "MattermostResourceConflictResolutionTask": {
+   "split": "eval",
+   "tier": "A",
+   "apps": [
+    "Calendar",
+    "Mail",
+    "Mattermost"
+   ],
+   "text": "# Task-specific lessons (from earlier attempts on this app)\nTreat these as HINTS, not rules. How to use them:\n- Always decide your next action from the CURRENT screenshot first.\n- Use a lesson ONLY if it clearly fits this task AND the screen you see now;\n  if it does not fit, IGNORE it completely.\n- 'avoid' lists past mistakes not to repeat; 'do' is a rough plan to adapt to\n  the real UI, never a script to follow blindly.\n- Never let a lesson override what the screenshot plainly shows.\n\nWhen send SMS with conference dates:\n  avoid: Agents selected wrong contacts and assumed success without verifying the message was sent to the correct recipient (+14058298746) and that dates were confirmed from the calendar event; verify exact contact/number and source the actual dates from the conference before composing, then confirm the sent message appears in the thread.\n",
+   "n_lessons": 1,
+   "chars": 870
+  },
+  "MattermostShiftCoverageTask": {
+   "split": "eval",
+   "tier": "A",
+   "apps": [
+    "Calendar",
+    "Mail",
+    "Mattermost"
+   ],
+   "text": "",
+   "n_lessons": 0,
+   "chars": 0
+  },
+  "MattermostTechnicalDebtTriageTask": {
+   "split": "eval",
+   "tier": "A",
+   "apps": [
+    "Contacts",
+    "Mattermost",
+    "Messages"
+   ],
+   "text": "",
+   "n_lessons": 0,
+   "chars": 0
+  },
+  "MattermostVisualInstructionResponseTask": {
+   "split": "eval",
+   "tier": "A",
+   "apps": [
+    "Clock",
+    "Contacts",
+    "Mattermost"
+   ],
+   "text": "",
+   "n_lessons": 0,
+   "chars": 0
+  }
+ }
+}
