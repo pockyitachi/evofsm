@@ -40,10 +40,12 @@ EvoFSM-MW evaluates — AndroidWorld+ → MobileWorld.
 110-task GUI-only eval, 5-run variance, two models (a weak base and the
 benchmark's near-ceiling first-party agent):
 
-| Model | B1 (zero-shot) | B2′ (best static prior) | B3 (symbolic TTA) | B4 |
+| Model | B1 (zero-shot) | B2′ (best static prior) | B3 (lessons-only †) | B4 |
 |---|--:|--:|--:|:--:|
-| **EvoFSM-8B** (qwen3-VL) | 8.2 ± 0.8 | 9.2 ± 1.6 | 10 – 10.4 | _headroom_ |
-| **MAI-UI-8B** (first-party) | 26.2 ± 2.4 | 26.4 ± 2.0 | 25.6 – 29 | _headroom_ |
+| **EvoFSM-8B** (qwen3-VL) | 8.2 ± 0.8 | 9.2 ± 1.6 | 10.0 ± 1.4 | _headroom_ |
+| **MAI-UI-8B** (first-party) | 26.2 ± 2.4 | 26.4 ± 2.0 | 29.0 ± 4.5 | _headroom_ |
+
+<sub>† B3 shows the strongest of three symbolic-TTA variants (lessons-only — distilled lessons at ~1/20 the prior's text); the full per-variant ablation (FSM-evo / fsm+lessons / lessons-only) lives in [`docs/mai_ui_8b_res.md`](docs/mai_ui_8b_res.md) and [`docs/b3_lesson_memory_results.md`](docs/b3_lesson_memory_results.md).</sub>
 
 **What the numbers say:**
 - **Static-injection benefit is capability-dependent** — +1.0 on the weak base,
