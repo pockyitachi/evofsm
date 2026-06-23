@@ -24,3 +24,7 @@ apks/*.xapk
 archive/**/*.zip
 archive/**/*.jsonl
 archive/**/*.pt
+
+# Paper draft + personal resume — kept local, not in the public repo
+paper_draft/
+RESUME.md
