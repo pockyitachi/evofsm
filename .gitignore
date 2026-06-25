@@ -7,9 +7,13 @@
 !/EvoFSM-RL/
 !/EvoFSM-MW/
 !/build_evofsm_tasks/
+!/website/
+!/.github/
 
 # Within EvoFSM-RL, drop large / regenerable / binary artifacts:
 /EvoFSM-RL/traces/
+# MkDocs build output (regenerable):
+/website/site/
 /EvoFSM-RL/apks/
 /EvoFSM-RL/data/
 /EvoFSM-RL/.venv/

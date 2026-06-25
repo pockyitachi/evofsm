@@ -1,0 +1,56 @@
+site_name: EvoFSM
+site_description: Test-time adaptation for mobile GUI agents on unseen apps
+site_url: https://pockyitachi.github.io/evofsm/
+repo_url: https://github.com/pockyitachi/evofsm
+repo_name: pockyitachi/evofsm
+
+theme:
+  name: material
+  features:
+    - navigation.sections
+    - navigation.top
+    - navigation.tracking
+    - content.code.copy
+    - search.suggest
+    - toc.follow
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+
+nav:
+  - Home: index.md
+  - Method: method.md
+  - Studies:
+      - Within-benchmark (AndroidWorld+): within-benchmark.md
+      - Cross-benchmark (MobileWorld): cross-benchmark.md
+  - Dataset & splits: dataset.md
+  - Reproduce: reproduce.md
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.superfences
+  - pymdownx.highlight
+  - pymdownx.details
+
+# Language switcher (中/EN) — add later with mkdocs-static-i18n:
+# plugins:
+#   - i18n:
+#       docs_structure: suffix
+#       languages:
+#         - {locale: en, name: English, default: true}
+#         - {locale: zh, name: 中文}
