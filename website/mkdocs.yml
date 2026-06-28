@@ -17,8 +17,6 @@ theme:
     - navigation.tabs.sticky
     - navigation.sections
     - navigation.top
-    - navigation.instant
-    - navigation.instant.progress
     - navigation.tracking
     - toc.follow
     - content.code.copy
@@ -76,10 +74,16 @@ extra:
     - icon: fontawesome/brands/github
       link: https://github.com/pockyitachi/evofsm
 
-# Language switcher (中/EN) — add later with mkdocs-static-i18n:
-# plugins:
-#   - i18n:
-#       docs_structure: suffix
-#       languages:
-#         - {locale: en, name: English, default: true}
-#         - {locale: zh, name: 中文}
+plugins:
+  - search
+  - i18n:
+      docs_structure: suffix
+      reconfigure_material: true
+      languages:
+        - locale: en
+          name: English
+          default: true
+          build: true
+        - locale: zh
+          name: 中文
+          build: true
