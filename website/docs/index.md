@@ -30,14 +30,39 @@ installs a banking app, a niche notes tool, or a ride-hailing service the agent
 has never encountered, can it become reliable from a handful of examples?*
 EvoFSM targets exactly that unseen-app, small-budget regime.
 
+## How it works
+
+```mermaid
+flowchart LR
+  P["<b>Two-layer FSM prior</b><br/>L1 app-specific<br/>L2 category-generic → L_C"]
+  subgraph LOOP["One deployment loop · per target app"]
+    direction TB
+    A["<b>Prompt channel</b><br/>frozen LLM mutates the FSM"]
+    B["<b>Weight channel</b><br/>GRPO updates the LoRA"]
+  end
+  P --> LOOP
+  LOOP --> E["adapt on T_adapt<br/>→ freeze →<br/>eval on T_eval"]
+  classDef prior fill:#ede7f6,stroke:#7c4dff,stroke-width:2px,color:#311b92
+  classDef ch fill:#ffffff,stroke:#7c4dff,color:#311b92
+  classDef out fill:#f3e5f5,stroke:#7c4dff,color:#311b92
+  class P prior
+  class A,B ch
+  class E out
+```
+
+The **same loop** runs at source-pool pretraining and at target-app deployment,
+which makes "test-time adaptation" a well-defined operation rather than an ad-hoc
+fine-tune. See [Method](method.md) for the full picture.
+
+## Explore
+
 <div class="grid cards" markdown>
 
 -   :material-sitemap-outline:{ .lg .middle } &nbsp; **Method**
 
     ---
 
-    A two-layer FSM prior and one deployment loop that co-adapts the symbolic
-    prompt **and** the LoRA weights — same loop at pretraining and deployment.
+    The two-layer FSM prior and the joint prompt + weight adaptation loop.
 
     [:octicons-arrow-right-24: Read the method](method.md)
 
@@ -45,8 +70,7 @@ EvoFSM targets exactly that unseen-app, small-budget regime.
 
     ---
 
-    AndroidWorld+ held-out apps: **B1 38.6 → B4 52.9**, with +9.3 / +3.7 ablation
-    gains and a built-in null control.
+    AndroidWorld+ held-out apps: **B1 38.6 → B4 52.9**, with +9.3 / +3.7 gains.
 
     [:octicons-arrow-right-24: See the study](within-benchmark.md)
 
@@ -54,8 +78,7 @@ EvoFSM targets exactly that unseen-app, small-budget regime.
 
     ---
 
-    AndroidWorld+ → MobileWorld, two models — does symbolic TTA beat the static
-    prior across a benchmark boundary?
+    AndroidWorld+ → MobileWorld, two models — symbolic TTA vs the static prior.
 
     [:octicons-arrow-right-24: See the study](cross-benchmark.md)
 
@@ -63,8 +86,7 @@ EvoFSM targets exactly that unseen-app, small-budget regime.
 
     ---
 
-    Pool / category / template levels within a benchmark; category-level tiers
-    across benchmarks. Full breakdowns.
+    Pool / category / template within a benchmark; category-level tiers across.
 
     [:octicons-arrow-right-24: Browse the splits](dataset.md)
 
