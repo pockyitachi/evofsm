@@ -51,6 +51,8 @@ Four rungs, each adding one capability on top of the previous:
 - **B4** — `+ joint LoRA`. The full EvoFSM method: the evolved FSM **and** a
   per-app LoRA are co-adapted on `T_adapt`, then frozen for `T_eval`.
 
+![AndroidWorld+ ablation ladder — B1 to B4 overall T_eval](assets/rl_ladder.png){ width="620" }
+
 | Rung | Method | Tier-B | Tier-C | **Overall (T_eval)** |
 |---|---|:---:|:---:|:---:|
 | **B1** | zero-shot Qwen3-VL-M3A | 47.2 | 29.4 | **38.6** |

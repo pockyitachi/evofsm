@@ -35,6 +35,8 @@ Success out of 110, 5-run `mean ± std`. **B2′** is the best static configurat
 (app Layer-2 + category `L_C`, no Layer-1 — see findings below); the B3 column is
 the **lessons-only** symbolic-evolution variant, the reportable positive.
 
+![Cross-benchmark — symbolic TTA vs static prior on two models](assets/mw_models.png){ width="620" }
+
 | Model | B1 (zero-shot) | B2′ (static prior) | B3 (lessons-only) |
 |---|---|---|---|
 | **EvoFSM-8B** (weak base) | 8.2 ± 0.8 | 9.2 ± 1.6 | **10.0 ± 1.4** |
