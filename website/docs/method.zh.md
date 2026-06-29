@@ -134,7 +134,7 @@ A_{i,j} = r_{i,j} − V_i ,    V_i = mean reward over rollouts in group i
 其 advantage 构造上恒为零。reward 是基于规则的 episode 成功度（来自 AndroidWorld
 grader 的 `{0, 0.5, 1.0}`）外加一小项步数效率奖励；每条轨迹的贡献按其长度
 （`1/T_j`）归一化，使一条 30 步和一条 1 步的 rollout 权重相等。梯度仅经
-**LoRA**（rank 16，α 32，作用于 `q_proj`/`v_proj`）流动；基座权重保持冻结，由 LoRA
+**LoRA**（rank 32，α 32，仅语言层 `q_proj`/`v_proj`）流动；基座权重保持冻结，由 LoRA
 的隐式正则化替代显式 KL 惩罚。
 
 **选择——由 TrueSkill 挑选 FSM 变体。**每轮迭代是一场锦标赛回合：通过**乐观

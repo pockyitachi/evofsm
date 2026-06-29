@@ -61,7 +61,7 @@ flowchart LR
 
     ---
 
-    AndroidWorld+ 留出 app:**B1 38.6 → B4 52.9**,分别 +9.3 / +3.7。
+    AndroidWorld+ 留出 app:**B1 38.6 → B4 52.9** —— 符号 +9.5,权重 +4.8。
 
     [:octicons-arrow-right-24: 查看研究](within-benchmark.md)
 

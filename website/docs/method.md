@@ -149,7 +149,7 @@ has no peer to subtract, so its advantage is constructively zero. Reward is
 rule-based episode success (`{0, 0.5, 1.0}` from AndroidWorld's grader) plus a
 small step-efficiency bonus; each trajectory's contribution is normalized by its
 length (`1/T_j`) so a 30-step and a 1-step rollout weigh equally. Gradients flow
-through **LoRA only** (rank 16, α 32, on `q_proj`/`v_proj`); base weights stay
+through **LoRA only** (rank 32, α 32, language-only `q_proj`/`v_proj`); base weights stay
 frozen and LoRA's implicit regularization replaces an explicit KL penalty.
 
 **Selection — TrueSkill chooses FSM variants.** Each iteration is a tournament

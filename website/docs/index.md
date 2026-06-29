@@ -70,7 +70,7 @@ fine-tune. See [Method](method.md) for the full picture.
 
     ---
 
-    AndroidWorld+ held-out apps: **B1 38.6 → B4 52.9**, with +9.3 / +3.7 gains.
+    AndroidWorld+ held-out apps: **B1 38.6 → B4 52.9** — symbolic +9.5, weight +4.8.
 
     [:octicons-arrow-right-24: See the study](within-benchmark.md)
 

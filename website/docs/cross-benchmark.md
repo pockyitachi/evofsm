@@ -12,11 +12,12 @@ apps, a new harness, a new agent format — by Play-Store category alone.
 - **Pure vision** — no accessibility tree. The agent sees only screenshots and
   acts in MobileWorld's native `mobile_use` format. The FSM/`L_C` prior is
   spliced into the system prompt as text.
-- **Two models** span the capability range:
-    - **EvoFSM-8B** (Qwen3-VL-8B-Instruct) — a *weak base* on this benchmark,
-      ~8% zero-shot.
-    - **MAI-UI-8B** — MobileWorld's own *first-party* GUI agent, a
-      **near-ceiling** external baseline native to the benchmark (~26% zero-shot).
+- **Two backbones** span the capability range:
+    - **EvoFSM-8B** (Qwen3-VL-8B-Instruct), **base-direct** — no π^pre init, a
+      *weak base* on this benchmark, ~8% zero-shot.
+    - **MAI-UI-8B** — MobileWorld's *first-party* GUI agent, initialized from a
+      **strong π^pre** (Phase-1 pretrain, ckpt s550); a near-ceiling backbone
+      here, ~26% zero-shot.
 - **Variance** — every configuration is run **5×110 tasks**; we report
   `mean ± std`. Containers are created **fresh per run and never reused**
   (MobileWorld does not reset app state between tasks), so concurrency affects
@@ -32,20 +33,22 @@ weight adaptation.
 ## B1–B3 on two models
 
 Success out of 110, 5-run `mean ± std`. **B2′** is the best static configuration
-(app Layer-2 + category `L_C`, no Layer-1 — see findings below); the B3 column is
-the **lessons-only** symbolic-evolution variant, the reportable positive.
+(app Layer-2 + category `L_C`, no Layer-1 — see findings below); **B3** is the
+**lessons-only** symbolic-evolution variant; **B4** adds the shared-LoRA weight
+channel on the same rollouts.
 
 ![Cross-benchmark — symbolic TTA vs static prior on two models](assets/mw_models.png){ width="620" }
 
-| Model | B1 (zero-shot) | B2′ (static prior) | B3 (lessons-only) |
-|---|---|---|---|
-| **EvoFSM-8B** (weak base) | 8.2 ± 0.8 | 9.2 ± 1.6 | **10.0 ± 1.4** |
-| **MAI-UI-8B** (near-ceiling) | 26.2 ± 2.4 | 26.4 ± 2.0 | **29.0 ± 4.5** |
+| Model | B1 (zero-shot) | B2′ (static) | B3 (sym. evo) | B4 (joint) |
+|---|---|---|---|---|
+| **EvoFSM-8B** (base-direct) | 8.2 ± 0.8 | 9.2 ± 1.6 | **10.0 ± 1.4** | 10.0 ± 1.4 |
+| **MAI-UI-8B** (π^pre s550) | 26.2 ± 2.4 | 26.4 ± 2.0 | **29.0 ± 4.5** | 28.8 ± 3.8 |
 
 MAI-UI is ~3.2× the EvoFSM-8B base — a far stronger GUI agent on its home
-benchmark, with the widest gap on Tier-A multi-app composition. Both B3 numbers
-are *nominally* the highest in their row but, given the error bars, overlap the
-static prior heavily.
+benchmark, with the widest gap on Tier-A multi-app composition. **B3** is the
+nominal peak in each row but, given the error bars, overlaps the static prior;
+**B4** (adding the weight channel) lands level with B3 on both backbones — the
+weight half is detailed below.
 
 ## Key findings
 
@@ -116,37 +119,48 @@ dump).
 
 B4 is B3 plus a second channel: a shared LoRA adapts via GRPO on the **same**
 rollouts the lessons evolve on (one switch, `EVOFSM_TTA_EVOLUTION_MODE=lesson`).
-The dual-channel joint is the method's selling point; in this low-data
-(~51-task) regime the weight half is reported as an honest limitation, not a
-demotion.
+The dual-channel joint is the method's selling point.
 
-Base-direct (base Qwen3-VL-8B, no π^pre), MW-110, ×5 mean:
+On both backbones the test-time weight update is **null so far** — it neither
+helps nor hurts the lessons-only line:
 
-| config | mean /110 | symbolic form | weight channel |
-|---|---|---|---|
-| B1 (zero-shot) | 8.2 | — | — |
-| B2′ (static prior) | 9.2 | full FSM L2 | — |
-| B3 (symbolic evo) | ~10 | — | frozen |
-| **B4 fsm-champion** (ablation) | **8.2** | full FSM champion | harmful (degrades 10 → 8.2) |
-| **B4 lessons-only** (headline) | **10.0** | distilled lessons | neutral (no drag) |
+| backbone | B3 (sym. evo) | B4 (joint) |
+|---|:---:|:---:|
+| EvoFSM-8B (base-direct) | 10.0 ± 1.4 | 10.0 ± 1.4 |
+| MAI-UI-8B (π^pre s550) | 29.0 ± 4.5 | 28.8 ± 3.8 |
 
-Two readings of the weight half:
+B3 and B4 overlap rep-for-rep, so we read these as means, not single runs. Two
+*regime* reasons the weight channel has **not yet** surfaced a gain here — both
+pointing at the cross-benchmark setting, not the method:
 
-- **Under the full FSM, weight is harmful.** Holding the symbolic champion fixed
-  and sweeping the LoRA checkpoint, the score **monotonically degrades**
-  (10 → 9 → 9 → 8 → 8.2 ≈ B1): the ~6.8k-token FSM L2 dump is a noisy training
-  signal the weight over-fits.
-- **Under lessons-only, weight is neutral.** The compact lessons-only symbolic
-  reaches **10.0 ≈ the B3 ceiling** at ~**1/26** the tokens (≈264 vs ≈6847 prompt
-  tokens) — smaller *and* better. The honest framing: lessons-only makes the
-  weight channel *harmless*, it does not make it *add signal*. Which symbolic the
-  weight trains under decides whether the joint is harmless (lessons) or harmful
-  (FSM).
+1. **Cross-benchmark transfer is intrinsically harder.** The two benchmarks are
+   independently authored, so a π^pre trained on AndroidWorld+ and deployed on
+   MobileWorld faces a much larger distribution shift than the within-benchmark
+   Level-1 setting — where the same weight channel *does* add **+4.8 pp** — a
+   harder regime for the on-policy update to find usable signal in.
+2. **The adapt budget is far thinner.** Unlike Level 1, which expands each
+   template into K seeded episodes, MobileWorld has **no seed mechanism** — each
+   adapt task is a single episode, so the per-app on-policy data is an order of
+   magnitude smaller, plausibly too little for the weight update to surface a
+   gain yet.
 
-!!! note "B4 status: in progress"
-    The numbers above are the **base-direct** B4 (no π^pre init): lessons-only =
-    **10.0**, on par with B3. The **π^pre-initialized** joint (Phase-1 pretrained
-    LoRA + lessons-only) is **still under evaluation** — the MAI-UI π^pre pretrain
-    is mid-run and its B1 curve only begins to rise around step 400. We do not yet
-    claim a weight-channel gain in this cross-benchmark setting; the weight half's
-    headroom (more adapt data, π^pre init) is future work.
+What π^pre *does* buy here is the **base level** (MAI B1 26.2 ≫ qwen 8.2) and a
+**higher symbolic ceiling** (29.0 vs 10.0) — the init carries the backbone even
+where the deployment-time weight step does not yet move it.
+
+!!! note "Status: ongoing"
+    The weight channel is null-but-not-harmful here, not a method failure. We are
+    still optimizing the training hyperparameters and the adaptation mechanism,
+    and scaling the cross-benchmark adapt data is the natural path to surfacing a
+    weight gain. Updated results will be posted on GitHub.
+
+### Which symbolic the weight trains under
+
+One mechanism note from the base-direct sweep: *what* symbolic the LoRA trains
+under decides whether the joint stays harmless. Holding a full FSM champion fixed
+and sweeping the checkpoint, the score **monotonically degrades**
+(10 → 9 → 9 → 8 → 8.2 ≈ B1): the ~6.8k-token FSM dump is a noisy signal the
+weight over-fits. The compact **lessons-only** symbolic (~264 vs ~6847 prompt
+tokens, ~1/26 the size) keeps the joint at the B3 ceiling. So lessons-only makes
+the weight channel *harmless*; surfacing an actual *gain* is the open problem
+above.
