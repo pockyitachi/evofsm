@@ -1,7 +1,7 @@
 /* ===== Typography: larger, airier ===== */
 .md-typeset {
-  font-size: 0.85rem;
-  line-height: 1.75;
+  font-size: 0.8rem;
+  line-height: 1.65;
 }
 .md-typeset h1 {
   font-weight: 800;
@@ -16,7 +16,7 @@
   font-weight: 700;
 }
 .md-typeset table:not([class]) {
-  font-size: 0.78rem;
+  font-size: 0.74rem;
 }
 
 /* ===== Home hero ===== */
@@ -87,4 +87,44 @@
 /* keep prose readable, not too wide on big screens */
 .md-grid {
   max-width: 62rem;
+}
+
+/* ===== Header / navigation bar ===== */
+/* Refined site title */
+.md-header__title {
+  font-weight: 700;
+  letter-spacing: -0.015em;
+}
+
+/* Desktop: reorder the right-hand cluster so search comes first, then the
+   day/night + language toggles grouped together, then the repo link.
+   By default the two toggles sit awkwardly to the LEFT of the search box. */
+@media screen and (min-width: 60em) {
+  .md-search                                            { order: 1; }
+  .md-header__option[data-md-component="palette"]       { order: 2; }
+  .md-header__option:not([data-md-component="palette"]) { order: 3; }
+  .md-header__source                                    { order: 4; }
+
+  /* divider so GitHub reads as its own group on the far right */
+  .md-header__source {
+    margin-left: 0.5rem;
+    padding-left: 0.6rem;
+    border-left: 1px solid rgba(255, 255, 255, 0.18);
+  }
+}
+
+/* Equal, soft-rounded hover targets for the toggle icons */
+.md-header__option .md-icon,
+.md-header__button.md-icon {
+  border-radius: 0.45rem;
+  transition: background-color .2s ease;
+}
+.md-header__option .md-icon:hover,
+.md-header__button.md-icon:hover {
+  background: rgba(255, 255, 255, 0.13);
+}
+
+/* Tabs row: a touch lighter weight for a cleaner second line */
+.md-tabs__link {
+  font-weight: 500;
 }
